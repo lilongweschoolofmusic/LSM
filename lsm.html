@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lilongwe School of Music</title>
+  <style>
+    :root{--navy:#0a1628;--blue:#1a3a6b;--mid-blue:#2255a4;--gold:#c9a84c;--gold-light:#e8c97a;--white:#f8f6f0;--off-white:#edeae2;--text:#1a1a2e;--light-text:#5a6a80;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.97);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:72px;border-bottom:1px solid rgba(201,168,76,0.25);}
+    .nav-logo{display:flex;align-items:center;gap:0.75rem;font-family:Georgia, serif;font-size:1.1rem;color:var(--gold);letter-spacing:1px;}
+    .nav-logo img{display:block;height:34px;width:auto;}
+    .nav-logo span{color:var(--white);font-weight:300;font-size:0.9rem;letter-spacing:2px;text-transform:uppercase;font-family:Arial, sans-serif;}
+    .nav-links{display:flex;gap:2.2rem;list-style:none;}
+    .nav-links a{color:rgba(248,246,240,0.8);text-decoration:none;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
+    .nav-links a:hover{color:var(--gold);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--gold);}
+
+    /* HERO */
+    #home{min-height:100vh;background:#090c15;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;text-align:center;padding:120px 5% 80px;}
+    #home::before{content:'';position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0.92),rgba(0,0,0,0.92)),url('Images/Hero bg.jpg') center/cover;filter:blur(5px);}
+    .hero-lines{display:none;}
+    .hero-content{position:relative;z-index:2;max-width:860px;}
+    .hero-badge{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;padding:6px 20px;margin-bottom:2rem;animation:fadeUp 0.8s ease both;}
+    .hero-title{font-family:Arial, sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:1.2rem;animation:fadeUp 0.8s 0.15s ease both;}
+    .hero-title em{font-style:italic;color:var(--gold);}
+    .hero-tagline{font-family:Arial, sans-serif;font-size:0.3em;color:var(--gold);display:block;letter-spacing:0.08em;}
+    .hero-subtitle{font-family:Arial, sans-serif;font-size:1rem;color:rgba(248,246,240,0.65);line-height:1.9;max-width:620px;margin:0 auto 2.5rem;font-weight:300;animation:fadeUp 0.8s 0.3s ease both;}
+    .hero-cta{display:inline-flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp 0.8s 0.45s ease both;}
+    .btn-primary{background:var(--gold);color:var(--navy);padding:14px 36px;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:700;transition:all 0.3s;display:inline-block;}
+    .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+    .btn-outline{border:1px solid rgba(248,246,240,0.35);color:var(--white);padding:14px 36px;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:300;transition:all 0.3s;}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+    .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(248,246,240,0.35);font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;animation:bounce 2s infinite;}
+    .hero-scroll::after{content:'';display:block;width:1px;height:48px;background:linear-gradient(to bottom,rgba(248,246,240,0.35),transparent);}
+
+    /* COMMONS */
+    section{padding:100px 5%;}
+    .section-tag{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.8rem;}
+    .section-title{font-family:Georgia, serif;font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:1.2rem;}
+    .section-line{width:55px;height:2px;background:var(--gold);margin-bottom:1.8rem;}
+
+    /* ABOUT */
+    #about{background:var(--white);}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;max-width:1200px;margin:0 auto;}
+    .about-text p{font-size:1rem;line-height:1.95;color:#3a4a5e;margin-bottom:1.2rem;font-weight:300;}
+    .mv-cards{display:flex;flex-direction:column;gap:1.5rem;}
+    .mv-card{border-left:3px solid var(--gold);padding:1.4rem 1.6rem;background:var(--off-white);}
+    .mv-card h4{font-family:Georgia, serif;font-size:1.05rem;color:var(--navy);margin-bottom:0.6rem;}
+    .mv-card p{font-size:0.9rem;color:var(--light-text);line-height:1.8;}
+    .pillars-row{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--off-white);}
+    .pillar{background:var(--white);padding:1.8rem 1.4rem;text-align:center;transition:background 0.3s;cursor:default;}
+    .pillar:hover{background:var(--navy);}
+    .pillar:hover .pillar-title{color:var(--gold);}
+    .pillar:hover .pillar-text{color:rgba(248,246,240,0.6);}
+    .pillar-icon{font-size:1.7rem;margin-bottom:0.8rem;}
+    .pillar-title{font-family:Georgia, serif;font-size:0.95rem;color:var(--navy);margin-bottom:0.4rem;transition:color 0.3s;}
+    .pillar-text{font-size:0.8rem;color:var(--light-text);line-height:1.6;transition:color 0.3s;}
+
+    /* PROGRAMS */
+    #services{background:var(--navy);}
+    #services .section-title{color:var(--white);}
+    .services-intro{font-size:0.98rem;color:rgba(248,246,240,0.55);max-width:640px;line-height:1.85;margin-bottom:3rem;font-weight:300;}
+    .programs-tabs{display:flex;gap:0;margin-bottom:2.5rem;flex-wrap:wrap;}
+    .tab-btn{padding:12px 28px;background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(248,246,240,0.5);font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;}
+    .tab-btn:hover{color:var(--gold);border-color:rgba(201,168,76,0.3);}
+    .tab-btn.active{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:700;}
+    .tab-content{display:none;}
+    .tab-content.active{display:block;}
+    .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5px;background:rgba(255,255,255,0.04);max-width:1200px;}
+    .edu-card{background:rgba(10,22,40,0.95);padding:2.2rem 2rem;transition:background 0.3s;}
+    .edu-card:hover{background:var(--blue);}
+    .edu-card .icon{font-size:1.8rem;margin-bottom:1rem;}
+    .edu-card h3{font-family:Georgia, serif;font-size:1.15rem;color:var(--gold);margin-bottom:0.8rem;}
+    .edu-card p{font-size:0.86rem;color:rgba(248,246,240,0.55);line-height:1.8;margin-bottom:1rem;}
+    .tag-list{display:flex;flex-wrap:wrap;gap:0.35rem;}
+    .tag{font-size:0.68rem;letter-spacing:1px;border:1px solid rgba(201,168,76,0.3);color:var(--gold-light);padding:3px 9px;}
+    .exam-box{max-width:1200px;margin-top:2rem;border:1px solid rgba(201,168,76,0.2);padding:2rem 2.5rem;}
+    .exam-box h3{font-family:Georgia, serif;color:var(--gold);font-size:1.1rem;margin-bottom:1rem;}
+    .exam-box p{font-size:0.88rem;color:rgba(248,246,240,0.55);line-height:1.8;margin-bottom:0.5rem;}
+    .exam-box strong{color:rgba(248,246,240,0.8);}
+    .schedule-strip{display:flex;gap:1.5rem;flex-wrap:wrap;max-width:1200px;margin-top:3rem;}
+    .schedule-item{background:rgba(34,85,164,0.2);border:1px solid rgba(201,168,76,0.2);padding:1.5rem 2rem;flex:1;min-width:180px;}
+    .schedule-item .day{font-family:Georgia, serif;font-size:1.1rem;color:var(--gold);margin-bottom:0.3rem;}
+    .schedule-item .time{color:rgba(248,246,240,0.75);font-size:0.9rem;}
+    .perf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5px;background:rgba(255,255,255,0.04);max-width:1200px;}
+    .perf-card{background:rgba(10,22,40,0.95);padding:2.2rem 2rem;transition:background 0.3s;}
+    .perf-card:hover{background:var(--blue);}
+    .perf-card .icon{font-size:1.8rem;margin-bottom:1rem;}
+    .perf-card h3{font-family:Georgia, serif;font-size:1.15rem;color:var(--gold);margin-bottom:0.8rem;}
+    .perf-card p{font-size:0.84rem;color:rgba(248,246,240,0.5);margin-bottom:0.8rem;}
+    .perf-card ul{list-style:none;}
+    .perf-card ul li{font-size:0.86rem;color:rgba(248,246,240,0.55);line-height:1.9;padding-left:1rem;position:relative;}
+    .perf-card ul li::before{content:'•';position:absolute;left:0;color:var(--gold);opacity:0.5;}
+
+    /* APPROACH */
+    .approach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5px;background:rgba(255,255,255,0.05);max-width:1200px;margin-top:2rem;}
+    .approach-item{background:rgba(10,22,40,0.9);padding:2rem 1.8rem;}
+    .approach-item .num{font-family:Georgia, serif;font-size:2.5rem;font-style:italic;color:var(--gold);opacity:0.3;line-height:1;margin-bottom:1rem;}
+    .approach-item h4{font-family:Georgia, serif;font-size:1rem;color:var(--gold);margin-bottom:0.5rem;}
+    .approach-item p{font-size:0.84rem;color:rgba(248,246,240,0.5);line-height:1.75;}
+
+    /* WHY */
+    .why-inner{max-width:1200px;margin:0 auto;}
+    .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
+    .why-item{display:flex;gap:1rem;align-items:flex-start;}
+    .why-num{font-family:Georgia, serif;font-size:2.4rem;color:var(--gold);font-style:italic;line-height:1;opacity:0.5;flex-shrink:0;}
+    .why-item h4{font-family:Georgia, serif;font-size:1rem;color:var(--navy);margin-bottom:0.4rem;}
+    .why-item p{font-size:0.84rem;color:var(--light-text);line-height:1.75;}
+
+    /* PARTNERS */
+    .partners-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;max-width:1200px;margin:0 auto;}
+    .partner img{background-color:#fff;padding:5px;border-radius:4px;}
+
+    /* STUDENT LIFE */
+    .student-life-grid{max-width:1200px;margin:0 auto;}
+    .slideshow{position:relative;width:100%;height:400px;overflow:hidden;border-radius:8px;}
+    .slideshow img{position:absolute;width:100%;height:100%;object-fit:cover;opacity:0;animation:fade 12s infinite;}
+    .slideshow img:nth-child(1){animation-delay:0s;}
+    .slideshow img:nth-child(2){animation-delay:2s;}
+    .slideshow img:nth-child(3){animation-delay:4s;}
+    .slideshow img:nth-child(4){animation-delay:6s;}
+    .slideshow img:nth-child(5){animation-delay:8s;}
+    .slideshow img:nth-child(6){animation-delay:10s;}
+    @keyframes fade{0%,100%{opacity:0;}10%,90%{opacity:1;}}
+
+    /* GALLERY */
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto;}
+    .gallery-item img{width:100%;height:200px;object-fit:cover;border-radius:8px;transition:transform 0.3s;}
+    .gallery-item img:hover{transform:scale(1.05);}
+
+    /* CONTACT */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;max-width:1100px;margin:0 auto;}
+    .contact-info p.tagline{font-style:italic;color:var(--light-text);font-size:0.92rem;margin-bottom:1.5rem;border-left:2px solid var(--gold);padding-left:1rem;line-height:1.7;}
+    .contact-detail{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+    .contact-detail .icon{width:42px;height:42px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+    .contact-detail .info a,.contact-detail .info span{font-size:0.9rem;color:var(--text);text-decoration:none;display:block;}
+    .contact-detail .info a:hover{color:var(--mid-blue);}
+    .contact-detail .info .label{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:2px;}
+    .contact-form{display:flex;flex-direction:column;gap:1.2rem;}
+    .form-group{display:flex;flex-direction:column;gap:0.4rem;}
+    .form-group label{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--light-text);}
+    .form-group input,.form-group select,.form-group textarea{padding:12px 16px;border:1px solid #d8d4ca;background:var(--white);font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:0.93rem;color:var(--text);outline:none;transition:border-color 0.3s;}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--mid-blue);}
+    .form-group textarea{resize:vertical;min-height:120px;}
+    .form-submit{background:var(--navy);color:var(--gold);border:none;padding:14px 36px;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-weight:700;cursor:pointer;transition:background 0.3s;align-self:flex-start;}
+    .form-submit:hover{background:var(--blue);}
+    .form-success{display:none;background:#e8f5e9;border:1px solid #a5d6a7;color:#2e7d32;padding:1rem 1.5rem;font-size:0.9rem;margin-top:0.5rem;}
+
+    /* FOOTER */
+    footer{background:var(--navy);padding:3rem 5%;text-align:center;border-top:1px solid rgba(201,168,76,0.15);}
+    .footer-logo{font-family:Georgia, serif;font-size:1.4rem;color:var(--gold);margin-bottom:0.4rem;}
+    .footer-tagline{font-family:Georgia, serif;font-style:italic;color:rgba(248,246,240,0.35);font-size:0.88rem;margin-bottom:0.8rem;}
+    footer p{font-size:0.78rem;color:rgba(248,246,240,0.3);letter-spacing:1px;}
+
+    /* ANIMATIONS */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:3rem;}.contact-grid{grid-template-columns:1fr;gap:3rem;}.pillars-row{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:640px){.nav-links{display:none;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--navy);padding:1.5rem 5%;gap:1.5rem;}.nav-links.open{display:flex;}.hamburger{display:flex;}.hero-title{font-size:2rem;}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><img src="Images/Logos/LSM%20Logo%20white.png" alt="LSM Logo" style="height:42px; margin-right:0.75rem;"><span>Lilongwe School of Music</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Programs</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#why">Why LSM</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#student-life">Student Life</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <h1 class="hero-title"><strong style="font-family:Arial, sans-serif;font-weight:bold;">Lilongwe School of Music</strong> <span class="hero-tagline">Performance Art Theatre · Orchestra · Music Education</span></h1>
+    <p class="hero-subtitle">A professional music education and performance institution committed to the highest standards of musical training developing musicians who are technically proficient, expressive, and performance-ready.</p>
+    <div class="hero-cta">
+      <a href="#services" class="btn-primary">Explore Programs</a>
+      <a href="#contact" class="btn-outline">Enroll Today</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <span class="section-tag">About LSM</span>
+      <h2 class="section-title">A Professional Centre of Music Education &amp; Performance</h2>
+      <div class="section-line"></div>
+      <p>Lilongwe School of Music (LSM) is a professional music education and performance institution committed to the highest standards of musical training and artistic excellence. The school provides structured instruction in instrumental performance, vocal studies, and music theory, guided by internationally recognized frameworks.</p>
+      <p>LSM serves both as an academic institution and a performance hub, preparing students for graded music examinations while also offering professional music services for a wide range of events.</p>
+      <p>Through disciplined training and performance practice, the school develops musicians who are technically proficient, expressive, and performance-ready.</p>
+    </div>
+    <div class="mv-cards reveal">
+      <div class="mv-card">
+        <h4>&#127919; Our Mission</h4>
+        <p>To deliver high-quality, structured music education that develops skilled and disciplined musicians while fostering creativity and excellence. We further strive to give a voice to the voiceless placing instruments in the hands of aspiring individuals and nurturing their talent through instrumental training, choir, and opera studies.</p>
+      </div>
+      <div class="mv-card">
+        <h4>&#127775; Our Vision</h4>
+        <p>To be a leading centre of music education and performance in Malawi and beyond, recognized for producing well-rounded musicians and delivering outstanding musical experiences.</p>
+      </div>
+    </div>
+    <div class="pillars-row reveal">
+      <div class="pillar"><div class="pillar-icon">&#127942;</div><div class="pillar-title">Excellence</div><div class="pillar-text">Highest standards in every lesson and performance</div></div>
+      <div class="pillar"><div class="pillar-icon">&#9889;</div><div class="pillar-title">Discipline</div><div class="pillar-text">Consistency and commitment in practice</div></div>
+      <div class="pillar"><div class="pillar-icon">&#127912;</div><div class="pillar-title">Creativity</div><div class="pillar-text">Artistic expression and musical interpretation</div></div>
+      <div class="pillar"><div class="pillar-icon">&#127757;</div><div class="pillar-title">Inclusivity</div><div class="pillar-text">Talent developed from all backgrounds</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="services">
+  <span class="section-tag">What We Offer</span>
+  <h2 class="section-title">Core Programs</h2>
+  <div class="section-line"></div>
+  <p class="services-intro">From structured music education to professional performance services LSM offers comprehensive programs for students and institutions alike.</p>
+
+  <div class="programs-tabs">
+    <button class="tab-btn active" onclick="switchTab('edu',this)">Music Education &amp; Training</button>
+    <button class="tab-btn" onclick="switchTab('perf',this)">Performance &amp; Professional Services</button>
+  </div>
+
+  <!-- Education Tab -->
+  <div class="tab-content active" id="tab-edu">
+    <div class="edu-grid reveal">
+      <div class="edu-card">
+        <div class="icon">&#127931;</div>
+        <h3>Instrumental Performance</h3>
+        <p>Professional training in orchestral instruments for all levels, guided by internationally recognized frameworks.</p>
+        <div class="tag-list">
+          <span class="tag">Violin</span><span class="tag">Viola</span><span class="tag">Cello</span><span class="tag">Double Bass</span><span class="tag">Flute</span><span class="tag">Clarinet</span><span class="tag">Trumpet</span><span class="tag">Trombone</span><span class="tag">French Horn</span><span class="tag">Piano</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="icon">&#127908;</div>
+        <h3>Vocal Studies</h3>
+        <p>Comprehensive vocal training spanning classical and contemporary disciplines, from solo performance to choral and operatic studies.</p>
+        <div class="tag-list">
+          <span class="tag">Solo Singing</span><span class="tag">Classical</span><span class="tag">Contemporary</span><span class="tag">Choral Singing</span><span class="tag">Choir</span><span class="tag">Opera</span><span class="tag">Vocal Technique</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="icon">&#128216;</div>
+        <h3>Music Theory</h3>
+        <p>Structured theory instruction from beginner to advanced, building the intellectual foundations every serious musician needs.</p>
+        <div class="tag-list">
+          <span class="tag">Beginner to Advanced</span><span class="tag">Aural Skills</span><span class="tag">Sight-Reading</span><span class="tag">Harmony</span><span class="tag">Exam Prep</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exam-box reveal">
+      <h3>Examinations</h3>
+      <p>Lilongwe School of Music (LSM) prepares candidates for internationally benchmarked music examinations in both Theory and Performance.</p>
+      <ul style="margin-top:1rem;margin-left:1rem;padding-left:1.6rem;color:rgba(248,246,240,0.85);line-height:1.9;">
+        <li>Music Theory: Initial to Grade 8</li>
+        <li>Instrumental Performance: Initial to Grade 8</li>
+        <li>Vocal Performance: Initial Grade to Grade 8</li>
+      </ul>
+      <p style="margin-top:1rem;font-weight:700;">Diploma Qualifications:</p>
+      <ul style="margin-top:0.5rem;margin-left:1rem;padding-left:1.6rem;color:rgba(248,246,240,0.85);line-height:1.9;">
+        <li>Associate Diploma (ATCL)</li>
+        <li>Licentiate Diploma (LTCL)</li>
+        <li>Fellowship Diploma (FTCL)</li>
+      </ul>
+      <p style="margin-top:0.8rem;"><strong>Important Requirement:</strong> A pass in Grade 5 Music Theory is compulsory for candidates wishing to progress to Grades 6–8 Practical Examinations.</p>
+    </div>
+
+    <div class="schedule-strip reveal">
+      <div style="flex-basis:100%"><h3 style="font-family:Georgia, serif;color:var(--gold);font-size:1.05rem;letter-spacing:1px;margin-bottom:1rem;">Class Schedule</h3></div>
+      <div class="schedule-item"><div class="day">Friday</div><div class="time">5:00 PM – 7:00 PM</div></div>
+      <div class="schedule-item"><div class="day">Saturday</div><div class="time">4:00 PM – 7:30 PM</div></div>
+      <div style="flex:2;min-width:240px;padding:1.5rem 2rem;background:rgba(34,85,164,0.1);border:1px solid rgba(201,168,76,0.1);display:flex;align-items:center;">
+        <p style="font-size:0.85rem;color:rgba(248,246,240,0.5);line-height:1.85;">Flexible part-time schedule designed to allow students to balance academic and work commitments with music education effectively.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Performance Tab -->
+  <div class="tab-content" id="tab-perf">
+    <div class="perf-grid reveal">
+      <div class="perf-card">
+        <div class="icon">&#127932;</div>
+        <h3>Orchestra &amp; Ensemble</h3>
+        <ul>
+          <li>Full orchestra presentations</li>
+          <li>Chamber ensembles</li>
+          <li>Concert and recital performances</li>
+        </ul>
+      </div>
+      <div class="perf-card">
+        <div class="icon">&#127903;</div>
+        <h3>Ticketed Events</h3>
+        <ul>
+          <li>Public concerts and staged performances</li>
+          <li>Seasonal and themed musical showcases</li>
+        </ul>
+      </div>
+      <div class="perf-card">
+        <div class="icon">&#128197;</div>
+        <h3>Event Bookings</h3>
+        <p>Professional musicians available for:</p>
+        <ul>
+          <li>Corporate events</li>
+          <li>Weddings and engagements</li>
+          <li>Church services</li>
+          <li>Funeral services</li>
+          <li>Private functions</li>
+        </ul>
+      </div>
+      <div class="perf-card">
+        <div class="icon">&#11088;</div>
+        <h3>Solo Performers</h3>
+        <ul>
+          <li>Instrumental soloists</li>
+          <li>Vocal soloists</li>
+          <li>Classical and operatic repertoire</li>
+        </ul>
+      </div>
+    </div>
+    <div style="max-width:1200px;margin-top:2.5rem;padding:2rem 2.5rem;border:1px solid rgba(201,168,76,0.15);background:rgba(34,85,164,0.1);">
+      <p style="font-family:Georgia, serif;font-style:italic;color:rgba(248,246,240,0.6);font-size:1rem;line-height:1.8;">"LSM offers professional music performances for both institutional and private engagements bringing artistic excellence to every occasion."</p>
+      <a href="#contact" class="btn-primary" style="margin-top:1.5rem;">Book a Performance</a>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach" style="background:var(--navy);padding:80px 5%;">
+  <span class="section-tag">How We Teach</span>
+  <h2 class="section-title" style="color:var(--white);">Teaching &amp; Learning Approach</h2>
+  <div class="section-line"></div>
+  <p style="font-size:0.95rem;color:rgba(248,246,240,0.5);max-width:600px;line-height:1.85;margin-bottom:0;font-weight:300;">Students benefit from both individual instruction and ensemble participation, ensuring balanced musical development.</p>
+  <div class="approach-grid reveal">
+    <div class="approach-item"><div class="num">01</div><h4>Technical Proficiency</h4><p>Rigorous training to develop precision, accuracy, and mastery of each instrument or voice.</p></div>
+    <div class="approach-item"><div class="num">02</div><h4>Musical Expression</h4><p>Cultivating interpretation, phrasing, and emotional depth that separates good musicians from great ones.</p></div>
+    <div class="approach-item"><div class="num">03</div><h4>Performance Readiness</h4><p>Regular performance opportunities ensuring students are confident and prepared on stage.</p></div>
+    <div class="approach-item"><div class="num">04</div><h4>Discipline &amp; Consistency</h4><p>A structured practice culture that builds habits of excellence across every student's journey.</p></div>
+  </div>
+</section>
+
+<!-- WHY LSM -->
+<section id="why" style="background:var(--off-white);padding:80px 5%;">
+  <div class="why-inner">
+    <span class="section-tag">Why Choose Us</span>
+    <h2 class="section-title">The LSM Advantage</h2>
+    <div class="section-line"></div>
+    <div class="why-grid reveal">
+      <div class="why-item"><div class="why-num">01</div><div><h4>Professional Curriculum</h4><p>Structured programs guided by internationally recognized frameworks and examination boards.</p></div></div>
+      <div class="why-item"><div class="why-num">02</div><div><h4>International Exam Prep</h4><p>Full preparation from Initial Grade through to Grade 8 across Theory and Performance.</p></div></div>
+      <div class="why-item"><div class="why-num">03</div><div><h4>Performance Opportunities</h4><p>Access to real-world concerts, recitals, and professional event bookings.</p></div></div>
+      <div class="why-item"><div class="why-num">04</div><div><h4>Experienced Instructors</h4><p>Qualified mentors dedicated to each student's individual growth and development.</p></div></div>
+      <div class="why-item"><div class="why-num">05</div><div><h4>Real-World Engagement</h4><p>Students participate in professional performance settings from early on in their training.</p></div></div>
+      <div class="why-item"><div class="why-num">06</div><div><h4>A Voice for All</h4><p>Committed to placing instruments in the hands of aspiring musicians regardless of background.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners" style="background:var(--off-white);">
+  <span class="section-tag">Our Partners</span>
+  <h2 class="section-title">Institutions We Partner With</h2>
+  <div class="section-line"></div>
+  <p style="font-size:0.95rem;color:var(--light-text);max-width:600px;margin:0 auto 3rem;text-align:center;line-height:1.8;">LSM collaborates with leading international music examination boards and institutions to provide world-class education and certification.</p>
+  <div class="partners-grid reveal">
+    <div class="partner"><img src="Images/Logos/LSM%20Logo%20white.png" alt="LSM" style="max-width:120px;margin-bottom:1rem;"><div class="partner-caption">LSM</div></div>
+    <div class="partner"><img src="Images/Logos/Trinity_Centre_75333_logo_purple.png" alt="Trinity College London" style="max-width:150px;margin-bottom:1rem;"><div class="partner-caption">Trinity College London</div></div>
+    <div class="partner"><img src="Images/Logos/ABRSM%20logo.webp" alt="ABRSM" style="max-width:150px;margin-bottom:1rem;"><div class="partner-caption">ABRSM</div></div>
+    <div class="partner"><img src="Images/Logos/lcm-logo.png" alt="London College of Music" style="max-width:150px;margin-bottom:1rem;"><div class="partner-caption">London College of Music</div></div>
+  </div>
+</section>
+
+<!-- STUDENT LIFE -->
+<section id="student-life" style="background:var(--white);">
+  <span class="section-tag">Student Life</span>
+  <h2 class="section-title">Life at LSM</h2>
+  <div class="section-line"></div>
+  <p style="font-size:0.95rem;color:var(--light-text);max-width:600px;margin:0 auto 3rem;text-align:center;line-height:1.8;">Experience the vibrant community and musical journey of our students through these moments captured at Lilongwe School of Music.</p>
+  <div class="student-life-grid reveal">
+    <div class="slideshow">
+      <img src="Images/Student life photos/Student life (1).jpg" alt="Student Life 1">
+      <img src="Images/Student life photos/Student life (2).jpg" alt="Student Life 2">
+      <img src="Images/Student life photos/Student life (3).jpg" alt="Student Life 3">
+      <img src="Images/Student life photos/Student life (4).jpg" alt="Student Life 4">
+      <img src="Images/Student life photos/Student life (5).jpg" alt="Student Life 5">
+      <img src="Images/Student life photos/Student life (6).jpg" alt="Student Life 6">
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="background:var(--off-white);">
+  <span class="section-tag">Photo Gallery</span>
+  <h2 class="section-title">LSM in Action</h2>
+  <div class="section-line"></div>
+  <p style="font-size:0.95rem;color:var(--light-text);max-width:600px;margin:0 auto 3rem;text-align:center;line-height:1.8;">Explore moments from our performances, rehearsals, and community events at Lilongwe School of Music.</p>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item"><img src="Images/20231229_211257_resized.jpg" alt="LSM Moment 1"></div>
+    <div class="gallery-item"><img src="Images/Conductor.jpg" alt="Conductor"></div>
+    <div class="gallery-item"><img src="Images/Horn player.jpg" alt="Horn Player"></div>
+    <div class="gallery-item"><img src="Images/LSM Ensemble.jpg" alt="LSM Ensemble"></div>
+    <div class="gallery-item"><img src="Images/LSM in performance.jpg" alt="LSM in Performance"></div>
+    <div class="gallery-item"><img src="Images/LSM Orchestra 2.jpg" alt="LSM Orchestra 2"></div>
+    <div class="gallery-item"><img src="Images/LSM Orchestra 3.jpg" alt="LSM Orchestra 3"></div>
+    <div class="gallery-item"><img src="Images/LSM Orchestra.jpg" alt="LSM Orchestra"></div>
+    <div class="gallery-item"><img src="Images/LSM With Chaminade Orchestra.jpg" alt="LSM with Chaminade Orchestra"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--white);">
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">Begin Your Musical Journey</h2>
+      <div class="section-line"></div>
+      <p class="tagline">"Begin your musical journey with Lilongwe School of Music where discipline meets artistry, and talent is developed into excellence."</p>
+      <div class="contact-detail">
+        <div class="icon">&#128222;</div>
+        <div class="info"><span class="label">Phone</span><a href="tel:+265981448075">+265 981 448 075</a></div>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">&#128139;</div>
+        <div class="info"><span class="label">Email</span><a href="mailto:lilongweschoolofmusic.lsm@yahoo.com">lilongweschoolofmusic.lsm@yahoo.com</a></div>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">&#128205;</div>
+        <div class="info"><span class="label">Location</span><span>Lilongwe, Malawi</span></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="contact-form" id="contactForm">
+        <div class="form-group"><label>Full Name</label><input type="text" id="fname" placeholder="Your full name"/></div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="femail" placeholder="your@email.com"/></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="fphone" placeholder="+265 ..."/></div>
+        <div class="form-group">
+          <label>Enquiry Type</label>
+          <select id="ftype">
+            <option value="">Select...</option>
+            <option>Student Enrolment</option>
+            <option>Examination Preparation</option>
+            <option>Event / Performance Booking</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Program of Interest</label>
+          <select id="fprogram">
+            <option value="">Select a program...</option>
+            <optgroup label="Instrumental Performance">
+              <option>Violin</option><option>Viola</option><option>Cello</option><option>Double Bass</option>
+              <option>Flute</option><option>Clarinet</option><option>Trumpet</option><option>Trombone</option>
+              <option>French Horn</option><option>Piano</option>
+            </optgroup>
+            <optgroup label="Vocal Studies">
+              <option>Solo Singing</option><option>Choir / Choral Singing</option><option>Opera and Vocal Technique</option>
+            </optgroup>
+            <optgroup label="Theory and Other">
+              <option>Music Theory</option><option>Examination Preparation</option><option>Performance / Event Booking</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea id="fmessage" placeholder="Tell us about yourself or ask any questions..."></textarea></div>
+        <button class="form-submit" onclick="submitForm()">Send Enquiry</button>
+        <div class="form-success" id="formSuccess">Thank you! We will be in touch with you shortly.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Lilongwe School of Music</div>
+  <div class="footer-tagline">Performance Art Theatre : Orchestra : Music Education</div>
+  <p>+265 981 448 075 &nbsp;&middot;&nbsp; lilongweschoolofmusic.lsm@yahoo.com</p>
+  <p style="margin-top:1rem;">&#169; 2026 Lilongwe School of Music (LSM). All rights reserved.</p>
+</footer>
+
+<script>
+  function toggleMenu(){
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(function(a){
+    a.addEventListener('click', function(){
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  }, {threshold: 0.08});
+  document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+
+  function switchTab(name, btn){
+    document.querySelectorAll('.tab-content').forEach(function(t){ t.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function submitForm(){
+    var name = document.getElementById('fname').value.trim();
+    var email = document.getElementById('femail').value.trim();
+    if(!name || !email){ alert('Please fill in your name and email address.'); return; }
+    document.getElementById('formSuccess').style.display = 'block';
+    document.querySelector('.form-submit').style.display = 'none';
+  }
+</script>
+</body>
+</html>
