@@ -1,679 +1,492 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lilongwe School of Music Training World-Class Musicians in Malawi</title>
-  <meta name="description" content="Lilongwe School <br>of Music (LSM) — Malawi's leading conservatory for instrumental performance, vocal studies, orchestra, and international exam preparation.">
-  <meta name="keywords" content="music school Malawi, music lessons Lilongwe, piano lessons Malawi, violin lessons Lilongwe, orchestra Malawi, Trinity exams Malawi, ABRSM Malawi, music academy Lilongwe">
-  <meta name="author" content="Lilongwe School of Music">
-  <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Lilongwe School of Music Training World-Class Musicians in Malawi">
-  <meta property="og:description" content="Professional conservatory-level music education, ensemble training, and international examination preparation in Malawi.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://github.com/lilongweschoolofmusic/LSM.git">
-  <link rel="canonical" href="https://github.com/lilongweschoolofmusic/LSM.git">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"MusicSchool","name":"Lilongwe School of Music","address":{"@type":"PostalAddress","addressLocality":"Lilongwe","addressCountry":"MW"},"telephone":"+265981448075","email":"lilongweschoolofmusic.lsm@yahoo.com"}
-  </script>
-  <style>
-    /* ──────────────── TOKENS ──────────────── */
-    :root {
-      --ink:    #080c14;
-      --navy:   #0c1829;
-      --cobalt: #122240;
-      --blue:   #1a3561;
-      --steel:  #2b4d8f;
-      --gold:   #c8a84b;
-      --gold2:  #dfc06a;
-      --gold3:  #f0d99a;
-      --cream:  #f7f4ec;
-      --off:    #edeae0;
-      --mist:   #d6d2c6;
-      --text:   #1c1e2a;
-      --mid:    #4a566a;
-      --light:  #8090a6;
-      --white:  #fdfbf6;
-      --ff-display: 'Cormorant Garamond', Georgia, serif;
-      --ff-body:    'Outfit', 'Segoe UI', sans-serif;
-      --ease: cubic-bezier(.4,0,.2,1);
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lilongwe School of Music Training World-Class Musicians in Malawi</title>
+<meta name="description" content="Lilongwe School of Music (LSM) — Malawi's leading conservatory for instrumental performance, vocal studies, orchestra, and international exam preparation.">
+<meta name="keywords" content="music school Malawi, music lessons Lilongwe, piano lessons Malawi, violin lessons Lilongwe, orchestra Malawi, Trinity exams Malawi, ABRSM Malawi, music academy Lilongwe">
+<meta name="author" content="Lilongwe School of Music">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Lilongwe School of Music Training World-Class Musicians in Malawi">
+<meta property="og:description" content="Professional conservatory-level music education, ensemble training, and international examination preparation in Malawi.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://github.com/lilongweschoolofmusic/LSM.git">
+<link rel="canonical" href="https://github.com/lilongweschoolofmusic/LSM.git">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MusicSchool","name":"Lilongwe School of Music","address":{"@type":"PostalAddress","addressLocality":"Lilongwe","addressCountry":"MW"},"telephone":"+265981448075","email":"lilongweschoolofmusic.lsm@yahoo.com"}
+</script>
+<style>
+/* ──────────────── TOKENS ──────────────── */
+:root {
+  --ink: #080c14;
+  --navy: #0c1829;
+  --cobalt: #122240;
+  --blue: #1a3561;
+  --steel: #2b4d8f;
+  --gold: #c8a84b;
+  --gold2: #dfc06a;
+  --gold3: #f0d99a;
+  --cream: #f7f4ec;
+  --off: #edeae0;
+  --mist: #d6d2c6;
+  --text: #1c1e2a;
+  --mid: #4a566a;
+  --light: #8090a6;
+  --white: #fdfbf6;
+  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --ff-body: 'Outfit', 'Segoe UI', sans-serif;
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+/* ──────────────── RESET ──────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { font-family:var(--ff-body); background:var(--white); color:var(--text); overflow-x:hidden; }
+img { display:block; max-width:100%; }
+a { text-decoration:none; }
+button { font-family:var(--ff-body); cursor:pointer; }
 
-    /* ──────────────── RESET ──────────────── */
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; font-size:16px; }
-    body { font-family:var(--ff-body); background:var(--white); color:var(--text); overflow-x:hidden; }
-    img { display:block; max-width:100%; }
-    a { text-decoration:none; }
-    button { font-family:var(--ff-body); cursor:pointer; }
+/* ──────────────── SCROLL BAR ──────────────── */
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:var(--navy); }
+::-webkit-scrollbar-thumb { background:var(--gold); }
 
-    /* ──────────────── SCROLL BAR ──────────────── */
-    ::-webkit-scrollbar { width:5px; }
-    ::-webkit-scrollbar-track { background:var(--navy); }
-    ::-webkit-scrollbar-thumb { background:var(--gold); }
+/* ──────────────── UTILITY ──────────────── */
+.container { max-width:1200px; margin:0 auto; padding:0 5%; }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+.tag-label { display:inline-block; font-family:var(--ff-body); font-size:.65rem; font-weight:600; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); margin-bottom:.9rem; }
+.section-title { font-family:var(--ff-display); font-size:clamp(2rem,4.5vw,3.2rem); font-weight:600; line-height:1.1; color:var(--navy); margin-bottom:1rem; }
+.section-title.light { color:var(--white); }
+.gold-rule { width:52px; height:2px; background:var(--gold); margin-bottom:1.8rem; }
+.gold-rule.centered { margin-left:auto; margin-right:auto; }
 
-    /* ──────────────── UTILITY ──────────────── */
-    .container { max-width:1200px; margin:0 auto; padding:0 5%; }
-    .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
-    .tag-label {
-      display:inline-block; font-family:var(--ff-body);
-      font-size:.65rem; font-weight:600; letter-spacing:.35em; text-transform:uppercase;
-      color:var(--gold); margin-bottom:.9rem;
-    }
-    .section-title {
-      font-family:var(--ff-display); font-size:clamp(2rem,4.5vw,3.2rem);
-      font-weight:600; line-height:1.1; color:var(--navy); margin-bottom:1rem;
-    }
-    .section-title.light { color:var(--white); }
-    .gold-rule { width:52px; height:2px; background:var(--gold); margin-bottom:1.8rem; }
-    .gold-rule.centered { margin-left:auto; margin-right:auto; }
+/* ──────────────── BUTTONS ──────────────── */
+.btn { display:inline-flex; align-items:center; gap:.5rem; padding:14px 34px; font-family:var(--ff-body); font-size:.75rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; transition:all .28s var(--ease); border:none; cursor:pointer; position:relative; overflow:hidden; }
+.btn::after { content:''; position:absolute; inset:0; opacity:0; background:rgba(255,255,255,.12); transition:opacity .25s; }
+.btn:hover::after { opacity:1; }
+.btn-gold { background:var(--gold); color:var(--navy); }
+.btn-gold:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 8px 28px rgba(200,168,75,.35); }
+.btn-outline-gold { background:transparent; color:var(--gold); border:1.5px solid var(--gold); }
+.btn-outline-gold:hover { background:var(--gold); color:var(--navy); transform:translateY(-2px); }
+.btn-outline-white { background:transparent; color:var(--white); border:1.5px solid rgba(255,255,255,.45); }
+.btn-outline-white:hover { border-color:var(--gold); color:var(--gold); }
+.btn-navy { background:var(--navy); color:var(--gold); }
+.btn-navy:hover { background:var(--blue); transform:translateY(-2px); }
+.btn-sm { padding:10px 24px; font-size:.7rem; }
 
-    /* ──────────────── BUTTONS ──────────────── */
-    .btn {
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:14px 34px; font-family:var(--ff-body); font-size:.75rem;
-      font-weight:600; letter-spacing:.2em; text-transform:uppercase;
-      transition:all .28s var(--ease); border:none; cursor:pointer;
-      position:relative; overflow:hidden;
-    }
-    .btn::after {
-      content:''; position:absolute; inset:0; opacity:0;
-      background:rgba(255,255,255,.12); transition:opacity .25s;
-    }
-    .btn:hover::after { opacity:1; }
-    .btn-gold { background:var(--gold); color:var(--navy); }
-    .btn-gold:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 8px 28px rgba(200,168,75,.35); }
-    .btn-outline-gold { background:transparent; color:var(--gold); border:1.5px solid var(--gold); }
-    .btn-outline-gold:hover { background:var(--gold); color:var(--navy); transform:translateY(-2px); }
-    .btn-outline-white { background:transparent; color:var(--white); border:1.5px solid rgba(255,255,255,.45); }
-    .btn-outline-white:hover { border-color:var(--gold); color:var(--gold); }
-    .btn-navy { background:var(--navy); color:var(--gold); }
-    .btn-navy:hover { background:var(--blue); transform:translateY(-2px); }
-    .btn-sm { padding:10px 24px; font-size:.7rem; }
+/* ──────────────── REVEAL ──────────────── */
+.reveal { opacity:0; transform:translateY(32px); transition:opacity .75s var(--ease), transform .75s var(--ease); }
+.reveal.visible { opacity:1; transform:none; }
+.reveal-delay-1 { transition-delay:.1s; }
+.reveal-delay-2 { transition-delay:.2s; }
+.reveal-delay-3 { transition-delay:.3s; }
 
-    /* ──────────────── REVEAL ──────────────── */
-    .reveal { opacity:0; transform:translateY(32px); transition:opacity .75s var(--ease), transform .75s var(--ease); }
-    .reveal.visible { opacity:1; transform:none; }
-    .reveal-delay-1 { transition-delay:.1s; }
-    .reveal-delay-2 { transition-delay:.2s; }
-    .reveal-delay-3 { transition-delay:.3s; }
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+#topbar { position:fixed; top:0; left:0; right:0; z-index:200; background:rgba(8,12,20,.92); backdrop-filter:blur(16px); border-bottom:1px solid rgba(200,168,75,.18); transition:background .3s, box-shadow .3s; }
+#topbar.scrolled { box-shadow:0 4px 32px rgba(0,0,0,.5); }
+.nav-inner { display:flex; align-items:center; justify-content:space-between; height:72px; padding:0 5%; }
+.nav-brand { display:flex; align-items:center; gap:.9rem; cursor:pointer; }
+.nav-brand img { height:170px; width:auto; }
 
-    /* ═══════════════════════════════════════════════
-       NAVIGATION
-    ═══════════════════════════════════════════════ */
-    #topbar {
-      position:fixed; top:0; left:0; right:0; z-index:200;
-      background:rgba(8,12,20,.92); backdrop-filter:blur(16px);
-      border-bottom:1px solid rgba(200,168,75,.18);
-      transition:background .3s, box-shadow .3s;
-    }
-    #topbar.scrolled { box-shadow:0 4px 32px rgba(0,0,0,.5); }
-    .nav-inner {
-      display:flex; align-items:center; justify-content:space-between;
-      height:72px; padding:0 5%;
-    }
-    .nav-brand {
-      display:flex; align-items:center; gap:.9rem; cursor:pointer;
-    }
-    .nav-brand img { height:38px; width:auto; }
-    .nav-brand-text { line-height:1.2; }
-    .nav-brand-text strong {
-      display:block; font-family:var(--ff-display); font-size:1.05rem;
-      font-weight:600; color:var(--gold); letter-spacing:.04em;
-    }
-    .nav-brand-text small {
-      font-size:.6rem; letter-spacing:.25em; text-transform:uppercase;
-      color:rgba(255,255,255,.4); font-weight:300;
-    }
-    .nav-menu { display:flex; align-items:center; gap:2rem; list-style:none; }
-    .nav-menu a {
-      color:rgba(255,255,255,.7); font-size:.72rem; font-weight:500;
-      letter-spacing:.18em; text-transform:uppercase;
-      transition:color .25s; padding:4px 0; position:relative;
-    }
-    .nav-menu a::after {
-      content:''; position:absolute; bottom:-2px; left:0; right:0;
-      height:1px; background:var(--gold); transform:scaleX(0); transition:transform .25s;
-    }
-    .nav-menu a:hover { color:var(--gold); }
-    .nav-menu a:hover::after { transform:scaleX(1); }
-    .nav-cta { display:flex; align-items:center; gap:.8rem; }
-    .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; padding:4px; }
-    .hamburger span { display:block; width:22px; height:2px; background:var(--gold); transition:.3s; }
-    .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
-    .hamburger.open span:nth-child(2) { opacity:0; }
-    .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+.nav-menu { display:flex; align-items:center; gap:2rem; list-style:none; }
+.nav-menu a { color:rgba(255,255,255,.7); font-size:.72rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; transition:color .25s; padding:4px 0; position:relative; }
+.nav-menu a::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform .25s; }
+.nav-menu a:hover { color:var(--gold); }
+.nav-menu a:hover::after { transform:scaleX(1); }
+.nav-cta { display:flex; align-items:center; gap:.8rem; }
 
-    @media(max-width:1000px){
-      .nav-menu { display:none; }
-      .nav-cta { display:none; }
-      .hamburger { display:flex; }
-      .nav-mobile-panel {
-        position:fixed; top:72px; left:0; right:0; bottom:0;
-        background:rgba(8,12,20,.97); backdrop-filter:blur(20px);
-        z-index:199; display:flex; flex-direction:column; align-items:center;
-        justify-content:center; gap:2.5rem; opacity:0; pointer-events:none;
-        transition:opacity .35s;
-      }
-      .nav-mobile-panel.open { opacity:1; pointer-events:all; }
-      .nav-mobile-panel a {
-        color:rgba(255,255,255,.75); font-family:var(--ff-display);
-        font-size:1.8rem; font-weight:500; letter-spacing:.05em;
-        transition:color .25s;
-      }
-      .nav-mobile-panel a:hover { color:var(--gold); }
-    }
+/* ── HAMBURGER ── */
+.hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; padding:8px; cursor:pointer; }
+.hamburger span { display:block; width:24px; height:2px; background:var(--gold); border-radius:2px; transition:.3s; }
+.hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
 
-    /* ═══════════════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════════════ */
-    #home {
-      min-height:100vh; position:relative; display:flex; align-items:center;
-      overflow:hidden; background:var(--ink);
-    }
-    .hero-bg {
-      position:absolute; inset:0;
-      background:url('Images/Hero\ bg.jpg') center/cover no-repeat;
-      opacity:.18; filter:blur(2px);
-    }
-    .hero-overlay {
-      position:absolute; inset:0;
-      background:linear-gradient(135deg,rgba(8,12,20,.98) 0%,rgba(12,24,41,.9) 50%,rgba(26,53,97,.75) 100%);
-    }
-    .hero-grain {
-      position:absolute; inset:0; opacity:.04;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-    /* decorative gold lines */
-    .hero-deco {
-      position:absolute; top:0; right:0; width:45%; height:100%;
-      pointer-events:none; overflow:hidden;
-    }
-    .hero-deco::before {
-      content:''; position:absolute; top:-10%; right:-5%;
-      width:600px; height:600px; border:1px solid rgba(200,168,75,.1);
-      border-radius:50%; transform:rotate(-20deg);
-    }
-    .hero-deco::after {
-      content:''; position:absolute; top:10%; right:5%;
-      width:380px; height:380px; border:1px solid rgba(200,168,75,.07);
-      border-radius:50%;
-    }
-    .hero-content {
-      position:relative; z-index:2; width:100%; padding:140px 5% 100px;
-      display:grid; grid-template-columns:1fr .9fr; gap:4rem; align-items:center;
-      max-width:1200px; margin:0 auto;
-    }
-    .hero-left {}
-    .hero-badge {
-      display:inline-flex; align-items:center; gap:.6rem;
-      border:1px solid rgba(200,168,75,.35); padding:6px 16px 6px 12px;
-      margin-bottom:1.8rem;
-    }
-    .hero-badge .dot { width:6px; height:6px; background:var(--gold); border-radius:50%; }
-    .hero-badge span { font-size:.65rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); font-weight:500; }
-    .hero-title {
-      font-family:var(--ff-display); font-size:clamp(2.6rem,5.5vw,4.4rem);
-      font-weight:600; line-height:1.06; color:var(--white); margin-bottom:1.4rem;
-    }
-    .hero-title em { font-style:italic; color:var(--gold); }
-    .hero-sub {
-      font-size:1rem; color:rgba(255,255,255,.55); line-height:1.9;
-      max-width:520px; font-weight:300; margin-bottom:2.4rem;
-    }
-    .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; }
-    .hero-right { display:flex; flex-direction:column; gap:1.2rem; }
-    .hero-stat-card {
-      background:rgba(255,255,255,.04); border:1px solid rgba(200,168,75,.15);
-      padding:1.5rem 1.8rem; backdrop-filter:blur(8px);
-      transition:background .3s, border-color .3s;
-    }
-    .hero-stat-card:hover { background:rgba(26,53,97,.4); border-color:rgba(200,168,75,.35); }
-    .hero-stat-card .num {
-      font-family:var(--ff-display); font-size:2.4rem; font-weight:600;
-      color:var(--gold); line-height:1;
-    }
-    .hero-stat-card .label { font-size:.75rem; color:rgba(255,255,255,.45); letter-spacing:.1em; margin-top:.3rem; }
-    .hero-scroll-hint {
-      position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
-      display:flex; flex-direction:column; align-items:center; gap:.5rem;
-      font-size:.6rem; letter-spacing:.3em; text-transform:uppercase;
-      color:rgba(255,255,255,.25); animation:bob 2.5s ease-in-out infinite;
-    }
-    .hero-scroll-hint .line { width:1px; height:44px; background:linear-gradient(to bottom,rgba(200,168,75,.4),transparent); }
-    @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+/* Social icons in nav */
+.nav-social { display:flex; align-items:center; gap:.6rem; }
+.nav-social a { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border:1px solid rgba(200,168,75,.25); border-radius:50%; color:rgba(255,255,255,.5); transition:all .25s; }
+.nav-social a:hover { border-color:var(--gold); color:var(--gold); background:rgba(200,168,75,.1); }
+.nav-social a svg { width:14px; height:14px; fill:currentColor; }
 
-    @media(max-width:820px){
-      .hero-content { grid-template-columns:1fr; gap:3rem; }
-      .hero-right { display:grid; grid-template-columns:repeat(2,1fr); }
-    }
-    @media(max-width:500px){ .hero-right { grid-template-columns:1fr; } }
+/* ── MOBILE NAV PANEL ── */
+.nav-mobile-panel {
+  position:fixed;
+  top:72px; left:0; right:0; bottom:0;
+  background:rgba(8,12,20,.97);
+  backdrop-filter:blur(20px);
+  z-index:199;
+  display:none; /* hidden by default */
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2rem;
+  overflow-y:auto;
+  padding:2rem 0;
+}
+.nav-mobile-panel.open { display:flex; }
+.nav-mobile-panel a { color:rgba(255,255,255,.75); font-family:var(--ff-display); font-size:1.8rem; font-weight:500; letter-spacing:.05em; transition:color .25s; }
+.nav-mobile-panel a:hover { color:var(--gold); }
+.mobile-social { display:flex; gap:1rem; margin-top:.5rem; }
+.mobile-social a { display:flex; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid rgba(200,168,75,.3); border-radius:50%; color:rgba(255,255,255,.6); }
+.mobile-social a:hover { border-color:var(--gold); color:var(--gold); }
+.mobile-social a svg { width:18px; height:18px; fill:currentColor; }
 
-    /* ═══════════════════════════════════════════════
-       ANNOUNCEMENT BAR
-    ═══════════════════════════════════════════════ */
-    .announce-bar {
-      background:var(--gold); padding:12px 5%;
-      display:flex; align-items:center; justify-content:center; gap:1.5rem;
-      flex-wrap:wrap;
-    }
-    .announce-bar p { font-size:.78rem; font-weight:600; color:var(--navy); letter-spacing:.05em; }
-    .announce-bar a { font-size:.72rem; font-weight:700; color:var(--navy); border-bottom:1px solid var(--navy); padding-bottom:1px; }
+@media(max-width:1000px){
+  .nav-menu { display:none; }
+  .nav-cta { display:none; }
+  .nav-social { display:none; }
+  .hamburger { display:flex; }
+}
 
-    /* ═══════════════════════════════════════════════
-       SECTION GENERIC
-    ═══════════════════════════════════════════════ */
-    .section { padding:96px 5%; }
-    .section-header { margin-bottom:3.5rem; }
-    .section-header.centered { text-align:center; }
-    .section-header.centered .gold-rule { margin:0 auto 1.8rem; }
-    .section-intro {
-      font-size:.98rem; line-height:1.9; color:var(--mid); font-weight:300; max-width:620px;
-    }
-    .section-intro.centered { margin:0 auto; }
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+#home { min-height:100vh; position:relative; display:flex; align-items:center; overflow:hidden; background:var(--ink); }
+.hero-bg { position:absolute; inset:0; background:url('Images/Horn player.jpg') center/cover no-repeat; opacity:.6; filter:blur(1px); }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(8,12,20,.97) 0%,rgba(6,12,17,.44) 50%,rgba(26,53,97,.72) 100%); }
+.hero-grain { position:absolute; inset:0; opacity:.04; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.hero-deco { position:absolute; top:0; right:0; width:45%; height:100%; pointer-events:none; overflow:hidden; }
+.hero-deco::before { content:''; position:absolute; top:-10%; right:-5%; width:600px; height:600px; border:1px solid rgba(200,168,75,.1); border-radius:50%; transform:rotate(-20deg); }
+.hero-deco::after { content:''; position:absolute; top:10%; right:5%; width:380px; height:380px; border:1px solid rgba(200,168,75,.07); border-radius:50%; }
+.hero-content { position:relative; z-index:2; width:100%; padding:140px 5% 100px; display:grid; grid-template-columns:1fr .9fr; gap:4rem; align-items:center; max-width:1200px; margin:0 auto; }
+.hero-badge { display:inline-flex; align-items:center; gap:.6rem; border:1px solid rgba(200,168,75,.35); padding:6px 16px 6px 12px; margin-bottom:1.8rem; }
+.hero-badge .dot { width:6px; height:6px; background:var(--gold); border-radius:50%; }
+.hero-badge span { font-size:.65rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); font-weight:500; }
+.hero-title { font-family:'Arial', sans-serif; font-size:clamp(2.8rem,3.5vw,2.8rem);; font-weight:600; line-height:1.06; color:var(--white); margin-bottom:1.4rem; }
+.hero-title em { font-style:italic; color:var(--gold); }
+.hero-subtitle { font-family:'Arial', sans-serif; font-size:clamp(1.0rem,1.8vw,1rem); font-weight:500; line-height:1.1; color:var(--white); margin-bottom:1.4rem; }
+.hero-subtitle em { font-style:italic; color:var(--gold); }
+.hero-sub { font-size:1rem; color:rgba(255,255,255,.55); line-height:1.9; max-width:520px; font-weight:300; margin-bottom:2.4rem; }
+.hero-actions { display:flex; gap:1rem; flex-wrap:wrap; }
+.hero-right { display:flex; flex-direction:column; gap:1.2rem; }
+.hero-stat-card { background:rgba(255,255,255,.04); border:1px solid rgba(200,168,75,.15); padding:1.5rem 1.8rem; backdrop-filter:blur(8px); transition:background .3s, border-color .3s; }
+.hero-stat-card:hover { background:rgba(26,53,97,.4); border-color:rgba(200,168,75,.35); }
+.hero-stat-card .num { font-family:var(--ff-display); font-size:2.4rem; font-weight:600; color:var(--gold); line-height:1; }
+.hero-stat-card .label { font-size:.75rem; color:rgba(255,255,255,.45); letter-spacing:.1em; margin-top:.3rem; }
+.hero-scroll-hint { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.5rem; font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.25); animation:bob 2.5s ease-in-out infinite; }
+.hero-scroll-hint .line { width:1px; height:44px; background:linear-gradient(to bottom,rgba(200,168,75,.4),transparent); }
+@keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+@media(max-width:820px){ .hero-content { grid-template-columns:1fr; gap:3rem; } .hero-right { display:grid; grid-template-columns:repeat(2,1fr); } }
+@media(max-width:500px){ .hero-right { grid-template-columns:1fr; } }
 
-    /* ═══════════════════════════════════════════════
-       ABOUT / IDENTITY
-    ═══════════════════════════════════════════════ */
-    #about { background:var(--white); }
-    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
-    .about-lead {
-      font-family:var(--ff-display); font-size:1.3rem; font-style:italic;
-      color:var(--navy); line-height:1.7; margin-bottom:1.8rem;
-      padding-bottom:1.4rem; border-bottom:1px solid var(--mist);
-    }
-    .about-body { font-size:.96rem; line-height:1.95; color:var(--mid); font-weight:300; margin-bottom:1rem; }
-    .mv-stack { display:flex; flex-direction:column; gap:1.2rem; }
-    .mv-item {
-      padding:1.6rem 1.8rem; border-left:3px solid var(--gold);
-      background:var(--cream); transition:background .3s;
-    }
-    .mv-item:hover { background:var(--off); }
-    .mv-item h4 { font-family:var(--ff-display); font-size:1.1rem; color:var(--navy); margin-bottom:.5rem; }
-    .mv-item p { font-size:.88rem; color:var(--mid); line-height:1.8; }
-    .pillars { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--off); margin-top:4rem; }
-    .pillar-item {
-      background:var(--white); padding:2rem 1.4rem; text-align:center;
-      transition:background .3s, color .3s; cursor:default;
-    }
-    .pillar-item:hover { background:var(--navy); }
-    .pillar-item:hover .pi-title { color:var(--gold); }
-    .pillar-item:hover .pi-text { color:rgba(255,255,255,.45); }
-    .pi-icon { font-size:1.6rem; margin-bottom:.8rem; }
-    .pi-title { font-family:var(--ff-display); font-size:.98rem; color:var(--navy); margin-bottom:.3rem; transition:color .3s; }
-    .pi-text { font-size:.78rem; color:var(--light); line-height:1.6; transition:color .3s; }
+/* ═══════════════════════════════════════════════
+   ANNOUNCEMENT BAR
+═══════════════════════════════════════════════ */
+.announce-bar { background:var(--gold); padding:12px 5%; display:flex; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
+.announce-bar p { font-size:.78rem; font-weight:600; color:var(--navy); letter-spacing:.05em; }
+.announce-bar a { font-size:.72rem; font-weight:700; color:var(--navy); border-bottom:1px solid var(--navy); padding-bottom:1px; }
 
-    @media(max-width:800px){ .about-grid{grid-template-columns:1fr;gap:3rem;} .pillars{grid-template-columns:repeat(2,1fr);} }
+/* ═══════════════════════════════════════════════
+   SECTION GENERIC
+═══════════════════════════════════════════════ */
+.section { padding:96px 5%; }
+.section-header { margin-bottom:3.5rem; }
+.section-header.centered { text-align:center; }
+.section-header.centered .gold-rule { margin:0 auto 1.8rem; }
+.section-intro { font-size:.98rem; line-height:1.9; color:var(--mid); font-weight:300; max-width:620px; }
+.section-intro.centered { margin:0 auto; }
 
-    /* ═══════════════════════════════════════════════
-       PROGRAMS / CURRICULUM
-    ═══════════════════════════════════════════════ */
-    #programs { background:var(--navy); }
-    .programs-intro { font-size:.95rem; color:rgba(255,255,255,.45); max-width:620px; line-height:1.9; font-weight:300; margin-bottom:2.8rem; }
-    .prog-tabs { display:flex; gap:0; flex-wrap:wrap; margin-bottom:2.5rem; }
-    .prog-tab {
-      padding:12px 28px; background:transparent;
-      border:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.45);
-      font-size:.7rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase;
-      transition:all .25s; cursor:pointer;
-    }
-    .prog-tab:hover { color:var(--gold); border-color:rgba(200,168,75,.3); }
-    .prog-tab.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
-    .prog-panel { display:none; }
-    .prog-panel.active { display:block; }
-    .prog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); }
-    .prog-card {
-      background:rgba(8,12,20,.95); padding:2.4rem 2rem;
-      transition:background .3s;
-    }
-    .prog-card:hover { background:var(--cobalt); }
-    .prog-card .pc-icon { font-size:1.8rem; margin-bottom:1rem; }
-    .prog-card h3 { font-family:var(--ff-display); font-size:1.2rem; color:var(--gold); margin-bottom:.7rem; }
-    .prog-card p { font-size:.85rem; color:rgba(255,255,255,.45); line-height:1.8; margin-bottom:1rem; }
-    .prog-card .pc-tags { display:flex; flex-wrap:wrap; gap:.35rem; }
-    .pc-tag { font-size:.65rem; letter-spacing:.08em; border:1px solid rgba(200,168,75,.25); color:var(--gold3); padding:3px 9px; }
+/* ═══════════════════════════════════════════════
+   ABOUT / IDENTITY
+═══════════════════════════════════════════════ */
+#about { background:var(--white); }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+.about-lead { font-family:var(--ff-display); font-size:1.3rem; font-style:italic; color:var(--navy); line-height:1.7; margin-bottom:1.8rem; padding-bottom:1.4rem; border-bottom:1px solid var(--mist); }
+.about-body { font-size:.96rem; line-height:1.95; color:var(--mid); font-weight:300; margin-bottom:1rem; }
+.mv-stack { display:flex; flex-direction:column; gap:1.2rem; }
+.mv-item { padding:1.6rem 1.8rem; border-left:3px solid var(--gold); background:var(--cream); transition:background .3s; }
+.mv-item:hover { background:var(--off); }
+.mv-item h4 { font-family:var(--ff-display); font-size:1.1rem; color:var(--navy); margin-bottom:.5rem; }
+.mv-item p { font-size:.88rem; color:var(--mid); line-height:1.8; }
+.pillars { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--off); margin-top:4rem; }
+.pillar-item { background:var(--white); padding:2rem 1.4rem; text-align:center; transition:background .3s, color .3s; cursor:default; }
+.pillar-item:hover { background:var(--navy); }
+.pillar-item:hover .pi-title { color:var(--gold); }
+.pillar-item:hover .pi-text { color:rgba(255,255,255,.45); }
+.pi-icon { font-size:1.6rem; margin-bottom:.8rem; }
+.pi-title { font-family:var(--ff-display); font-size:.98rem; color:var(--navy); margin-bottom:.3rem; transition:color .3s; }
+.pi-text { font-size:.78rem; color:var(--light); line-height:1.6; transition:color .3s; }
+@media(max-width:800px){ .about-grid{grid-template-columns:1fr;gap:3rem;} .pillars{grid-template-columns:repeat(2,1fr);} }
 
-    .exam-panel {
-      max-width:900px; margin-top:2rem;
-      border:1px solid rgba(200,168,75,.2); padding:2.5rem;
-    }
-    .exam-panel h3 { font-family:var(--ff-display); font-size:1.3rem; color:var(--gold); margin-bottom:1.2rem; }
-    .exam-cols { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2rem; }
-    .exam-col h4 { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:.9rem; }
-    .exam-col ul { list-style:none; }
-    .exam-col li { font-size:.87rem; color:rgba(255,255,255,.55); line-height:2; padding-left:.9rem; position:relative; }
-    .exam-col li::before { content:'–'; position:absolute; left:0; color:var(--gold); opacity:.5; }
-    .exam-notice {
-      margin-top:1.4rem; padding:1rem 1.4rem; background:rgba(200,168,75,.08);
-      border-left:2px solid var(--gold); font-size:.83rem; color:rgba(255,255,255,.55); line-height:1.7;
-    }
-    .exam-notice strong { color:rgba(255,255,255,.75); }
+/* ═══════════════════════════════════════════════
+   PROGRAMS / CURRICULUM
+═══════════════════════════════════════════════ */
+#programs { background:var(--navy); }
+.programs-intro { font-size:.95rem; color:rgba(255,255,255,.45); max-width:620px; line-height:1.9; font-weight:300; margin-bottom:2.8rem; }
+.prog-tabs { display:flex; gap:0; flex-wrap:wrap; margin-bottom:2.5rem; }
+.prog-tab { padding:12px 28px; background:transparent; border:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.45); font-size:.7rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; transition:all .25s; cursor:pointer; }
+.prog-tab:hover { color:var(--gold); border-color:rgba(200,168,75,.3); }
+.prog-tab.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
+.prog-panel { display:none; }
+.prog-panel.active { display:block; }
+.prog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); }
+.prog-card { background:rgba(8,12,20,.95); padding:2.4rem 2rem; transition:background .3s; }
+.prog-card:hover { background:var(--cobalt); }
+.prog-card .pc-icon { font-size:1.8rem; margin-bottom:1rem; }
+.prog-card h3 { font-family:var(--ff-display); font-size:1.2rem; color:var(--gold); margin-bottom:.7rem; }
+.prog-card p { font-size:.85rem; color:rgba(255,255,255,.45); line-height:1.8; margin-bottom:1rem; }
+.prog-card .pc-tags { display:flex; flex-wrap:wrap; gap:.35rem; }
+.pc-tag { font-size:.65rem; letter-spacing:.08em; border:1px solid rgba(200,168,75,.25); color:var(--gold3); padding:3px 9px; }
+.exam-panel { max-width:900px; margin-top:2rem; border:1px solid rgba(200,168,75,.2); padding:2.5rem; }
+.exam-panel h3 { font-family:var(--ff-display); font-size:1.3rem; color:var(--gold); margin-bottom:1.2rem; }
+.exam-cols { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2rem; }
+.exam-col h4 { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:.9rem; }
+.exam-col ul { list-style:none; }
+.exam-col li { font-size:.87rem; color:rgba(255,255,255,.55); line-height:2; padding-left:.9rem; position:relative; }
+.exam-col li::before { content:'–'; position:absolute; left:0; color:var(--gold); opacity:.5; }
+.exam-notice { margin-top:1.4rem; padding:1rem 1.4rem; background:rgba(200,168,75,.08); border-left:2px solid var(--gold); font-size:.83rem; color:rgba(255,255,255,.55); line-height:1.7; }
+.exam-notice strong { color:rgba(255,255,255,.75); }
+.schedule-row { display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:2.5rem; }
+.sched-item { flex:1; min-width:160px; background:rgba(26,53,97,.25); border:1px solid rgba(200,168,75,.15); padding:1.4rem 1.8rem; }
+.sched-item .sday { font-family:var(--ff-display); font-size:1.1rem; color:var(--gold); margin-bottom:.2rem; }
+.sched-item .stime { font-size:.87rem; color:rgba(255,255,255,.6); }
+.perf-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); }
+.perf-card { background:rgba(8,12,20,.95); padding:2.4rem 2rem; transition:background .3s; }
+.perf-card:hover { background:var(--cobalt); }
+.perf-card .pf-icon { font-size:1.8rem; margin-bottom:1rem; }
+.perf-card h3 { font-family:var(--ff-display); font-size:1.2rem; color:var(--gold); margin-bottom:.7rem; }
+.perf-card p { font-size:.84rem; color:rgba(255,255,255,.45); line-height:1.8; margin-bottom:.6rem; }
+.perf-card ul { list-style:none; }
+.perf-card ul li { font-size:.85rem; color:rgba(255,255,255,.5); line-height:1.9; padding-left:.9rem; position:relative; }
+.perf-card ul li::before { content:'▸'; position:absolute; left:0; color:var(--gold); font-size:.7rem; top:.15em; }
 
-    .schedule-row { display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:2.5rem; }
-    .sched-item {
-      flex:1; min-width:160px; background:rgba(26,53,97,.25);
-      border:1px solid rgba(200,168,75,.15); padding:1.4rem 1.8rem;
-    }
-    .sched-item .sday { font-family:var(--ff-display); font-size:1.1rem; color:var(--gold); margin-bottom:.2rem; }
-    .sched-item .stime { font-size:.87rem; color:rgba(255,255,255,.6); }
+/* ═══════════════════════════════════════════════
+   ADMISSIONS
+═══════════════════════════════════════════════ */
+#admissions { background:var(--cream); }
+.admissions-layout { display:grid; grid-template-columns:1.1fr 1fr; gap:5rem; align-items:start; }
+.adm-age-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-bottom:2.5rem; }
+.age-card { padding:1.6rem; border:1px solid var(--mist); background:var(--white); transition:border-color .3s, box-shadow .3s; }
+.age-card:hover { border-color:var(--gold); box-shadow:0 6px 24px rgba(200,168,75,.12); }
+.age-card .ac-range { font-family:var(--ff-display); font-size:1.5rem; color:var(--gold); font-weight:600; margin-bottom:.3rem; }
+.age-card .ac-label { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--navy); font-weight:600; margin-bottom:.5rem; }
+.age-card p { font-size:.83rem; color:var(--mid); line-height:1.7; }
+.req-list { list-style:none; margin-bottom:2rem; }
+.req-list li { display:flex; align-items:flex-start; gap:.9rem; padding:1rem 0; border-bottom:1px solid var(--mist); font-size:.9rem; color:var(--mid); line-height:1.6; }
+.req-list li:last-child { border:none; }
+.req-list li .ri { color:var(--gold); font-size:1rem; flex-shrink:0; margin-top:.1rem; }
+.app-step { display:flex; gap:1.4rem; align-items:flex-start; margin-bottom:2rem; }
+.step-num { width:44px; height:44px; background:var(--navy); color:var(--gold); display:flex; align-items:center; justify-content:center; font-family:var(--ff-display); font-size:1.2rem; font-weight:600; flex-shrink:0; }
+.step-body h4 { font-family:var(--ff-display); font-size:1.1rem; color:var(--navy); margin-bottom:.35rem; }
+.step-body p { font-size:.87rem; color:var(--mid); line-height:1.7; }
+.step-connector { width:1px; height:28px; background:var(--mist); margin-left:21px; }
+@media(max-width:800px){ .admissions-layout { grid-template-columns:1fr; gap:3rem; } .adm-age-cards { grid-template-columns:1fr 1fr; } }
 
-    .perf-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); }
-    .perf-card {
-      background:rgba(8,12,20,.95); padding:2.4rem 2rem; transition:background .3s;
-    }
-    .perf-card:hover { background:var(--cobalt); }
-    .perf-card .pf-icon { font-size:1.8rem; margin-bottom:1rem; }
-    .perf-card h3 { font-family:var(--ff-display); font-size:1.2rem; color:var(--gold); margin-bottom:.7rem; }
-    .perf-card p { font-size:.84rem; color:rgba(255,255,255,.45); line-height:1.8; margin-bottom:.6rem; }
-    .perf-card ul { list-style:none; }
-    .perf-card ul li { font-size:.85rem; color:rgba(255,255,255,.5); line-height:1.9; padding-left:.9rem; position:relative; }
-    .perf-card ul li::before { content:'▸'; position:absolute; left:0; color:var(--gold); font-size:.7rem; top:.15em; }
+/* ═══════════════════════════════════════════════
+   EVENTS & PERFORMANCES
+═══════════════════════════════════════════════ */
+#events { background:var(--navy); }
+.events-intro { font-size:.95rem; color:rgba(255,255,255,.45); max-width:620px; line-height:1.9; font-weight:300; margin-bottom:3rem; }
+.events-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); margin-bottom:3rem; }
+.event-card { background:rgba(8,12,20,.95); padding:2.5rem 2.2rem; transition:background .3s; position:relative; overflow:hidden; }
+.event-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); }
+.event-card:hover::before { transform:scaleX(1); }
+.event-card:hover { background:var(--cobalt); }
+.event-card .ec-icon { font-size:2rem; margin-bottom:1.2rem; }
+.event-card h3 { font-family:var(--ff-display); font-size:1.25rem; color:var(--gold); margin-bottom:.8rem; }
+.event-card p { font-size:.86rem; color:rgba(255,255,255,.45); line-height:1.85; margin-bottom:1rem; }
+.event-card ul { list-style:none; }
+.event-card ul li { font-size:.84rem; color:rgba(255,255,255,.5); padding:5px 0 5px .9rem; position:relative; border-bottom:1px solid rgba(255,255,255,.05); }
+.event-card ul li:last-child { border:none; }
+.event-card ul li::before { content:'◆'; position:absolute; left:0; color:var(--gold); font-size:.45rem; top:.6em; }
+.booking-strip { background:rgba(200,168,75,.08); border:1px solid rgba(200,168,75,.2); padding:2.5rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+.booking-strip p { font-family:var(--ff-display); font-size:1.2rem; font-style:italic; color:rgba(255,255,255,.7); max-width:540px; line-height:1.6; }
+.booking-strip .bs-actions { display:flex; gap:.8rem; flex-wrap:wrap; }
 
-    /* ═══════════════════════════════════════════════
-       ADMISSIONS
-    ═══════════════════════════════════════════════ */
-    #admissions { background:var(--cream); }
-    .admissions-layout { display:grid; grid-template-columns:1.1fr 1fr; gap:5rem; align-items:start; }
-    .adm-age-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-bottom:2.5rem; }
-    .age-card {
-      padding:1.6rem; border:1px solid var(--mist); background:var(--white);
-      transition:border-color .3s, box-shadow .3s;
-    }
-    .age-card:hover { border-color:var(--gold); box-shadow:0 6px 24px rgba(200,168,75,.12); }
-    .age-card .ac-range {
-      font-family:var(--ff-display); font-size:1.5rem; color:var(--gold);
-      font-weight:600; margin-bottom:.3rem;
-    }
-    .age-card .ac-label { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--navy); font-weight:600; margin-bottom:.5rem; }
-    .age-card p { font-size:.83rem; color:var(--mid); line-height:1.7; }
-    .req-list { list-style:none; margin-bottom:2rem; }
-    .req-list li {
-      display:flex; align-items:flex-start; gap:.9rem;
-      padding:1rem 0; border-bottom:1px solid var(--mist); font-size:.9rem;
-      color:var(--mid); line-height:1.6;
-    }
-    .req-list li:last-child { border:none; }
-    .req-list li .ri { color:var(--gold); font-size:1rem; flex-shrink:0; margin-top:.1rem; }
+/* ═══════════════════════════════════════════════
+   WHY LSM
+═══════════════════════════════════════════════ */
+#why { background:var(--off); }
+.why-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2rem; }
+.why-item { display:flex; gap:1.2rem; align-items:flex-start; }
+.why-num { font-family:var(--ff-display); font-size:2.2rem; color:var(--gold); font-style:italic; line-height:1; opacity:.4; flex-shrink:0; }
+.why-body h4 { font-family:var(--ff-display); font-size:1.05rem; color:var(--navy); margin-bottom:.35rem; }
+.why-body p { font-size:.84rem; color:var(--mid); line-height:1.75; }
 
-    .application-steps { }
-    .app-step {
-      display:flex; gap:1.4rem; align-items:flex-start; margin-bottom:2rem;
-    }
-    .step-num {
-      width:44px; height:44px; background:var(--navy); color:var(--gold);
-      display:flex; align-items:center; justify-content:center;
-      font-family:var(--ff-display); font-size:1.2rem; font-weight:600;
-      flex-shrink:0;
-    }
-    .step-body h4 { font-family:var(--ff-display); font-size:1.1rem; color:var(--navy); margin-bottom:.35rem; }
-    .step-body p { font-size:.87rem; color:var(--mid); line-height:1.7; }
-    .step-connector { width:1px; height:28px; background:var(--mist); margin-left:21px; }
+/* ═══════════════════════════════════════════════
+   APPROACH
+═══════════════════════════════════════════════ */
+#approach { background:var(--cobalt); }
+.approach-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1.5px; background:rgba(255,255,255,.04); margin-top:2rem; }
+.approach-item { background:rgba(8,12,20,.9); padding:2.2rem 2rem; }
+.approach-item .ap-num { font-family:var(--ff-display); font-size:2.8rem; font-style:italic; color:var(--gold); opacity:.25; line-height:1; margin-bottom:1rem; }
+.approach-item h4 { font-family:var(--ff-display); font-size:1.05rem; color:var(--gold); margin-bottom:.5rem; }
+.approach-item p { font-size:.83rem; color:rgba(255,255,255,.45); line-height:1.75; }
 
-    @media(max-width:800px){
-      .admissions-layout { grid-template-columns:1fr; gap:3rem; }
-      .adm-age-cards { grid-template-columns:1fr 1fr; }
-    }
+/* ═══════════════════════════════════════════════
+   PARTNERS
+═══════════════════════════════════════════════ */
+#partners { background:var(--white); }
+.partners-note { font-size:.9rem; color:var(--mid); max-width:600px; margin:0 auto 3rem; text-align:center; line-height:1.8; }
+.partners-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px; background:var(--off); max-width:900px; margin:0 auto; }
+.partner-cell { background:var(--white); padding:2.4rem 1.8rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; transition:background .3s; }
+.partner-cell:hover { background:var(--cream); }
+.partner-cell img { max-height:64px; width:auto; object-fit:contain; filter:grayscale(1); opacity:.6; transition:.3s; }
+.partner-cell:hover img { filter:none; opacity:1; }
+.partner-cell span { font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--light); }
 
-    /* ═══════════════════════════════════════════════
-       EVENTS & PERFORMANCES
-    ═══════════════════════════════════════════════ */
-    #events { background:var(--navy); }
-    .events-intro { font-size:.95rem; color:rgba(255,255,255,.45); max-width:620px; line-height:1.9; font-weight:300; margin-bottom:3rem; }
-    .events-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); margin-bottom:3rem; }
-    .event-card {
-      background:rgba(8,12,20,.95); padding:2.5rem 2.2rem;
-      transition:background .3s; position:relative; overflow:hidden;
-    }
-    .event-card::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:2px;
-      background:var(--gold); transform:scaleX(0); transform-origin:left;
-      transition:transform .4s var(--ease);
-    }
-    .event-card:hover::before { transform:scaleX(1); }
-    .event-card:hover { background:var(--cobalt); }
-    .event-card .ec-icon { font-size:2rem; margin-bottom:1.2rem; }
-    .event-card h3 { font-family:var(--ff-display); font-size:1.25rem; color:var(--gold); margin-bottom:.8rem; }
-    .event-card p { font-size:.86rem; color:rgba(255,255,255,.45); line-height:1.85; margin-bottom:1rem; }
-    .event-card ul { list-style:none; }
-    .event-card ul li {
-      font-size:.84rem; color:rgba(255,255,255,.5); padding:5px 0 5px .9rem;
-      position:relative; border-bottom:1px solid rgba(255,255,255,.05);
-    }
-    .event-card ul li:last-child { border:none; }
-    .event-card ul li::before { content:'◆'; position:absolute; left:0; color:var(--gold); font-size:.45rem; top:.6em; }
-    .booking-strip {
-      background:rgba(200,168,75,.08); border:1px solid rgba(200,168,75,.2);
-      padding:2.5rem; display:flex; align-items:center; justify-content:space-between;
-      gap:2rem; flex-wrap:wrap;
-    }
-    .booking-strip p { font-family:var(--ff-display); font-size:1.2rem; font-style:italic; color:rgba(255,255,255,.7); max-width:540px; line-height:1.6; }
-    .booking-strip .bs-actions { display:flex; gap:.8rem; flex-wrap:wrap; }
+/* ═══════════════════════════════════════════════
+   STUDENT LIFE / GALLERY
+═══════════════════════════════════════════════ */
+#student-life { background:var(--cream); }
+.slideshow-wrap { position:relative; width:100%; height:480px; overflow:hidden; }
+.slideshow-wrap img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s; }
+.slideshow-wrap img.active { opacity:1; }
+.slide-dots { display:flex; gap:.5rem; justify-content:center; margin-top:1.2rem; }
+.slide-dot { width:8px; height:8px; border-radius:50%; background:var(--mist); cursor:pointer; transition:background .3s; }
+.slide-dot.active { background:var(--gold); }
+#gallery { background:var(--white); }
+.gal-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
+.gal-item { overflow:hidden; position:relative; }
+.gal-item img { width:100%; height:210px; object-fit:cover; transition:transform .5s var(--ease); }
+.gal-item:hover img { transform:scale(1.07); }
+.gal-item .gal-over { position:absolute; inset:0; background:rgba(8,12,20,.65); opacity:0; display:flex; align-items:center; justify-content:center; transition:opacity .35s; }
+.gal-item:hover .gal-over { opacity:1; }
+.gal-over span { font-family:var(--ff-display); font-size:1.1rem; color:var(--gold); font-style:italic; }
 
-    /* ═══════════════════════════════════════════════
-       WHY LSM
-    ═══════════════════════════════════════════════ */
-    #why { background:var(--off); }
-    .why-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2rem; }
-    .why-item { display:flex; gap:1.2rem; align-items:flex-start; }
-    .why-num {
-      font-family:var(--ff-display); font-size:2.2rem; color:var(--gold);
-      font-style:italic; line-height:1; opacity:.4; flex-shrink:0;
-    }
-    .why-body h4 { font-family:var(--ff-display); font-size:1.05rem; color:var(--navy); margin-bottom:.35rem; }
-    .why-body p { font-size:.84rem; color:var(--mid); line-height:1.75; }
+/* ═══════════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════════ */
+#testimonials { background:var(--off); }
+.test-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; max-width:960px; margin:0 auto; }
+.test-card { border-left:3px solid var(--gold); padding:1.8rem 2rem; background:var(--white); transition:box-shadow .3s; }
+.test-card:hover { box-shadow:0 8px 32px rgba(0,0,0,.08); }
+.test-card blockquote { font-family:var(--ff-display); font-style:italic; font-size:1.05rem; color:var(--text); line-height:1.8; margin-bottom:1rem; }
+.test-card cite { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-style:normal; }
 
-    /* ═══════════════════════════════════════════════
-       APPROACH
-    ═══════════════════════════════════════════════ */
-    #approach { background:var(--cobalt); }
-    .approach-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1.5px; background:rgba(255,255,255,.04); margin-top:2rem; }
-    .approach-item { background:rgba(8,12,20,.9); padding:2.2rem 2rem; }
-    .approach-item .ap-num {
-      font-family:var(--ff-display); font-size:2.8rem; font-style:italic;
-      color:var(--gold); opacity:.25; line-height:1; margin-bottom:1rem;
-    }
-    .approach-item h4 { font-family:var(--ff-display); font-size:1.05rem; color:var(--gold); margin-bottom:.5rem; }
-    .approach-item p { font-size:.83rem; color:rgba(255,255,255,.45); line-height:1.75; }
+/* ═══════════════════════════════════════════════
+   BOOKING / CONTACT FORMS (Formspree)
+═══════════════════════════════════════════════ */
+#booking { background:var(--navy); }
+.booking-layout { display:grid; grid-template-columns:1fr 1.2fr; gap:5rem; align-items:start; }
+.booking-info h2 { font-family:var(--ff-display); font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:600; color:var(--white); line-height:1.15; margin-bottom:1rem; }
+.booking-info p { font-size:.93rem; color:rgba(255,255,255,.45); line-height:1.9; font-weight:300; margin-bottom:1.5rem; }
+.contact-items { display:flex; flex-direction:column; gap:1rem; }
+.ci { display:flex; align-items:flex-start; gap:1rem; }
+.ci .ci-icon { width:40px; height:40px; background:rgba(200,168,75,.12); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; border:1px solid rgba(200,168,75,.2); }
+.ci .ci-text .lbl { font-size:.62rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:2px; }
+.ci .ci-text a, .ci .ci-text span { font-size:.9rem; color:rgba(255,255,255,.7); display:block; }
+.ci .ci-text a:hover { color:var(--gold); }
+.ci .ci-text a.second-phone { font-size:.85rem; color:rgba(255,255,255,.5); margin-top:2px; }
+.contact-social { display:flex; gap:.8rem; margin-top:1.2rem; }
+.contact-social a { display:flex; align-items:center; gap:.5rem; padding:8px 16px; border:1px solid rgba(200,168,75,.2); color:rgba(255,255,255,.5); font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; transition:all .25s; }
+.contact-social a:hover { border-color:var(--gold); color:var(--gold); background:rgba(200,168,75,.08); }
+.contact-social a svg { width:14px; height:14px; fill:currentColor; flex-shrink:0; }
 
-    /* ═══════════════════════════════════════════════
-       PARTNERS
-    ═══════════════════════════════════════════════ */
-    #partners { background:var(--white); }
-    .partners-note { font-size:.9rem; color:var(--mid); max-width:600px; margin:0 auto 3rem; text-align:center; line-height:1.8; }
-    .partners-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px; background:var(--off); max-width:900px; margin:0 auto; }
-    .partner-cell {
-      background:var(--white); padding:2.4rem 1.8rem;
-      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem;
-      transition:background .3s;
-    }
-    .partner-cell:hover { background:var(--cream); }
-    .partner-cell img { max-height:64px; width:auto; object-fit:contain; filter:grayscale(1); opacity:.6; transition:.3s; }
-    .partner-cell:hover img { filter:none; opacity:1; }
-    .partner-cell span { font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--light); }
+/* ── Form tab system ── */
+.form-tab-nav { display:flex; gap:0; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:4px; margin-bottom:1.5rem; }
+.form-tab-nav-btn { flex:1; background:transparent; border:none; color:rgba(255,255,255,.4); font-family:var(--ff-body); font-size:.66rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; padding:0.65rem 0.4rem; cursor:pointer; border-radius:5px; transition:color .25s, background .25s; white-space:nowrap; }
+.form-tab-nav-btn:hover { color:rgba(255,255,255,.7); }
+.form-tab-nav-btn.active { background:var(--gold); color:var(--navy); }
+@media(max-width:560px){ .form-tab-nav { flex-direction:column; } }
 
-    /* ═══════════════════════════════════════════════
-       STUDENT LIFE / GALLERY
-    ═══════════════════════════════════════════════ */
-    #student-life { background:var(--cream); }
-    .slideshow-wrap { position:relative; width:100%; height:480px; overflow:hidden; }
-    .slideshow-wrap img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s; }
-    .slideshow-wrap img.active { opacity:1; }
-    .slide-dots { display:flex; gap:.5rem; justify-content:center; margin-top:1.2rem; }
-    .slide-dot { width:8px; height:8px; border-radius:50%; background:var(--mist); cursor:pointer; transition:background .3s; }
-    .slide-dot.active { background:var(--gold); }
+/* ── Form panels ── */
+.ftab-panel { display:none; animation:fadeUp .3s ease forwards; }
+.ftab-panel.active { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
 
-    #gallery { background:var(--white); }
-    .gal-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
-    .gal-item { overflow:hidden; position:relative; }
-    .gal-item img { width:100%; height:210px; object-fit:cover; transition:transform .5s var(--ease); }
-    .gal-item:hover img { transform:scale(1.07); }
-    .gal-item .gal-over {
-      position:absolute; inset:0; background:rgba(8,12,20,.65);
-      opacity:0; display:flex; align-items:center; justify-content:center;
-      transition:opacity .35s;
-    }
-    .gal-item:hover .gal-over { opacity:1; }
-    .gal-over span { font-family:var(--ff-display); font-size:1.1rem; color:var(--gold); font-style:italic; }
+/* ── Field groups ── */
+.booking-form { display:flex; flex-direction:column; gap:0; }
+.form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+@media(max-width:560px){ .form-row-2 { grid-template-columns:1fr; } }
 
-    /* ═══════════════════════════════════════════════
-       TESTIMONIALS
-    ═══════════════════════════════════════════════ */
-    #testimonials { background:var(--off); }
-    .test-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; max-width:960px; margin:0 auto; }
-    .test-card {
-      border-left:3px solid var(--gold); padding:1.8rem 2rem; background:var(--white);
-      transition:box-shadow .3s;
-    }
-    .test-card:hover { box-shadow:0 8px 32px rgba(0,0,0,.08); }
-    .test-card blockquote {
-      font-family:var(--ff-display); font-style:italic; font-size:1.05rem;
-      color:var(--text); line-height:1.8; margin-bottom:1rem;
-    }
-    .test-card cite { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-style:normal; }
+.fg { display:flex; flex-direction:column; gap:.4rem; margin-bottom:.9rem; }
+.fg label { font-size:.62rem; letter-spacing:.25em; text-transform:uppercase; color:rgba(255,255,255,.35); font-weight:500; }
+.fg input, .fg select, .fg textarea {
+  padding:13px 16px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
+  color:var(--white); font-family:var(--ff-body); font-size:.92rem; outline:none;
+  transition:border-color .25s, background .25s; border-radius:4px;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color:var(--gold); background:rgba(255,255,255,.08); }
+.fg input::placeholder, .fg textarea::placeholder { color:rgba(255,255,255,.25); }
+.fg select { color:rgba(255,255,255,.6); cursor:pointer; -webkit-appearance:none; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c8a84b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 1rem center; padding-right:2.5rem; }
+.fg select option { background:var(--navy); color:var(--white); }
+.fg textarea { resize:vertical; min-height:110px; }
+.fg input.invalid, .fg select.invalid, .fg textarea.invalid { border-color:rgba(201,80,76,.7); box-shadow:0 0 0 3px rgba(201,80,76,.1); }
+.field-err { font-size:.7rem; color:#e88; display:none; }
+.fg.has-err .field-err { display:block; }
 
-    /* ═══════════════════════════════════════════════
-       BOOKING FORM
-    ═══════════════════════════════════════════════ */
-    #booking { background:var(--navy); }
-    .booking-layout { display:grid; grid-template-columns:1fr 1.2fr; gap:5rem; align-items:start; }
-    .booking-info h2 { font-family:var(--ff-display); font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:600; color:var(--white); line-height:1.15; margin-bottom:1rem; }
-    .booking-info p { font-size:.93rem; color:rgba(255,255,255,.45); line-height:1.9; font-weight:300; margin-bottom:1.5rem; }
-    .contact-items { display:flex; flex-direction:column; gap:1rem; }
-    .ci {
-      display:flex; align-items:center; gap:1rem;
-    }
-    .ci .ci-icon {
-      width:40px; height:40px; background:rgba(200,168,75,.12);
-      display:flex; align-items:center; justify-content:center;
-      font-size:1rem; flex-shrink:0; border:1px solid rgba(200,168,75,.2);
-    }
-    .ci .ci-text .lbl { font-size:.62rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:2px; }
-    .ci .ci-text a, .ci .ci-text span { font-size:.9rem; color:rgba(255,255,255,.7); display:block; }
-    .ci .ci-text a:hover { color:var(--gold); }
+/* ── Submit button ── */
+.btn-form-submit { display:flex; align-items:center; justify-content:center; gap:.5rem; width:100%; margin-top:.5rem; padding:.9rem 1.5rem; background:var(--gold); border:none; border-radius:4px; color:var(--navy); font-family:var(--ff-body); font-size:.78rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; transition:background .25s, transform .2s, opacity .25s; }
+.btn-form-submit:hover { background:var(--gold2); transform:translateY(-1px); }
+.btn-form-submit:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+.btn-form-submit .fspinner { width:16px; height:16px; border:2px solid rgba(8,12,20,.3); border-top-color:var(--navy); border-radius:50%; animation:fspin .7s linear infinite; display:none; }
+@keyframes fspin { to{transform:rotate(360deg)} }
 
-    /* Form */
-    .booking-form { display:flex; flex-direction:column; gap:1.1rem; }
-    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-    .fg { display:flex; flex-direction:column; gap:.4rem; }
-    .fg label { font-size:.65rem; letter-spacing:.25em; text-transform:uppercase; color:rgba(255,255,255,.35); font-weight:500; }
-    .fg input, .fg select, .fg textarea {
-      padding:13px 16px; background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.12); color:var(--white);
-      font-family:var(--ff-body); font-size:.92rem;
-      outline:none; transition:border-color .25s, background .25s;
-    }
-    .fg input:focus, .fg select:focus, .fg textarea:focus {
-      border-color:var(--gold); background:rgba(255,255,255,.08);
-    }
-    .fg input::placeholder, .fg textarea::placeholder { color:rgba(255,255,255,.25); }
-    .fg select { color:rgba(255,255,255,.6); cursor:pointer; }
-    .fg select option { background:var(--navy); color:var(--white); }
-    .fg textarea { resize:vertical; min-height:110px; }
-    .form-tabs { display:flex; gap:0; margin-bottom:.5rem; }
-    .form-tab-btn {
-      flex:1; padding:10px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1);
-      color:rgba(255,255,255,.4); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase;
-      cursor:pointer; transition:all .25s; font-family:var(--ff-body); font-weight:600;
-    }
-    .form-tab-btn.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
-    .form-panel { display:none; }
-    .form-panel.active { display:contents; }
-    .form-success-msg {
-      display:none; background:rgba(100,200,100,.1); border:1px solid rgba(100,200,100,.3);
-      color:#7ddc7d; padding:1rem 1.4rem; font-size:.88rem; margin-top:.5rem;
-    }
+/* ── Form notices ── */
+.form-notice { display:none; align-items:center; gap:.75rem; padding:1rem 1.2rem; border-radius:4px; font-size:.86rem; margin-top:1rem; line-height:1.5; }
+.form-notice.show { display:flex; }
+.form-notice.ok { background:rgba(76,175,121,.1); border:1px solid rgba(76,175,121,.3); color:#7ddc7d; }
+.form-notice.err { background:rgba(201,80,76,.1); border:1px solid rgba(201,80,76,.3); color:#e88; }
 
-    @media(max-width:800px){
-      .booking-layout { grid-template-columns:1fr; gap:3rem; }
-      .form-row { grid-template-columns:1fr; }
-    }
+/* ── Formspree setup note ── */
+.setup-note-bar { margin-top:1.2rem; padding:.8rem 1rem; background:rgba(200,168,75,.07); border-left:2px solid var(--gold); font-size:.78rem; color:rgba(255,255,255,.4); line-height:1.6; }
+.setup-note-bar a { color:var(--gold); }
+.setup-note-bar strong { color:rgba(255,255,255,.65); }
 
-    /* ═══════════════════════════════════════════════
-       CTA BANNER
-    ═══════════════════════════════════════════════ */
-    .cta-banner {
-      background:var(--gold); padding:56px 5%;
-      display:flex; align-items:center; justify-content:center; gap:3rem;
-      flex-wrap:wrap; text-align:center;
-    }
-    .cta-banner h2 {
-      font-family:var(--ff-display); font-size:clamp(1.8rem,4vw,2.8rem);
-      font-weight:600; color:var(--navy); max-width:520px; line-height:1.15;
-    }
-    .cta-banner h2 em { font-style:italic; }
-    .cta-btn-group { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
-    .cta-banner .btn-navy { background:var(--navy); color:var(--gold); }
-    .cta-banner .btn-outline-navy { background:transparent; border:1.5px solid var(--navy); color:var(--navy); padding:14px 34px; font-size:.75rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; transition:all .25s; }
-    .cta-banner .btn-outline-navy:hover { background:var(--navy); color:var(--gold); }
+@media(max-width:800px){ .booking-layout { grid-template-columns:1fr; gap:3rem; } }
 
-    /* ═══════════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════════ */
-    footer {
-      background:var(--ink); padding:64px 5% 32px;
-      border-top:1px solid rgba(200,168,75,.1);
-    }
-    .footer-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
-    .footer-brand .fb-logo { font-family:var(--ff-display); font-size:1.4rem; color:var(--gold); margin-bottom:.4rem; }
-    .footer-brand .fb-sub { font-family:var(--ff-display); font-style:italic; font-size:.85rem; color:rgba(255,255,255,.3); margin-bottom:1rem; }
-    .footer-brand p { font-size:.82rem; color:rgba(255,255,255,.3); line-height:1.8; }
-    .footer-col h4 { font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; font-weight:600; }
-    .footer-col ul { list-style:none; }
-    .footer-col ul li { margin-bottom:.6rem; }
-    .footer-col ul li a { font-size:.85rem; color:rgba(255,255,255,.4); transition:color .25s; }
-    .footer-col ul li a:hover { color:var(--gold); }
-    .footer-bottom {
-      border-top:1px solid rgba(255,255,255,.06); padding-top:1.5rem;
-      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
-    }
-    .footer-bottom p { font-size:.75rem; color:rgba(255,255,255,.2); letter-spacing:.05em; }
-    .footer-bottom .ft-links { display:flex; gap:1.5rem; }
-    .footer-bottom .ft-links a { font-size:.73rem; color:rgba(255,255,255,.25); }
-    .footer-bottom .ft-links a:hover { color:var(--gold); }
+/* ═══════════════════════════════════════════════
+   CTA BANNER
+═══════════════════════════════════════════════ */
+.cta-banner { background:var(--gold); padding:56px 5%; display:flex; align-items:center; justify-content:center; gap:3rem; flex-wrap:wrap; text-align:center; }
+.cta-banner h2 { font-family:var(--ff-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:600; color:var(--navy); max-width:520px; line-height:1.15; }
+.cta-banner h2 em { font-style:italic; }
+.cta-btn-group { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+.cta-banner .btn-navy { background:var(--navy); color:var(--gold); }
+.cta-banner .btn-outline-navy { background:transparent; border:1.5px solid var(--navy); color:var(--navy); padding:14px 34px; font-size:.75rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; transition:all .25s; }
+.cta-banner .btn-outline-navy:hover { background:var(--navy); color:var(--gold); }
 
-    @media(max-width:760px){
-      .footer-grid { grid-template-columns:1fr 1fr; }
-    }
-    @media(max-width:480px){
-      .footer-grid { grid-template-columns:1fr; }
-    }
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(200,168,75,.1); }
+.footer-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
+.footer-brand .fb-logo { font-family:var(--ff-display); font-size:1.4rem; color:var(--gold); margin-bottom:.4rem; }
+.footer-brand .fb-sub { font-family:var(--ff-display); font-style:italic; font-size:.85rem; color:rgba(255,255,255,.3); margin-bottom:1rem; }
+.footer-brand p { font-size:.82rem; color:rgba(255,255,255,.3); line-height:1.8; margin-bottom:1rem; }
+.footer-social { display:flex; gap:.6rem; margin-top:.5rem; }
+.footer-social a { display:flex; align-items:center; justify-content:center; width:34px; height:34px; border:1px solid rgba(200,168,75,.2); border-radius:50%; color:rgba(255,255,255,.35); transition:all .25s; }
+.footer-social a:hover { border-color:var(--gold); color:var(--gold); background:rgba(200,168,75,.1); }
+.footer-social a svg { width:14px; height:14px; fill:currentColor; }
+.footer-col h4 { font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; font-weight:600; }
+.footer-col ul { list-style:none; }
+.footer-col ul li { margin-bottom:.6rem; }
+.footer-col ul li a { font-size:.85rem; color:rgba(255,255,255,.4); transition:color .25s; }
+.footer-col ul li a:hover { color:var(--gold); }
+.footer-bottom { border-top:1px solid rgba(255,255,255,.06); padding-top:1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+.footer-bottom p { font-size:.75rem; color:rgba(255,255,255,.2); letter-spacing:.05em; }
+.footer-bottom .ft-links { display:flex; gap:1.5rem; }
+.footer-bottom .ft-links a { font-size:.73rem; color:rgba(255,255,255,.25); }
+.footer-bottom .ft-links a:hover { color:var(--gold); }
+@media(max-width:760px){ .footer-grid { grid-template-columns:1fr 1fr; } }
+@media(max-width:480px){ .footer-grid { grid-template-columns:1fr; } }
 
-    /* ═══════════════════════════════════════════════
-       WHATSAPP FLOAT
-    ═══════════════════════════════════════════════ */
-    .wa-float {
-      position:fixed; bottom:24px; right:24px; z-index:999;
-      background:#25D366; color:#fff; padding:12px 22px;
-      border-radius:50px; font-weight:700; font-size:.8rem; letter-spacing:.05em;
-      box-shadow:0 4px 18px rgba(37,211,102,.4); display:flex; align-items:center; gap:.5rem;
-      transition:transform .2s, box-shadow .2s; text-decoration:none;
-    }
-    .wa-float:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(37,211,102,.5); }
+/* ═══════════════════════════════════════════════
+   WHATSAPP FLOAT
+═══════════════════════════════════════════════ */
+.wa-float { position:fixed; bottom:24px; right:24px; z-index:999; background:#25D366; color:#fff; padding:12px 22px; border-radius:50px; font-weight:700; font-size:.8rem; letter-spacing:.05em; box-shadow:0 4px 18px rgba(37,211,102,.4); display:flex; align-items:center; gap:.5rem; transition:transform .2s, box-shadow .2s; text-decoration:none; }
+.wa-float:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(37,211,102,.5); }
 
-    /* ═══════════════════════════════════════════════
-       STICKY APPLY BAR (mobile)
-    ═══════════════════════════════════════════════ */
-    .sticky-cta {
-      display:none; position:fixed; bottom:0; left:0; right:0; z-index:198;
-      background:var(--navy); border-top:1px solid rgba(200,168,75,.2);
-      padding:12px 5%; gap:.8rem; align-items:center; justify-content:center;
-    }
-    @media(max-width:600px){ .sticky-cta { display:flex; } .wa-float { bottom:72px; } }
+/* ═══════════════════════════════════════════════
+   STICKY MOBILE CTA
+═══════════════════════════════════════════════ */
+.sticky-cta { display:none; position:fixed; bottom:0; left:0; right:0; z-index:198; background:var(--navy); border-top:1px solid rgba(200,168,75,.2); padding:12px 5%; gap:.8rem; align-items:center; justify-content:center; }
+@media(max-width:600px){ .sticky-cta { display:flex; } .wa-float { bottom:72px; } }
 
-    /* ═══════════════════════════════════════════════
-       PAGE TRANSITIONS / MISC
-    ═══════════════════════════════════════════════ */
-    .sep-gold { width:100%; height:1px; background:linear-gradient(to right,transparent,rgba(200,168,75,.3),transparent); }
-    .quote-block {
-      border-left:3px solid var(--gold); padding:1.2rem 1.8rem;
-      font-family:var(--ff-display); font-style:italic;
-      font-size:1.1rem; color:rgba(255,255,255,.6); line-height:1.7;
-      margin:2rem 0; background:rgba(200,168,75,.04);
-    }
-  </style>
+/* ═══════════════════════════════════════════════
+   MISC
+═══════════════════════════════════════════════ */
+.sep-gold { width:100%; height:1px; background:linear-gradient(to right,transparent,rgba(200,168,75,.3),transparent); }
+.quote-block { border-left:3px solid var(--gold); padding:1.2rem 1.8rem; font-family:var(--ff-display); font-style:italic; font-size:1.1rem; color:rgba(255,255,255,.6); line-height:1.7; margin:2rem 0; background:rgba(200,168,75,.04); }
+</style>
 </head>
 <body>
 
@@ -682,10 +495,6 @@
   <div class="nav-inner">
     <div class="nav-brand" onclick="scrollTo({top:0,behavior:'smooth'})">
       <img src="Images/Logos/LSM Logos/LSM Logo white.png" alt="LSM Logo">
-      <div class="nav-brand-text">
-        <strong>Lilongwe School of Music</strong>
-        <small>Performance · Orchestra · Education</small>
-      </div>
     </div>
     <ul class="nav-menu" id="navMenu">
       <li><a href="#home">Home</a></li>
@@ -697,17 +506,25 @@
       <li><a href="#booking">Contact</a></li>
     </ul>
     <div class="nav-cta">
+      <div class="nav-social">
+        <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
       <a href="#admissions" class="btn btn-outline-gold btn-sm">Apply Now</a>
       <a href="#booking" class="btn btn-gold btn-sm">Book Lessons</a>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileNav()">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
 <!-- Mobile nav panel -->
-<nav class="nav-mobile-panel" id="mobilePanel">
+<nav class="nav-mobile-panel" id="mobilePanel" aria-label="Mobile navigation">
   <a href="#home" onclick="closeMobileNav()">Home</a>
   <a href="#about" onclick="closeMobileNav()">About LSM</a>
   <a href="#programs" onclick="closeMobileNav()">Curriculum</a>
@@ -715,6 +532,14 @@
   <a href="#events" onclick="closeMobileNav()">Events</a>
   <a href="#gallery" onclick="closeMobileNav()">Gallery</a>
   <a href="#booking" onclick="closeMobileNav()">Book / Contact</a>
+  <div class="mobile-social">
+    <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+  </div>
   <div style="display:flex;gap:1rem;margin-top:1rem;">
     <a href="#admissions" class="btn btn-gold" onclick="closeMobileNav()">Apply Now</a>
   </div>
@@ -722,7 +547,7 @@
 
 <!-- ═══════ ANNOUNCEMENT BAR ═══════ -->
 <div class="announce-bar">
-  <p>2026 Enrolments Now Open Limited Places Available</p>
+  <p>2026 Enrolments Now Open — Limited Places Available</p>
   <a href="#admissions">Apply Today →</a>
 </div>
 
@@ -738,8 +563,8 @@
         <div class="dot"></div>
         <span>Malawi's Premier Conservatory</span>
       </div>
-      <h1 class="hero-title">Lilongwe School of Music</h1>
-      <h2>Training<br><em>World-Class</em><br>Musicians in Malawi</h2>
+      <h1 class="hero-title">Lilongwe School <br>of Music</h1>
+      <h2 class="hero-subtitle">Training<br><em>World-Class</em><br>Musicians in Malawi</h2>
       <p class="hero-sub">A conservatory-level institution offering structured instrumental training, vocal studies, ensemble performance, and internationally benchmarked examination preparation.</p>
       <div class="hero-actions">
         <a href="#admissions" class="btn btn-gold">Apply Now</a>
@@ -790,45 +615,27 @@
       </div>
       <div class="mv-stack reveal">
         <div class="mv-item">
-          <h4>🎯 <bold>Our Mission</bold></h4>
-          <p>To deliver high-quality, structured music education that develops skilled and disciplined musicians while fostering creativity and excellence. We strive to give a voice to the voiceless placing instruments in the hands of aspiring individuals and nurturing their talent through instrumental training, choir, and opera studies.</p>
+          <h4>🎯 Our Mission</h4>
+          <p>To deliver high-quality, structured music education that develops skilled and disciplined musicians while fostering creativity and excellence. We strive to give a voice to the voiceless — placing instruments in the hands of aspiring individuals and nurturing their talent through instrumental training, choir, and opera studies.</p>
         </div>
         <div class="mv-item">
           <h4>✨ Our Vision</h4>
-          <p>To be the leading centre of music education and performance in Malawi and beyond recognized for producing well-rounded musicians and delivering outstanding musical experiences.</p>
+          <p>To be the leading centre of music education and performance in Malawi and beyond — recognized for producing well-rounded musicians and delivering outstanding musical experiences.</p>
         </div>
         <div class="mv-item">
           <h4>🏛️ Our Conservatory Identity</h4>
-          <p>LSM is modelled on conservatory best practice rigorous curriculum, ensemble training, performance development pathways, and internationally benchmarked examinations through Trinity College London, ABRSM, and the London College of Music.</p>
+          <p>LSM is modelled on conservatory best practice — rigorous curriculum, ensemble training, performance development pathways, and internationally benchmarked examinations through Trinity College London, ABRSM, and the London College of Music.</p>
         </div>
       </div>
     </div>
     <div class="pillars reveal">
-      <div class="pillar-item">
-        <div class="pi-icon">🏆</div>
-        <div class="pi-title">Excellence</div>
-        <div class="pi-text">Highest standards in every lesson and performance</div>
-      </div>
-      <div class="pillar-item">
-        <div class="pi-icon">⚡</div>
-        <div class="pi-title">Discipline</div>
-        <div class="pi-text">Consistency and commitment in practice and performance</div>
-      </div>
-      <div class="pillar-item">
-        <div class="pi-icon">🎨</div>
-        <div class="pi-title">Creativity</div>
-        <div class="pi-text">Artistic expression and musical interpretation</div>
-      </div>
-      <div class="pillar-item">
-        <div class="pi-icon">🌍</div>
-        <div class="pi-title">Inclusivity</div>
-        <div class="pi-text">Talent developed from all backgrounds</div>
-      </div>
+      <div class="pillar-item"><div class="pi-icon">🏆</div><div class="pi-title">Excellence</div><div class="pi-text">Highest standards in every lesson and performance</div></div>
+      <div class="pillar-item"><div class="pi-icon">⚡</div><div class="pi-title">Discipline</div><div class="pi-text">Consistency and commitment in practice and performance</div></div>
+      <div class="pillar-item"><div class="pi-icon">🎨</div><div class="pi-title">Creativity</div><div class="pi-text">Artistic expression and musical interpretation</div></div>
+      <div class="pillar-item"><div class="pi-icon">🌍</div><div class="pi-title">Inclusivity</div><div class="pi-text">Talent developed from all backgrounds</div></div>
     </div>
   </div>
 </section>
-
-<div class="sep-gold"></div>
 
 <!-- ═══════ PROGRAMS / CURRICULUM ═══════ -->
 <section id="programs" class="section">
@@ -843,8 +650,6 @@
       <button class="prog-tab active" onclick="switchProgTab('edu',this)">Music Education &amp; Training</button>
       <button class="prog-tab" onclick="switchProgTab('perf',this)">Performance &amp; Professional Services</button>
     </div>
-
-    <!-- Education Panel -->
     <div class="prog-panel active" id="prog-edu">
       <div class="prog-grid reveal">
         <div class="prog-card">
@@ -890,7 +695,6 @@
           </div>
         </div>
       </div>
-
       <div class="exam-panel reveal">
         <h3>International Examination Preparation</h3>
         <p style="font-size:.87rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:1.5rem;">LSM prepares candidates for internationally benchmarked music examinations in both Theory and Performance through its partner examination boards.</p>
@@ -930,7 +734,6 @@
           <strong>Important:</strong> A pass in Grade 5 Music Theory is compulsory for candidates wishing to progress to Grades 6–8 Practical Examinations.
         </div>
       </div>
-
       <div class="schedule-row reveal">
         <div style="flex-basis:100%;margin-bottom:.5rem;">
           <h3 style="font-family:var(--ff-display);color:var(--gold);font-size:1.1rem;letter-spacing:.03em;">Class Schedule</h3>
@@ -951,8 +754,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Performance Panel -->
     <div class="prog-panel" id="prog-perf">
       <div class="perf-grid reveal">
         <div class="perf-card">
@@ -1014,110 +815,45 @@
   <div class="container">
     <div class="section-header">
       <span class="tag-label">Admissions</span>
-      <h2 class="section-title">Join LSM Begin Your Musical Journey</h2>
+      <h2 class="section-title">Join LSM — Begin Your Musical Journey</h2>
       <div class="gold-rule"></div>
-      <p class="section-intro">LSM welcomes students of all ages and levels from beginners discovering music for the first time to advanced musicians pursuing diploma qualifications. Here is everything you need to know about joining.</p>
+      <p class="section-intro">LSM welcomes students of all ages and levels — from beginners discovering music for the first time to advanced musicians pursuing diploma qualifications.</p>
     </div>
     <div class="admissions-layout">
-
-      <!-- LEFT: Age Groups + Requirements -->
       <div>
         <div class="reveal">
           <span class="tag-label">Age Groups</span>
           <div class="adm-age-cards">
-            <div class="age-card">
-              <div class="ac-range">5–8</div>
-              <div class="ac-label">Junior Beginners</div>
-              <p>Foundational music introduction aural training, basic instrument handling, and musical play.</p>
-            </div>
-            <div class="age-card">
-              <div class="ac-range">9–13</div>
-              <div class="ac-label">Junior Students</div>
-              <p>Structured instrument lessons with early examination preparation from Initial Grade.</p>
-            </div>
-            <div class="age-card">
-              <div class="ac-range">14–17</div>
-              <div class="ac-label">Senior Students</div>
-              <p>Advanced technique, ensemble training, and Grade 1–8 examination preparation.</p>
-            </div>
-            <div class="age-card">
-              <div class="ac-range">18+</div>
-              <div class="ac-label">Adult Learners</div>
-              <p>All levels welcome. Flexible scheduling for working adults and diploma candidates.</p>
-            </div>
+            <div class="age-card"><div class="ac-range">5–8</div><div class="ac-label">Junior Beginners</div><p>Foundational music introduction — aural training, basic instrument handling, and musical play.</p></div>
+            <div class="age-card"><div class="ac-range">9–13</div><div class="ac-label">Junior Students</div><p>Structured instrument lessons with early examination preparation from Initial Grade.</p></div>
+            <div class="age-card"><div class="ac-range">14–17</div><div class="ac-label">Senior Students</div><p>Advanced technique, ensemble training, and Grade 1–8 examination preparation.</p></div>
+            <div class="age-card"><div class="ac-range">18+</div><div class="ac-label">Adult Learners</div><p>All levels welcome. Flexible scheduling for working adults and diploma candidates.</p></div>
           </div>
         </div>
-
         <div class="reveal" style="margin-top:2rem;">
           <span class="tag-label">Entry Requirements</span>
           <ul class="req-list">
-            <li>
-              <span class="ri">✔</span>
-              <span><strong>No prior experience required</strong> for beginners all absolute beginners are welcome across all age groups.</span>
-            </li>
-            <li>
-              <span class="ri">✔</span>
-              <span><strong>Previous grade certificates</strong> (if applicable) for students transferring from other institutions or wishing to enter at a higher level.</span>
-            </li>
-            <li>
-              <span class="ri">✔</span>
-              <span><strong>Instrument placement assessment.</strong> A brief informal assessment to determine the appropriate starting level for new students.</span>
-            </li>
-            <li>
-              <span class="ri">✔</span>
-              <span><strong>Grade 5 Theory pass</strong> is required for students wishing to proceed to Grades 6–8 Practical Examinations.</span>
-            </li>
-            <li>
-              <span class="ri">✔</span>
-              <span><strong>Parental/guardian consent</strong> required for students under 18 years of age.</span>
-            </li>
-            <li>
-              <span class="ri">✔</span>
-              <span><strong>Commitment to regular attendance</strong> and consistent practice is expected of all enrolled students.</span>
-            </li>
+            <li><span class="ri">✔</span><span><strong>No prior experience required</strong> for beginners — all absolute beginners are welcome across all age groups.</span></li>
+            <li><span class="ri">✔</span><span><strong>Previous grade certificates</strong> (if applicable) for students transferring from other institutions.</span></li>
+            <li><span class="ri">✔</span><span><strong>Instrument placement assessment.</strong> A brief informal assessment to determine the appropriate starting level.</span></li>
+            <li><span class="ri">✔</span><span><strong>Grade 5 Theory pass</strong> is required for students wishing to proceed to Grades 6–8 Practical Examinations.</span></li>
+            <li><span class="ri">✔</span><span><strong>Parental/guardian consent</strong> required for students under 18 years of age.</span></li>
+            <li><span class="ri">✔</span><span><strong>Commitment to regular attendance</strong> and consistent practice is expected of all enrolled students.</span></li>
           </ul>
         </div>
       </div>
-
-      <!-- RIGHT: Application Process -->
       <div class="reveal">
         <span class="tag-label">Application Process</span>
         <h3 style="font-family:var(--ff-display);font-size:1.5rem;color:var(--navy);margin-bottom:1.8rem;">How to Enrol</h3>
-
-        <div class="app-step">
-          <div class="step-num">01</div>
-          <div class="step-body">
-            <h4>Submit Your Enquiry</h4>
-            <p>Contact LSM via the enquiry form below, by phone, email, or WhatsApp. Indicate your instrument of interest, age group, and current level.</p>
-          </div>
-        </div>
+        <div class="app-step"><div class="step-num">01</div><div class="step-body"><h4>Submit Your Enquiry</h4><p>Contact LSM via the enquiry form below, by phone, email, or WhatsApp.</p></div></div>
         <div class="step-connector"></div>
-        <div class="app-step">
-          <div class="step-num">02</div>
-          <div class="step-body">
-            <h4>Placement Assessment</h4>
-            <p>New students undergo a brief informal placement assessment to determine the appropriate curriculum level and examination path.</p>
-          </div>
-        </div>
+        <div class="app-step"><div class="step-num">02</div><div class="step-body"><h4>Placement Assessment</h4><p>New students undergo a brief informal placement assessment to determine the appropriate curriculum level.</p></div></div>
         <div class="step-connector"></div>
-        <div class="app-step">
-          <div class="step-num">03</div>
-          <div class="step-body">
-            <h4>Confirm Enrolment</h4>
-            <p>Upon confirmation of placement, complete enrolment by submitting registration details and any required documentation.</p>
-          </div>
-        </div>
+        <div class="app-step"><div class="step-num">03</div><div class="step-body"><h4>Confirm Enrolment</h4><p>Upon confirmation of placement, complete enrolment by submitting registration details.</p></div></div>
         <div class="step-connector"></div>
-        <div class="app-step">
-          <div class="step-num">04</div>
-          <div class="step-body">
-            <h4>Begin Lessons</h4>
-            <p>You will be assigned to a qualified instructor and integrated into the appropriate lesson schedule. Ensemble training begins from day one.</p>
-          </div>
-        </div>
-
+        <div class="app-step"><div class="step-num">04</div><div class="step-body"><h4>Begin Lessons</h4><p>You will be assigned to a qualified instructor and integrated into the appropriate lesson schedule.</p></div></div>
         <div style="margin-top:2rem;padding:1.6rem;background:var(--off);border-left:3px solid var(--gold);">
-          <p style="font-size:.87rem;color:var(--mid);line-height:1.8;margin-bottom:1rem;">Ready to begin? Spaces are limited apply now to secure your place in the next intake.</p>
+          <p style="font-size:.87rem;color:var(--mid);line-height:1.8;margin-bottom:1rem;">Ready to begin? Spaces are limited — apply now to secure your place in the next intake.</p>
           <a href="#booking" class="btn btn-gold">Apply Now</a>
         </div>
       </div>
@@ -1134,12 +870,11 @@
       <div class="gold-rule"></div>
       <p class="events-intro">LSM brings music to life beyond the classroom — through public concerts, orchestra showcases, school recitals, and professional engagements for private and corporate clients.</p>
     </div>
-
     <div class="events-grid reveal">
       <div class="event-card">
         <div class="ec-icon">🎼</div>
         <h3>Public Concerts</h3>
-        <p>Staged concerts featuring LSM students and faculty, open to the public. Events range from classical recitals to contemporary showcases.</p>
+        <p>Staged concerts featuring LSM students and faculty, open to the public.</p>
         <ul>
           <li>Annual Orchestra Concert</li>
           <li>Student Recital Evenings</li>
@@ -1151,7 +886,7 @@
       <div class="event-card">
         <div class="ec-icon">🎻</div>
         <h3>School Orchestra Performances</h3>
-        <p>LSM's orchestra performs at institutional events, competitions, and collaborative concerts with other ensembles.</p>
+        <p>LSM's orchestra performs at institutional events, competitions, and collaborative concerts.</p>
         <ul>
           <li>Full Symphony Orchestra Presentations</li>
           <li>Chamber Ensemble Showcases</li>
@@ -1163,7 +898,7 @@
       <div class="event-card">
         <div class="ec-icon">🎩</div>
         <h3>Corporate &amp; Private Bookings</h3>
-        <p>Professional musicians available for hire delivering world-class musical experiences at your event.</p>
+        <p>Professional musicians available for hire — delivering world-class musical experiences.</p>
         <ul>
           <li>Corporate Events &amp; Gala Dinners</li>
           <li>Weddings &amp; Engagement Ceremonies</li>
@@ -1173,7 +908,6 @@
         </ul>
       </div>
     </div>
-
     <div class="booking-strip reveal">
       <p>"Bring the excellence of Lilongwe School of Music to your occasion. Our professional musicians deliver unforgettable musical experiences."</p>
       <div class="bs-actions">
@@ -1191,39 +925,15 @@
       <span class="tag-label">How We Teach</span>
       <h2 class="section-title light">Teaching &amp; Learning Approach</h2>
       <div class="gold-rule"></div>
-      <p style="font-size:.95rem;color:rgba(255,255,255,.45);max-width:600px;line-height:1.85;font-weight:300;">Students benefit from individual instruction, ensemble training, and regular performance opportunities — ensuring balanced and comprehensive musical development.</p>
+      <p style="font-size:.95rem;color:rgba(255,255,255,.45);max-width:600px;line-height:1.85;font-weight:300;">Students benefit from individual instruction, ensemble training, and regular performance opportunities.</p>
     </div>
     <div class="approach-grid reveal">
-      <div class="approach-item">
-        <div class="ap-num">01</div>
-        <h4>Technical Proficiency</h4>
-        <p>Rigorous training to develop precision, accuracy, and mastery of each instrument or voice — the foundation of every great musician.</p>
-      </div>
-      <div class="approach-item">
-        <div class="ap-num">02</div>
-        <h4>Musical Expression</h4>
-        <p>Cultivating interpretation, phrasing, and emotional depth through repertoire study and performance development.</p>
-      </div>
-      <div class="approach-item">
-        <div class="ap-num">03</div>
-        <h4>Ensemble Training</h4>
-        <p>From the earliest stages, students participate in ensemble and orchestra settings — developing collaborative and professional musicianship.</p>
-      </div>
-      <div class="approach-item">
-        <div class="ap-num">04</div>
-        <h4>Performance Readiness</h4>
-        <p>Regular performance opportunities ensure students are confident, stage-ready, and prepared for examinations and professional engagements.</p>
-      </div>
-      <div class="approach-item">
-        <div class="ap-num">05</div>
-        <h4>Exam Pathway</h4>
-        <p>A clear, structured examination pathway from Initial Grade through to Diploma level — aligned with internationally recognized standards.</p>
-      </div>
-      <div class="approach-item">
-        <div class="ap-num">06</div>
-        <h4>Discipline &amp; Consistency</h4>
-        <p>A structured practice culture that builds habits of excellence and sustained commitment throughout every student's conservatory journey.</p>
-      </div>
+      <div class="approach-item"><div class="ap-num">01</div><h4>Technical Proficiency</h4><p>Rigorous training to develop precision, accuracy, and mastery of each instrument or voice.</p></div>
+      <div class="approach-item"><div class="ap-num">02</div><h4>Musical Expression</h4><p>Cultivating interpretation, phrasing, and emotional depth through repertoire study and performance development.</p></div>
+      <div class="approach-item"><div class="ap-num">03</div><h4>Ensemble Training</h4><p>From the earliest stages, students participate in ensemble and orchestra settings — developing collaborative musicianship.</p></div>
+      <div class="approach-item"><div class="ap-num">04</div><h4>Performance Readiness</h4><p>Regular performance opportunities ensure students are confident, stage-ready, and prepared for examinations.</p></div>
+      <div class="approach-item"><div class="ap-num">05</div><h4>Exam Pathway</h4><p>A clear, structured examination pathway from Initial Grade through to Diploma level.</p></div>
+      <div class="approach-item"><div class="ap-num">06</div><h4>Discipline &amp; Consistency</h4><p>A structured practice culture that builds habits of excellence throughout every student's conservatory journey.</p></div>
     </div>
   </div>
 </section>
@@ -1237,48 +947,12 @@
       <div class="gold-rule"></div>
     </div>
     <div class="why-grid reveal">
-      <div class="why-item">
-        <div class="why-num">01</div>
-        <div class="why-body">
-          <h4>Conservatory-Level Curriculum</h4>
-          <p>Structured programs modelled on international conservatory best practice and guided by globally recognized examination frameworks.</p>
-        </div>
-      </div>
-      <div class="why-item">
-        <div class="why-num">02</div>
-        <div class="why-body">
-          <h4>International Exam Preparation</h4>
-          <p>Comprehensive preparation from Initial Grade through Grade 8 and Diploma levels across Theory, Instrumental, and Vocal examinations.</p>
-        </div>
-      </div>
-      <div class="why-item">
-        <div class="why-num">03</div>
-        <div class="why-body">
-          <h4>Ensemble &amp; Orchestra Training</h4>
-          <p>Students join orchestral and ensemble settings from the beginning — developing professional musicianship and collaborative skills.</p>
-        </div>
-      </div>
-      <div class="why-item">
-        <div class="why-num">04</div>
-        <div class="why-body">
-          <h4>Performance Development</h4>
-          <p>Access to real-world concerts, recitals, and professional event bookings from early in the student journey.</p>
-        </div>
-      </div>
-      <div class="why-item">
-        <div class="why-num">05</div>
-        <div class="why-body">
-          <h4>Experienced Faculty</h4>
-          <p>Qualified and dedicated instructors committed to each student's individual growth, technical development, and artistic expression.</p>
-        </div>
-      </div>
-      <div class="why-item">
-        <div class="why-num">06</div>
-        <div class="why-body">
-          <h4>A Voice for All</h4>
-          <p>Committed to placing instruments in the hands of aspiring musicians — regardless of background, experience, or circumstance.</p>
-        </div>
-      </div>
+      <div class="why-item"><div class="why-num">01</div><div class="why-body"><h4>Conservatory-Level Curriculum</h4><p>Structured programs modelled on international conservatory best practice and guided by globally recognized examination frameworks.</p></div></div>
+      <div class="why-item"><div class="why-num">02</div><div class="why-body"><h4>International Exam Preparation</h4><p>Comprehensive preparation from Initial Grade through Grade 8 and Diploma levels.</p></div></div>
+      <div class="why-item"><div class="why-num">03</div><div class="why-body"><h4>Ensemble &amp; Orchestra Training</h4><p>Students join orchestral and ensemble settings from the beginning — developing professional musicianship.</p></div></div>
+      <div class="why-item"><div class="why-num">04</div><div class="why-body"><h4>Performance Development</h4><p>Access to real-world concerts, recitals, and professional event bookings from early in the student journey.</p></div></div>
+      <div class="why-item"><div class="why-num">05</div><div class="why-body"><h4>Experienced Faculty</h4><p>Qualified and dedicated instructors committed to each student's individual growth and artistic expression.</p></div></div>
+      <div class="why-item"><div class="why-num">06</div><div class="why-body"><h4>A Voice for All</h4><p>Committed to placing instruments in the hands of aspiring musicians — regardless of background or experience.</p></div></div>
     </div>
   </div>
 </section>
@@ -1290,25 +964,13 @@
       <span class="tag-label">Examination Partners</span>
       <h2 class="section-title">Institutions We Partner With</h2>
       <div class="gold-rule centered"></div>
-      <p class="partners-note">LSM collaborates with the world's leading international music examination boards and institutions ensuring all students receive globally recognized certification and internationally benchmarked training.</p>
+      <p class="partners-note">LSM collaborates with the world's leading international music examination boards and institutions — ensuring all students receive globally recognized certification and internationally benchmarked training.</p>
     </div>
     <div class="partners-grid reveal">
-      <div class="partner-cell">
-        <img src="Images/Logos/LSM Logos/LSM Logo blue.png" alt="LSM">
-        <span>LSM</span>
-      </div>
-      <div class="partner-cell">
-        <img src="Images/Logos/Partiners Logos/Trinity_Centre_75333_logo_purple.png" alt="Trinity College London">
-        <span>Trinity College London</span>
-      </div>
-      <div class="partner-cell">
-        <img src="Images/Logos/Partiners Logos/ABRSM logo.webp" alt="ABRSM">
-        <span>ABRSM</span>
-      </div>
-      <div class="partner-cell">
-        <img src="Images/Logos/Partiners Logos/University of West London logo.webp" alt="London College of Music">
-        <span>London College of Music</span>
-      </div>
+      <div class="partner-cell"><img src="Images/Logos/LSM Logos/LSM Logo blue.png" alt="LSM"><span>LSM</span></div>
+      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/Trinity_Centre_75333_logo_purple.png" alt="Trinity College London"><span>Trinity College London</span></div>
+      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/ABRSM logo.webp" alt="ABRSM"><span>ABRSM</span></div>
+      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/University of West London logo.webp" alt="London College of Music"><span>London College of Music</span></div>
     </div>
   </div>
 </section>
@@ -1374,25 +1036,16 @@
       <div class="gold-rule centered"></div>
     </div>
     <div class="test-grid reveal">
-      <div class="test-card">
-        <blockquote>"LSM has transformed my musical journey. The conservatory-level training and performance opportunities are truly exceptional."</blockquote>
-        <cite>LSM Instrumental Student</cite>
-      </div>
-      <div class="test-card">
-        <blockquote>"Highly structured lessons, supportive instructors, and a genuine pathway to excellence. I could not recommend LSM more highly."</blockquote>
-        <cite>LSM Vocal Student</cite>
-      </div>
-      <div class="test-card">
-        <blockquote>"The ensemble training changed how I think about music. Playing in the orchestra gave me confidence I never had before."</blockquote>
-        <cite>LSM Orchestra Member</cite>
-      </div>
+      <div class="test-card"><blockquote>"LSM has transformed my musical journey. The conservatory-level training and performance opportunities are truly exceptional."</blockquote><cite>LSM Instrumental Student</cite></div>
+      <div class="test-card"><blockquote>"Highly structured lessons, supportive instructors, and a genuine pathway to excellence. I could not recommend LSM more highly."</blockquote><cite>LSM Vocal Student</cite></div>
+      <div class="test-card"><blockquote>"The ensemble training changed how I think about music. Playing in the orchestra gave me confidence I never had before."</blockquote><cite>LSM Orchestra Member</cite></div>
     </div>
   </div>
 </section>
 
 <!-- ═══════ CTA BANNER ═══════ -->
 <div class="cta-banner">
-  <h2><em>Begin Your Musical Journey</em><br> Enrol Today</h2>
+  <h2><em>Begin Your Musical Journey</em><br>Enrol Today</h2>
   <div class="cta-btn-group">
     <a href="#admissions" class="btn btn-navy">Apply Now</a>
     <a href="#booking" class="btn btn-outline-navy">Book Lessons</a>
@@ -1400,20 +1053,23 @@
   </div>
 </div>
 
-<!-- ═══════ BOOKING / CONTACT ═══════ -->
+<!-- ═══════ BOOKING / CONTACT (Formspree) ═══════ -->
 <section id="booking" class="section">
   <div class="container">
     <div class="booking-layout">
+
+      <!-- LEFT: Contact Info -->
       <div class="booking-info reveal">
         <span class="tag-label">Get In Touch</span>
         <h2>Begin Your Musical Journey with LSM</h2>
-        <p>Whether you are enquiring about student enrolment, examination preparation, or booking a professional performance we would love to hear from you.</p>
+        <p>Whether you are enquiring about student enrolment, examination preparation, or booking a professional performance — we would love to hear from you.</p>
         <div class="contact-items">
           <div class="ci">
             <div class="ci-icon">📞</div>
             <div class="ci-text">
               <div class="lbl">Phone</div>
               <a href="tel:+265981448075">+265 981 448 075</a>
+              <a href="tel:+265997246261" class="second-phone">+265 997 246 261</a>
             </div>
           </div>
           <div class="ci">
@@ -1438,121 +1094,309 @@
             </div>
           </div>
         </div>
+        <div class="contact-social">
+          <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+        </div>
         <div style="margin-top:2rem;padding:1.4rem 1.6rem;border:1px solid rgba(200,168,75,.2);background:rgba(200,168,75,.05);">
           <p style="font-family:var(--ff-display);font-style:italic;font-size:1rem;color:rgba(255,255,255,.55);line-height:1.7;">"Discipline meets artistry. Talent becomes excellence. Your journey starts here."</p>
         </div>
       </div>
 
+      <!-- RIGHT: Forms (Formspree) -->
       <div class="reveal">
-        <!-- Tabs -->
-        <div class="form-tabs">
-          <button class="form-tab-btn active" onclick="switchFormTab('enrol',this)">Student Enrolment</button>
-          <button class="form-tab-btn" onclick="switchFormTab('perf',this)">Book a Performance</button>
-          <button class="form-tab-btn" onclick="switchFormTab('gen',this)">General Enquiry</button>
+
+        <!--
+        ══════════════════════════════════════════════════════
+        FORMSPREE SETUP — 3 simple steps:
+          1. Go to https://formspree.io and create a FREE account
+          2. Create 3 new forms (one per tab) and copy each form ID
+          3. Replace the placeholder IDs below:
+             - ENROLMENT_FORM_ID  → your enrolment form ID
+             - PERFORMANCE_FORM_ID → your performance booking form ID
+             - ENQUIRY_FORM_ID    → your general enquiry form ID
+          Each form ID looks like: xrgvkpbd
+          Your endpoint will be: https://formspree.io/f/xrgvkpbd
+        ══════════════════════════════════════════════════════
+        -->
+        <script>
+          var FORMSPREE = {
+            enrol: 'mkoknpzq',
+            perf:  'xpqkzojj',
+            gen:   'xaqaylpw'
+          };
+        </script>
+<script>
+  document.querySelectorAll('.form-tab-nav-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.form-tab-nav-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('.ftab-panel').forEach(function(p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('ftab-' + btn.dataset.ftab).classList.add('active');
+    });
+  });
+
+  var FIELDS = {
+    enrol: [
+      { id: 'en_name',  label: 'Full Name',         req: true,  fgId: 'fg_en_name'  },
+      { id: 'en_email', label: 'Email',              req: true,  fgId: 'fg_en_email', type: 'email' },
+      { id: 'en_phone', label: 'Phone/WhatsApp',     req: false },
+      { id: 'en_age',   label: 'Age Group',          req: true,  fgId: 'fg_en_age'  },
+      { id: 'en_prog',  label: 'Instrument/Program', req: true,  fgId: 'fg_en_prog'  },
+      { id: 'en_level', label: 'Current Level',      req: true,  fgId: 'fg_en_level' },
+      { id: 'en_msg',   label: 'Additional Info',    req: false }
+    ],
+    perf: [
+      { id: 'pf_name',  label: 'Name',                    req: true,  fgId: 'fg_pf_name'  },
+      { id: 'pf_email', label: 'Email',                   req: true,  fgId: 'fg_pf_email', type: 'email' },
+      { id: 'pf_phone', label: 'Phone/WhatsApp',          req: false },
+      { id: 'pf_type',  label: 'Event Type',              req: true,  fgId: 'fg_pf_type'  },
+      { id: 'pf_date',  label: 'Event Date',              req: true,  fgId: 'fg_pf_date'  },
+      { id: 'pf_loc',   label: 'Event Location',          req: true,  fgId: 'fg_pf_loc'   },
+      { id: 'pf_msg',   label: 'Performance Requirements',req: true,  fgId: 'fg_pf_msg'   }
+    ],
+    gen: [
+      { id: 'gn_name',    label: 'Name',    req: true,  fgId: 'fg_gn_name'    },
+      { id: 'gn_email',   label: 'Email',   req: true,  fgId: 'fg_gn_email', type: 'email' },
+      { id: 'gn_subject', label: 'Subject', req: true,  fgId: 'fg_gn_subject' },
+      { id: 'gn_msg',     label: 'Message', req: true,  fgId: 'fg_gn_msg'     }
+    ]
+  };
+
+  function submitLSMForm(key) {
+    var fields = FIELDS[key];
+    var valid  = true;
+
+    fields.forEach(function(f) {
+      if (f.fgId) document.getElementById(f.fgId).classList.remove('error');
+    });
+
+    var payload = {};
+    fields.forEach(function(f) {
+      var el  = document.getElementById(f.id);
+      var val = el ? el.value.trim() : '';
+      if (f.req && !val) {
+        if (f.fgId) document.getElementById(f.fgId).classList.add('error');
+        valid = false;
+      }
+      if (f.type === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        if (f.fgId) document.getElementById(f.fgId).classList.add('error');
+        valid = false;
+      }
+      payload[f.label] = val;
+    });
+
+    if (!valid) return;
+
+    var btn  = document.getElementById('btn_'  + key);
+    var spin = document.getElementById('spin_' + key);
+    var okEl = document.getElementById('ok_'   + key);
+    var errEl= document.getElementById('err_'  + key);
+
+    btn.disabled        = true;
+    spin.style.display  = 'inline-block';
+    okEl.style.display  = 'none';
+    errEl.style.display = 'none';
+
+    fetch('https://formspree.io/f/' + FORMSPREE[key], {
+      method:  'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
+    })
+    .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
+    .then(function(r) {
+      spin.style.display = 'none';
+      btn.disabled       = false;
+      if (r.ok) {
+        okEl.style.display = 'block';
+        fields.forEach(function(f) { var el = document.getElementById(f.id); if (el) el.value = ''; });
+      } else {
+        errEl.style.display = 'block';
+      }
+    })
+    .catch(function() {
+      spin.style.display  = 'none';
+      btn.disabled        = false;
+      errEl.style.display = 'block';
+    });
+  }
+</script>
+        <!-- Tab navigation -->
+        <div class="form-tab-nav">
+          <button class="form-tab-nav-btn active" data-ftab="enrol">🎓 Enrolment</button>
+          <button class="form-tab-nav-btn" data-ftab="perf">🎻 Performance</button>
+          <button class="form-tab-nav-btn" data-ftab="gen">✉️ Enquiry</button>
         </div>
 
-        <!-- Enrolment Form -->
-        <div class="form-panel active" id="ftab-enrol">
-          <div class="booking-form" id="enrolForm">
-            <div class="form-row">
-              <div class="fg"><label>Full Name</label><input type="text" id="e_name" placeholder="Your full name"></div>
-              <div class="fg"><label>Email</label><input type="email" id="e_email" placeholder="your@email.com"></div>
+        <!-- ══ ENROLMENT FORM ══ -->
+        <div class="ftab-panel active" id="ftab-enrol">
+          <div class="form-row-2">
+            <div class="fg" id="fg_en_name">
+              <label>Full Name *</label>
+              <input type="text" id="en_name" placeholder="Your full name" autocomplete="name">
+              <span class="field-err">Please enter your full name.</span>
             </div>
-            <div class="form-row">
-              <div class="fg"><label>Phone / WhatsApp</label><input type="tel" id="e_phone" placeholder="+265 ..."></div>
-              <div class="fg">
-                <label>Age Group</label>
-                <select id="e_age">
-                  <option value="">Select age group...</option>
-                  <option>5–8 (Junior Beginners)</option>
-                  <option>9–13 (Junior Students)</option>
-                  <option>14–17 (Senior Students)</option>
-                  <option>18+ (Adult Learners)</option>
-                </select>
-              </div>
+            <div class="fg" id="fg_en_email">
+              <label>Email *</label>
+              <input type="email" id="en_email" placeholder="your@email.com" autocomplete="email">
+              <span class="field-err">Please enter a valid email.</span>
             </div>
+          </div>
+          <div class="form-row-2">
             <div class="fg">
-              <label>Instrument / Program of Interest</label>
-              <select id="e_prog">
-                <option value="">Select program...</option>
-                <optgroup label="Instrumental">
-                  <option>Violin</option><option>Viola</option><option>Cello</option>
-                  <option>Double Bass</option><option>Flute</option><option>Clarinet</option>
-                  <option>Trumpet</option><option>Trombone</option><option>French Horn</option><option>Piano</option>
-                </optgroup>
-                <optgroup label="Vocal Studies">
-                  <option>Solo Singing</option><option>Choir / Choral Singing</option><option>Opera &amp; Vocal Technique</option>
-                </optgroup>
-                <optgroup label="Other">
-                  <option>Music Theory</option><option>Examination Preparation</option><option>Ensemble Training</option>
-                </optgroup>
-              </select>
+              <label>Phone / WhatsApp</label>
+              <input type="tel" id="en_phone" placeholder="+265 ..." autocomplete="tel">
             </div>
+            <div class="fg" id="fg_en_age">
+              <label>Age Group *</label>
+              <select id="en_age">
+                <option value="">Select age group…</option>
+                <option>5–8 (Junior Beginners)</option>
+                <option>9–13 (Junior Students)</option>
+                <option>14–17 (Senior Students)</option>
+                <option>18+ (Adult Learners)</option>
+              </select>
+              <span class="field-err">Please select an age group.</span>
+            </div>
+          </div>
+          <div class="fg" id="fg_en_prog">
+            <label>Instrument / Program *</label>
+            <select id="en_prog">
+              <option value="">Select program…</option>
+              <optgroup label="Instrumental">
+                <option>Violin</option><option>Viola</option><option>Cello</option>
+                <option>Double Bass</option><option>Flute</option><option>Clarinet</option>
+                <option>Trumpet</option><option>Trombone</option><option>French Horn</option><option>Piano</option>
+              </optgroup>
+              <optgroup label="Vocal Studies">
+                <option>Solo Singing</option><option>Choir / Choral Singing</option><option>Opera &amp; Vocal Technique</option>
+              </optgroup>
+              <optgroup label="Other">
+                <option>Music Theory</option><option>Examination Preparation</option><option>Ensemble Training</option>
+              </optgroup>
+            </select>
+            <span class="field-err">Please select a program.</span>
+          </div>
+          <div class="fg" id="fg_en_level">
+            <label>Current Level *</label>
+            <select id="en_level">
+              <option value="">Select level…</option>
+              <option>Complete Beginner</option>
+              <option>Some prior experience</option>
+              <option>Initial Grade / Grade 1–2</option>
+              <option>Grade 3–5</option>
+              <option>Grade 6–8</option>
+              <option>Diploma Level</option>
+            </select>
+            <span class="field-err">Please select your level.</span>
+          </div>
+          <div class="fg">
+            <label>Additional Information</label>
+            <textarea id="en_msg" placeholder="Tell us about yourself or ask any questions…"></textarea>
+          </div>
+          <button class="btn-form-submit" id="btn_enrol" onclick="submitLSMForm('enrol')">
+            <span class="fspinner" id="spin_enrol"></span><span>Submit Application</span>
+          </button>
+          <div class="form-notice ok" id="ok_enrol">✅ &nbsp;Thank you! Your application has been received. We'll be in touch shortly.</div>
+          <div class="form-notice err" id="err_enrol">⚠️ &nbsp;Something went wrong. Please email us directly or try again.</div>
+        </div>
+
+        <!-- ══ PERFORMANCE BOOKING FORM ══ -->
+        <div class="ftab-panel" id="ftab-perf">
+          <div class="form-row-2">
+            <div class="fg" id="fg_pf_name">
+              <label>Your Name *</label>
+              <input type="text" id="pf_name" placeholder="Your full name" autocomplete="name">
+              <span class="field-err">Please enter your name.</span>
+            </div>
+            <div class="fg" id="fg_pf_email">
+              <label>Email *</label>
+              <input type="email" id="pf_email" placeholder="your@email.com" autocomplete="email">
+              <span class="field-err">Please enter a valid email.</span>
+            </div>
+          </div>
+          <div class="form-row-2">
             <div class="fg">
-              <label>Current Level</label>
-              <select id="e_level">
-                <option value="">Select level...</option>
-                <option>Complete Beginner</option>
-                <option>Some prior experience</option>
-                <option>Initial Grade / Grade 1–2</option>
-                <option>Grade 3–5</option>
-                <option>Grade 6–8</option>
-                <option>Diploma Level</option>
+              <label>Phone / WhatsApp</label>
+              <input type="tel" id="pf_phone" placeholder="+265 ..." autocomplete="tel">
+            </div>
+            <div class="fg" id="fg_pf_type">
+              <label>Event Type *</label>
+              <select id="pf_type">
+                <option value="">Select event type…</option>
+                <option>Corporate Event / Gala Dinner</option>
+                <option>Wedding / Engagement</option>
+                <option>Church Service</option>
+                <option>Funeral / Memorial Service</option>
+                <option>Private Function</option>
+                <option>Concert / Ticketed Event</option>
+                <option>Other</option>
               </select>
+              <span class="field-err">Please select an event type.</span>
             </div>
-            <div class="fg"><label>Additional Information</label><textarea id="e_msg" placeholder="Tell us about yourself or ask any questions..."></textarea></div>
-            <button class="btn btn-gold" onclick="submitForm('enrolForm','enrolSuccess')">Submit Application</button>
-            <div class="form-success-msg" id="enrolSuccess">✔ Thank you! Your application has been received. We will be in touch shortly.</div>
           </div>
+          <div class="form-row-2">
+            <div class="fg" id="fg_pf_date">
+              <label>Event Date *</label>
+              <input type="date" id="pf_date">
+              <span class="field-err">Please provide the event date.</span>
+            </div>
+            <div class="fg" id="fg_pf_loc">
+              <label>Event Location *</label>
+              <input type="text" id="pf_loc" placeholder="Venue / city">
+              <span class="field-err">Please enter the location.</span>
+            </div>
+          </div>
+          <div class="fg" id="fg_pf_msg">
+            <label>Performance Requirements *</label>
+            <textarea id="pf_msg" placeholder="Describe the ensemble or solo performance required, duration, repertoire preferences…"></textarea>
+            <span class="field-err">Please describe your requirements.</span>
+          </div>
+          <button class="btn-form-submit" id="btn_perf" onclick="submitLSMForm('perf')">
+            <span class="fspinner" id="spin_perf"></span><span>Submit Booking Request</span>
+          </button>
+          <div class="form-notice ok" id="ok_perf">✅ &nbsp;Booking request received! We'll contact you with a quote shortly.</div>
+          <div class="form-notice err" id="err_perf">⚠️ &nbsp;Something went wrong. Please email us directly or try again.</div>
         </div>
 
-        <!-- Performance Booking Form -->
-        <div class="form-panel" id="ftab-perf">
-          <div class="booking-form" id="perfForm">
-            <div class="form-row">
-              <div class="fg"><label>Your Name</label><input type="text" id="p_name" placeholder="Your full name"></div>
-              <div class="fg"><label>Email</label><input type="email" id="p_email" placeholder="your@email.com"></div>
+        <!-- ══ GENERAL ENQUIRY FORM ══ -->
+        <div class="ftab-panel" id="ftab-gen">
+          <div class="form-row-2">
+            <div class="fg" id="fg_gn_name">
+              <label>Your Name *</label>
+              <input type="text" id="gn_name" placeholder="Your full name" autocomplete="name">
+              <span class="field-err">Please enter your name.</span>
             </div>
-            <div class="form-row">
-              <div class="fg"><label>Phone / WhatsApp</label><input type="tel" id="p_phone" placeholder="+265 ..."></div>
-              <div class="fg">
-                <label>Event Type</label>
-                <select id="p_type">
-                  <option value="">Select event type...</option>
-                  <option>Corporate Event / Gala Dinner</option>
-                  <option>Wedding / Engagement</option>
-                  <option>Church Service</option>
-                  <option>Funeral / Memorial Service</option>
-                  <option>Private Function</option>
-                  <option>Concert / Ticketed Event</option>
-                  <option>Other</option>
-                </select>
-              </div>
+            <div class="fg" id="fg_gn_email">
+              <label>Email *</label>
+              <input type="email" id="gn_email" placeholder="your@email.com" autocomplete="email">
+              <span class="field-err">Please enter a valid email.</span>
             </div>
-            <div class="form-row">
-              <div class="fg"><label>Event Date</label><input type="date" id="p_date"></div>
-              <div class="fg"><label>Event Location</label><input type="text" id="p_location" placeholder="Venue / city"></div>
-            </div>
-            <div class="fg"><label>Performance Requirements</label><textarea id="p_msg" placeholder="Describe the type of ensemble or solo performance required, duration, repertoire preferences..."></textarea></div>
-            <button class="btn btn-gold" onclick="submitForm('perfForm','perfSuccess')">Submit Booking Request</button>
-            <div class="form-success-msg" id="perfSuccess">✔ Thank you! Your booking request has been received. We will contact you with a quote shortly.</div>
           </div>
+          <div class="fg" id="fg_gn_subject">
+            <label>Subject *</label>
+            <input type="text" id="gn_subject" placeholder="What is your enquiry about?">
+            <span class="field-err">Please enter a subject.</span>
+          </div>
+          <div class="fg" id="fg_gn_msg">
+            <label>Message *</label>
+            <textarea id="gn_msg" placeholder="How can we help you?"></textarea>
+            <span class="field-err">Please enter your message.</span>
+          </div>
+          <button class="btn-form-submit" id="btn_gen" onclick="submitLSMForm('gen')">
+            <span class="fspinner" id="spin_gen"></span><span>Send Message</span>
+          </button>
+          <div class="form-notice ok" id="ok_gen">✅ &nbsp;Your message has been received. We'll get back to you shortly.</div>
+          <div class="form-notice err" id="err_gen">⚠️ &nbsp;Something went wrong. Please email us directly or try again.</div>
         </div>
 
-        <!-- General Enquiry Form -->
-        <div class="form-panel" id="ftab-gen">
-          <div class="booking-form" id="genForm">
-            <div class="form-row">
-              <div class="fg"><label>Your Name</label><input type="text" id="g_name" placeholder="Your full name"></div>
-              <div class="fg"><label>Email</label><input type="email" id="g_email" placeholder="your@email.com"></div>
-            </div>
-            <div class="fg"><label>Subject</label><input type="text" id="g_subject" placeholder="What is your enquiry about?"></div>
-            <div class="fg"><label>Message</label><textarea id="g_msg" placeholder="How can we help you?"></textarea></div>
-            <button class="btn btn-gold" onclick="submitForm('genForm','genSuccess')">Send Message</button>
-            <div class="form-success-msg" id="genSuccess">✔ Your message has been received. We will get back to you shortly.</div>
-          </div>
-        </div>
-      </div>
+      </div><!-- /form col -->
     </div>
   </div>
 </section>
@@ -1565,6 +1409,17 @@
         <div class="fb-logo">Lilongwe School of Music</div>
         <div class="fb-sub">Performance Art Theatre · Orchestra · Music Education</div>
         <p>Malawi's leading conservatory for instrumental performance, vocal studies, ensemble training, and internationally benchmarked music examinations.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://wa.me/265981448075" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+        </div>
       </div>
       <div class="footer-col">
         <h4>Quick Links</h4>
@@ -1592,10 +1447,11 @@
         <h4>Contact</h4>
         <ul>
           <li><a href="tel:+265981448075">+265 981 448 075</a></li>
+          <li><a href="tel:+265997246261">+265 997 246 261</a></li>
           <li><a href="mailto:lilongweschoolofmusic.lsm@yahoo.com">LSM Email</a></li>
           <li><a href="https://wa.me/265981448075" target="_blank">WhatsApp</a></li>
-          <li><a href="#booking">Enrol Now</a></li>
-          <li><a href="#booking">Book a Performance</a></li>
+          <li><a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank">Instagram</a></li>
+          <li><a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank">Facebook</a></li>
         </ul>
       </div>
     </div>
@@ -1612,7 +1468,7 @@
 
 <!-- WhatsApp Float -->
 <a href="https://wa.me/265981448075" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
-  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
   Chat on WhatsApp
 </a>
 
@@ -1623,65 +1479,207 @@
 </div>
 
 <script>
-  /* ── NAV ── */
-  function toggleMobileNav(){
-    document.getElementById('hamburger').classList.toggle('open');
-    document.getElementById('mobilePanel').classList.toggle('open');
-  }
-  function closeMobileNav(){
-    document.getElementById('hamburger').classList.remove('open');
-    document.getElementById('mobilePanel').classList.remove('open');
-  }
-  window.addEventListener('scroll',function(){
-    document.getElementById('topbar').classList.toggle('scrolled', window.scrollY > 50);
+/* ── NAV ── */
+function toggleMobileNav() {
+  var btn   = document.getElementById('hamburger');
+  var panel = document.getElementById('mobilePanel');
+  var open  = panel.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+function closeMobileNav() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('hamburger').setAttribute('aria-expanded','false');
+  document.getElementById('mobilePanel').classList.remove('open');
+  document.body.style.overflow = '';
+}
+window.addEventListener('scroll', function() {
+  document.getElementById('topbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+/* Close mobile nav on ESC */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeMobileNav();
+});
+
+/* ── REVEAL ── */
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: .07 });
+document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+
+/* ── TABS: programs ── */
+function switchProgTab(name, btn) {
+  document.querySelectorAll('.prog-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.prog-tab').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('prog-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ── TABS: booking forms ── */
+document.querySelectorAll('.form-tab-nav-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.form-tab-nav-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.ftab-panel').forEach(function(p) { p.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('ftab-' + btn.dataset.ftab).classList.add('active');
   });
+});
 
-  /* ── REVEAL ── */
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
-  },{threshold:.07});
-  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+/* ── SLIDESHOW ── */
+var slideIdx = 0;
+var slides = document.querySelectorAll('#slideshow img');
+var dots   = document.querySelectorAll('#slideDots .slide-dot');
+function goSlide(n) {
+  slides[slideIdx].classList.remove('active');
+  dots[slideIdx].classList.remove('active');
+  slideIdx = n;
+  slides[slideIdx].classList.add('active');
+  dots[slideIdx].classList.add('active');
+}
+setInterval(function() { goSlide((slideIdx + 1) % slides.length); }, 3800);
 
-  /* ── TABS: programs ── */
-  function switchProgTab(name,btn){
-    document.querySelectorAll('.prog-panel').forEach(function(p){ p.classList.remove('active'); });
-    document.querySelectorAll('.prog-tab').forEach(function(b){ b.classList.remove('active'); });
-    document.getElementById('prog-'+name).classList.add('active');
-    btn.classList.add('active');
+/* ════════════════════════════════════════════════
+   FORM SYSTEM — Formspree
+   Each form posts to https://formspree.io/f/{ID}
+   Set your IDs in the FORMSPREE object above.
+════════════════════════════════════════════════ */
+function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+
+function vField(id, fgId, check) {
+  var el = document.getElementById(id);
+  var fg = fgId ? document.getElementById(fgId) : null;
+  var ok = check(el.value);
+  el.classList.toggle('invalid', !ok);
+  if (fg) fg.classList.toggle('has-err', !ok);
+  return ok;
+}
+
+function validateEnrol() {
+  var n = vField('en_name',  'fg_en_name',  function(v){ return v.trim().length > 1; });
+  var e = vField('en_email', 'fg_en_email', isEmail);
+  var a = vField('en_age',   'fg_en_age',   function(v){ return v !== ''; });
+  var p = vField('en_prog',  'fg_en_prog',  function(v){ return v !== ''; });
+  var l = vField('en_level', 'fg_en_level', function(v){ return v !== ''; });
+  return n && e && a && p && l;
+}
+function validatePerf() {
+  var n  = vField('pf_name',  'fg_pf_name',  function(v){ return v.trim().length > 1; });
+  var e  = vField('pf_email', 'fg_pf_email', isEmail);
+  var t  = vField('pf_type',  'fg_pf_type',  function(v){ return v !== ''; });
+  var d  = vField('pf_date',  'fg_pf_date',  function(v){ return v !== ''; });
+  var lo = vField('pf_loc',   'fg_pf_loc',   function(v){ return v.trim().length > 1; });
+  var m  = vField('pf_msg',   'fg_pf_msg',   function(v){ return v.trim().length > 5; });
+  return n && e && t && d && lo && m;
+}
+function validateGen() {
+  var n = vField('gn_name',    'fg_gn_name',    function(v){ return v.trim().length > 1; });
+  var e = vField('gn_email',   'fg_gn_email',   isEmail);
+  var s = vField('gn_subject', 'fg_gn_subject', function(v){ return v.trim().length > 2; });
+  var m = vField('gn_msg',     'fg_gn_msg',     function(v){ return v.trim().length > 5; });
+  return n && e && s && m;
+}
+
+function collectEnrolData() {
+  return {
+    'Form Type':   'Enrolment Application',
+    'Full Name':   document.getElementById('en_name').value.trim(),
+    'email':       document.getElementById('en_email').value.trim(),
+    'Phone':       document.getElementById('en_phone').value.trim() || '—',
+    'Age Group':   document.getElementById('en_age').value,
+    'Program':     document.getElementById('en_prog').value,
+    'Level':       document.getElementById('en_level').value,
+    'Notes':       document.getElementById('en_msg').value.trim() || '—'
+  };
+}
+function collectPerfData() {
+  return {
+    'Form Type':       'Performance Booking',
+    'Name':            document.getElementById('pf_name').value.trim(),
+    'email':           document.getElementById('pf_email').value.trim(),
+    'Phone':           document.getElementById('pf_phone').value.trim() || '—',
+    'Event Type':      document.getElementById('pf_type').value,
+    'Event Date':      document.getElementById('pf_date').value,
+    'Location':        document.getElementById('pf_loc').value.trim(),
+    'Requirements':    document.getElementById('pf_msg').value.trim()
+  };
+}
+function collectGenData() {
+  return {
+    'Form Type': 'General Enquiry',
+    'Name':      document.getElementById('gn_name').value.trim(),
+    'email':     document.getElementById('gn_email').value.trim(),
+    'Subject':   document.getElementById('gn_subject').value.trim(),
+    'message':   document.getElementById('gn_msg').value.trim()
+  };
+}
+
+var resetIds = {
+  enrol: ['en_name','en_email','en_phone','en_age','en_prog','en_level','en_msg'],
+  perf:  ['pf_name','pf_email','pf_phone','pf_type','pf_date','pf_loc','pf_msg'],
+  gen:   ['gn_name','gn_email','gn_subject','gn_msg']
+};
+function resetLSMForm(id) {
+  resetIds[id].forEach(function(fid) {
+    var el = document.getElementById(fid);
+    if (!el) return;
+    el.tagName === 'SELECT' ? (el.selectedIndex = 0) : (el.value = '');
+    el.classList.remove('invalid');
+  });
+  document.querySelectorAll('#ftab-' + id + ' .fg').forEach(function(fg) {
+    fg.classList.remove('has-err');
+  });
+}
+
+/* Clear errors on input */
+document.querySelectorAll('input, select, textarea').forEach(function(el) {
+  el.addEventListener('input', function() {
+    el.classList.remove('invalid');
+    if (el.closest('.fg')) el.closest('.fg').classList.remove('has-err');
+  });
+});
+
+async function submitLSMForm(id) {
+  var validators = { enrol: validateEnrol, perf: validatePerf, gen: validateGen };
+  var collectors = { enrol: collectEnrolData, perf: collectPerfData, gen: collectGenData };
+
+  if (!validators[id]()) return;
+
+  var btn  = document.getElementById('btn_' + id);
+  var spin = document.getElementById('spin_' + id);
+  var okEl = document.getElementById('ok_' + id);
+  var erEl = document.getElementById('err_' + id);
+  var formId = FORMSPREE[id];
+
+  okEl.classList.remove('show');
+  erEl.classList.remove('show');
+  btn.disabled = true;
+  spin.style.display = 'block';
+
+  var data = collectors[id]();
+
+  try {
+    var res = await fetch('https://formspree.io/f/' + formId, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    var json = await res.json();
+    if (res.ok) {
+      okEl.classList.add('show');
+      resetLSMForm(id);
+    } else {
+      erEl.classList.add('show');
+      console.error('Formspree error:', json);
+    }
+  } catch (err) {
+    erEl.classList.add('show');
+    console.error('Network error:', err);
+  } finally {
+    btn.disabled = false;
+    spin.style.display = 'none';
   }
-
-  /* ── TABS: form ── */
-  function switchFormTab(name,btn){
-    document.querySelectorAll('.form-panel').forEach(function(p){ p.classList.remove('active'); });
-    document.querySelectorAll('.form-tab-btn').forEach(function(b){ b.classList.remove('active'); });
-    document.getElementById('ftab-'+name).classList.add('active');
-    btn.classList.add('active');
-  }
-
-  /* ── SLIDESHOW ── */
-  var slideIdx = 0;
-  var slides = document.querySelectorAll('#slideshow img');
-  var dots = document.querySelectorAll('#slideDots .slide-dot');
-  function goSlide(n){
-    slides[slideIdx].classList.remove('active');
-    dots[slideIdx].classList.remove('active');
-    slideIdx = n;
-    slides[slideIdx].classList.add('active');
-    dots[slideIdx].classList.add('active');
-  }
-  setInterval(function(){ goSlide((slideIdx+1) % slides.length); }, 3800);
-
-  /* ── FORM SUBMIT ── */
-  function submitForm(formId, successId){
-    var form = document.getElementById(formId);
-    var inputs = form.querySelectorAll('input[type=text], input[type=email], input[type=tel]');
-    var allGood = true;
-    inputs.forEach(function(i){ if(!i.value.trim()){ i.style.borderColor='rgba(255,100,100,.5)'; allGood=false; } else { i.style.borderColor=''; } });
-    if(!allGood){ return; }
-    document.getElementById(successId).style.display = 'block';
-    var btn = form.querySelector('.btn');
-    if(btn){ btn.style.display='none'; }
-  }
+}
 </script>
 </body>
 </html>
