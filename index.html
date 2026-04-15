@@ -3,21 +3,49 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Lilongwe School of Music Training World-Class Musicians in Malawi</title>
-<meta name="description" content="Lilongwe School of Music (LSM) — Malawi's leading conservatory for instrumental performance, vocal studies, orchestra, and international exam preparation.">
-<meta name="keywords" content="music school Malawi, music lessons Lilongwe, piano lessons Malawi, violin lessons Lilongwe, orchestra Malawi, Trinity exams Malawi, ABRSM Malawi, music academy Lilongwe">
+
+<title>Lilongwe School of Music | Piano, Violin & Singing Lessons in Malawi</title>
+
+<meta name="description" content="Lilongwe School of Music (LSM) offers professional piano, violin, voice and theory lessons in Lilongwe, Malawi. ABRSM & Trinity exam preparation, orchestra training and world-class music education.">
+
+<meta name="keywords" content="music school Lilongwe, piano lessons Malawi, violin teacher Lilongwe, singing lessons Malawi, ABRSM Malawi, Trinity exams Malawi, orchestra Lilongwe">
+
 <meta name="author" content="Lilongwe School of Music">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="Lilongwe School of Music Training World-Class Musicians in Malawi">
-<meta property="og:description" content="Professional conservatory-level music education, ensemble training, and international examination preparation in Malawi.">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://lilongweschoolofmusic.github.io/LSM/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Lilongwe School of Music | Music Lessons in Malawi">
+<meta property="og:description" content="Professional music training in Lilongwe. Piano, violin, voice, orchestra and international exam preparation.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://github.com/lilongweschoolofmusic/LSM.git">
-<link rel="canonical" href="https://github.com/lilongweschoolofmusic/LSM.git">
+<meta property="og:url" content="https://lilongweschoolofmusic.github.io/LSM/">
+
+<!-- GEO -->
+<meta name="geo.region" content="MW">
+<meta name="geo.placename" content="Lilongwe">
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Structured Data -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"MusicSchool","name":"Lilongwe School of Music","address":{"@type":"PostalAddress","addressLocality":"Lilongwe","addressCountry":"MW"},"telephone":"+265981448075","email":"lilongweschoolofmusic.lsm@yahoo.com"}
+{
+  "@context": "https://schema.org",
+  "@type": "MusicSchool",
+  "name": "Lilongwe School of Music",
+  "url": "https://lilongweschoolofmusic.github.io/LSM/",
+  "telephone": "+265981448075",
+  "email": "lilongweschoolofmusic.lsm@yahoo.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lilongwe",
+    "addressCountry": "MW"
+  }
+}
 </script>
 <style>
 /* ──────────────── TOKENS ──────────────── */
@@ -137,10 +165,11 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .mobile-social a svg { width:18px; height:18px; fill:currentColor; }
 
 @media(max-width:1000px){
-  .nav-menu { display:none; }
+  .nav-menu { display:flex; flex-direction:column; position:absolute; top:72px; left:0; right:0; background:rgba(8,12,20,.95); padding:1rem 0; z-index:199; }
+  .nav-menu a { padding:0.5rem 5%; }
   .nav-cta { display:none; }
   .nav-social { display:none; }
-  .hamburger { display:flex; }
+  .hamburger { display:none; }
 }
 
 /* ═══════════════════════════════════════════════
@@ -180,6 +209,23 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .announce-bar { background:var(--gold); padding:12px 5%; display:flex; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
 .announce-bar p { font-size:.78rem; font-weight:600; color:var(--navy); letter-spacing:.05em; }
 .announce-bar a { font-size:.72rem; font-weight:700; color:var(--navy); border-bottom:1px solid var(--navy); padding-bottom:1px; }
+.announcement-special { background:var(--off); }
+.announcement-special .section-header { max-width:900px; margin:0 auto 2rem; }
+.monthly-layout { display:grid; grid-template-columns:1fr 400px; gap:3rem; align-items:start; }
+.monthly-content { display:flex; flex-direction:column; gap:1.5rem; }
+.monthly-item { background:var(--white); border:1px solid var(--mist); border-radius:18px; padding:2rem; box-shadow:0 16px 36px rgba(0,0,0,.06); transition:transform .3s ease, box-shadow .3s ease; }
+.monthly-item:hover { transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,.1); }
+.monthly-item h3 { font-family:var(--ff-display); font-size:1.1rem; color:var(--navy); margin-bottom:1rem; }
+.monthly-item p, .monthly-item ul { color:var(--mid); line-height:1.8; }
+.monthly-item ul { margin-top:1rem; padding-left:1.2rem; }
+.monthly-item ul li { margin-bottom:.6rem; }
+.monthly-video { position:sticky; top:100px; }
+.video-window { background:var(--white); border:1px solid var(--mist); border-radius:18px; padding:1rem; box-shadow:0 16px 36px rgba(0,0,0,.06); position:relative; }
+.video-window iframe { border-radius:12px; }
+.fullscreen-btn { position:absolute; top:10px; right:10px; background:rgba(0,0,0,.5); color:white; border:none; border-radius:50%; width:40px; height:40px; font-size:18px; cursor:pointer; opacity:0; transition:opacity .3s; }
+.video-window:hover .fullscreen-btn { opacity:1; }
+@media(max-width:1024px){ .monthly-layout { grid-template-columns:1fr; gap:2rem; } .monthly-video { position:static; } }
+@media(max-width:820px){ .announcement-special .container { padding:0 3%; } }
 
 /* ═══════════════════════════════════════════════
    SECTION GENERIC
@@ -238,7 +284,7 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .exam-col h4 { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:.9rem; }
 .exam-col ul { list-style:none; }
 .exam-col li { font-size:.87rem; color:rgba(255,255,255,.55); line-height:2; padding-left:.9rem; position:relative; }
-.exam-col li::before { content:'–'; position:absolute; left:0; color:var(--gold); opacity:.5; }
+.exam-col li::before { content:'•'; position:absolute; left:0; color:var(--gold); opacity:.5; }
 .exam-notice { margin-top:1.4rem; padding:1rem 1.4rem; background:rgba(200,168,75,.08); border-left:2px solid var(--gold); font-size:.83rem; color:rgba(255,255,255,.55); line-height:1.7; }
 .exam-notice strong { color:rgba(255,255,255,.75); }
 .schedule-row { display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:2.5rem; }
@@ -517,7 +563,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <a href="#admissions" class="btn btn-outline-gold btn-sm">Apply Now</a>
       <a href="#booking" class="btn btn-gold btn-sm">Book Lessons</a>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -594,6 +640,49 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
   <div class="hero-scroll-hint">
     <span>Scroll</span>
     <div class="line"></div>
+  </div>
+</section>
+
+<!-- ═══════ MONTHLY ANNOUNCEMENT SPECIAL ═══════ -->
+<section id="monthly-announcement" class="section announcement-special">
+  <div class="container">
+    <div class="section-header centered">
+      <span class="tag-label">Monthly Bulletin</span>
+      <h2 class="section-title">Announcement Special</h2>
+      <div class="gold-rule centered"></div>
+      <p class="section-intro"><center>A dedicated monthly update space for featured announcements, event highlights, and LSM news.</p>
+    </div>
+    <div class="monthly-layout reveal">
+      <div class="monthly-content">
+        <article class="monthly-item">
+          <h3>May 2026 Special Edition</h3>
+          <p>New intake now open for Grade 1–8 music exam preparation, ensemble coaching, and private instruction. This month's focus is on spring recital planning, ensemble registrations, and scholarship auditions.</p>
+          <ul>
+            <li>Feature: Orchestra rehearsal schedule update</li>
+            <li>Reminder: Grade 5 Theory preparation sessions begin 15 May</li>
+            <li>Spotlight: Student performance showcase on 28 May</li>
+          </ul>
+        </article>
+        <article class="monthly-item">
+          <h3>Composer of the Month</h3>
+          <p>Celebrating the works of local composers and chamber music arrangements that inspire our students. Add your note here as the monthly recommendation.</p>
+        </article>
+        <article class="monthly-item">
+          <h3>Second Assessment</h3>
+          <p>Dear Parents, Students, and Guardians, this is a reminder that booking for the Second Assessment must be completed strictly before the end of April, 
+            as no bookings will be accepted afterward, and the examinations will be conducted in May. This assessment is very important as it helps learners strengthen their 
+            understanding of key topics, identify areas that need improvement, and prepare effectively for the final examinations. We kindly urge all students to ensure they complete their booking within 
+            April and take the assessment seriously, while parents and guardians are encouraged to provide full support and guidance during this important academic period.</p>
+        </article>
+      </div>
+      <div class="monthly-video">
+        <div class="video-window">
+          <!-- Replace with your video embed code -->
+          <iframe id="lsm-video" width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="LSM Monthly Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <button type="button" class="fullscreen-btn" onclick="toggleFullscreen()" aria-label="Toggle Fullscreen">⛶</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -701,7 +790,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
         <div class="exam-cols">
           <div class="exam-col">
             <h4>Theory</h4>
-            <ul> <ul style="padding-left: 1.5rem;"></ul>
+            <ul style="padding-left: 1.5rem;">
               <li>Initial Grade to Grade 8</li>
               <li>Aural &amp; Sight-Reading</li>
               <li>Harmony &amp; Counterpoint</li>
@@ -1092,14 +1181,14 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
             <div class="ci-icon">📍</div>
             <div class="ci-text">
               <div class="lbl">Location</div>
-              <span>Lilongwe, Malawi</span>
+              <span>Lilongwe Area 23 Midland (Near Chipasula Pvt Sec School), Malawi</span>
             </div>
           </div>
           <div class="ci">
             <div class="ci-icon">🟢</div>
             <div class="ci-text">
               <div class="lbl">WhatsApp</div>
-              <a href="https://wa.me/265981448075" target="_blank">WhatsApp Us</a>
+              <a href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank">WhatsApp Us</a>
             </div>
           </div>
         </div>
@@ -1134,113 +1223,11 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
           Your endpoint will be: https://formspree.io/f/xrgvkpbd
         ══════════════════════════════════════════════════════
         -->
-        <script>
-          var FORMSPREE = {
-            enrol: 'mkoknpzq',
-            perf:  'xpqkzojj',
-            gen:   'xaqaylpw'
-          };
-        </script>
-<script>
-  document.querySelectorAll('.form-tab-nav-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.form-tab-nav-btn').forEach(function(b) { b.classList.remove('active'); });
-      document.querySelectorAll('.ftab-panel').forEach(function(p) { p.classList.remove('active'); });
-      btn.classList.add('active');
-      document.getElementById('ftab-' + btn.dataset.ftab).classList.add('active');
-    });
-  });
 
-  var FIELDS = {
-    enrol: [
-      { id: 'en_name',  label: 'Full Name',         req: true,  fgId: 'fg_en_name'  },
-      { id: 'en_email', label: 'Email',              req: true,  fgId: 'fg_en_email', type: 'email' },
-      { id: 'en_phone', label: 'Phone/WhatsApp',     req: false },
-      { id: 'en_age',   label: 'Age Group',          req: true,  fgId: 'fg_en_age'  },
-      { id: 'en_prog',  label: 'Instrument/Program', req: true,  fgId: 'fg_en_prog'  },
-      { id: 'en_level', label: 'Current Level',      req: true,  fgId: 'fg_en_level' },
-      { id: 'en_msg',   label: 'Additional Info',    req: false }
-    ],
-    perf: [
-      { id: 'pf_name',  label: 'Name',                    req: true,  fgId: 'fg_pf_name'  },
-      { id: 'pf_email', label: 'Email',                   req: true,  fgId: 'fg_pf_email', type: 'email' },
-      { id: 'pf_phone', label: 'Phone/WhatsApp',          req: false },
-      { id: 'pf_type',  label: 'Event Type',              req: true,  fgId: 'fg_pf_type'  },
-      { id: 'pf_date',  label: 'Event Date',              req: true,  fgId: 'fg_pf_date'  },
-      { id: 'pf_loc',   label: 'Event Location',          req: true,  fgId: 'fg_pf_loc'   },
-      { id: 'pf_msg',   label: 'Performance Requirements',req: true,  fgId: 'fg_pf_msg'   }
-    ],
-    gen: [
-      { id: 'gn_name',    label: 'Name',    req: true,  fgId: 'fg_gn_name'    },
-      { id: 'gn_email',   label: 'Email',   req: true,  fgId: 'fg_gn_email', type: 'email' },
-      { id: 'gn_subject', label: 'Subject', req: true,  fgId: 'fg_gn_subject' },
-      { id: 'gn_msg',     label: 'Message', req: true,  fgId: 'fg_gn_msg'     }
-    ]
-  };
-
-  function submitLSMForm(key) {
-    var fields = FIELDS[key];
-    var valid  = true;
-
-    fields.forEach(function(f) {
-      if (f.fgId) document.getElementById(f.fgId).classList.remove('error');
-    });
-
-    var payload = {};
-    fields.forEach(function(f) {
-      var el  = document.getElementById(f.id);
-      var val = el ? el.value.trim() : '';
-      if (f.req && !val) {
-        if (f.fgId) document.getElementById(f.fgId).classList.add('error');
-        valid = false;
-      }
-      if (f.type === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-        if (f.fgId) document.getElementById(f.fgId).classList.add('error');
-        valid = false;
-      }
-      payload[f.label] = val;
-    });
-
-    if (!valid) return;
-
-    var btn  = document.getElementById('btn_'  + key);
-    var spin = document.getElementById('spin_' + key);
-    var okEl = document.getElementById('ok_'   + key);
-    var errEl= document.getElementById('err_'  + key);
-
-    btn.disabled        = true;
-    spin.style.display  = 'inline-block';
-    okEl.style.display  = 'none';
-    errEl.style.display = 'none';
-
-    fetch('https://formspree.io/f/' + FORMSPREE[key], {
-      method:  'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload)
-    })
-    .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
-    .then(function(r) {
-      spin.style.display = 'none';
-      btn.disabled       = false;
-      if (r.ok) {
-        okEl.style.display = 'block';
-        fields.forEach(function(f) { var el = document.getElementById(f.id); if (el) el.value = ''; });
-      } else {
-        errEl.style.display = 'block';
-      }
-    })
-    .catch(function() {
-      spin.style.display  = 'none';
-      btn.disabled        = false;
-      errEl.style.display = 'block';
-    });
-  }
-</script>
-        <!-- Tab navigation -->
         <div class="form-tab-nav">
-          <button class="form-tab-nav-btn active" data-ftab="enrol">🎓 Enrolment</button>
-          <button class="form-tab-nav-btn" data-ftab="perf">🎻 Performance</button>
-          <button class="form-tab-nav-btn" data-ftab="gen">✉️ Enquiry</button>
+          <button type="button" class="form-tab-nav-btn active" data-ftab="enrol">🎓 Enrolment</button>
+          <button type="button" class="form-tab-nav-btn" data-ftab="perf">🎻 Performance</button>
+          <button type="button" class="form-tab-nav-btn" data-ftab="gen">✉️ Enquiry</button>
         </div>
 
         <!-- ══ ENROLMENT FORM ══ -->
@@ -1309,7 +1296,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
             <label>Additional Information</label>
             <textarea id="en_msg" placeholder="Tell us about yourself or ask any questions…"></textarea>
           </div>
-          <button class="btn-form-submit" id="btn_enrol" onclick="submitLSMForm('enrol')">
+          <button type="button" class="btn-form-submit" id="btn_enrol" onclick="submitLSMForm('enrol')">
             <span class="fspinner" id="spin_enrol"></span><span>Submit Application</span>
           </button>
           <div class="form-notice ok" id="ok_enrol">✅ &nbsp;Thank you! Your application has been received. We'll be in touch shortly.</div>
@@ -1367,7 +1354,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
             <textarea id="pf_msg" placeholder="Describe the ensemble or solo performance required, duration, repertoire preferences…"></textarea>
             <span class="field-err">Please describe your requirements.</span>
           </div>
-          <button class="btn-form-submit" id="btn_perf" onclick="submitLSMForm('perf')">
+          <button type="button" class="btn-form-submit" id="btn_perf" onclick="submitLSMForm('perf')">
             <span class="fspinner" id="spin_perf"></span><span>Submit Booking Request</span>
           </button>
           <div class="form-notice ok" id="ok_perf">✅ &nbsp;Booking request received! We'll contact you with a quote shortly.</div>
@@ -1398,7 +1385,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
             <textarea id="gn_msg" placeholder="How can we help you?"></textarea>
             <span class="field-err">Please enter your message.</span>
           </div>
-          <button class="btn-form-submit" id="btn_gen" onclick="submitLSMForm('gen')">
+          <button type="button" class="btn-form-submit" id="btn_gen" onclick="submitLSMForm('gen')">
             <span class="fspinner" id="spin_gen"></span><span>Send Message</span>
           </button>
           <div class="form-notice ok" id="ok_gen">✅ &nbsp;Your message has been received. We'll get back to you shortly.</div>
@@ -1425,7 +1412,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
           <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener" aria-label="Facebook">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
-          <a href="https://wa.me/265981448075" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <a href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank" rel="noopener" aria-label="WhatsApp">
             <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           </a>
         </div>
@@ -1458,7 +1445,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
           <li><a href="tel:+265981448075">+265 981 448 075</a></li>
           <li><a href="tel:+265997246261">+265 997 246 261</a></li>
           <li><a href="mailto:lilongweschoolofmusic.lsm@yahoo.com">LSM Email</a></li>
-          <li><a href="https://wa.me/265981448075" target="_blank">WhatsApp</a></li>
+          <li><a href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank">WhatsApp</a></li>
           <li><a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank">Instagram</a></li>
           <li><a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank">Facebook</a></li>
         </ul>
@@ -1476,7 +1463,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
 </footer>
 
 <!-- WhatsApp Float -->
-<a href="https://wa.me/265981448075" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+<a href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
   <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
   WhatsApp Us
 </a>
@@ -1489,6 +1476,11 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
 
 <script>
 /* ── NAV ── */
+var FORMSPREE = {
+  enrol: 'mkoknpzq',
+  perf:  'xpqkzojj',
+  gen:   'xaqaylpw'
+};
 function toggleMobileNav() {
   var btn   = document.getElementById('hamburger');
   var panel = document.getElementById('mobilePanel');
@@ -1687,6 +1679,17 @@ async function submitLSMForm(id) {
   } finally {
     btn.disabled = false;
     spin.style.display = 'none';
+  }
+}
+
+function toggleFullscreen() {
+  var iframe = document.getElementById('lsm-video');
+  if (!document.fullscreenElement) {
+    iframe.requestFullscreen().catch(err => {
+      console.error('Error attempting to enable full-screen mode:', err.message);
+    });
+  } else {
+    document.exitFullscreen();
   }
 }
 </script>
