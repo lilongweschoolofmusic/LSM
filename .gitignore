@@ -1,0 +1,4 @@
+.vscode/
+LSM/.git/
+*.swp
+.DS_Store
