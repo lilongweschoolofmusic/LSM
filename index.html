@@ -165,11 +165,10 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .mobile-social a svg { width:18px; height:18px; fill:currentColor; }
 
 @media(max-width:1000px){
-  .nav-menu { display:flex; flex-direction:column; position:absolute; top:72px; left:0; right:0; background:rgba(8,12,20,.95); padding:1rem 0; z-index:199; }
-  .nav-menu a { padding:0.5rem 5%; }
+  .nav-menu { display:none; }
   .nav-cta { display:none; }
   .nav-social { display:none; }
-  .hamburger { display:none; }
+  .hamburger { display:flex; }
 }
 
 /* ═══════════════════════════════════════════════
@@ -200,13 +199,24 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .hero-scroll-hint { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.5rem; font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.25); animation:bob 2.5s ease-in-out infinite; }
 .hero-scroll-hint .line { width:1px; height:44px; background:linear-gradient(to bottom,rgba(200,168,75,.4),transparent); }
 @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
-@media(max-width:820px){ .hero-content { grid-template-columns:1fr; gap:3rem; } .hero-right { display:grid; grid-template-columns:repeat(2,1fr); } }
+
+/* ── Enhanced CTA Section ── */
+.hero-cta-section { position:relative; z-index:3; background:linear-gradient(135deg,rgba(8,12,20,.95) 0%,rgba(18,40,96,.9) 100%); padding:4rem 5% 2rem; border-top:1px solid rgba(200,168,75,.1); }
+.hero-cta-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; max-width:1200px; margin:0 auto; }
+.hero-cta-card { background:rgba(255,255,255,.05); border:1px solid rgba(200,168,75,.2); padding:2rem; border-radius:12px; text-align:center; transition:transform .3s ease, background .3s ease, border-color .3s ease; backdrop-filter:blur(10px); }
+.hero-cta-card:hover { transform:translateY(-4px); background:rgba(255,255,255,.08); border-color:var(--gold); }
+.cta-icon { font-size:3rem; margin-bottom:1rem; }
+.hero-cta-card h3 { font-family:var(--ff-display); font-size:1.3rem; color:var(--gold); margin-bottom:.8rem; }
+.hero-cta-card p { font-size:.9rem; color:rgba(255,255,255,.7); line-height:1.6; margin-bottom:1.5rem; }
+.hero-cta-card .btn { margin-top:auto; }
+
+@media(max-width:820px){ .hero-content { grid-template-columns:1fr; gap:3rem; } .hero-right { display:grid; grid-template-columns:repeat(2,1fr); } .hero-cta-grid { grid-template-columns:1fr; gap:1.5rem; } }
 @media(max-width:500px){ .hero-right { grid-template-columns:1fr; } }
 
 /* ═══════════════════════════════════════════════
    ANNOUNCEMENT BAR
 ═══════════════════════════════════════════════ */
-.announce-bar { background:var(--gold); padding:12px 5%; display:flex; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
+.announce-bar { background:var(--gold); padding:12px 5%; display:none; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
 .announce-bar p { font-size:.78rem; font-weight:600; color:var(--navy); letter-spacing:.05em; }
 .announce-bar a { font-size:.72rem; font-weight:700; color:var(--navy); border-bottom:1px solid var(--navy); padding-bottom:1px; }
 .announcement-special { background:var(--off); }
@@ -387,6 +397,12 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .slide-dot { width:8px; height:8px; border-radius:50%; background:var(--mist); cursor:pointer; transition:background .3s; }
 .slide-dot.active { background:var(--gold); }
 #gallery { background:var(--white); }
+
+/* ═══════════════════════════════════════════════
+   MALAWI YOUTH ORCHESTRA (MYO)
+═══════════════════════════════════════════════ */
+#myo { background:var(--off); }
+.myo-section-title { font-family:var(--ff-display); font-size:1.4rem; color:var(--gold); margin-bottom:1rem; }
 .gal-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
 .gal-item { overflow:hidden; position:relative; }
 .gal-item img { width:100%; height:210px; object-fit:cover; transition:transform .5s var(--ease); }
@@ -394,6 +410,20 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .gal-item .gal-over { position:absolute; inset:0; background:rgba(8,12,20,.65); opacity:0; display:flex; align-items:center; justify-content:center; transition:opacity .35s; }
 .gal-item:hover .gal-over { opacity:1; }
 .gal-over span { font-family:var(--ff-display); font-size:1.1rem; color:var(--gold); font-style:italic; }
+
+/* ═══════════════════════════════════════════════
+   PARTNERSHIPS & DONATIONS
+═══════════════════════════════════════════════ */
+#partnership-donation { background:var(--cream); }
+.partnership-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; margin-top:3rem; }
+.partnership-card { background:var(--white); padding:2rem; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,.08); transition:transform .3s, box-shadow .3s; }
+.partnership-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,.12); }
+.partnership-card .pc-icon { font-size:3rem; text-align:center; margin-bottom:1rem; }
+.partnership-card h3 { font-family:var(--ff-display); font-size:1.25rem; color:var(--navy); margin-bottom:.5rem; }
+.partnership-card p { color:var(--mid); line-height:1.6; margin-bottom:1rem; }
+.partnership-card ul { list-style:none; padding:0; margin:0 0 1.5rem; }
+.partnership-card ul li { padding:.25rem 0; color:var(--text); font-size:.9rem; }
+.partnership-card ul li:before { content:"✓ "; color:var(--gold); font-weight:bold; }
 
 /* ═══════════════════════════════════════════════
    TESTIMONIALS
@@ -436,6 +466,34 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .ftab-panel.active { display:block; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
 
+/* ── Booking / contact layout ── */
+#booking { background:linear-gradient(180deg, #061024 0%, #09162c 100%); }
+#booking .section-header .section-title { color:var(--white); }
+#booking .section-header .section-intro { color:rgba(255,255,255,.78) !important; }
+#booking .tag-label { color:var(--gold); }
+.booking-layout { display:grid; grid-template-columns:0.95fr 1.2fr; gap:4rem; align-items:start; margin-top:2rem; }
+.booking-form-panel { background:transparent; border:none; border-radius:0; padding:0; box-shadow:none; }
+.booking-form-panel .form-card { background:transparent; box-shadow:none; padding:0; border:none; }
+.booking-form-panel p { color:rgba(255,255,255,.83); }
+.form-tab-nav { display:flex; gap:0; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:6px; margin-bottom:1.5rem; }
+.form-tab-nav-btn { flex:1; background:transparent; border:none; color:rgba(255,255,255,.75); font-family:var(--ff-body); font-size:.75rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; padding:.9rem .8rem; cursor:pointer; border-radius:12px; transition:color .25s, background .25s; white-space:nowrap; }
+.form-tab-nav-btn:hover { color:var(--white); }
+.form-tab-nav-btn.active { background:var(--gold); color:var(--navy); }
+.booking-contact-panel .section-header { margin-bottom:2rem; }
+.booking-contact-panel h3 { font-family:var(--ff-display); font-size:1.4rem; color:var(--white); margin-bottom:1rem; }
+.booking-contact-panel ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:1rem; }
+.booking-contact-panel li { display:flex; align-items:flex-start; gap:0.95rem; }
+.booking-contact-panel .ci-icon-box { width:42px; min-width:42px; height:42px; display:flex; align-items:center; justify-content:center; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05); color:var(--gold); font-size:1.1rem; }
+.booking-contact-panel strong { color:var(--gold); font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; display:block; margin-bottom:.15rem; }
+.booking-contact-panel a, .booking-contact-panel span { color:rgba(255,255,255,.95); text-decoration:none; font-size:.92rem; }
+.booking-contact-panel a:hover { color:var(--gold); }
+.booking-contact-panel .contact-actions { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.2rem; }
+.booking-contact-panel .contact-actions a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; padding:12px 18px; background:transparent; border:1px solid rgba(255,255,255,.18); border-radius:0; color:rgba(255,255,255,.95); font-size:.82rem; text-transform:uppercase; transition:background .25s, border-color .25s, color .25s; }
+.booking-contact-panel .contact-actions a:hover { background:rgba(255,255,255,.08); border-color:var(--gold); color:var(--gold); }
+.booking-contact-panel .contact-note-box { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:24px; padding:1.5rem; margin-top:1.5rem; }
+.booking-contact-panel .contact-note-box p { color:rgba(255,255,255,.83); font-size:.9rem; line-height:1.6; margin:0; }
+@media(max-width:1000px){ .booking-layout { grid-template-columns:1fr; } }
+
 /* ── Field groups ── */
 .booking-form { display:flex; flex-direction:column; gap:0; }
 .form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
@@ -459,6 +517,18 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .field-err { font-size:.7rem; color:#e88; display:none; }
 .fg.has-err .field-err { display:block; }
 
+/* ── Checkbox field ── */
+.fg-checkbox { display:flex; align-items:center; gap:.5rem; }
+.fg-checkbox input[type="checkbox"] { width:16px; height:16px; cursor:pointer; accent-color:var(--gold); }
+.fg-checkbox label { font-size:.8rem; color:rgba(255,255,255,.6); font-weight:400; letter-spacing:0; text-transform:none; margin:0; cursor:pointer; }
+.checkbox-group { margin-bottom:1.2rem; padding:1rem; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:4px; }
+.checkbox-group > p { font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); display:block; margin-bottom:.8rem; font-weight:500; }
+
+/* Checkbox field __ */
+.fg-checkbox { display:flex; align-items:center; gap:.5rem; margin-bottom:.9rem; }
+.fg-checkbox input[type="checkbox"] { width:16px; height:16px; cursor:pointer; accent-color:var(--gold); }
+.fg-checkbox label { font-size:.8rem; color:rgba(255,255,255,.6); font-weight:400; letter-spacing:0; text-transform:none; margin:0; cursor:pointer; }
+
 /* ── Submit button ── */
 .btn-form-submit { display:flex; align-items:center; justify-content:center; gap:.5rem; width:100%; margin-top:.5rem; padding:.9rem 1.5rem; background:var(--gold); border:none; border-radius:4px; color:var(--navy); font-family:var(--ff-body); font-size:.78rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; transition:background .25s, transform .2s, opacity .25s; }
 .btn-form-submit:hover { background:var(--gold2); transform:translateY(-1px); }
@@ -478,6 +548,57 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .setup-note-bar strong { color:rgba(255,255,255,.65); }
 
 @media(max-width:800px){ .booking-layout { grid-template-columns:1fr; gap:3rem; } }
+
+/* ═══════════════════════════════════════════════
+   PARTNERSHIP & DONATIONS
+═══════════════════════════════════════════════ */
+#partnership { background:var(--off); }
+.partnership-layout { display:grid; grid-template-columns:1fr 1.2fr; gap:5rem; align-items:start; }
+.partnership-content { display:flex; flex-direction:column; gap:2.5rem; }
+.partnership-intro h3 { font-family:var(--ff-display); font-size:1.8rem; color:var(--navy); margin-bottom:1rem; }
+.partnership-intro p { font-size:.95rem; color:var(--mid); line-height:1.8; margin-bottom:1.5rem; }
+.partnership-intro ul { list-style:none; padding:0; }
+.partnership-intro li { font-size:.9rem; color:var(--mid); line-height:1.8; padding-left:1.2rem; position:relative; margin-bottom:.8rem; }
+.partnership-intro li::before { content:'♪'; position:absolute; left:0; color:var(--gold); font-size:.8rem; }
+
+.donation-types h4 { font-family:var(--ff-display); font-size:1.4rem; color:var(--navy); margin-bottom:1.5rem; }
+.donation-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
+.donation-item { background:var(--white); padding:1.8rem; border-radius:8px; border:1px solid var(--mist); transition:transform .3s ease, box-shadow .3s ease; }
+.donation-item:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); }
+.donation-icon { font-size:2rem; margin-bottom:1rem; text-align:center; }
+.donation-item h5 { font-family:var(--ff-display); font-size:1.1rem; color:var(--navy); margin-bottom:.5rem; text-align:center; }
+.donation-item p { font-size:.85rem; color:var(--mid); line-height:1.7; text-align:center; }
+
+.partnership-form .form-card { background:var(--white); padding:2.5rem; border-radius:12px; box-shadow:0 16px 36px rgba(0,0,0,.06); }
+.partnership-form h3 { font-family:var(--ff-display); font-size:1.6rem; color:var(--navy); margin-bottom:.5rem; }
+.partnership-form > p { font-size:.9rem; color:var(--mid); line-height:1.7; margin-bottom:2rem; }
+
+@media(max-width:1000px){ .partnership-layout { grid-template-columns:1fr; gap:3rem; } }
+
+/* ═══════════════════════════════════════════════
+   CONTACT INFO & FORMS
+═══════════════════════════════════════════════ */
+.contact-info-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; margin-bottom:3rem; }
+.contact-card { background:var(--white); padding:2rem; border-radius:12px; border:1px solid var(--mist); text-align:center; transition:transform .3s ease, box-shadow .3s ease; }
+.contact-card:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); }
+.ci-icon { font-size:2.5rem; margin-bottom:1rem; }
+.contact-card .ci-text .lbl { font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:.5rem; }
+.contact-card .ci-text a, .contact-card .ci-text span { font-size:.9rem; color:var(--text); display:block; line-height:1.6; }
+.contact-card .ci-text a:hover { color:var(--gold); }
+.contact-card .ci-text .second-phone { font-size:.8rem; color:var(--mid); margin-top:.3rem; }
+
+.form-section-layout { display:grid; grid-template-columns:1fr 1.2fr; gap:5rem; align-items:start; margin-top:4rem; }
+.form-section-info { display:flex; flex-direction:column; gap:2rem; }
+.form-section-info .tag-label { align-self:flex-start; }
+.form-benefits { display:flex; flex-direction:column; gap:1.5rem; }
+.benefit-item { display:flex; gap:1rem; align-items:flex-start; }
+.benefit-icon { font-size:1.5rem; flex-shrink:0; margin-top:.2rem; }
+.benefit-text h4 { font-family:var(--ff-display); font-size:1rem; color:var(--navy); margin-bottom:.3rem; }
+.benefit-text p { font-size:.85rem; color:var(--mid); line-height:1.6; }
+
+.form-section-form .form-card { background:var(--white); padding:2.5rem; border-radius:12px; box-shadow:0 16px 36px rgba(0,0,0,.06); }
+
+@media(max-width:1000px){ .form-section-layout { grid-template-columns:1fr; gap:3rem; } }
 
 /* ═══════════════════════════════════════════════
    CTA BANNER
@@ -520,6 +641,8 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
 ═══════════════════════════════════════════════ */
 .wa-float { position:fixed; bottom:24px; right:24px; z-index:999; background:#25D366; color:#fff; padding:12px 22px; border-radius:50px; font-weight:700; font-size:.8rem; letter-spacing:.05em; box-shadow:0 4px 18px rgba(37,211,102,.4); display:flex; align-items:center; gap:.5rem; transition:transform .2s, box-shadow .2s; text-decoration:none; }
 .wa-float:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(37,211,102,.5); }
+@media(max-width:600px){ .wa-float { padding:8px 12px; font-size:.65rem; bottom:70px; right:12px; } .wa-float svg { width:14px; height:14px; } }
+@media(max-width:600px){ .wa-float { padding:8px 12px; font-size:.65rem; bottom:70px; right:12px; } .wa-float svg { width:14px; height:14px; } }
 
 /* ═══════════════════════════════════════════════
    STICKY MOBILE CTA
@@ -548,7 +671,9 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <li><a href="#programs">Curriculum</a></li>
       <li><a href="#admissions">Admissions</a></li>
       <li><a href="#events">Events</a></li>
-      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#gallery">LSM Orchestra</a></li>
+      <li><a href="#myo">Youth Orchestra</a></li>
+      <li><a href="#partnership-donation">Support LSM</a></li>
       <li><a href="#booking">Contact</a></li>
     </ul>
     <div class="nav-cta">
@@ -560,8 +685,6 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
           <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </a>
       </div>
-      <a href="#admissions" class="btn btn-outline-gold btn-sm">Apply Now</a>
-      <a href="#booking" class="btn btn-gold btn-sm">Book Lessons</a>
     </div>
     <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">
       <span></span><span></span><span></span>
@@ -576,7 +699,9 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
   <a href="#programs" onclick="closeMobileNav()">Curriculum</a>
   <a href="#admissions" onclick="closeMobileNav()">Admissions</a>
   <a href="#events" onclick="closeMobileNav()">Events</a>
-  <a href="#gallery" onclick="closeMobileNav()">Gallery</a>
+  <a href="#gallery" onclick="closeMobileNav()">LSM Orchestra</a>
+  <a href="#myo" onclick="closeMobileNav()">Youth Orchestra</a>
+  <a href="#partnership-donation" onclick="closeMobileNav()">Support LSM</a>
   <a href="#booking" onclick="closeMobileNav()">Book / Contact</a>
   <div class="mobile-social">
     <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener" aria-label="Instagram">
@@ -615,7 +740,6 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <div class="hero-actions">
         <a href="#admissions" class="btn btn-gold">Apply Now</a>
         <a href="#programs" class="btn btn-outline-white">Explore Curriculum</a>
-        <a href="#booking" class="btn btn-outline-white">Book Lessons</a>
       </div>
     </div>
     <div class="hero-right">
@@ -628,7 +752,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
         <div class="label">International Examination Preparation</div>
       </div>
       <div class="hero-stat-card reveal reveal-delay-2">
-        <div class="num">3</div>
+        <div class="num">4</div>
         <div class="label">Global Examination Partners</div>
       </div>
       <div class="hero-stat-card reveal reveal-delay-3">
@@ -637,6 +761,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       </div>
     </div>
   </div>
+
   <div class="hero-scroll-hint">
     <span>Scroll</span>
     <div class="line"></div>
@@ -848,7 +973,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
           <p style="font-size:.84rem;color:rgba(255,255,255,.45);line-height:1.85;">Flexible part-time schedule designed to allow students to balance academic and professional commitments with music education.</p>
         </div>
         <div style="display:flex;align-items:center;padding:1rem;">
-          <a href="#booking" class="btn btn-gold">Book Lessons</a>
+          <a href="#enrolment-form" class="btn btn-gold">Enrol Now</a>
         </div>
       </div>
     </div>
@@ -952,7 +1077,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
         <div class="app-step"><div class="step-num">04</div><div class="step-body"><h4>Begin Lessons</h4><p>You will be assigned to a qualified instructor and integrated into the appropriate lesson schedule.</p></div></div>
         <div style="margin-top:2rem;padding:1.6rem;background:var(--off);border-left:3px solid var(--gold);">
           <p style="font-size:.87rem;color:var(--mid);line-height:1.8;margin-bottom:1rem;">Ready to begin? Spaces are limited apply now to secure your place in the next intake.</p>
-          <a href="#booking" class="btn btn-gold">Apply Now</a>
+          <a href="#enrolment-form" class="btn btn-gold">Apply Now</a>
         </div>
       </div>
     </div>
@@ -1108,7 +1233,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
   <div class="container">
     <div class="section-header">
       <span class="tag-label">Photo Gallery</span>
-      <h2 class="section-title">LSM in Performance</h2>
+      <h2 class="section-title">LSM Orchestra in Performance</h2>
       <div class="gold-rule"></div>
       <p class="section-intro">Moments from rehearsals, concerts, and community performances at Lilongwe School of Music.</p>
     </div>
@@ -1121,6 +1246,119 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <div class="gal-item"><img src="Images/LSM Orchestra 3.jpg" alt="LSM Orchestra 3"><div class="gal-over"><span>Orchestra Rehearsal</span></div></div>
       <div class="gal-item"><img src="Images/LSM Orchestra.jpg" alt="LSM Orchestra"><div class="gal-over"><span>Full Orchestra</span></div></div>
       <div class="gal-item"><img src="Images/LSM With Chaminade Orchestra.jpg" alt="LSM with Chaminade Orchestra"><div class="gal-over"><span>With Chaminade Orchestra</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ MALAWI YOUTH ORCHESTRA (MYO) ═══════ -->
+<section id="myo" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag-label">Coming Soon</span>
+      <h2 class="section-title">The Malawi Youth Orchestra (MYO)</h2>
+      <div class="gold-rule"></div>
+      <p class="section-intro">An exciting new initiative bringing together the finest young musicians and vocalists in Malawi for world-class orchestral and ensemble experiences.</p>
+    </div>
+    <div class="reveal">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:3rem;">
+        <div>
+          <h3 class="myo-section-title">About the Malawi Youth Orchestra</h3>
+          <p style="font-size:.95rem;line-height:1.9;color:var(--text);margin-bottom:1.2rem;">The Malawi Youth Orchestra (MYO) represents a groundbreaking initiative to develop and celebrate the next generation of musical performers in Malawi. Designed as an elite ensemble project under the Lilongwe School of Music, MYO will bring together the most talented instrumentalists and vocalists across the country to perform at the highest standards.</p>
+          <p style="font-size:.95rem;line-height:1.9;color:var(--text);">We are currently in the planning stages and are excited to share that we will be launching the Malawi Youth Orchestra in the future. This represents a major step in advancing music performance and education across our nation.</p>
+        </div>
+        <div>
+          <h3 class="myo-section-title">Planned Activities</h3>
+          <ul style="list-style:none;">
+            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;">
+              <span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span>
+              <span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Auditions & Recruitment:</strong> Nationwide auditions to identify and select the most promising young musicians across all instrumental and vocal disciplines.</span>
+            </li>
+            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;">
+              <span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span>
+              <span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Intensive Rehearsals:</strong> Regular ensemble rehearsals and coaching with master musicians to develop world-class performance standards.</span>
+            </li>
+            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;">
+              <span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span>
+              <span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Concert Performances:</strong> Public concerts and touring performances across Malawi, showcasing our nation's musical talent at the highest level.</span>
+            </li>
+            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;">
+              <span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span>
+              <span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">International Collaborations:</strong> Partnerships with international orchestras and music institutions for collaborative performances and cultural exchange.</span>
+            </li>
+            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;">
+              <span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span>
+              <span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Music Education Workshops:</strong> Masterclasses and educational workshops delivered by leading musicians and conductors for MYO members and the broader student community.</span>
+            </li>
+            <li style="display:flex;gap:1rem;align-items:flex-start;">
+              <span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span>
+              <span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Professional Development:</strong> Preparation for international competition opportunities and professional music careers.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div style="padding:2rem;background:var(--cream);border:1px solid var(--mist);border-left:3px solid var(--gold);border-radius:4px;margin-top:3rem;">
+        <p style="font-family:var(--ff-display);font-size:1.1rem;font-style:italic;color:var(--navy);line-height:1.8;margin-bottom:1rem;"><strong style="color:var(--text);">Participation:</strong> The Malawi Youth Orchestra will feature the finest young instrumentalists and vocalists from across Malawi, selected through rigorous auditions. Whether you perform classical, contemporary, or traditional music, if you have the passion and dedication for excellence, there is a place for you.</p>
+        <p style="font-size:.9rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--text);">Stay tuned</strong> for announcements regarding auditions, rehearsal schedules, and performance dates as we prepare for the launch of this transformative initiative in the near future.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PARTNERSHIPS & DONATIONS ═══════ -->
+<section id="partnership-donation" class="section">
+  <div class="container">
+    <div class="section-header centered">
+      <span class="tag-label">Support LSM</span>
+      <h2 class="section-title">Partnerships & Donations</h2>
+      <div class="gold-rule centered"></div>
+      <p class="section-intro">Join us in nurturing Malawi's musical talent. Your support helps provide instruments, training, and opportunities for young musicians across the country.</p>
+    </div>
+
+    <div class="partnership-grid reveal">
+      <div class="partnership-card">
+        <div class="pc-icon">🎻</div>
+        <h3>Instrument Donations</h3>
+        <p>Donate musical instruments to equip our students and expand our inventory.</p>
+        <ul>
+          <li>Pianos, violins, cellos, and more</li>
+          <li>Sheet music and accessories</li>
+          <li>Maintenance and repair support</li>
+        </ul>
+        <a href="#booking" class="btn btn-outline-gold">Learn More</a>
+      </div>
+      <div class="partnership-card">
+        <div class="pc-icon">🤝</div>
+        <h3>Corporate Partnerships</h3>
+        <p>Partner with LSM for sponsorships, events, and community outreach programs.</p>
+        <ul>
+          <li>Event sponsorships</li>
+          <li>Employee volunteer programs</li>
+          <li>Brand collaborations</li>
+        </ul>
+        <a href="#booking" class="btn btn-outline-gold">Partner With Us</a>
+      </div>
+      <div class="partnership-card">
+        <div class="pc-icon">💰</div>
+        <h3>Financial Donations</h3>
+        <p>Support our mission through monetary contributions that fund scholarships and operations.</p>
+        <ul>
+          <li>Student scholarships</li>
+          <li>Facility improvements</li>
+          <li>Program expansion</li>
+        </ul>
+        <a href="#booking" class="btn btn-outline-gold">Donate Now</a>
+      </div>
+      <div class="partnership-card">
+        <div class="pc-icon">📚</div>
+        <h3>Educational Partnerships</h3>
+        <p>Collaborate on academic programs, research, and curriculum development.</p>
+        <ul>
+          <li>University collaborations</li>
+          <li>Research partnerships</li>
+          <li>Teacher training programs</li>
+        </ul>
+        <a href="#booking" class="btn btn-outline-gold">Explore Opportunities</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1145,8 +1383,8 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
 <div class="cta-banner">
   <h2><em>Begin Your Musical Journey</em><br>Enrol Today</h2>
   <div class="cta-btn-group">
-    <a href="#admissions" class="btn btn-navy">Apply Now</a>
-    <a href="#booking" class="btn btn-outline-navy">Book Lessons</a>
+    <a href="#booking" class="btn btn-navy">Apply Now</a>
+    <a href="#booking" class="btn btn-outline-navy">Enrol Now</a>
     <a href="#booking" class="btn btn-outline-navy">Contact Us</a>
   </div>
 </div>
@@ -1154,245 +1392,312 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
 <!-- ═══════ BOOKING / CONTACT (Formspree) ═══════ -->
 <section id="booking" class="section">
   <div class="container">
-    <div class="booking-layout">
-
-      <!-- LEFT: Contact Info -->
-      <div class="booking-info reveal">
-        <span class="tag-label">Get In Touch</span>
-        <h2>Begin Your Musical Journey with LSM</h2>
-        <p>Whether you are enquiring about student enrolment, examination preparation, or booking a professional performance we would love to hear from you.</p>
-        <div class="contact-items">
-          <div class="ci">
-            <div class="ci-icon">📞</div>
-            <div class="ci-text">
-              <div class="lbl">Phone</div>
+    <div class="booking-layout reveal">
+      <aside class="booking-contact-panel">
+        <div class="section-header">
+          <span class="tag-label">Get In Touch</span>
+          <h2 class="section-title">Begin Your Musical Journey with LSM</h2>
+          <div class="gold-rule"></div>
+          <p class="section-intro" style="color:rgba(255,255,255,.78);">Whether you are enquiring about student enrolment, examination preparation, booking a professional performance, or interested in partnering with us, we would love to hear from you.</p>
+        </div>
+        <h3>Contact Information</h3>
+        <ul>
+          <li>
+            <span class="ci-icon-box">📞</span>
+            <div>
+              <strong>Phone</strong>
               <a href="tel:+265981448075">+265 981 448 075</a>
-              <a href="tel:+265997246261" class="second-phone">+265 997 246 261</a>
+              <a href="tel:+265997246261">+265 997 246 261</a>
             </div>
-          </div>
-          <div class="ci">
-            <div class="ci-icon">✉️</div>
-            <div class="ci-text">
-              <div class="lbl">Email</div>
+          </li>
+          <li>
+            <span class="ci-icon-box">✉️</span>
+            <div>
+              <strong>Email</strong>
               <a href="mailto:lilongweschoolofmusic.lsm@yahoo.com">lilongweschoolofmusic.lsm@yahoo.com</a>
             </div>
-          </div>
-          <div class="ci">
-            <div class="ci-icon">📍</div>
-            <div class="ci-text">
-              <div class="lbl">Location</div>
+          </li>
+          <li>
+            <span class="ci-icon-box">📍</span>
+            <div>
+              <strong>Location</strong>
               <span>Lilongwe Area 23 Midland (Near Chipasula Pvt Sec School), Malawi</span>
             </div>
-          </div>
-          <div class="ci">
-            <div class="ci-icon">🟢</div>
-            <div class="ci-text">
-              <div class="lbl">WhatsApp</div>
+          </li>
+          <li>
+            <span class="ci-icon-box">🟢</span>
+            <div>
+              <strong>WhatsApp</strong>
               <a href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank">WhatsApp Us</a>
             </div>
+          </li>
+        </ul>
+        <div class="contact-actions">
+          <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/share/1Cm23V43bj/" target="_blank" rel="noopener">Facebook</a>
+        </div>
+        <div class="contact-note-box">
+          <p>We respond to all enquiries within 24 hours. For urgent matters, please call us directly.</p>
+        </div>
+      </aside>
+
+      <div class="booking-form-panel">
+        <div class="form-card">
+          <div class="form-tab-nav">
+            <button class="form-tab-nav-btn active" data-ftab="enrol">🎓 Enrolment</button>
+            <button class="form-tab-nav-btn" data-ftab="perf">🎻 Performance</button>
+            <button class="form-tab-nav-btn" data-ftab="gen">✉️ Enquiry</button>
+            <button class="form-tab-nav-btn" data-ftab="part">💝 Partnership & Donations</button>
           </div>
-        </div>
-        <div class="contact-social">
-          <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            Instagram
-          </a>
-          <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            Facebook
-          </a>
-        </div>
-        <div style="margin-top:2rem;padding:1.4rem 1.6rem;border:1px solid rgba(200,168,75,.2);background:rgba(200,168,75,.05);">
-          <p style="font-family:var(--ff-display);font-style:italic;font-size:1rem;color:rgba(255,255,255,.55);line-height:1.7;">"Discipline meets artistry. Talent becomes excellence. Your journey starts here."</p>
+
+          <div class="ftab-panel active" id="ftab-enrol">
+            <form class="booking-form" id="enrolForm">
+              <div class="form-row-2">
+                <div class="fg" id="fg_en_name">
+                  <label>Full Name *</label>
+                  <input type="text" id="en_name" placeholder="Your full name" autocomplete="name">
+                  <span class="field-err">Please enter your full name.</span>
+                </div>
+                <div class="fg" id="fg_en_email">
+                  <label>Email *</label>
+                  <input type="email" id="en_email" placeholder="your@email.com" autocomplete="email">
+                  <span class="field-err">Please enter a valid email.</span>
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div class="fg" id="fg_en_phone">
+                  <label>Phone / WhatsApp *</label>
+                  <input type="tel" id="en_phone" placeholder="+265 ..." autocomplete="tel">
+                  <span class="field-err">Please enter your phone number.</span>
+                </div>
+                <div class="fg" id="fg_en_age">
+                  <label>Age Group *</label>
+                  <select id="en_age">
+                    <option value="">Select age group...</option>
+                    <option>5 - 10 years</option>
+                    <option>11 - 15 years</option>
+                    <option>16 - 20 years</option>
+                    <option>21 - 30 years</option>
+                    <option>31+ years</option>
+                  </select>
+                  <span class="field-err">Please select an age group.</span>
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div class="fg" id="fg_en_prog">
+                  <label>Instrument / Program *</label>
+                  <select id="en_prog">
+                    <option value="">Select program...</option>
+                    <option>Piano</option>
+                    <option>Violin</option>
+                    <option>Voice</option>
+                    <option>Cello</option>
+                    <option>Flute</option>
+                    <option>Clarinet</option>
+                    <option>Trumpet</option>
+                    <option>Guitar</option>
+                    <option>Drums / Percussion</option>
+                    <option>Other</option>
+                  </select>
+                  <span class="field-err">Please select a program.</span>
+                </div>
+                <div class="fg" id="fg_en_level">
+                  <label>Current Level *</label>
+                  <select id="en_level">
+                    <option value="">Select current level...</option>
+                    <option>Complete Beginner</option>
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                    <option>Exam Preparation</option>
+                  </select>
+                  <span class="field-err">Please select your current level.</span>
+                </div>
+              </div>
+              <div class="fg" id="fg_en_qual">
+                <label>Qualifications</label>
+                <input type="text" id="en_qual" placeholder="Grade, certificate or experience" autocomplete="off">
+              </div>
+              <div class="fg" id="fg_en_msg">
+                <label>Additional Information</label>
+                <textarea id="en_msg" placeholder="Tell us about your musical goals and background..."></textarea>
+              </div>
+              <div class="checkbox-group">
+                <p>Preferences</p>
+                <div class="fg-checkbox">
+                  <input type="checkbox" id="en_newsletter" checked>
+                  <label for="en_newsletter">Keep me informed about future enrolments, booking news, and promotions</label>
+                </div>
+              </div>
+              <button type="button" class="btn-form-submit" id="btn_enrol" onclick="submitLSMForm('enrol')">
+                <span class="fspinner" id="spin_enrol"></span><span>Submit Application</span>
+              </button>
+              <div class="form-notice ok" id="ok_enrol">✅ &nbsp;Thank you! Your application has been received. We'll contact you within 2-3 business days.</div>
+              <div class="form-notice err" id="err_enrol">⚠️ &nbsp;Something went wrong. Please email us directly or try again.</div>
+            </form>
+          </div>
+
+          <div class="ftab-panel" id="ftab-perf">
+            <form class="booking-form" id="perfForm">
+              <div class="form-row-2">
+                <div class="fg" id="fg_pf_name">
+                  <label>Your Name *</label>
+                  <input type="text" id="pf_name" placeholder="Your full name" autocomplete="name">
+                  <span class="field-err">Please enter your name.</span>
+                </div>
+                <div class="fg" id="fg_pf_email">
+                  <label>Email *</label>
+                  <input type="email" id="pf_email" placeholder="your@email.com" autocomplete="email">
+                  <span class="field-err">Please enter a valid email.</span>
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div class="fg" id="fg_pf_phone">
+                  <label>Phone / WhatsApp *</label>
+                  <input type="tel" id="pf_phone" placeholder="+265 ..." autocomplete="tel">
+                  <span class="field-err">Please enter your phone number.</span>
+                </div>
+                <div class="fg" id="fg_pf_type">
+                  <label>Event Type *</label>
+                  <select id="pf_type">
+                    <option value="">Select event type...</option>
+                    <option>Wedding</option>
+                    <option>Corporate Event</option>
+                    <option>Private Concert</option>
+                    <option>School Function</option>
+                    <option>Religious Ceremony</option>
+                    <option>Other</option>
+                  </select>
+                  <span class="field-err">Please select an event type.</span>
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div class="fg" id="fg_pf_date">
+                  <label>Preferred Date *</label>
+                  <input type="date" id="pf_date">
+                  <span class="field-err">Please select a date.</span>
+                </div>
+                <div class="fg" id="fg_pf_loc">
+                  <label>Event Location *</label>
+                  <input type="text" id="pf_loc" placeholder="Event location" autocomplete="off">
+                  <span class="field-err">Please enter the event location.</span>
+                </div>
+              </div>
+              <div class="fg" id="fg_pf_msg">
+                <label>Event Details *</label>
+                <textarea id="pf_msg" placeholder="Describe the event, number of guests, duration, and music preferences..."></textarea>
+                <span class="field-err">Please provide event details.</span>
+              </div>
+              <div class="checkbox-group">
+                <p>Preferences</p>
+                <div class="fg-checkbox">
+                  <input type="checkbox" id="pf_newsletter" checked>
+                  <label for="pf_newsletter">Keep me informed about future enrolments, booking news, and promotions</label>
+                </div>
+              </div>
+              <button type="button" class="btn-form-submit" id="btn_perf" onclick="submitLSMForm('perf')">
+                <span class="fspinner" id="spin_perf"></span><span>Request Quote</span>
+              </button>
+              <div class="form-notice ok" id="ok_perf">✅ &nbsp;Thank you! Your booking request has been received. We'll contact you with a quote within 2-3 business days.</div>
+              <div class="form-notice err" id="err_perf">⚠️ &nbsp;Something went wrong. Please email us directly or try again.</div>
+            </form>
+          </div>
+
+          <div class="ftab-panel" id="ftab-gen">
+            <form class="booking-form" id="genForm">
+              <div class="form-row-2">
+                <div class="fg" id="fg_gn_name">
+                  <label>Your Name *</label>
+                  <input type="text" id="gn_name" placeholder="Your full name" autocomplete="name">
+                  <span class="field-err">Please enter your name.</span>
+                </div>
+                <div class="fg" id="fg_gn_email">
+                  <label>Email *</label>
+                  <input type="email" id="gn_email" placeholder="your@email.com" autocomplete="email">
+                  <span class="field-err">Please enter a valid email.</span>
+                </div>
+              </div>
+              <div class="fg" id="fg_gn_subject">
+                <label>Subject *</label>
+                <input type="text" id="gn_subject" placeholder="What is your enquiry about?" autocomplete="off">
+                <span class="field-err">Please enter a subject.</span>
+              </div>
+              <div class="fg" id="fg_gn_msg">
+                <label>Message *</label>
+                <textarea id="gn_msg" placeholder="Please provide details of your enquiry…"></textarea>
+                <span class="field-err">Please enter your message.</span>
+              </div>
+              <div class="checkbox-group">
+                <p>Preferences</p>
+                <div class="fg-checkbox">
+                  <input type="checkbox" id="gn_newsletter" checked>
+                  <label for="gn_newsletter">Keep me informed about future enrolments, booking news, and promotions</label>
+                </div>
+              </div>
+              <button type="button" class="btn-form-submit" id="btn_gen" onclick="submitLSMForm('gen')">
+                <span class="fspinner" id="spin_gen"></span><span>Send Enquiry</span>
+              </button>
+              <div class="form-notice ok" id="ok_gen">✅ &nbsp;Thank you! Your message has been received. We'll get back to you shortly.</div>
+              <div class="form-notice err" id="err_gen">⚠️ &nbsp;Something went wrong. Please email us directly or try again.</div>
+            </form>
+          </div>
+
+          <div class="ftab-panel" id="ftab-part">
+            <form class="booking-form" id="partForm">
+              <div class="form-row-2">
+                <div class="fg" id="fg_pt_name">
+                  <label>Your Name / Organization *</label>
+                  <input type="text" id="pt_name" placeholder="Name or organization name" autocomplete="name">
+                  <span class="field-err">Please enter your name or organization name.</span>
+                </div>
+                <div class="fg" id="fg_pt_email">
+                  <label>Email *</label>
+                  <input type="email" id="pt_email" placeholder="your@email.com" autocomplete="email">
+                  <span class="field-err">Please enter a valid email.</span>
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div class="fg">
+                  <label>Phone / WhatsApp</label>
+                  <input type="tel" id="pt_phone" placeholder="+265 ..." autocomplete="tel">
+                </div>
+                <div class="fg" id="fg_pt_type">
+                  <label>Partnership Type *</label>
+                  <select id="pt_type">
+                    <option value="">Select type…</option>
+                    <option>Sponsorship</option>
+                    <option>Instrument Donation</option>
+                    <option>Financial Donation</option>
+                    <option>In-Kind Donation</option>
+                    <option>Corporate Partnership</option>
+                    <option>Academic / Institutional Partnership</option>
+                    <option>Other</option>
+                  </select>
+                  <span class="field-err">Please select a partnership type.</span>
+                </div>
+              </div>
+              <div class="fg" id="fg_pt_msg">
+                <label>Details about your Partnership or Donation *</label>
+                <textarea id="pt_msg" placeholder="Tell us about your donation or partnership proposal…"></textarea>
+                <span class="field-err">Please provide details about your donation or partnership.</span>
+              </div>
+              <div class="checkbox-group">
+                <p>Preferences</p>
+                <div class="fg-checkbox">
+                  <input type="checkbox" id="pt_newsletter" checked>
+                  <label for="pt_newsletter">Keep me informed about future enrolments, booking news, and promotions</label>
+                </div>
+              </div>
+              <button type="button" class="btn-form-submit" id="btn_part" onclick="submitLSMForm('part')">
+                <span class="fspinner" id="spin_part"></span><span>Submit Partnership Proposal</span>
+              </button>
+              <div class="form-notice ok" id="ok_part">✅ &nbsp;Thank you! Your partnership proposal has been received. We'll contact you shortly.</div>
+              <div class="form-notice err" id="err_part">⚠️ &nbsp;Something went wrong. Please email us directly or try again.</div>
+            </form>
+          </div>
         </div>
       </div>
 
-      <!-- RIGHT: Forms (Formspree) -->
-      <div class="reveal">
-
-        <!--
-        ══════════════════════════════════════════════════════
-        FORMSPREE SETUP — 3 simple steps:
-          1. Go to https://formspree.io and create a FREE account
-          2. Create 3 new forms (one per tab) and copy each form ID
-          3. Replace the placeholder IDs below:
-             - ENROLMENT_FORM_ID  → your enrolment form ID
-             - PERFORMANCE_FORM_ID → your performance booking form ID
-             - ENQUIRY_FORM_ID    → your general enquiry form ID
-          Each form ID looks like: xrgvkpbd
-          Your endpoint will be: https://formspree.io/f/xrgvkpbd
-        ══════════════════════════════════════════════════════
-        -->
-
-        <div class="form-tab-nav">
-          <button type="button" class="form-tab-nav-btn active" data-ftab="enrol">🎓 Enrolment</button>
-          <button type="button" class="form-tab-nav-btn" data-ftab="perf">🎻 Performance</button>
-          <button type="button" class="form-tab-nav-btn" data-ftab="gen">✉️ Enquiry</button>
-        </div>
-
-        <!-- ══ ENROLMENT FORM ══ -->
-        <div class="ftab-panel active" id="ftab-enrol">
-          <div class="form-row-2">
-            <div class="fg" id="fg_en_name">
-              <label>Full Name *</label>
-              <input type="text" id="en_name" placeholder="Your full name" autocomplete="name">
-              <span class="field-err">Please enter your full name.</span>
-            </div>
-            <div class="fg" id="fg_en_email">
-              <label>Email *</label>
-              <input type="email" id="en_email" placeholder="your@email.com" autocomplete="email">
-              <span class="field-err">Please enter a valid email.</span>
-            </div>
-          </div>
-          <div class="form-row-2">
-            <div class="fg">
-              <label>Phone / WhatsApp</label>
-              <input type="tel" id="en_phone" placeholder="+265 ..." autocomplete="tel">
-            </div>
-            <div class="fg" id="fg_en_age">
-              <label>Age Group *</label>
-              <select id="en_age">
-                <option value="">Select age group…</option>
-                <option>5–8 (Junior Beginners)</option>
-                <option>9–13 (Junior Students)</option>
-                <option>14–17 (Senior Students)</option>
-                <option>18+ (Adult Learners)</option>
-              </select>
-              <span class="field-err">Please select an age group.</span>
-            </div>
-          </div>
-          <div class="fg" id="fg_en_prog">
-            <label>Instrument / Program *</label>
-            <select id="en_prog">
-              <option value="">Select program…</option>
-              <optgroup label="Instrumental">
-                <option>Violin</option><option>Viola</option><option>Cello</option>
-                <option>Double Bass</option><option>Flute</option><option>Clarinet</option>
-                <option>Trumpet</option><option>Trombone</option><option>French Horn</option><option>Piano</option>
-              </optgroup>
-              <optgroup label="Vocal Studies">
-                <option>Solo Singing</option><option>Choir / Choral Singing</option><option>Opera &amp; Vocal Technique</option>
-              </optgroup>
-              <optgroup label="Other">
-                <option>Music Theory</option><option>Examination Preparation</option><option>Ensemble Training</option>
-              </optgroup>
-            </select>
-            <span class="field-err">Please select a program.</span>
-          </div>
-          <div class="fg" id="fg_en_level">
-            <label>Current Level *</label>
-            <select id="en_level">
-              <option value="">Select level…</option>
-              <option>Complete Beginner</option>
-              <option>Some prior experience</option>
-              <option>Initial Grade / Grade 1–2</option>
-              <option>Grade 3–5</option>
-              <option>Grade 6–8</option>
-              <option>Diploma Level</option>
-            </select>
-            <span class="field-err">Please select your level.</span>
-          </div>
-          <div class="fg">
-            <label>Additional Information</label>
-            <textarea id="en_msg" placeholder="Tell us about yourself or ask any questions…"></textarea>
-          </div>
-          <button type="button" class="btn-form-submit" id="btn_enrol" onclick="submitLSMForm('enrol')">
-            <span class="fspinner" id="spin_enrol"></span><span>Submit Application</span>
-          </button>
-          <div class="form-notice ok" id="ok_enrol">✅ &nbsp;Thank you! Your application has been received. We'll be in touch shortly.</div>
-          <div class="form-notice err" id="err_enrol">⚠️ &nbsp;Something went wrong. Please email us directly or try again.</div>
-        </div>
-
-        <!-- ══ PERFORMANCE BOOKING FORM ══ -->
-        <div class="ftab-panel" id="ftab-perf">
-          <div class="form-row-2">
-            <div class="fg" id="fg_pf_name">
-              <label>Your Name *</label>
-              <input type="text" id="pf_name" placeholder="Your full name" autocomplete="name">
-              <span class="field-err">Please enter your name.</span>
-            </div>
-            <div class="fg" id="fg_pf_email">
-              <label>Email *</label>
-              <input type="email" id="pf_email" placeholder="your@email.com" autocomplete="email">
-              <span class="field-err">Please enter a valid email.</span>
-            </div>
-          </div>
-          <div class="form-row-2">
-            <div class="fg">
-              <label>Phone / WhatsApp</label>
-              <input type="tel" id="pf_phone" placeholder="+265 ..." autocomplete="tel">
-            </div>
-            <div class="fg" id="fg_pf_type">
-              <label>Event Type *</label>
-              <select id="pf_type">
-                <option value="">Select event type…</option>
-                <option>Corporate Event / Gala Dinner</option>
-                <option>Wedding / Engagement</option>
-                <option>Church Service</option>
-                <option>Funeral / Memorial Service</option>
-                <option>Private Function</option>
-                <option>Concert / Ticketed Event</option>
-                <option>Other</option>
-              </select>
-              <span class="field-err">Please select an event type.</span>
-            </div>
-          </div>
-          <div class="form-row-2">
-            <div class="fg" id="fg_pf_date">
-              <label>Event Date *</label>
-              <input type="date" id="pf_date">
-              <span class="field-err">Please provide the event date.</span>
-            </div>
-            <div class="fg" id="fg_pf_loc">
-              <label>Event Location *</label>
-              <input type="text" id="pf_loc" placeholder="Venue / city">
-              <span class="field-err">Please enter the location.</span>
-            </div>
-          </div>
-          <div class="fg" id="fg_pf_msg">
-            <label>Performance Requirements *</label>
-            <textarea id="pf_msg" placeholder="Describe the ensemble or solo performance required, duration, repertoire preferences…"></textarea>
-            <span class="field-err">Please describe your requirements.</span>
-          </div>
-          <button type="button" class="btn-form-submit" id="btn_perf" onclick="submitLSMForm('perf')">
-            <span class="fspinner" id="spin_perf"></span><span>Submit Booking Request</span>
-          </button>
-          <div class="form-notice ok" id="ok_perf">✅ &nbsp;Booking request received! We'll contact you with a quote shortly.</div>
-          <div class="form-notice err" id="err_perf">⚠️ &nbsp;Something went wrong. Please email us directly or try again.</div>
-        </div>
-
-        <!-- ══ GENERAL ENQUIRY FORM ══ -->
-        <div class="ftab-panel" id="ftab-gen">
-          <div class="form-row-2">
-            <div class="fg" id="fg_gn_name">
-              <label>Your Name *</label>
-              <input type="text" id="gn_name" placeholder="Your full name" autocomplete="name">
-              <span class="field-err">Please enter your name.</span>
-            </div>
-            <div class="fg" id="fg_gn_email">
-              <label>Email *</label>
-              <input type="email" id="gn_email" placeholder="your@email.com" autocomplete="email">
-              <span class="field-err">Please enter a valid email.</span>
-            </div>
-          </div>
-          <div class="fg" id="fg_gn_subject">
-            <label>Subject *</label>
-            <input type="text" id="gn_subject" placeholder="What is your enquiry about?">
-            <span class="field-err">Please enter a subject.</span>
-          </div>
-          <div class="fg" id="fg_gn_msg">
-            <label>Message *</label>
-            <textarea id="gn_msg" placeholder="How can we help you?"></textarea>
-            <span class="field-err">Please enter your message.</span>
-          </div>
-          <button type="button" class="btn-form-submit" id="btn_gen" onclick="submitLSMForm('gen')">
-            <span class="fspinner" id="spin_gen"></span><span>Send Message</span>
-          </button>
-          <div class="form-notice ok" id="ok_gen">✅ &nbsp;Your message has been received. We'll get back to you shortly.</div>
-          <div class="form-notice err" id="err_gen">⚠️ &nbsp;Something went wrong. Please email us directly or try again.</div>
-        </div>
-
-      </div><!-- /form col -->
     </div>
   </div>
 </section>
@@ -1457,6 +1762,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
         <a href="#home">Home</a>
         <a href="#admissions">Admissions</a>
         <a href="#booking">Contact</a>
+        <a href="#partnership">Partnership</a>
       </div>
     </div>
   </div>
@@ -1479,7 +1785,9 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
 var FORMSPREE = {
   enrol: 'mkoknpzq',
   perf:  'xpqkzojj',
-  gen:   'xaqaylpw'
+  gen:   'xaqaylpw',
+  part:  'mkoknpzq',  // Tab system partnership form
+  partnership: 'your-partnership-form-id'  // Standalone partnership form
 };
 function toggleMobileNav() {
   var btn   = document.getElementById('hamburger');
@@ -1580,6 +1888,20 @@ function validateGen() {
   var m = vField('gn_msg',     'fg_gn_msg',     function(v){ return v.trim().length > 5; });
   return n && e && s && m;
 }
+function validatePart() {
+  var n = vField('pt_name',  'fg_pt_name',  function(v){ return v.trim().length > 1; });
+  var e = vField('pt_email', 'fg_pt_email', isEmail);
+  var t = vField('pt_type',  'fg_pt_type',  function(v){ return v !== ''; });
+  var m = vField('pt_msg',   'fg_pt_msg',   function(v){ return v.trim().length > 5; });
+  return n && e && t && m;
+}
+function validatePartnership() {
+  var n = vField('part_name',  'fg_part_name',  function(v){ return v.trim().length > 1; });
+  var e = vField('part_email', 'fg_part_email', isEmail);
+  var t = vField('part_type',  'fg_part_type',  function(v){ return v !== ''; });
+  var m = vField('part_msg',   'fg_part_msg',   function(v){ return v.trim().length > 5; });
+  return n && e && t && m;
+}
 
 function collectEnrolData() {
   return {
@@ -1590,7 +1912,9 @@ function collectEnrolData() {
     'Age Group':   document.getElementById('en_age').value,
     'Program':     document.getElementById('en_prog').value,
     'Level':       document.getElementById('en_level').value,
-    'Notes':       document.getElementById('en_msg').value.trim() || '—'
+    'Qualifications': document.getElementById('en_qual').value.trim() || '—',
+    'Notes':       document.getElementById('en_msg').value.trim() || '—',
+    'Newsletter': document.getElementById('en_newsletter').checked ? 'Yes' : 'No'
   };
 }
 function collectPerfData() {
@@ -1602,7 +1926,8 @@ function collectPerfData() {
     'Event Type':      document.getElementById('pf_type').value,
     'Event Date':      document.getElementById('pf_date').value,
     'Location':        document.getElementById('pf_loc').value.trim(),
-    'Requirements':    document.getElementById('pf_msg').value.trim()
+    'Requirements':    document.getElementById('pf_msg').value.trim(),
+    'Newsletter': document.getElementById('pf_newsletter').checked ? 'Yes' : 'No'
   };
 }
 function collectGenData() {
@@ -1611,14 +1936,39 @@ function collectGenData() {
     'Name':      document.getElementById('gn_name').value.trim(),
     'email':     document.getElementById('gn_email').value.trim(),
     'Subject':   document.getElementById('gn_subject').value.trim(),
-    'message':   document.getElementById('gn_msg').value.trim()
+    'message':   document.getElementById('gn_msg').value.trim(),
+    'Newsletter': document.getElementById('gn_newsletter').checked ? 'Yes' : 'No'
+  };
+}
+function collectPartData() {
+  return {
+    'Form Type': 'Partnership & Donation',
+    'Name/Organization': document.getElementById('pt_name').value.trim(),
+    'email':     document.getElementById('pt_email').value.trim(),
+    'Phone':     document.getElementById('pt_phone').value.trim() || '—',
+    'Partnership Type': document.getElementById('pt_type').value,
+    'Details':   document.getElementById('pt_msg').value.trim(),
+    'Newsletter': document.getElementById('pt_newsletter').checked ? 'Yes' : 'No'
+  };
+}
+function collectPartnershipData() {
+  return {
+    'Form Type': 'Partnership & Donation (Standalone)',
+    'Name/Organization': document.getElementById('part_name').value.trim(),
+    'email':     document.getElementById('part_email').value.trim(),
+    'Phone':     document.getElementById('part_phone').value.trim() || '—',
+    'Partnership Type': document.getElementById('part_type').value,
+    'Details':   document.getElementById('part_msg').value.trim(),
+    'Newsletter': document.getElementById('part_newsletter').checked ? 'Yes' : 'No'
   };
 }
 
 var resetIds = {
-  enrol: ['en_name','en_email','en_phone','en_age','en_prog','en_level','en_msg'],
+  enrol: ['en_name','en_email','en_phone','en_age','en_prog','en_level','en_qual','en_msg'],
   perf:  ['pf_name','pf_email','pf_phone','pf_type','pf_date','pf_loc','pf_msg'],
-  gen:   ['gn_name','gn_email','gn_subject','gn_msg']
+  gen:   ['gn_name','gn_email','gn_subject','gn_msg'],
+  part:  ['pt_name','pt_email','pt_phone','pt_type','pt_msg'],
+  partnership: ['part_name','part_email','part_phone','part_type','part_msg']
 };
 function resetLSMForm(id) {
   resetIds[id].forEach(function(fid) {
@@ -1641,8 +1991,8 @@ document.querySelectorAll('input, select, textarea').forEach(function(el) {
 });
 
 async function submitLSMForm(id) {
-  var validators = { enrol: validateEnrol, perf: validatePerf, gen: validateGen };
-  var collectors = { enrol: collectEnrolData, perf: collectPerfData, gen: collectGenData };
+  var validators = { enrol: validateEnrol, perf: validatePerf, gen: validateGen, part: validatePart, partnership: validatePartnership };
+  var collectors = { enrol: collectEnrolData, perf: collectPerfData, gen: collectGenData, part: collectPartData, partnership: collectPartnershipData };
 
   if (!validators[id]()) return;
 
