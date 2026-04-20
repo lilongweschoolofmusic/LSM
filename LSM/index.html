@@ -382,8 +382,8 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .partners-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px; background:var(--off); max-width:900px; margin:0 auto; }
 .partner-cell { background:var(--white); padding:2.4rem 1.8rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; transition:background .3s; }
 .partner-cell:hover { background:var(--cream); }
-.partner-cell img { max-height:64px; width:auto; object-fit:contain; filter:grayscale(1); opacity:.6; transition:.3s; }
-.partner-cell:hover img { filter:none; opacity:1; }
+.partner-cell img { max-height:64px; width:auto; object-fit:contain; }
+.partner-cell:hover img { }
 .partner-cell span { font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--light); }
 
 /* ═══════════════════════════════════════════════
@@ -648,6 +648,16 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
 ═══════════════════════════════════════════════ */
 .sticky-cta { display:none; position:fixed; bottom:0; left:0; right:0; z-index:198; background:var(--navy); border-top:1px solid rgba(200,168,75,.2); padding:12px 5%; gap:.8rem; align-items:center; justify-content:center; }
 @media(max-width:600px){ .sticky-cta { display:flex; } .wa-float { bottom:72px; } }
+
+/* MYO mobile fixes */
+@media(max-width:800px){ #myo .reveal > div { grid-template-columns:1fr; gap:2rem; } }
+@media(max-width:600px){ .myo-section-title { font-size:1.2rem; } }
+
+/* Student life slideshow mobile */
+@media(max-width:600px){ .slideshow-wrap { height:300px; } .slideshow-wrap img { object-fit:contain; } }
+
+/* General mobile sizes */
+@media(max-width:600px){ .section-title { font-size:2rem; } .btn { padding:12px 28px; font-size:.7rem; } }
 
 /* ═══════════════════════════════════════════════
    MISC
@@ -1189,7 +1199,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <p class="partners-note">LSM collaborates with the world's leading international music examination boards and institutions ensuring all students receive globally recognized certification and internationally benchmarked training.</p>
     </div>
     <div class="partners-grid reveal">
-      <div class="partner-cell"><img src="Images/Logos/LSM Logos/LSM Logo blue.png" alt="LSM"><span>LSM</span></div>
+      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/LCME Logo.webp" alt="LCME"><span>LCME</span></div>
       <div class="partner-cell"><img src="Images/Logos/Partiners Logos/Trinity_Centre_75333_logo_purple.png" alt="Trinity College London"><span>Trinity College London</span></div>
       <div class="partner-cell"><img src="Images/Logos/Partiners Logos/ABRSM logo.webp" alt="ABRSM"><span>ABRSM</span></div>
       <div class="partner-cell"><img src="Images/Logos/Partiners Logos/University of West London logo.webp" alt="London College of Music"><span>London College of Music</span></div>
@@ -1236,15 +1246,25 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <div class="gold-rule"></div>
       <p class="section-intro">Moments from rehearsals, concerts, and community performances at Lilongwe School of Music.</p>
     </div>
-    <div class="gal-grid reveal">
-      <div class="gal-item"><img src="Images/Conductor.jpg" alt="Conductor"><div class="gal-over"><span>The Conductor</span></div></div>
-      <div class="gal-item"><img src="Images/Horn player.jpg" alt="Horn Player"><div class="gal-over"><span>Horn Performance</span></div></div>
-      <div class="gal-item"><img src="Images/LSM Ensemble.jpg" alt="LSM Ensemble"><div class="gal-over"><span>Ensemble Training</span></div></div>
-      <div class="gal-item"><img src="Images/LSM in performance.jpg" alt="LSM in Performance"><div class="gal-over"><span>LSM in Performance</span></div></div>
-      <div class="gal-item"><img src="Images/LSM Orchestra 2.jpg" alt="LSM Orchestra 2"><div class="gal-over"><span>LSM Orchestra</span></div></div>
-      <div class="gal-item"><img src="Images/LSM Orchestra 3.jpg" alt="LSM Orchestra 3"><div class="gal-over"><span>Orchestra Rehearsal</span></div></div>
-      <div class="gal-item"><img src="Images/LSM Orchestra.jpg" alt="LSM Orchestra"><div class="gal-over"><span>Full Orchestra</span></div></div>
-      <div class="gal-item"><img src="Images/LSM With Chaminade Orchestra.jpg" alt="LSM with Chaminade Orchestra"><div class="gal-over"><span>With Chaminade Orchestra</span></div></div>
+    <div class="slideshow-wrap reveal" id="gallery-slideshow">
+      <img src="Images/Conductor.jpg" alt="Conductor" class="active">
+      <img src="Images/Horn player.jpg" alt="Horn Player">
+      <img src="Images/LSM Ensemble.jpg" alt="LSM Ensemble">
+      <img src="Images/LSM in performance.jpg" alt="LSM in Performance">
+      <img src="Images/LSM Orchestra 2.jpg" alt="LSM Orchestra 2">
+      <img src="Images/LSM Orchestra 3.jpg" alt="LSM Orchestra 3">
+      <img src="Images/LSM Orchestra.jpg" alt="LSM Orchestra">
+      <img src="Images/LSM With Chaminade Orchestra.jpg" alt="LSM with Chaminade Orchestra">
+    </div>
+    <div class="slide-dots" id="gallery-slideDots">
+      <div class="slide-dot active" onclick="goSlideGallery(0)"></div>
+      <div class="slide-dot" onclick="goSlideGallery(1)"></div>
+      <div class="slide-dot" onclick="goSlideGallery(2)"></div>
+      <div class="slide-dot" onclick="goSlideGallery(3)"></div>
+      <div class="slide-dot" onclick="goSlideGallery(4)"></div>
+      <div class="slide-dot" onclick="goSlideGallery(5)"></div>
+      <div class="slide-dot" onclick="goSlideGallery(6)"></div>
+      <div class="slide-dot" onclick="goSlideGallery(7)"></div>
     </div>
   </div>
 </section>
@@ -1847,6 +1867,19 @@ function goSlide(n) {
   dots[slideIdx].classList.add('active');
 }
 setInterval(function() { goSlide((slideIdx + 1) % slides.length); }, 3800);
+
+/* ── GALLERY SLIDESHOW ── */
+var gallerySlideIdx = 0;
+var gallerySlides = document.querySelectorAll('#gallery-slideshow img');
+var galleryDots   = document.querySelectorAll('#gallery-slideDots .slide-dot');
+function goSlideGallery(n) {
+  gallerySlides[gallerySlideIdx].classList.remove('active');
+  galleryDots[gallerySlideIdx].classList.remove('active');
+  gallerySlideIdx = n;
+  gallerySlides[gallerySlideIdx].classList.add('active');
+  galleryDots[gallerySlideIdx].classList.add('active');
+}
+setInterval(function() { goSlideGallery((gallerySlideIdx + 1) % gallerySlides.length); }, 3800);
 
 /* ════════════════════════════════════════════════
    FORM SYSTEM — Formspree
