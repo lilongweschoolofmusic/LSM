@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LSM Videos - Rehearsals and Performances</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
+.container { max-width: 1200px; margin: 0 auto; }
+h1 { text-align: center; color: #333; }
+.video-container { margin: 20px 0; }
+video { width: 100%; max-width: 800px; display: block; margin: 0 auto; }
+.controls { text-align: center; margin-top: 10px; }
+button { padding: 10px 20px; margin: 0 5px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>LSM Videos - Rehearsals and Performances</h1>
+<div class="video-container">
+<video id="videoPlayer" controls>
+<source src="path/to/your/video.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<div class="controls">
+<button onclick="toggleFullscreen()">Fullscreen</button>
+<button onclick="minimizeVideo()">Minimize</button>
+</div>
+</div>
+<p>Add your video files here. Replace the src with the path to your video.</p>
+</div>
+<script>
+function toggleFullscreen() {
+  var video = document.getElementById('videoPlayer');
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.webkitRequestFullscreen) {
+    video.webkitRequestFullscreen();
+  } else if (video.msRequestFullscreen) {
+    video.msRequestFullscreen();
+  }
+}
+
+function minimizeVideo() {
+  // For minimize, perhaps hide the video or go back
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
+  // Or redirect to main page
+  // window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

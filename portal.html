@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Student Portal | Lilongwe School of Music</title>
+<meta name="description" content="Student portal for Lilongwe School of Music - access fees, class schedules, and assessment status.">
+<link rel="canonical" href="https://lilongweschoolofmusic.github.io/LSM/portal.html">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="portal.css">
+</head>
+<body>
+<header style="background:var(--navy); color:var(--white); padding:1.5rem 0; border-bottom:2px solid var(--gold);">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h1 style="font-size:1.8rem;">Student Portal</h1>
+      <a href="index.html" style="color:var(--gold);text-decoration:none;font-weight:500;">← Back to Home</a>
+    </div>
+  </div>
+</header>
+<div class="container" style="padding:2rem 0;">
+  <div id="auth" class="auth">
+    <div class="auth-form">
+      <h2>Student Login</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;">Login</button>
+        <p style="text-align:center;margin-top:1.5rem;color:var(--mid);">Don't have an account? <button type="button" id="registerBtn" style="background:none;border:none;color:var(--gold);cursor:pointer;font-weight:600;">Register here</button></p>
+      </form>
+    </div>
+  </div>
+  <!-- Registration Modal -->
+  <div id="registerModal" class="hidden" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6);z-index:999;">
+    <div style="background:var(--white);padding:2rem;border-radius:8px;max-width:460px;width:95%;box-shadow:0 20px 60px rgba(0,0,0,.3);">
+      <h3 style="font-family:var(--ff-display);color:var(--navy);margin-bottom:1.5rem;font-size:1.5rem;">Create Student Account</h3>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="reg_name">Full Name</label>
+          <input id="reg_name" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="reg_email">Email Address</label>
+          <input type="email" id="reg_email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="reg_phone">Phone Number</label>
+          <input type="tel" id="reg_phone" placeholder="+265..." >
+        </div>
+        <div class="form-group">
+          <label for="reg_password">Password</label>
+          <input type="password" id="reg_password" placeholder="••••••••" required>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:1.5rem;">
+          <button type="button" id="regCancel" class="btn btn-outline-gold">Cancel</button>
+          <button type="submit" class="btn btn-gold">Create Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="dashboard" class="dashboard">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;border-bottom:2px solid var(--mist);padding-bottom:1rem;">
+      <div>
+        <h2 style="color:var(--navy);margin-bottom:.3rem;">Welcome, <span id="userEmail" style="color:var(--gold);"></span></h2>
+        <p style="color:var(--mid);font-size:.95rem;">Student Portal Dashboard</p>
+      </div>
+      <button id="logoutBtn" class="btn btn-outline-gold">Logout</button>
+    </div>
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <h3>📚 Class Schedule</h3>
+        <ul id="schedules">
+          <li>No schedules assigned</li>
+        </ul>
+      </div>
+      <div class="dashboard-card">
+        <h3>💳 Fees & Payments</h3>
+        <p id="fees" style="margin:0;"></p>
+        <button class="btn btn-gold" style="margin-top:1rem;font-size:.75rem;" onclick="alert('Payment system coming soon')">Pay Now</button>
+      </div>
+      <div class="dashboard-card">
+        <h3>📊 Assessment Status</h3>
+        <ul id="assessments">
+          <li>No assessments yet</li>
+        </ul>
+      </div>
+      <div class="dashboard-card">
+        <h3>🎵 Assigned Instruments</h3>
+        <ul id="instruments">
+          <li>No instruments assigned</li>
+        </ul>
+      </div>
+      <div class="dashboard-card">
+        <h3>📋 Assignment & Homework</h3>
+        <ul id="assignments">
+          <li>No active assignments</li>
+        </ul>
+      </div>
+      <div class="dashboard-card">
+        <h3>🎓 Progress & Reports</h3>
+        <p style="color:var(--mid);">Your progress reports will appear here after evaluations.</p>
+        <button class="btn btn-gold" style="margin-top:1rem;font-size:.75rem;" onclick="alert('Reports coming soon')">View Reports</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="portal.js"></script>
+</body>
+</html>

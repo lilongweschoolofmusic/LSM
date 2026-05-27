@@ -29,7 +29,10 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="portal.css">
+<link rel="stylesheet" href="videos.css">
 
 <!-- Structured Data -->
 <script type="application/ld+json">
@@ -47,532 +50,6 @@
   }
 }
 </script>
-<style>
-/* ──────────────── TOKENS ──────────────── */
-:root {
-  --ink: #080c14;
-  --navy: #0c1829;
-  --cobalt: #122240;
-  --blue: #1a3561;
-  --steel: #2b4d8f;
-  --gold: #c8a84b;
-  --gold2: #dfc06a;
-  --gold3: #f0d99a;
-  --cream: #f7f4ec;
-  --off: #edeae0;
-  --mist: #d6d2c6;
-  --text: #1c1e2a;
-  --mid: #4a566a;
-  --light: #8090a6;
-  --white: #fdfbf6;
-  --ff-display: 'Cormorant Garamond', Georgia, serif;
-  --ff-body: 'Outfit', 'Segoe UI', sans-serif;
-  --ease: cubic-bezier(.4,0,.2,1);
-}
-/* ──────────────── RESET ──────────────── */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; font-size:16px; }
-body { font-family:var(--ff-body); background:var(--white); color:var(--text); overflow-x:hidden; }
-img { display:block; max-width:100%; }
-a { text-decoration:none; }
-button { font-family:var(--ff-body); cursor:pointer; }
-
-/* ──────────────── SCROLL BAR ──────────────── */
-::-webkit-scrollbar { width:5px; }
-::-webkit-scrollbar-track { background:var(--navy); }
-::-webkit-scrollbar-thumb { background:var(--gold); }
-
-/* ──────────────── UTILITY ──────────────── */
-.container { max-width:1200px; margin:0 auto; padding:0 5%; }
-.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
-.tag-label { display:inline-block; font-family:var(--ff-body); font-size:.65rem; font-weight:600; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); margin-bottom:.9rem; }
-.section-title { font-family:var(--ff-display); font-size:clamp(2rem,4.5vw,3.2rem); font-weight:600; line-height:1.1; color:var(--navy); margin-bottom:1rem; }
-.section-title.light { color:var(--white); }
-.gold-rule { width:52px; height:2px; background:var(--gold); margin-bottom:1.8rem; }
-.gold-rule.centered { margin-left:auto; margin-right:auto; }
-
-/* ──────────────── BUTTONS ──────────────── */
-.btn { display:inline-flex; align-items:center; gap:.5rem; padding:14px 34px; font-family:var(--ff-body); font-size:.75rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; transition:all .28s var(--ease); border:none; cursor:pointer; position:relative; overflow:hidden; }
-.btn::after { content:''; position:absolute; inset:0; opacity:0; background:rgba(255,255,255,.12); transition:opacity .25s; }
-.btn:hover::after { opacity:1; }
-.btn-gold { background:var(--gold); color:var(--navy); }
-.btn-gold:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 8px 28px rgba(200,168,75,.35); }
-.btn-outline-gold { background:transparent; color:var(--gold); border:1.5px solid var(--gold); }
-.btn-outline-gold:hover { background:var(--gold); color:var(--navy); transform:translateY(-2px); }
-.btn-outline-white { background:transparent; color:var(--white); border:1.5px solid rgba(255,255,255,.45); }
-.btn-outline-white:hover { border-color:var(--gold); color:var(--gold); }
-.btn-navy { background:var(--navy); color:var(--gold); }
-.btn-navy:hover { background:var(--blue); transform:translateY(-2px); }
-.btn-sm { padding:10px 24px; font-size:.7rem; }
-
-/* ──────────────── REVEAL ──────────────── */
-.reveal { opacity:0; transform:translateY(32px); transition:opacity .75s var(--ease), transform .75s var(--ease); }
-.reveal.visible { opacity:1; transform:none; }
-.reveal-delay-1 { transition-delay:.1s; }
-.reveal-delay-2 { transition-delay:.2s; }
-.reveal-delay-3 { transition-delay:.3s; }
-
-/* ═══════════════════════════════════════════════
-   NAVIGATION
-═══════════════════════════════════════════════ */
-#topbar { position:fixed; top:0; left:0; right:0; z-index:200; background:rgba(8,12,20,.92); backdrop-filter:blur(16px); border-bottom:1px solid rgba(200,168,75,.18); transition:background .3s, box-shadow .3s; }
-#topbar.scrolled { box-shadow:0 4px 32px rgba(0,0,0,.5); }
-.nav-inner { display:flex; align-items:center; justify-content:space-between; height:72px; padding:0 5%; }
-.nav-brand { display:flex; align-items:center; gap:.9rem; cursor:pointer; }
-.nav-brand img { height:170px; width:auto; }
-
-.nav-menu { display:flex; align-items:center; gap:2rem; list-style:none; }
-.nav-menu a { color:rgba(255,255,255,.7); font-size:.72rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; transition:color .25s; padding:4px 0; position:relative; }
-.nav-menu a::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform .25s; }
-.nav-menu a:hover { color:var(--gold); }
-.nav-menu a:hover::after { transform:scaleX(1); }
-.nav-cta { display:flex; align-items:center; gap:.8rem; }
-
-/* ── HAMBURGER ── */
-.hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; padding:8px; cursor:pointer; }
-.hamburger span { display:block; width:24px; height:2px; background:var(--gold); border-radius:2px; transition:.3s; }
-.hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
-.hamburger.open span:nth-child(2) { opacity:0; }
-.hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
-
-/* Social icons in nav */
-.nav-social { display:flex; align-items:center; gap:.6rem; }
-.nav-social a { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border:1px solid rgba(200,168,75,.25); border-radius:50%; color:rgba(255,255,255,.5); transition:all .25s; }
-.nav-social a:hover { border-color:var(--gold); color:var(--gold); background:rgba(200,168,75,.1); }
-.nav-social a svg { width:14px; height:14px; fill:currentColor; }
-
-/* ── MOBILE NAV PANEL ── */
-.nav-mobile-panel {
-  position:fixed;
-  top:72px; left:0; right:0; bottom:0;
-  background:rgba(8,12,20,.97);
-  backdrop-filter:blur(20px);
-  z-index:199;
-  display:none;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:2rem;
-  overflow-y:auto;
-  padding:2rem 0;
-}
-.nav-mobile-panel.open { display:flex; }
-.nav-mobile-panel a { color:rgba(255,255,255,.75); font-family:var(--ff-display); font-size:1.8rem; font-weight:500; letter-spacing:.05em; transition:color .25s; }
-.nav-mobile-panel a:hover { color:var(--gold); }
-.mobile-social { display:flex; gap:1rem; margin-top:.5rem; }
-.mobile-social a { display:flex; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid rgba(200,168,75,.3); border-radius:50%; color:rgba(255,255,255,.6); }
-.mobile-social a:hover { border-color:var(--gold); color:var(--gold); }
-.mobile-social a svg { width:18px; height:18px; fill:currentColor; }
-
-@media(max-width:1000px){
-  .nav-menu { display:none; }
-  .nav-cta { display:none; }
-  .nav-social { display:none; }
-  .hamburger { display:flex; }
-}
-
-/* ═══════════════════════════════════════════════
-   HERO
-═══════════════════════════════════════════════ */
-#home { min-height:100vh; position:relative; display:flex; align-items:center; overflow:hidden; background:var(--ink); }
-.hero-bg { position:absolute; inset:0; background:url('Images/Horn%20player.jpg') center/cover no-repeat; opacity:.6; filter:blur(1px); }
-.hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(8,12,20,.97) 0%,rgba(6,12,17,.44) 50%,rgba(26,53,97,.72) 100%); }
-.hero-grain { position:absolute; inset:0; opacity:.04; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-.hero-deco { position:absolute; top:0; right:0; width:45%; height:100%; pointer-events:none; overflow:hidden; }
-.hero-deco::before { content:''; position:absolute; top:-10%; right:-5%; width:600px; height:600px; border:1px solid rgba(200,168,75,.1); border-radius:50%; transform:rotate(-20deg); }
-.hero-deco::after { content:''; position:absolute; top:10%; right:5%; width:380px; height:380px; border:1px solid rgba(200,168,75,.07); border-radius:50%; }
-.hero-content { position:relative; z-index:2; width:100%; padding:140px 5% 100px; display:grid; grid-template-columns:1fr .9fr; gap:4rem; align-items:center; max-width:1200px; margin:0 auto; }
-.hero-badge { display:inline-flex; align-items:center; gap:.6rem; border:1px solid rgba(200,168,75,.35); padding:6px 16px 6px 12px; margin-bottom:1.8rem; }
-.hero-badge .dot { width:6px; height:6px; background:var(--gold); border-radius:50%; }
-.hero-badge span { font-size:.65rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); font-weight:500; }
-.hero-title { font-family:'Arial', sans-serif; font-size:clamp(2.8rem,3.5vw,2.8rem); font-weight:600; line-height:1.06; color:var(--white); margin-bottom:1.4rem; }
-.hero-title em { font-style:italic; color:var(--gold); }
-.hero-subtitle { font-family:'Arial', sans-serif; font-size:clamp(1.0rem,1.8vw,1rem); font-weight:500; line-height:1.1; color:var(--white); margin-bottom:1.4rem; }
-.hero-subtitle em { font-style:italic; color:var(--gold); }
-.hero-sub { font-size:1rem; color:rgba(255,255,255,.55); line-height:1.9; max-width:520px; font-weight:300; margin-bottom:2.4rem; }
-.hero-actions { display:flex; gap:1rem; flex-wrap:wrap; }
-.hero-right { display:flex; flex-direction:column; gap:1.2rem; }
-.hero-stat-card { background:rgba(255,255,255,.04); border:1px solid rgba(200,168,75,.15); padding:1.5rem 1.8rem; backdrop-filter:blur(8px); transition:background .3s, border-color .3s; }
-.hero-stat-card:hover { background:rgba(26,53,97,.4); border-color:rgba(200,168,75,.35); }
-.hero-stat-card .num { font-family:var(--ff-display); font-size:2.4rem; font-weight:600; color:var(--gold); line-height:1; }
-.hero-stat-card .label { font-size:.75rem; color:rgba(255,255,255,.45); letter-spacing:.1em; margin-top:.3rem; }
-.hero-scroll-hint { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.5rem; font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.25); animation:bob 2.5s ease-in-out infinite; }
-.hero-scroll-hint .line { width:1px; height:44px; background:linear-gradient(to bottom,rgba(200,168,75,.4),transparent); }
-@keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
-
-@media(max-width:820px){ .hero-content { grid-template-columns:1fr; gap:3rem; } .hero-right { display:grid; grid-template-columns:repeat(2,1fr); } }
-@media(max-width:500px){ .hero-right { grid-template-columns:1fr; } }
-
-/* ═══════════════════════════════════════════════
-   ANNOUNCEMENT BAR
-═══════════════════════════════════════════════ */
-.announce-bar { background:var(--gold); padding:12px 5%; display:none; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
-.announce-bar p { font-size:.78rem; font-weight:600; color:var(--navy); letter-spacing:.05em; }
-.announce-bar a { font-size:.72rem; font-weight:700; color:var(--navy); border-bottom:1px solid var(--navy); padding-bottom:1px; }
-.announcement-special { background:var(--off); }
-.announcement-special .section-header { max-width:900px; margin:0 auto 2rem; }
-.monthly-layout { display:grid; grid-template-columns:1fr 400px; gap:3rem; align-items:start; }
-.monthly-content { display:flex; flex-direction:column; gap:1.5rem; }
-.monthly-item { background:var(--white); border:1px solid var(--mist); border-radius:18px; padding:2rem; box-shadow:0 16px 36px rgba(0,0,0,.06); transition:transform .3s ease, box-shadow .3s ease; }
-.monthly-item:hover { transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,.1); }
-.monthly-item h3 { font-family:var(--ff-display); font-size:1.1rem; color:var(--navy); margin-bottom:1rem; }
-.monthly-item p, .monthly-item ul { color:var(--mid); line-height:1.8; }
-.monthly-item ul { margin-top:1rem; padding-left:1.2rem; }
-.monthly-item ul li { margin-bottom:.6rem; }
-.monthly-video { position:sticky; top:100px; }
-.video-window { background:var(--white); border:1px solid var(--mist); border-radius:18px; padding:1rem; box-shadow:0 16px 36px rgba(0,0,0,.06); position:relative; }
-.video-window iframe { border-radius:12px; }
-.fullscreen-btn { position:absolute; top:10px; right:10px; background:rgba(0,0,0,.5); color:white; border:none; border-radius:50%; width:40px; height:40px; font-size:18px; cursor:pointer; opacity:0; transition:opacity .3s; }
-.video-window:hover .fullscreen-btn { opacity:1; }
-@media(max-width:1024px){ .monthly-layout { grid-template-columns:1fr; gap:2rem; } .monthly-video { position:static; } }
-@media(max-width:820px){ .announcement-special .container { padding:0 3%; } }
-
-/* ═══════════════════════════════════════════════
-   SECTION GENERIC
-═══════════════════════════════════════════════ */
-.section { padding:96px 5%; }
-.section-header { margin-bottom:3.5rem; }
-.section-header.centered { text-align:center; }
-.section-header.centered .gold-rule { margin:0 auto 1.8rem; }
-.section-intro { font-size:.98rem; line-height:1.9; color:var(--mid); font-weight:300; max-width:620px; }
-.section-intro.centered { margin:0 auto; }
-
-/* ═══════════════════════════════════════════════
-   ABOUT / IDENTITY
-═══════════════════════════════════════════════ */
-#about { background:var(--white); }
-.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
-.about-lead { font-family:var(--ff-display); font-size:1.3rem; font-style:italic; color:var(--navy); line-height:1.7; margin-bottom:1.8rem; padding-bottom:1.4rem; border-bottom:1px solid var(--mist); }
-.about-body { font-size:.96rem; line-height:1.95; color:var(--mid); font-weight:300; margin-bottom:1rem; }
-.mv-stack { display:flex; flex-direction:column; gap:1.2rem; }
-.mv-item { padding:1.6rem 1.8rem; border-left:3px solid var(--gold); background:var(--cream); transition:background .3s; }
-.mv-item:hover { background:var(--off); }
-.mv-item h4 { font-family:var(--ff-display); font-size:1.1rem; color:var(--navy); margin-bottom:.5rem; }
-.mv-item p { font-size:.88rem; color:var(--mid); line-height:1.8; }
-.pillars { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--off); margin-top:4rem; }
-.pillar-item { background:var(--white); padding:2rem 1.4rem; text-align:center; transition:background .3s, color .3s; cursor:default; }
-.pillar-item:hover { background:var(--navy); }
-.pillar-item:hover .pi-title { color:var(--gold); }
-.pillar-item:hover .pi-text { color:rgba(255,255,255,.45); }
-.pi-icon { font-size:1.6rem; margin-bottom:.8rem; }
-.pi-title { font-family:var(--ff-display); font-size:.98rem; color:var(--navy); margin-bottom:.3rem; transition:color .3s; }
-.pi-text { font-size:.78rem; color:var(--light); line-height:1.6; transition:color .3s; }
-@media(max-width:800px){ .about-grid{grid-template-columns:1fr;gap:3rem;} .pillars{grid-template-columns:repeat(2,1fr);} }
-
-/* ═══════════════════════════════════════════════
-   PROGRAMS / CURRICULUM
-═══════════════════════════════════════════════ */
-#programs { background:var(--navy); }
-.programs-intro { font-size:.95rem; color:rgba(255,255,255,.45); max-width:620px; line-height:1.9; font-weight:300; margin-bottom:2.8rem; }
-.prog-tabs { display:flex; gap:0; flex-wrap:wrap; margin-bottom:2.5rem; }
-.prog-tab { padding:12px 28px; background:transparent; border:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.45); font-size:.7rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; transition:all .25s; cursor:pointer; }
-.prog-tab:hover { color:var(--gold); border-color:rgba(200,168,75,.3); }
-.prog-tab.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
-.prog-panel { display:none; }
-.prog-panel.active { display:block; }
-.prog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); }
-.prog-card { background:rgba(8,12,20,.95); padding:2.4rem 2rem; transition:background .3s; }
-.prog-card:hover { background:var(--cobalt); }
-.prog-card .pc-icon { font-size:1.8rem; margin-bottom:1rem; }
-.prog-card h3 { font-family:var(--ff-display); font-size:1.2rem; color:var(--gold); margin-bottom:.7rem; }
-.prog-card p { font-size:.85rem; color:rgba(255,255,255,.45); line-height:1.8; margin-bottom:1rem; }
-.prog-card .pc-tags { display:flex; flex-wrap:wrap; gap:.35rem; }
-.pc-tag { font-size:.65rem; letter-spacing:.08em; border:1px solid rgba(200,168,75,.25); color:var(--gold3); padding:3px 9px; }
-.exam-panel { max-width:900px; margin-top:2rem; border:1px solid rgba(200,168,75,.2); padding:2.5rem; }
-.exam-panel h3 { font-family:var(--ff-display); font-size:1.3rem; color:var(--gold); margin-bottom:1.2rem; }
-.exam-cols { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2rem; }
-.exam-col h4 { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:.9rem; }
-.exam-col ul { list-style:none; }
-.exam-col li { font-size:.87rem; color:rgba(255,255,255,.55); line-height:2; padding-left:.9rem; position:relative; }
-.exam-col li::before { content:'•'; position:absolute; left:0; color:var(--gold); opacity:.5; }
-.exam-notice { margin-top:1.4rem; padding:1rem 1.4rem; background:rgba(200,168,75,.08); border-left:2px solid var(--gold); font-size:.83rem; color:rgba(255,255,255,.55); line-height:1.7; }
-.exam-notice strong { color:rgba(255,255,255,.75); }
-.schedule-row { display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:2.5rem; }
-.sched-item { flex:1; min-width:160px; background:rgba(26,53,97,.25); border:1px solid rgba(200,168,75,.15); padding:1.4rem 1.8rem; }
-.sched-item .sday { font-family:var(--ff-display); font-size:1.1rem; color:var(--gold); margin-bottom:.2rem; }
-.sched-item .stime { font-size:.87rem; color:rgba(255,255,255,.6); }
-.perf-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); }
-.perf-card { background:rgba(8,12,20,.95); padding:2.4rem 2rem; transition:background .3s; }
-.perf-card:hover { background:var(--cobalt); }
-.perf-card .pf-icon { font-size:1.8rem; margin-bottom:1rem; }
-.perf-card h3 { font-family:var(--ff-display); font-size:1.2rem; color:var(--gold); margin-bottom:.7rem; }
-.perf-card p { font-size:.84rem; color:rgba(255,255,255,.45); line-height:1.8; margin-bottom:.6rem; }
-.perf-card ul { list-style:none; }
-.perf-card ul li { font-size:.85rem; color:rgba(255,255,255,.5); line-height:1.9; padding-left:.9rem; position:relative; }
-.perf-card ul li::before { content:'▸'; position:absolute; left:0; color:var(--gold); font-size:.7rem; top:.15em; }
-
-/* ═══════════════════════════════════════════════
-   ADMISSIONS
-═══════════════════════════════════════════════ */
-#admissions { background:var(--cream); }
-.admissions-layout { display:grid; grid-template-columns:1.1fr 1fr; gap:5rem; align-items:start; }
-.adm-age-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-bottom:2.5rem; }
-.age-card { padding:1.6rem; border:1px solid var(--mist); background:var(--white); transition:border-color .3s, box-shadow .3s; }
-.age-card:hover { border-color:var(--gold); box-shadow:0 6px 24px rgba(200,168,75,.12); }
-.age-card .ac-range { font-family:var(--ff-display); font-size:1.5rem; color:var(--gold); font-weight:600; margin-bottom:.3rem; }
-.age-card .ac-label { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--navy); font-weight:600; margin-bottom:.5rem; }
-.age-card p { font-size:.83rem; color:var(--mid); line-height:1.7; }
-.req-list { list-style:none; margin-bottom:2rem; }
-.req-list li { display:flex; align-items:flex-start; gap:.9rem; padding:1rem 0; border-bottom:1px solid var(--mist); font-size:.9rem; color:var(--mid); line-height:1.6; }
-.req-list li:last-child { border:none; }
-.req-list li .ri { color:var(--gold); font-size:1rem; flex-shrink:0; margin-top:.1rem; }
-.app-step { display:flex; gap:1.4rem; align-items:flex-start; margin-bottom:2rem; }
-.step-num { width:44px; height:44px; background:var(--navy); color:var(--gold); display:flex; align-items:center; justify-content:center; font-family:var(--ff-display); font-size:1.2rem; font-weight:600; flex-shrink:0; }
-.step-body h4 { font-family:var(--ff-display); font-size:1.1rem; color:var(--navy); margin-bottom:.35rem; }
-.step-body p { font-size:.87rem; color:var(--mid); line-height:1.7; }
-.step-connector { width:1px; height:28px; background:var(--mist); margin-left:21px; }
-@media(max-width:800px){ .admissions-layout { grid-template-columns:1fr; gap:3rem; } .adm-age-cards { grid-template-columns:1fr 1fr; } }
-
-/* ═══════════════════════════════════════════════
-   EVENTS & PERFORMANCES
-═══════════════════════════════════════════════ */
-#events { background:var(--navy); }
-.events-intro { font-size:.95rem; color:rgba(255,255,255,.45); max-width:620px; line-height:1.9; font-weight:300; margin-bottom:3rem; }
-.events-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); margin-bottom:3rem; }
-.event-card { background:rgba(8,12,20,.95); padding:2.5rem 2.2rem; transition:background .3s; position:relative; overflow:hidden; }
-.event-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); }
-.event-card:hover::before { transform:scaleX(1); }
-.event-card:hover { background:var(--cobalt); }
-.event-card .ec-icon { font-size:2rem; margin-bottom:1.2rem; }
-.event-card h3 { font-family:var(--ff-display); font-size:1.25rem; color:var(--gold); margin-bottom:.8rem; }
-.event-card p { font-size:.86rem; color:rgba(255,255,255,.45); line-height:1.85; margin-bottom:1rem; }
-.event-card ul { list-style:none; }
-.event-card ul li { font-size:.84rem; color:rgba(255,255,255,.5); padding:5px 0 5px .9rem; position:relative; border-bottom:1px solid rgba(255,255,255,.05); }
-.event-card ul li:last-child { border:none; }
-.event-card ul li::before { content:'◆'; position:absolute; left:0; color:var(--gold); font-size:.45rem; top:.6em; }
-.booking-strip { background:rgba(200,168,75,.08); border:1px solid rgba(200,168,75,.2); padding:2.5rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
-.booking-strip p { font-family:var(--ff-display); font-size:1.2rem; font-style:italic; color:rgba(255,255,255,.7); max-width:540px; line-height:1.6; }
-.booking-strip .bs-actions { display:flex; gap:.8rem; flex-wrap:wrap; }
-
-/* ═══════════════════════════════════════════════
-   WHY LSM
-═══════════════════════════════════════════════ */
-#why { background:var(--off); }
-.why-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2rem; }
-.why-item { display:flex; gap:1.2rem; align-items:flex-start; }
-.why-num { font-family:var(--ff-display); font-size:2.2rem; color:var(--gold); font-style:italic; line-height:1; opacity:.4; flex-shrink:0; }
-.why-body h4 { font-family:var(--ff-display); font-size:1.05rem; color:var(--navy); margin-bottom:.35rem; }
-.why-body p { font-size:.84rem; color:var(--mid); line-height:1.75; }
-
-/* ═══════════════════════════════════════════════
-   APPROACH
-═══════════════════════════════════════════════ */
-#approach { background:var(--cobalt); }
-.approach-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1.5px; background:rgba(255,255,255,.04); margin-top:2rem; }
-.approach-item { background:rgba(8,12,20,.9); padding:2.2rem 2rem; }
-.approach-item .ap-num { font-family:var(--ff-display); font-size:2.8rem; font-style:italic; color:var(--gold); opacity:.25; line-height:1; margin-bottom:1rem; }
-.approach-item h4 { font-family:var(--ff-display); font-size:1.05rem; color:var(--gold); margin-bottom:.5rem; }
-.approach-item p { font-size:.83rem; color:rgba(255,255,255,.45); line-height:1.75; }
-
-/* ═══════════════════════════════════════════════
-   PARTNERS
-═══════════════════════════════════════════════ */
-#partners { background:var(--white); }
-.partners-note { font-size:.9rem; color:var(--mid); max-width:600px; margin:0 auto 3rem; text-align:center; line-height:1.8; }
-.partners-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px; background:var(--off); max-width:900px; margin:0 auto; }
-.partner-cell { background:var(--white); padding:2.4rem 1.8rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; transition:background .3s; }
-.partner-cell:hover { background:var(--cream); }
-.partner-cell img { max-height:64px; width:auto; object-fit:contain; }
-.partner-cell:hover img { }
-.partner-cell span { font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--light); }
-
-/* ═══════════════════════════════════════════════
-   STUDENT LIFE / GALLERY
-═══════════════════════════════════════════════ */
-#student-life { background:var(--cream); }
-.slideshow-wrap { position:relative; width:100%; height:480px; overflow:hidden; }
-.slideshow-wrap img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s; }
-.slideshow-wrap img.active { opacity:1; }
-.slide-dots { display:flex; gap:.5rem; justify-content:center; margin-top:1.2rem; }
-.slide-dot { width:8px; height:8px; border-radius:50%; background:var(--mist); cursor:pointer; transition:background .3s; }
-.slide-dot.active { background:var(--gold); }
-#gallery { background:var(--white); }
-
-/* ═══════════════════════════════════════════════
-   MALAWI YOUTH ORCHESTRA (MYO)
-═══════════════════════════════════════════════ */
-#myo { background:var(--off); }
-.myo-section-title { font-family:var(--ff-display); font-size:1.4rem; color:var(--gold); margin-bottom:1rem; }
-.gal-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
-.gal-item { overflow:hidden; position:relative; }
-.gal-item img { width:100%; height:210px; object-fit:cover; transition:transform .5s var(--ease); }
-.gal-item:hover img { transform:scale(1.07); }
-.gal-item .gal-over { position:absolute; inset:0; background:rgba(8,12,20,.65); opacity:0; display:flex; align-items:center; justify-content:center; transition:opacity .35s; }
-.gal-item:hover .gal-over { opacity:1; }
-.gal-over span { font-family:var(--ff-display); font-size:1.1rem; color:var(--gold); font-style:italic; }
-
-/* ═══════════════════════════════════════════════
-   PARTNERSHIPS & DONATIONS
-═══════════════════════════════════════════════ */
-#partnership-donation { background:var(--cream); }
-.partnership-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; margin-top:3rem; }
-.partnership-card { background:var(--white); padding:2rem; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,.08); transition:transform .3s, box-shadow .3s; }
-.partnership-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,.12); }
-.partnership-card .pc-icon { font-size:3rem; text-align:center; margin-bottom:1rem; }
-.partnership-card h3 { font-family:var(--ff-display); font-size:1.25rem; color:var(--navy); margin-bottom:.5rem; }
-.partnership-card p { color:var(--mid); line-height:1.6; margin-bottom:1rem; }
-.partnership-card ul { list-style:none; padding:0; margin:0 0 1.5rem; }
-.partnership-card ul li { padding:.25rem 0; color:var(--text); font-size:.9rem; }
-.partnership-card ul li:before { content:"✓ "; color:var(--gold); font-weight:bold; }
-
-/* ═══════════════════════════════════════════════
-   TESTIMONIALS
-═══════════════════════════════════════════════ */
-#testimonials { background:var(--off); }
-.test-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; max-width:960px; margin:0 auto; }
-.test-card { border-left:3px solid var(--gold); padding:1.8rem 2rem; background:var(--white); transition:box-shadow .3s; }
-.test-card:hover { box-shadow:0 8px 32px rgba(0,0,0,.08); }
-.test-card blockquote { font-family:var(--ff-display); font-style:italic; font-size:1.05rem; color:var(--text); line-height:1.8; margin-bottom:1rem; }
-.test-card cite { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-style:normal; }
-
-/* ═══════════════════════════════════════════════
-   BOOKING / CONTACT
-═══════════════════════════════════════════════ */
-#booking { background:linear-gradient(180deg, #061024 0%, #09162c 100%); }
-#booking .section-header .section-title { color:var(--white); }
-#booking .section-header .section-intro { color:rgba(255,255,255,.78) !important; }
-#booking .tag-label { color:var(--gold); }
-.booking-layout { display:grid; grid-template-columns:0.95fr 1.2fr; gap:4rem; align-items:start; margin-top:2rem; }
-.booking-form-panel { background:transparent; border:none; border-radius:0; padding:0; box-shadow:none; }
-.booking-form-panel .form-card { background:transparent; box-shadow:none; padding:0; border:none; }
-.booking-form-panel p { color:rgba(255,255,255,.83); }
-
-/* ── Form tab system ── */
-.form-tab-nav { display:flex; gap:0; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:6px; margin-bottom:1.5rem; }
-.form-tab-nav-btn { flex:1; background:transparent; border:none; color:rgba(255,255,255,.75); font-family:var(--ff-body); font-size:.75rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; padding:.9rem .8rem; cursor:pointer; border-radius:12px; transition:color .25s, background .25s; white-space:nowrap; }
-.form-tab-nav-btn:hover { color:var(--white); }
-.form-tab-nav-btn.active { background:var(--gold); color:var(--navy); }
-@media(max-width:560px){ .form-tab-nav { flex-direction:column; } }
-
-/* ── Form panels ── */
-.ftab-panel { display:none; animation:fadeUp .3s ease forwards; }
-.ftab-panel.active { display:block; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
-
-.booking-contact-panel .section-header { margin-bottom:2rem; }
-.booking-contact-panel h3 { font-family:var(--ff-display); font-size:1.4rem; color:var(--white); margin-bottom:1rem; }
-.booking-contact-panel ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:1rem; }
-.booking-contact-panel li { display:flex; align-items:flex-start; gap:0.95rem; }
-.booking-contact-panel .ci-icon-box { width:42px; min-width:42px; height:42px; display:flex; align-items:center; justify-content:center; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05); color:var(--gold); font-size:1.1rem; }
-.booking-contact-panel strong { color:var(--gold); font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; display:block; margin-bottom:.15rem; }
-.booking-contact-panel a, .booking-contact-panel span { color:rgba(255,255,255,.95); text-decoration:none; font-size:.92rem; }
-.booking-contact-panel a:hover { color:var(--gold); }
-.booking-contact-panel .contact-actions { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.2rem; }
-.booking-contact-panel .contact-actions a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; padding:12px 18px; background:transparent; border:1px solid rgba(255,255,255,.18); border-radius:0; color:rgba(255,255,255,.95); font-size:.82rem; text-transform:uppercase; transition:background .25s, border-color .25s, color .25s; }
-.booking-contact-panel .contact-actions a:hover { background:rgba(255,255,255,.08); border-color:var(--gold); color:var(--gold); }
-.booking-contact-panel .contact-note-box { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:24px; padding:1.5rem; margin-top:1.5rem; }
-.booking-contact-panel .contact-note-box p { color:rgba(255,255,255,.83); font-size:.9rem; line-height:1.6; margin:0; }
-@media(max-width:1000px){ .booking-layout { grid-template-columns:1fr; } }
-
-/* ── Field groups ── */
-.booking-form { display:flex; flex-direction:column; gap:0; }
-.form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-@media(max-width:560px){ .form-row-2 { grid-template-columns:1fr; } }
-
-.fg { display:flex; flex-direction:column; gap:.4rem; margin-bottom:.9rem; }
-.fg label { font-size:.62rem; letter-spacing:.25em; text-transform:uppercase; color:rgba(255,255,255,.35); font-weight:500; }
-.fg input, .fg select, .fg textarea {
-  padding:13px 16px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
-  color:var(--white); font-family:var(--ff-body); font-size:.92rem; outline:none;
-  transition:border-color .25s, background .25s; border-radius:4px;
-}
-.fg input:focus, .fg select:focus, .fg textarea:focus { border-color:var(--gold); background:rgba(255,255,255,.08); }
-.fg input::placeholder, .fg textarea::placeholder { color:rgba(255,255,255,.25); }
-.fg select { color:rgba(255,255,255,.6); cursor:pointer; -webkit-appearance:none; appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c8a84b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:right 1rem center; padding-right:2.5rem; }
-.fg select option { background:var(--navy); color:var(--white); }
-.fg textarea { resize:vertical; min-height:110px; }
-.fg input.invalid, .fg select.invalid, .fg textarea.invalid { border-color:rgba(201,80,76,.7); box-shadow:0 0 0 3px rgba(201,80,76,.1); }
-.field-err { font-size:.7rem; color:#e88; display:none; }
-.fg.has-err .field-err { display:block; }
-
-/* ── Checkbox field ── */
-.fg-checkbox { display:flex; align-items:center; gap:.5rem; margin-bottom:.9rem; }
-.fg-checkbox input[type="checkbox"] { width:16px; height:16px; cursor:pointer; accent-color:var(--gold); }
-.fg-checkbox label { font-size:.8rem; color:rgba(255,255,255,.6); font-weight:400; letter-spacing:0; text-transform:none; margin:0; cursor:pointer; }
-.checkbox-group { margin-bottom:1.2rem; padding:1rem; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:4px; }
-.checkbox-group > p { font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); display:block; margin-bottom:.8rem; font-weight:500; }
-
-/* ── Submit button ── */
-.btn-form-submit { display:flex; align-items:center; justify-content:center; gap:.5rem; width:100%; margin-top:.5rem; padding:.9rem 1.5rem; background:var(--gold); border:none; border-radius:4px; color:var(--navy); font-family:var(--ff-body); font-size:.78rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; transition:background .25s, transform .2s, opacity .25s; }
-.btn-form-submit:hover { background:var(--gold2); transform:translateY(-1px); }
-.btn-form-submit:disabled { opacity:.6; cursor:not-allowed; transform:none; }
-.btn-form-submit .fspinner { width:16px; height:16px; border:2px solid rgba(8,12,20,.3); border-top-color:var(--navy); border-radius:50%; animation:fspin .7s linear infinite; display:none; }
-@keyframes fspin { to{transform:rotate(360deg)} }
-
-/* ── Form notices ── */
-.form-notice { display:none; align-items:center; gap:.75rem; padding:1rem 1.2rem; border-radius:4px; font-size:.86rem; margin-top:1rem; line-height:1.5; }
-.form-notice.show { display:flex; }
-.form-notice.ok { background:rgba(76,175,121,.1); border:1px solid rgba(76,175,121,.3); color:#7ddc7d; }
-.form-notice.err { background:rgba(201,80,76,.1); border:1px solid rgba(201,80,76,.3); color:#e88; }
-
-@media(max-width:800px){ .booking-layout { grid-template-columns:1fr; gap:3rem; } }
-
-/* ═══════════════════════════════════════════════
-   CTA BANNER
-═══════════════════════════════════════════════ */
-.cta-banner { background:var(--gold); padding:56px 5%; display:flex; align-items:center; justify-content:center; gap:3rem; flex-wrap:wrap; text-align:center; }
-.cta-banner h2 { font-family:var(--ff-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:600; color:var(--navy); max-width:520px; line-height:1.15; }
-.cta-banner h2 em { font-style:italic; }
-.cta-btn-group { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
-.cta-banner .btn-navy { background:var(--navy); color:var(--gold); }
-.cta-banner .btn-outline-navy { background:transparent; border:1.5px solid var(--navy); color:var(--navy); padding:14px 34px; font-size:.75rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; transition:all .25s; }
-.cta-banner .btn-outline-navy:hover { background:var(--navy); color:var(--gold); }
-
-/* ═══════════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════════ */
-footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(200,168,75,.1); }
-.footer-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
-.footer-brand .fb-logo { font-family:var(--ff-display); font-size:1.4rem; color:var(--gold); margin-bottom:.4rem; }
-.footer-brand .fb-sub { font-family:var(--ff-display); font-style:italic; font-size:.85rem; color:rgba(255,255,255,.3); margin-bottom:1rem; }
-.footer-brand p { font-size:.82rem; color:rgba(255,255,255,.3); line-height:1.8; margin-bottom:1rem; }
-.footer-social { display:flex; gap:.6rem; margin-top:.5rem; }
-.footer-social a { display:flex; align-items:center; justify-content:center; width:34px; height:34px; border:1px solid rgba(200,168,75,.2); border-radius:50%; color:rgba(255,255,255,.35); transition:all .25s; }
-.footer-social a:hover { border-color:var(--gold); color:var(--gold); background:rgba(200,168,75,.1); }
-.footer-social a svg { width:14px; height:14px; fill:currentColor; }
-.footer-col h4 { font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; font-weight:600; }
-.footer-col ul { list-style:none; }
-.footer-col ul li { margin-bottom:.6rem; }
-.footer-col ul li a { font-size:.85rem; color:rgba(255,255,255,.4); transition:color .25s; }
-.footer-col ul li a:hover { color:var(--gold); }
-.footer-bottom { border-top:1px solid rgba(255,255,255,.06); padding-top:1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
-.footer-bottom p { font-size:.75rem; color:rgba(255,255,255,.2); letter-spacing:.05em; }
-.footer-bottom .ft-links { display:flex; gap:1.5rem; }
-.footer-bottom .ft-links a { font-size:.73rem; color:rgba(255,255,255,.25); }
-.footer-bottom .ft-links a:hover { color:var(--gold); }
-@media(max-width:760px){ .footer-grid { grid-template-columns:1fr 1fr; } }
-@media(max-width:480px){ .footer-grid { grid-template-columns:1fr; } }
-
-/* ═══════════════════════════════════════════════
-   WHATSAPP FLOAT
-═══════════════════════════════════════════════ */
-.wa-float { position:fixed; bottom:24px; right:24px; z-index:999; background:#25D366; color:#fff; padding:12px 22px; border-radius:50px; font-weight:700; font-size:.8rem; letter-spacing:.05em; box-shadow:0 4px 18px rgba(37,211,102,.4); display:flex; align-items:center; gap:.5rem; transition:transform .2s, box-shadow .2s; text-decoration:none; }
-.wa-float:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(37,211,102,.5); }
-@media(max-width:600px){ .wa-float { padding:8px 12px; font-size:.65rem; bottom:70px; right:12px; } .wa-float svg { width:14px; height:14px; } }
-
-/* ═══════════════════════════════════════════════
-   STICKY MOBILE CTA
-═══════════════════════════════════════════════ */
-.sticky-cta { display:none; position:fixed; bottom:0; left:0; right:0; z-index:198; background:var(--navy); border-top:1px solid rgba(200,168,75,.2); padding:12px 5%; gap:.8rem; align-items:center; justify-content:center; }
-@media(max-width:600px){ .sticky-cta { display:flex; } .wa-float { bottom:72px; } }
-
-/* MYO mobile fixes */
-@media(max-width:800px){ #myo .reveal > div { grid-template-columns:1fr; gap:2rem; } }
-@media(max-width:600px){ .myo-section-title { font-size:1.2rem; } }
-
-/* Student life slideshow mobile */
-@media(max-width:600px){ .slideshow-wrap { height:300px; } .slideshow-wrap img { object-fit:contain; } }
-
-/* General mobile sizes */
-@media(max-width:600px){ .section-title { font-size:2rem; } .btn { padding:12px 28px; font-size:.7rem; } }
-
-/* ═══════════════════════════════════════════════
-   MISC
-═══════════════════════════════════════════════ */
-.sep-gold { width:100%; height:1px; background:linear-gradient(to right,transparent,rgba(200,168,75,.3),transparent); }
-.quote-block { border-left:3px solid var(--gold); padding:1.2rem 1.8rem; font-family:var(--ff-display); font-style:italic; font-size:1.1rem; color:rgba(255,255,255,.6); line-height:1.7; margin:2rem 0; background:rgba(200,168,75,.04); }
 </style>
 </head>
 <body>
@@ -593,6 +70,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <li><a href="#myo">Youth Orchestra</a></li>
       <li><a href="#partnership-donation">Support LSM</a></li>
       <li><a href="#booking">Contact</a></li>
+      <li><a href="portal.html">Student Portal</a></li>
     </ul>
     <div class="nav-cta">
       <div class="nav-social">
@@ -621,6 +99,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
   <a href="#myo" onclick="closeMobileNav()">Youth Orchestra</a>
   <a href="#partnership-donation" onclick="closeMobileNav()">Support LSM</a>
   <a href="#booking" onclick="closeMobileNav()">Book / Contact</a>
+  <a href="portal.html" onclick="closeMobileNav()">Student Portal</a>
   <div class="mobile-social">
     <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener" aria-label="Instagram">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -711,11 +190,12 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
         </article>
         <article class="monthly-item">
           <h3>Second Assessment</h3>
-          <p>Dear Parents, Students, and Guardians, this is a reminder that booking for the Second Assessment must be completed strictly before the end of April,
-            as no bookings will be accepted afterward, and the examinations will be conducted in May. This assessment is very important as it helps learners strengthen their
-            understanding of key topics, identify areas that need improvement, and prepare effectively for the final examinations. We kindly urge all students to ensure they complete their booking within
-            April and take the assessment seriously, while parents and guardians are encouraged to provide full support and guidance during this important academic period.</p>
-        </article>
+          <p>
+
+Announcement: <br>Please take note that the second assessment is due on 10 May 2026. If you have not yet taken the assessment, a booking fee will be required.
+Kindly, if you are in Grades 1 to 3 and have not yet taken the assessment, text me immediately so that we can schedule it.
+Please note that the assessment takes two hours, which is equivalent to two scheduled classes.
+Thank you.</article>
       </div>
       <div class="monthly-video">
         <div class="video-window">
@@ -1107,15 +587,15 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <p class="partners-note">LSM collaborates with the world's leading international music examination boards and institutions ensuring all students receive globally recognized certification and internationally benchmarked training.</p>
     </div>
     <div class="partners-grid reveal">
-      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/LCME Logo.webp" alt="LCME"><span>LCME</span></div>
-      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/Trinity_Centre_75333_logo_purple.png" alt="Trinity College London"><span>Trinity College London</span></div>
-      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/ABRSM logo.webp" alt="ABRSM"><span>ABRSM</span></div>
-      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/University of West London logo.webp" alt="London College of Music"><span>London College of Music</span></div>
+      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/LCME Logo.webp" alt="LCME"><span><center>London College of Music Examinations</center></span></div>
+      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/Trinity_Centre_75333_logo_purple.png" alt="Trinity College London"><span><center>Trinity College London</center></span></div>
+      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/ABRSM logo.webp" alt="ABRSM"><span><center>ABRSM</center></span></div>
+      <div class="partner-cell"><img src="Images/Logos/Partiners Logos/University of West London logo.webp" alt="London College of Music"><span><center>University of West London</center></span></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════ STUDENT LIFE ═══════ -->
+<!-- STUDENT LIFE  -->
 <section id="student-life" class="section" style="background:var(--cream);">
   <div class="container">
     <div class="section-header">
@@ -1155,6 +635,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <p class="section-intro">Moments from rehearsals, concerts, and community performances at Lilongwe School of Music.</p>
     </div>
     <div class="slideshow-wrap reveal" id="gallery-slideshow">
+      <button id="gallery-play-pause" class="play-pause-btn" onclick="toggleGallerySlideshow()">▶</button>
       <img src="Images/Conductor.jpg" alt="Conductor" class="active">
       <img src="Images/Horn player.jpg" alt="Horn Player">
       <img src="Images/LSM Ensemble.jpg" alt="LSM Ensemble">
@@ -1177,6 +658,41 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
   </div>
 </section>
 
+<!-- ═══════ VIDEOS ═══════ -->
+<section id="videos" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag-label">Info Graphics</span>
+      <h2 class="section-title">LSM Videos</h2>
+      <div class="gold-rule"></div>
+      <p class="section-intro">Watch our latest rehearsals and performances showcasing the talent and dedication of LSM students.</p>
+    </div>
+    <div class="video-container reveal">
+      <div style="position:relative;max-width:800px;margin:0 auto;">
+        <div id="videoThumbnail" style="position:relative;width:100%;background:#000;border-radius:6px;overflow:hidden;cursor:pointer;">
+          <img src="Images/LSM Orchestra.jpg" alt="Malawi National Anthem" style="width:100%;height:auto;display:block;opacity:.8;transition:opacity .3s;"/>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);">
+            <button id="playVideoBtn" style="width:80px;height:80px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:all .3s;box-shadow:0 8px 28px rgba(200,168,75,.35);">▶</button>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);padding:20px;color:#fff;font-family:var(--ff-display);">
+            <p style="margin:0;font-size:1.2rem;font-weight:600;">Malawi National Anthem</p>
+          </div>
+        </div>
+        <video id="videoPlayer" controls style="width:100%;max-width:800px;display:none;margin:0 auto;border-radius:6px;">
+          <source src="Videos/Malawi National Anthem.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div id="noContent" style="display:none; text-align:center; padding:40px; font-size:18px; color:#666; background:#e8e8e8; border-radius:5px; max-width:800px; margin:20px auto;">No content available, comeback later</div>
+      <div class="controls" style="text-align:center; margin-top:10px;">
+        <button id="togglePlayPause" style="padding:10px 20px; margin:0 5px; cursor:pointer; display:none;">Pause</button>
+        <button onclick="toggleFullscreen()" style="padding:10px 20px; margin:0 5px; cursor:pointer;">Fullscreen</button>
+        <button onclick="minimizeVideo()" style="padding:10px 20px; margin:0 5px; cursor:pointer;">Minimize</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════ MALAWI YOUTH ORCHESTRA (MYO) ═══════ -->
 <section id="myo" class="section">
   <div class="container">
@@ -1187,17 +703,16 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <p class="section-intro">An exciting new initiative bringing together the finest young musicians and vocalists in Malawi for world-class orchestral and ensemble experiences.</p>
     </div>
     <div class="reveal">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:3rem;">
-        <div>
-          <h3 class="myo-section-title">About the Malawi Youth Orchestra</h3>
-          <p style="font-size:.95rem;line-height:1.9;color:var(--text);margin-bottom:1.2rem;">The Malawi Youth Orchestra (MYO) represents a groundbreaking initiative to develop and celebrate the next generation of musical performers in Malawi. Designed as an elite ensemble project under the Lilongwe School of Music, MYO will bring together the most talented instrumentalists and vocalists across the country to perform at the highest standards.</p>
-          <p style="font-size:.95rem;line-height:1.9;color:var(--text);">We are currently in the planning stages and are excited to share that we will be launching the Malawi Youth Orchestra in the future. This represents a major step in advancing music performance and education across our nation.</p>
-        </div>
-        <div>
-          <h3 class="myo-section-title">Planned Activities</h3>
-          <ul style="list-style:none;">
-            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Auditions &amp; Recruitment:</strong> Nationwide auditions to identify and select the most promising young musicians across all instrumental and vocal disciplines.</span></li>
-            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Intensive Rehearsals:</strong> Regular ensemble rehearsals and coaching with master musicians to develop world-class performance standards.</span></li>
+      <div>
+        <h3 class="myo-section-title">About the Malawi Youth Orchestra</h3>
+        <p style="font-size:.95rem;line-height:1.9;color:var(--text);margin-bottom:1.2rem;">The Malawi Youth Orchestra (MYO) represents a groundbreaking initiative to develop and celebrate the next generation of musical performers in Malawi. Designed as an elite ensemble project under the Lilongwe School of Music, MYO will bring together the most talented instrumentalists and vocalists across the country to perform at the highest standards.</p>
+        <p style="font-size:.95rem;line-height:1.9;color:var(--text);margin-bottom:2rem;">We are currently in the planning stages and are excited to share that we will be launching the Malawi Youth Orchestra in the future. This represents a major step in advancing music performance and education across our nation.</p>
+      </div>
+      <div>
+        <h3 class="myo-section-title">Planned Activities</h3>
+        <ul style="list-style:none;margin-bottom:2rem;">
+          <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Auditions &amp; Recruitment:</strong> Nationwide auditions to identify and select the most promising young musicians across all instrumental and vocal disciplines.</span></li>
+          <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Intensive Rehearsals:</strong> Regular ensemble rehearsals and coaching with master musicians to develop world-class performance standards.</span></li>
             <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Concert Performances:</strong> Public concerts and touring performances across Malawi, showcasing our nation's musical talent at the highest level.</span></li>
             <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">International Collaborations:</strong> Partnerships with international orchestras and music institutions for collaborative performances and cultural exchange.</span></li>
             <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Music Education Workshops:</strong> Masterclasses and educational workshops delivered by leading musicians and conductors for MYO members and the broader student community.</span></li>
@@ -1772,6 +1287,9 @@ setInterval(function() { goSlide((slideIdx + 1) % slides.length); }, 3800);
 var gallerySlideIdx = 0;
 var gallerySlides = document.querySelectorAll('#gallery-slideshow img');
 var galleryDots   = document.querySelectorAll('#gallery-slideDots .slide-dot');
+var galleryInterval;
+var galleryPlaying = true;
+
 function goSlideGallery(n) {
   gallerySlides[gallerySlideIdx].classList.remove('active');
   galleryDots[gallerySlideIdx].classList.remove('active');
@@ -1779,7 +1297,20 @@ function goSlideGallery(n) {
   gallerySlides[gallerySlideIdx].classList.add('active');
   galleryDots[gallerySlideIdx].classList.add('active');
 }
-setInterval(function() { goSlideGallery((gallerySlideIdx + 1) % gallerySlides.length); }, 3800);
+
+function toggleGallerySlideshow() {
+  var btn = document.getElementById('gallery-play-pause');
+  if (galleryPlaying) {
+    clearInterval(galleryInterval);
+    btn.textContent = '⏸';
+  } else {
+    galleryInterval = setInterval(function() { goSlideGallery((gallerySlideIdx + 1) % gallerySlides.length); }, 3800);
+    btn.textContent = '▶';
+  }
+  galleryPlaying = !galleryPlaying;
+}
+
+galleryInterval = setInterval(function() { goSlideGallery((gallerySlideIdx + 1) % gallerySlides.length); }, 3800);
 
 /* ════════════════════════════════════════════════
    FORM VALIDATION & SUBMISSION
@@ -1949,15 +1480,73 @@ async function submitLSMForm(id) {
 
 /* ── FULLSCREEN VIDEO ── */
 function toggleFullscreen() {
-  var iframe = document.getElementById('lsm-video');
-  if (!document.fullscreenElement) {
-    iframe.requestFullscreen().catch(function(err) {
-      console.error('Fullscreen error:', err.message);
-    });
-  } else {
-    document.exitFullscreen();
+  var video = document.getElementById('videoPlayer');
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.webkitRequestFullscreen) {
+    video.webkitRequestFullscreen();
+  } else if (video.msRequestFullscreen) {
+    video.msRequestFullscreen();
   }
 }
+
+function minimizeVideo() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
+}
+// Video click-to-play and fallback handling
+(function(){
+  var thumbnail = document.getElementById('videoThumbnail');
+  var playBtn = document.getElementById('playVideoBtn');
+  var vid = document.getElementById('videoPlayer');
+  var noContent = document.getElementById('noContent');
+  var toggleBtn = document.getElementById('togglePlayPause');
+  if (!vid || !thumbnail) return;
+
+  // Click to play
+  if (playBtn) {
+    playBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      thumbnail.style.display = 'none';
+      vid.style.display = 'block';
+      toggleBtn.style.display = 'inline-block';
+      vid.play();
+    });
+  }
+
+  // Toggle play/pause
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function(){
+      if (vid.paused) {
+        vid.play();
+        toggleBtn.textContent = 'Pause';
+      } else {
+        vid.pause();
+        toggleBtn.textContent = 'Play';
+      }
+    });
+  }
+
+  function showNoContent(){
+    try { thumbnail.style.display = 'none'; vid.style.display = 'none'; } catch(e){}
+    noContent.style.display = 'block';
+  }
+
+  // Check if video source is valid
+  var sources = document.querySelectorAll('#videoPlayer source');
+  vid.addEventListener('error', function(){ showNoContent(); });
+  sources.forEach(function(s){ s.addEventListener('error', function(){ showNoContent(); }); });
+
+  // Check if source exists and is valid
+  var hasSrc = Array.from(sources).some(function(s){ var v = s.getAttribute('src'); return v && v.trim() !== '' && !v.includes('path/to'); });
+  if (!hasSrc) showNoContent();
+})();
 </script>
+<script src="script.js"></script>
 </body>
 </html>

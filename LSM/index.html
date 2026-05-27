@@ -65,8 +65,8 @@
   --mid: #4a566a;
   --light: #8090a6;
   --white: #fdfbf6;
-  --ff-display: 'Cormorant Garamond', Georgia, serif;
-  --ff-body: 'Outfit', 'Segoe UI', sans-serif;
+  --ff-display: 'Georgia', serif;
+  --ff-body: '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   --ease: cubic-bezier(.4,0,.2,1);
 }
 /* ──────────────── RESET ──────────────── */
@@ -175,7 +175,7 @@ button { font-family:var(--ff-body); cursor:pointer; }
    HERO
 ═══════════════════════════════════════════════ */
 #home { min-height:100vh; position:relative; display:flex; align-items:center; overflow:hidden; background:var(--ink); }
-.hero-bg { position:absolute; inset:0; background:url('Images/Horn%20player.jpg') center/cover no-repeat; opacity:.6; filter:blur(1px); }
+.hero-bg { position:absolute; inset:0; background:url('Images/LSM Orchestra.jpg') center/contain no-repeat; opacity:.6; filter:blur(1px); background-size: contain; }
 .hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(8,12,20,.97) 0%,rgba(6,12,17,.44) 50%,rgba(26,53,97,.72) 100%); }
 .hero-grain { position:absolute; inset:0; opacity:.04; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 .hero-deco { position:absolute; top:0; right:0; width:45%; height:100%; pointer-events:none; overflow:hidden; }
@@ -393,6 +393,7 @@ button { font-family:var(--ff-body); cursor:pointer; }
 .slideshow-wrap { position:relative; width:100%; height:480px; overflow:hidden; }
 .slideshow-wrap img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s; }
 .slideshow-wrap img.active { opacity:1; }
+.play-pause-btn { position:absolute; top:10px; right:10px; z-index:10; background:rgba(0,0,0,.5); color:#fff; border:none; padding:10px; font-size:1.2rem; cursor:pointer; border-radius:50%; width:50px; height:50px; display:flex; align-items:center; justify-content:center; }
 .slide-dots { display:flex; gap:.5rem; justify-content:center; margin-top:1.2rem; }
 .slide-dot { width:8px; height:8px; border-radius:50%; background:var(--mist); cursor:pointer; transition:background .3s; }
 .slide-dot.active { background:var(--gold); }
@@ -1247,6 +1248,7 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <p class="section-intro">Moments from rehearsals, concerts, and community performances at Lilongwe School of Music.</p>
     </div>
     <div class="slideshow-wrap reveal" id="gallery-slideshow">
+      <button id="gallery-play-pause" class="play-pause-btn" onclick="toggleGallerySlideshow()">▶</button>
       <img src="Images/Conductor.jpg" alt="Conductor" class="active">
       <img src="Images/Horn player.jpg" alt="Horn Player">
       <img src="Images/LSM Ensemble.jpg" alt="LSM Ensemble">
@@ -1269,6 +1271,40 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
   </div>
 </section>
 
+<!-- ═══════ VIDEOS ═══════ -->
+<section id="videos" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag-label">Rehearsals & Performances</span>
+      <h2 class="section-title">LSM Videos</h2>
+      <div class="gold-rule"></div>
+      <p class="section-intro">Watch our latest rehearsals and performances showcasing the talent and dedication of LSM students.</p>
+    </div>
+    <div class="video-container reveal">
+      <div style="position:relative;max-width:800px;margin:0 auto;">
+        <div id="videoThumbnail" style="position:relative;width:100%;background:#000;border-radius:6px;overflow:hidden;cursor:pointer;">
+          <img src="Images/LSM Orchestra.jpg" alt="Malawi National Anthem" style="width:100%;height:auto;display:block;opacity:.8;transition:opacity .3s;"/>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);">
+            <button id="playVideoBtn" style="width:80px;height:80px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:all .3s;box-shadow:0 8px 28px rgba(200,168,75,.35);">▶</button>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);padding:20px;color:#fff;font-family:var(--ff-display);">
+            <p style="margin:0;font-size:1.2rem;font-weight:600;">Malawi National Anthem</p>
+          </div>
+        </div>
+        <video id="videoPlayer" controls style="width:100%;max-width:800px;display:none;margin:0 auto;border-radius:6px;">
+          <source src="Videos/Malawi National Anthem.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="controls" style="text-align:center; margin-top:10px;">
+        <button id="togglePlayPause" style="padding:10px 20px; margin:0 5px; cursor:pointer; display:none;">Pause</button>
+        <button onclick="toggleFullscreen()" style="padding:10px 20px; margin:0 5px; cursor:pointer;">Fullscreen</button>
+        <button onclick="minimizeVideo()" style="padding:10px 20px; margin:0 5px; cursor:pointer;">Minimize</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════ MALAWI YOUTH ORCHESTRA (MYO) ═══════ -->
 <section id="myo" class="section">
   <div class="container">
@@ -1279,23 +1315,22 @@ footer { background:var(--ink); padding:64px 5% 32px; border-top:1px solid rgba(
       <p class="section-intro">An exciting new initiative bringing together the finest young musicians and vocalists in Malawi for world-class orchestral and ensemble experiences.</p>
     </div>
     <div class="reveal">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:3rem;">
-        <div>
-          <h3 class="myo-section-title">About the Malawi Youth Orchestra</h3>
-          <p style="font-size:.95rem;line-height:1.9;color:var(--text);margin-bottom:1.2rem;">The Malawi Youth Orchestra (MYO) represents a groundbreaking initiative to develop and celebrate the next generation of musical performers in Malawi. Designed as an elite ensemble project under the Lilongwe School of Music, MYO will bring together the most talented instrumentalists and vocalists across the country to perform at the highest standards.</p>
-          <p style="font-size:.95rem;line-height:1.9;color:var(--text);">We are currently in the planning stages and are excited to share that we will be launching the Malawi Youth Orchestra in the future. This represents a major step in advancing music performance and education across our nation.</p>
-        </div>
-        <div>
-          <h3 class="myo-section-title">Planned Activities</h3>
-          <ul style="list-style:none;">
-            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;">
-              <span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span>
-              <span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Auditions & Recruitment:</strong> Nationwide auditions to identify and select the most promising young musicians across all instrumental and vocal disciplines.</span>
-            </li>
-            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;">
-              <span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span>
-              <span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Intensive Rehearsals:</strong> Regular ensemble rehearsals and coaching with master musicians to develop world-class performance standards.</span>
-            </li>
+      <div>
+        <h3 class="myo-section-title">About the Malawi Youth Orchestra</h3>
+        <p style="font-size:.95rem;line-height:1.9;color:var(--text);margin-bottom:1.2rem;">The Malawi Youth Orchestra (MYO) represents a groundbreaking initiative to develop and celebrate the next generation of musical performers in Malawi. Designed as an elite ensemble project under the Lilongwe School of Music, MYO will bring together the most talented instrumentalists and vocalists across the country to perform at the highest standards.</p>
+        <p style="font-size:.95rem;line-height:1.9;color:var(--text);margin-bottom:2rem;">We are currently in the planning stages and are excited to share that we will be launching the Malawi Youth Orchestra in the future. This represents a major step in advancing music performance and education across our nation.</p>
+      </div>
+      <div>
+        <h3 class="myo-section-title">Planned Activities</h3>
+        <ul style="list-style:none;margin-bottom:2rem;">
+          <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;">
+            <span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span>
+            <span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Auditions & Recruitment:</strong> Nationwide auditions to identify and select the most promising young musicians across all instrumental and vocal disciplines.</span>
+          </li>
+          <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;">
+            <span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span>
+            <span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Intensive Rehearsals:</strong> Regular ensemble rehearsals and coaching with master musicians to develop world-class performance standards.</span>
+          </li>
             <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;">
               <span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span>
               <span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Concert Performances:</strong> Public concerts and touring performances across Malawi, showcasing our nation's musical talent at the highest level.</span>
@@ -1872,6 +1907,9 @@ setInterval(function() { goSlide((slideIdx + 1) % slides.length); }, 3800);
 var gallerySlideIdx = 0;
 var gallerySlides = document.querySelectorAll('#gallery-slideshow img');
 var galleryDots   = document.querySelectorAll('#gallery-slideDots .slide-dot');
+var galleryInterval;
+var galleryPlaying = true;
+
 function goSlideGallery(n) {
   gallerySlides[gallerySlideIdx].classList.remove('active');
   galleryDots[gallerySlideIdx].classList.remove('active');
@@ -1879,7 +1917,20 @@ function goSlideGallery(n) {
   gallerySlides[gallerySlideIdx].classList.add('active');
   galleryDots[gallerySlideIdx].classList.add('active');
 }
-setInterval(function() { goSlideGallery((gallerySlideIdx + 1) % gallerySlides.length); }, 3800);
+
+function toggleGallerySlideshow() {
+  var btn = document.getElementById('gallery-play-pause');
+  if (galleryPlaying) {
+    clearInterval(galleryInterval);
+    btn.textContent = '⏸';
+  } else {
+    galleryInterval = setInterval(function() { goSlideGallery((gallerySlideIdx + 1) % gallerySlides.length); }, 3800);
+    btn.textContent = '▶';
+  }
+  galleryPlaying = !galleryPlaying;
+}
+
+galleryInterval = setInterval(function() { goSlideGallery((gallerySlideIdx + 1) % gallerySlides.length); }, 3800);
 
 /* ════════════════════════════════════════════════
    FORM SYSTEM — Formspree
@@ -2066,15 +2117,58 @@ async function submitLSMForm(id) {
 }
 
 function toggleFullscreen() {
-  var iframe = document.getElementById('lsm-video');
-  if (!document.fullscreenElement) {
-    iframe.requestFullscreen().catch(err => {
-      console.error('Error attempting to enable full-screen mode:', err.message);
-    });
-  } else {
-    document.exitFullscreen();
+  var video = document.getElementById('videoPlayer');
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.webkitRequestFullscreen) {
+    video.webkitRequestFullscreen();
+  } else if (video.msRequestFullscreen) {
+    video.msRequestFullscreen();
   }
 }
+
+function minimizeVideo() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
+}
+
+// Video click-to-play and fallback handling
+(function(){
+  var thumbnail = document.getElementById('videoThumbnail');
+  var playBtn = document.getElementById('playVideoBtn');
+  var vid = document.getElementById('videoPlayer');
+  var toggleBtn = document.getElementById('togglePlayPause');
+  if (!vid || !thumbnail) return;
+
+  // Click to play
+  if (playBtn) {
+    playBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      thumbnail.style.display = 'none';
+      vid.style.display = 'block';
+      toggleBtn.style.display = 'inline-block';
+      vid.play();
+    });
+  }
+
+  // Toggle play/pause
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function(){
+      if (vid.paused) {
+        vid.play();
+        toggleBtn.textContent = 'Pause';
+      } else {
+        vid.pause();
+        toggleBtn.textContent = 'Play';
+      }
+    });
+  }
+})();
 </script>
 </body>
 </html>
