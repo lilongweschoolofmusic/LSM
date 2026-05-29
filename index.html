@@ -50,42 +50,48 @@
   }
 }
 </script>
-</style>
 </head>
 <body>
 
 <!-- ═══════ TOPBAR ═══════ -->
 <header id="topbar">
-  <div class="nav-inner">
-    <div class="nav-brand" onclick="scrollTo({top:0,behavior:'smooth'})">
+  <div class="top-row">
+    <div class="nav-brand" onclick="window.location.hash='#home';scrollTo({top:0,behavior:'smooth'})" style="cursor:pointer;">
       <img src="Images/Logos/LSM Logos/LSM Logo white.png" alt="LSM Logo">
     </div>
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#programs">Curriculum</a></li>
-      <li><a href="#admissions">Admissions</a></li>
-      <li><a href="#events">Events</a></li>
-      <li><a href="#gallery">LSM Orchestra</a></li>
-      <li><a href="#myo">Youth Orchestra</a></li>
-      <li><a href="#partnership-donation">Support LSM</a></li>
-      <li><a href="#booking">Contact</a></li>
-      <li><a href="portal.html">Student Portal</a></li>
-    </ul>
-    <div class="nav-cta">
-      <div class="nav-social">
-        <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </a>
-        <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
+    <div class="top-actions">
+      <div class="action-row">
+        <div class="nav-social top-social">
+          <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+        <a href="#admissions" class="btn btn-outline-white top-btn">Apply Now</a>
+        <a href="#booking" class="btn btn-outline-white top-btn">🎫 Book Tickets</a>
+      </div>
+      <div class="login-row" style="display:flex; gap:0.4rem; align-items:center; font-size:.65rem; color:rgba(255,255,255,.7);">
+        <a href="portal.html" style="color:rgba(255,255,255,.7); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='rgba(255,255,255,.7)'">Student Login</a>
+        <span style="color:rgba(255,255,255,.4);">/</span>
+        <a href="portal.html" style="color:rgba(255,255,255,.7); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='rgba(255,255,255,.7)'">Staff Login</a>
       </div>
     </div>
     <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">
       <span></span><span></span><span></span>
     </button>
-  </div>
+  </div> 
+  <nav class="subnav" aria-label="Primary site navigation">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#programs">Programs</a>
+    <a href="#admissions">Admissions</a>
+    <a href="#events">Events</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#myo">Youth Orchestra</a>
+    <a href="#booking">Contact</a>
+  </nav>
 </header>
 
 <!-- Mobile nav panel -->
@@ -124,6 +130,7 @@
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-grain"></div>
+  <div class="hero-deco hero-deco-left"></div>
   <div class="hero-deco"></div>
   <div class="hero-content">
     <div class="hero-left">
@@ -364,7 +371,7 @@ Thank you.</article>
           <div class="sday">Saturday</div>
           <div class="stime">4:00 PM – 7:30 PM</div>
         </div>
-        <div style="flex:2;min-width:240px;padding:1.4rem 1.8rem;background:rgba(26,53,97,.15);border:1px solid rgba(200,168,75,.1);display:flex;align-items:center;">
+        <div style="flex:2;min-width:240px;padding:1.4rem 1.8rem;background:rgba(26,53,97,.15);border:1px solid rgba(201,214,232,.18);display:flex;align-items:center;">
           <p style="font-size:.84rem;color:rgba(255,255,255,.45);line-height:1.85;">Flexible part-time schedule designed to allow students to balance academic and professional commitments with music education.</p>
         </div>
         <div style="display:flex;align-items:center;padding:1rem;">
@@ -621,6 +628,7 @@ Thank you.</article>
         <div class="slide-dot" onclick="goSlide(4)"></div>
         <div class="slide-dot" onclick="goSlide(5)"></div>
       </div>
+      <div class="slide-status" id="slideStatus">Viewing <span>1</span> of 6</div>
     </div>
   </div>
 </section>
@@ -655,6 +663,7 @@ Thank you.</article>
       <div class="slide-dot" onclick="goSlideGallery(6)"></div>
       <div class="slide-dot" onclick="goSlideGallery(7)"></div>
     </div>
+    <div class="slide-status" id="gallerySlideStatus">Viewing <span>1</span> of 8</div>
   </div>
 </section>
 
@@ -672,7 +681,7 @@ Thank you.</article>
         <div id="videoThumbnail" style="position:relative;width:100%;background:#000;border-radius:6px;overflow:hidden;cursor:pointer;">
           <img src="Images/LSM Orchestra.jpg" alt="Malawi National Anthem" style="width:100%;height:auto;display:block;opacity:.8;transition:opacity .3s;"/>
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);">
-            <button id="playVideoBtn" style="width:80px;height:80px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:all .3s;box-shadow:0 8px 28px rgba(200,168,75,.35);">▶</button>
+            <button id="playVideoBtn" style="width:80px;height:80px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:all .3s;box-shadow:0 8px 28px rgba(201,214,232,.35);">▶</button>
           </div>
           <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);padding:20px;color:#fff;font-family:var(--ff-display);">
             <p style="margin:0;font-size:1.2rem;font-weight:600;">Malawi National Anthem</p>
@@ -685,9 +694,9 @@ Thank you.</article>
       </div>
       <div id="noContent" style="display:none; text-align:center; padding:40px; font-size:18px; color:#666; background:#e8e8e8; border-radius:5px; max-width:800px; margin:20px auto;">No content available, comeback later</div>
       <div class="controls" style="text-align:center; margin-top:10px;">
-        <button id="togglePlayPause" style="padding:10px 20px; margin:0 5px; cursor:pointer; display:none;">Pause</button>
-        <button onclick="toggleFullscreen()" style="padding:10px 20px; margin:0 5px; cursor:pointer;">Fullscreen</button>
-        <button onclick="minimizeVideo()" style="padding:10px 20px; margin:0 5px; cursor:pointer;">Minimize</button>
+        <button id="togglePlayPause" style="padding:10px 20px; margin:0 5px; cursor:pointer; display:none;" aria-label="Pause">⏸</button>
+        <button onclick="toggleFullscreen()" style="padding:10px 20px; margin:0 5px; cursor:pointer;" aria-label="Fullscreen">⛶</button>
+        <button onclick="minimizeVideo()" style="padding:10px 20px; margin:0 5px; cursor:pointer;" aria-label="Minimize">🗕</button>
       </div>
     </div>
   </div>
@@ -1274,21 +1283,38 @@ document.querySelectorAll('.form-tab-nav-btn').forEach(function(btn) {
 var slideIdx = 0;
 var slides = document.querySelectorAll('#slideshow img');
 var dots   = document.querySelectorAll('#slideDots .slide-dot');
+var slideStatus = document.getElementById('slideStatus');
+
+function updateSlideStatus() {
+  if (!slideStatus) return;
+  var count = slideIdx + 1;
+  slideStatus.querySelector('span').textContent = count;
+}
+
 function goSlide(n) {
   slides[slideIdx].classList.remove('active');
   dots[slideIdx].classList.remove('active');
   slideIdx = n;
   slides[slideIdx].classList.add('active');
   dots[slideIdx].classList.add('active');
+  updateSlideStatus();
 }
+
 setInterval(function() { goSlide((slideIdx + 1) % slides.length); }, 3800);
 
 /* ── GALLERY SLIDESHOW ── */
 var gallerySlideIdx = 0;
 var gallerySlides = document.querySelectorAll('#gallery-slideshow img');
 var galleryDots   = document.querySelectorAll('#gallery-slideDots .slide-dot');
+var galleryStatus = document.getElementById('gallerySlideStatus');
 var galleryInterval;
 var galleryPlaying = true;
+
+function updateGalleryStatus() {
+  if (!galleryStatus) return;
+  var count = gallerySlideIdx + 1;
+  galleryStatus.querySelector('span').textContent = count;
+}
 
 function goSlideGallery(n) {
   gallerySlides[gallerySlideIdx].classList.remove('active');
@@ -1296,6 +1322,7 @@ function goSlideGallery(n) {
   gallerySlideIdx = n;
   gallerySlides[gallerySlideIdx].classList.add('active');
   galleryDots[gallerySlideIdx].classList.add('active');
+  updateGalleryStatus();
 }
 
 function toggleGallerySlideshow() {
@@ -1311,6 +1338,8 @@ function toggleGallerySlideshow() {
 }
 
 galleryInterval = setInterval(function() { goSlideGallery((gallerySlideIdx + 1) % gallerySlides.length); }, 3800);
+updateSlideStatus();
+updateGalleryStatus();
 
 /* ════════════════════════════════════════════════
    FORM VALIDATION & SUBMISSION
@@ -1546,6 +1575,19 @@ function minimizeVideo() {
   var hasSrc = Array.from(sources).some(function(s){ var v = s.getAttribute('src'); return v && v.trim() !== '' && !v.includes('path/to'); });
   if (!hasSrc) showNoContent();
 })();
+
+/* ── TOPBAR SCROLL MINIMIZE ── */
+var lastScrollTop = 0;
+var topbar = document.getElementById('topbar');
+window.addEventListener('scroll', function() {
+  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  if (scrollTop > 100) {
+    topbar.classList.add('scroll-minimized');
+  } else {
+    topbar.classList.remove('scroll-minimized');
+  }
+  lastScrollTop = scrollTop;
+});
 </script>
 <script src="script.js"></script>
 </body>
