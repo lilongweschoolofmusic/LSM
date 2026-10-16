@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Meet the musicians of LSM Open Orchestra and explore the orchestra by instrument section.">
+  <title>LSM Open Orchestra Roster | Lilongwe School of Music</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --navy: #1e2a4a;
+      --ink: #171717;
+      --muted: #626262;
+      --gold: #c8a84b;
+      --line: #c9c9c9;
+      --paper: #fff;
+      --warm: #f5efe5;
+    }
+    html { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+    html.scrollbar-visible { scrollbar-color: rgba(12,24,41,.55) transparent; }
+    html::-webkit-scrollbar { width: 7px; height: 7px; }
+    html::-webkit-scrollbar-track { background: transparent; }
+    html::-webkit-scrollbar-thumb { border-radius: 999px; background: transparent; }
+    html.scrollbar-visible::-webkit-scrollbar-thumb { background: rgba(12,24,41,.55); }
+    @media(max-width: 600px) {
+      html { scrollbar-width: none; }
+      html::-webkit-scrollbar { display: none; width: 0; height: 0; }
+    }
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root) { animation: page-fade-out .18s ease-out both; }
+    ::view-transition-new(root) { animation: page-fade-in .42s ease-out both; }
+    @keyframes page-fade-out { to { opacity: 0; } }
+    @keyframes page-fade-in { from { opacity: 0; } to { opacity: 1; } }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+    a { color: inherit; }
+    .site-header { background: var(--navy); color: #fff; }
+    .header-inner { width: min(1200px, 90%); min-height: 72px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { display: inline-flex; align-items: center; }
+    .brand img { display: block; width: 156px; max-height: 48px; object-fit: contain; }
+    .brand-group { display: flex; align-items: center; gap: .8rem; }
+    .header-whatsapp { display: flex; width: 30px; height: 30px; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; color: #fff; transition: color .2s, border-color .2s, background .2s; }
+    .header-whatsapp:hover { border-color: #25d366; background: rgba(37,211,102,.12); color: #25d366; }
+    .header-whatsapp svg { width: 16px; height: 16px; fill: currentColor; }
+    .home-link { color: #fff; font-size: .85rem; text-decoration: none; }
+    .home-link:hover { color: #fff; }
+    .page-intro { padding: 2rem 5%; background: #0d456f; color: #f7f4ec; }
+    .page-intro-inner { width: min(1080px, 100%); margin: auto; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: 2rem; }
+    .eyebrow { margin: 0 0 .65rem; color: #fff; font-size: .7rem; font-weight: 700; letter-spacing: .17em; text-transform: uppercase; }
+    h1 { margin: 0; color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.1; }
+    .intro-copy { max-width: 430px; margin: .85rem 0 0; padding-bottom: .85rem; border-bottom: 1px solid rgba(255,255,255,.45); color: rgba(255,255,255,.88); font-size: .88rem; line-height: 1.6; }
+    .intro-image { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+    main { width: min(1080px, 90%); margin: 0 auto; padding: 1.8rem 0 4rem; background: var(--paper); }
+    .roster-note { margin: 0 0 1.6rem; color: var(--muted); font-size: .84rem; line-height: 1.6; }
+    .roster-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 2.4rem; }
+    .roster-column { display: grid; gap: 1.35rem; }
+    .instrument { min-width: 0; }
+    .instrument h2 { margin: 0 0 .45rem; padding-bottom: .35rem; border-bottom: 1px solid #9b9b9b; color: #111; font-size: .98rem; font-weight: 700; }
+    .musician-list { margin: 0; padding: 0; list-style: none; }
+    .musician-list li { padding: .12rem 0; color: #333; font-size: .8rem; line-height: 1.45; }
+    .back-row { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+    .back-row a { color: var(--navy); font-size: .84rem; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .footer-intro-band { padding: 34px 5%; background: #f3e9d9; color: var(--navy); }
+    .footer-intro-inner { width: min(1200px, 100%); margin: auto; display: grid; grid-template-columns: minmax(130px, 180px) minmax(0, 1fr) minmax(190px, .8fr); align-items: center; gap: 2rem; }
+    .footer-monogram { width: 140px; height: 140px; object-fit: contain; }
+    .footer-intro-copy h2 { margin: 0 0 .55rem; font-family: Arial, Helvetica, sans-serif; font-size: clamp(1.2rem, 2vw, 1.65rem); }
+    .footer-intro-copy p, .footer-intro-action p { margin: 0; color: #3e4855; font-size: .86rem; line-height: 1.7; }
+    .footer-intro-action { padding-left: 1.5rem; border-left: 1px solid rgba(12,24,41,.4); }
+    .footer-intro-action h2 { margin: 0 0 .55rem; font-size: 1rem; }
+    .footer-intro-action a { display: inline-block; margin-top: .8rem; color: var(--navy); font-size: .82rem; font-weight: 700; }
+    .site-footer { padding: 48px 5% 76px; background: #050505; color: #fff; }
+    .footer-inner { width: min(1200px, 100%); margin: auto; }
+    .footer-grid { display: grid; grid-template-columns: 1.45fr repeat(2, minmax(130px, 1fr)) minmax(180px, 1fr); gap: 2.4rem; margin-bottom: 2.5rem; }
+    .footer-brand-logo { display: inline-flex; margin-bottom: 1rem; }
+    .footer-brand-logo img { width: auto; max-width: 165px; max-height: 66px; object-fit: contain; }
+    .footer-brand-sub { margin: 0 0 1rem; color: rgba(255,255,255,.72); font-family: Arial, Helvetica, sans-serif; font-size: .85rem; font-style: italic; }
+    .footer-brand p { margin: 0; color: rgba(255,255,255,.82); font-size: .82rem; line-height: 1.8; }
+    .footer-col h2 { margin: 0 0 1rem; color: #fff; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; }
+    .footer-col ul { margin: 0; padding: 0; list-style: none; }
+    .footer-col li { margin-bottom: .58rem; }
+    .footer-col li a { color: rgba(255,255,255,.82); font-size: .82rem; line-height: 1.5; text-decoration: none; }
+    .footer-col li a:hover, .footer-bottom a:hover { color: #fff; }
+    .footer-contact { padding-left: 1.6rem; border-left: 1px solid rgba(255,255,255,.25); }
+    .footer-contact .footer-contact-heading { margin-top: 1.3rem; }
+    .footer-social { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1rem; }
+    .footer-social a { display: flex; width: 36px; height: 36px; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.7); border-radius: 50%; color: #fff; text-decoration: none; transition: color .2s, border-color .2s; }
+    .footer-social a:hover { border-color: #fff; color: #fff; }
+    .footer-social svg { width: 14px; height: 14px; fill: currentColor; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,.28); }
+    .footer-bottom p, .footer-bottom a { color: rgba(255,255,255,.82); font-size: .74rem; line-height: 1.6; }
+    .footer-bottom p { margin: 0; }
+    .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+    .footer-bottom a { text-decoration: none; }
+    @media(prefers-reduced-motion:reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; }
+      ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+    }
+    @media(max-width: 900px) {
+      .footer-intro-inner { grid-template-columns: 130px minmax(0, 1fr); }
+      .footer-monogram { grid-row: span 2; }
+      .footer-intro-action { padding: 1rem 0 0; border-top: 1px solid rgba(12,24,41,.25); border-left: 0; }
+      .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .footer-contact { padding: 1.3rem 0 0; border: 0; border-top: 1px solid rgba(255,255,255,.25); }
+    }
+    @media(max-width: 520px) {
+      .header-inner { min-height: 64px; }
+      .brand img { width: 132px; }
+      .home-link { font-size: .76rem; }
+      .page-intro { padding: 1.5rem 5%; }
+      .page-intro-inner { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
+      main { padding-top: 1.5rem; }
+      .roster-grid { grid-template-columns: minmax(0, 1fr); gap: 1.35rem; }
+      .footer-intro-band { padding: 28px 6%; }
+      .footer-intro-inner { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
+      .footer-monogram { grid-row: auto; width: 104px; height: 104px; margin: 0 auto; }
+      .footer-intro-copy, .footer-intro-action { text-align: center; }
+      .site-footer { padding: 36px 6% 96px; }
+      .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1rem; }
+      .footer-contact { grid-column: 1 / -1; }
+      .footer-brand-logo img { max-width: 145px; max-height: 60px; }
+      .footer-bottom { align-items: flex-start; }
+      .footer-bottom-links { gap: .85rem 1rem; }
+    }
+    @media(max-width: 360px) { .footer-grid { grid-template-columns: minmax(0, 1fr); } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <a class="brand" href="index.html" aria-label="Lilongwe School of Music home">
+          <img src="Images/Logos/LSM Logos/LSM Logo white.png" alt="Lilongwe School of Music">
+        </a>
+        <a class="header-whatsapp" href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank" rel="noopener noreferrer" aria-label="Contact LSM on WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </a>
+      </div>
+      <a class="home-link" href="index.html#open-orchestra">← Back to LSM Open Orchestra</a>
+    </div>
+  </header>
+
+  <section class="page-intro" aria-labelledby="roster-title">
+    <div class="page-intro-inner">
+      <div class="intro-text">
+        <p class="eyebrow">Lilongwe School of Music</p>
+        <h1 id="roster-title">Orchestra Roster</h1>
+        <p class="intro-copy">Meet the musicians of LSM Open Orchestra and explore the players across our instrument sections.</p>
+      </div>
+      <img class="intro-image" src="Images/LSM Orchestra 3.jpg" alt="LSM Open Orchestra performing together">
+    </div>
+  </section>
+
+  <main>
+    <p class="roster-note">Musicians and principal positions are listed by instrument section.</p>
+    <div class="roster-grid">
+      <div class="roster-column">
+        <section class="instrument" aria-labelledby="first-violins-title">
+          <h2 id="first-violins-title">First Violins</h2>
+          <ul class="musician-list">
+            <li>Edgar Mwanja (Principal First Violin)</li>
+            <li>John Chilongo</li>
+            <li>Devki Prejesh</li>
+            <li>Chawezi Lia</li>
+            <li>Tazirwa Chembezi</li>
+            <li>Timothy Ndaluza</li>
+            <li>Janki Prejesh</li>
+          </ul>
+        </section>
+        <section class="instrument" aria-labelledby="second-violins-title">
+          <h2 id="second-violins-title">Second Violins</h2>
+          <ul class="musician-list">
+            <li>Principal Second Violin — Position vacant</li>
+            <li>Chimwemwe Banda</li>
+            <li>Mafunanse Chisi</li>
+            <li>Alick Banda</li>
+          </ul>
+        </section>
+        <section class="instrument" aria-labelledby="viola-title">
+          <h2 id="viola-title">Violas</h2>
+          <ul class="musician-list">
+            <li>Principal Viola — Position vacant</li>
+            <li>Brian Lia</li>
+            <li>Tapiwa Chawaka</li>
+          </ul>
+        </section>
+      </div>
+      <div class="roster-column">
+        <section class="instrument" aria-labelledby="flute-title">
+          <h2 id="flute-title">Flute</h2>
+          <ul class="musician-list"><li>Wikiwe Kumwenda</li></ul>
+        </section>
+        <section class="instrument" aria-labelledby="trombone-title">
+          <h2 id="trombone-title">Trombone</h2>
+          <ul class="musician-list">
+            <li>Vitumbiko Chisi (Principal Trombonist)</li>
+          </ul>
+        </section>
+        <section class="instrument" aria-labelledby="bass-trombone-title">
+          <h2 id="bass-trombone-title">Bass Trombone</h2>
+          <ul class="musician-list">
+            <li>Wongani Shaba</li>
+          </ul>
+        </section>
+        <section class="instrument" aria-labelledby="piano-title">
+          <h2 id="piano-title">Piano</h2>
+          <ul class="musician-list">
+            <li>Alick Banda</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+    <div class="back-row"><a href="index.html">← Return to Lilongwe School of Music</a></div>
+  </main>
+
+  <section class="footer-intro-band" aria-label="Support Lilongwe School of Music">
+    <div class="footer-intro-inner">
+      <img class="footer-monogram" src="Monograms/LSM Monogram (2).png" alt="Lilongwe School of Music monogram">
+      <div class="footer-intro-copy">
+        <h2>Music education. Shared ambition. A global outlook.</h2>
+        <p>Lilongwe School of Music brings together music education, performance and ensemble opportunities in Malawi.</p>
+      </div>
+      <div class="footer-intro-action">
+        <h2>Help music thrive</h2>
+        <p>Explore ways to partner with or support the work of LSM.</p>
+        <a href="index.html#partnership-donation">Partner with LSM <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="footer-brand-logo" href="index.html" aria-label="Lilongwe School of Music home">
+            <img src="Images/Logos/LSM Logos/LSM Logo white.png" alt="Lilongwe School of Music">
+          </a>
+          <p class="footer-brand-sub">Performance Art Theatre · Orchestra · Music Education</p>
+          <p>Music education, performance and ensemble opportunities in Lilongwe, Malawi.</p>
+        </div>
+        <nav class="footer-col" aria-label="Attend">
+          <h2>Attend</h2>
+          <ul>
+            <li><a href="index.html#upcoming-events">Events</a></li>
+            <li><a href="index.html#gallery">Photo gallery</a></li>
+            <li><a href="index.html#videos">Watch &amp; listen</a></li>
+            <li><a href="index.html#open-orchestra">LSM Open Orchestra</a></li>
+            <li><a href="videos.html">Video library</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col" aria-label="Explore">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="index.html#about">About LSM</a></li>
+            <li><a href="index.html#programs">Music programmes</a></li>
+            <li><a href="index.html#admissions">Admissions</a></li>
+            <li><a href="index.html#partners">Examination partners</a></li>
+            <li><a href="index.html#student-life">Student life</a></li>
+            <li><a href="teachers.html">Our teachers</a></li>
+          </ul>
+        </nav>
+        <div class="footer-col footer-contact">
+          <h2>Get involved</h2>
+          <ul>
+            <li><a href="index.html#open-orchestra">Join LSM Open Orchestra</a></li>
+            <li><a href="orchestra-roster.html">LSM Open Orchestra roster</a></li>
+            <li><a href="index.html#partnership-donation">Partnerships &amp; donations</a></li>
+            <li><a href="vacancies.html">Vacancies</a></li>
+          </ul>
+          <h2 class="footer-contact-heading">Contact</h2>
+          <ul>
+            <li>Lilongwe, Malawi</li>
+          </ul>
+          <div class="footer-social" aria-label="LSM social media">
+            <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Lilongwe School of Music (LSM). All rights reserved. · Lilongwe, Malawi</p>
+        <nav class="footer-bottom-links" aria-label="Footer links">
+          <a href="index.html">Home</a>
+          <a href="index.html#admissions">Admissions</a>
+          <a href="index.html#booking">Contact</a>
+          <a href="index.html#partnership-donation">Support LSM</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener('pointermove', function(event) {
+      if (event.pointerType === 'touch' || window.innerWidth <= 600) return;
+      var nearRightEdge = event.clientX >= document.documentElement.clientWidth - 18;
+      if (nearRightEdge) {
+        document.documentElement.classList.add('scrollbar-visible');
+      } else {
+        document.documentElement.classList.remove('scrollbar-visible');
+      }
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', function() {
+      document.documentElement.classList.remove('scrollbar-visible');
+    });
+  </script>
+</body>
+</html>

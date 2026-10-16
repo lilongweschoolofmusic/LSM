@@ -26,14 +26,6 @@
 <meta name="geo.region" content="MW">
 <meta name="geo.placename" content="Lilongwe">
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="portal.css">
-<link rel="stylesheet" href="videos.css">
-
 <!-- Structured Data -->
 <script type="application/ld+json">
 {
@@ -50,59 +42,799 @@
   }
 }
 </script>
+<style>
+/* ──────────────── TOKENS ──────────────── */
+:root {
+  --ink: #080c14;
+  --navy: #0c1829;
+  --cobalt: #122240;
+  --blue: #1a3561;
+  --steel: #2b4d8f;
+  --gold: #c8a84b;
+  --gold2: #dfc06a;
+  --gold3: #f0d99a;
+  --cream: #f7f4ec;
+  --off: #edeae0;
+  --mist: #d6d2c6;
+  --text: #1c1e2a;
+  --mid: #4a566a;
+  --light: #8090a6;
+  --white: #fdfbf6;
+  --ff-display: Arial, sans-serif;
+  --ff-body: Arial, sans-serif;
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+/* ──────────────── RESET ──────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { font-family:var(--ff-body); background:var(--white); color:var(--text); overflow-x:hidden; }
+img { display:block; max-width:100%; }
+a { text-decoration:none; }
+button { font-family:var(--ff-body); cursor:pointer; }
+@view-transition { navigation:auto; }
+::view-transition-old(root) { animation:home-page-fade-out .18s ease-out both; }
+::view-transition-new(root) { animation:home-page-fade-in .42s ease-out both; }
+@keyframes home-page-fade-out { to { opacity:0; } }
+@keyframes home-page-fade-in { from { opacity:0; } to { opacity:1; } }
+@media(prefers-reduced-motion:reduce){
+  ::view-transition-old(root), ::view-transition-new(root) { animation:none; }
+}
+
+/* ──────────────── SCROLL BAR ──────────────── */
+html { scrollbar-width:thin; scrollbar-color:transparent transparent; }
+html.scrollbar-visible { scrollbar-color:rgba(12,24,41,.55) transparent; }
+html::-webkit-scrollbar { width:7px; height:7px; }
+html::-webkit-scrollbar-track { background:transparent; }
+html::-webkit-scrollbar-thumb { border-radius:999px; background:transparent; }
+html.scrollbar-visible::-webkit-scrollbar-thumb { background:rgba(12,24,41,.55); }
+@media(max-width:600px){
+  html { scrollbar-width:none; }
+  html::-webkit-scrollbar { display:none; width:0; height:0; }
+}
+
+/* ──────────────── UTILITY ──────────────── */
+.container { max-width:1200px; margin:0 auto; padding:0 5%; }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+.tag-label { display:inline-block; font-family:var(--ff-body); font-size:.65rem; font-weight:600; letter-spacing:.35em; text-transform:uppercase; color:var(--navy); margin-bottom:.9rem; }
+#programs .tag-label, #events .tag-label, #approach .tag-label { color:#fff; }
+.section-title { font-family:var(--ff-display); font-size:clamp(2rem,3vw,2.4rem); font-weight:600; line-height:1.1; color:var(--navy); margin-bottom:1rem; }
+.section-title.light { color:var(--white); }
+.gold-rule { width:52px; height:2px; background:var(--gold); margin-bottom:1.8rem; }
+.gold-rule.centered { margin-left:auto; margin-right:auto; }
+
+/* ──────────────── BUTTONS ──────────────── */
+.btn { display:inline-flex; align-items:center; gap:.5rem; padding:14px 34px; font-family:var(--ff-body); font-size:.75rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; transition:all .28s var(--ease); border:none; cursor:pointer; position:relative; overflow:hidden; }
+.btn::after { content:''; position:absolute; inset:0; opacity:0; background:rgba(255,255,255,.12); transition:opacity .25s; }
+.btn:hover::after { opacity:1; }
+.btn-gold { background:var(--gold); color:var(--navy); }
+.btn-gold:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 8px 28px rgba(200,168,75,.35); }
+.btn-outline-gold { background:transparent; color:var(--navy); border:1.5px solid var(--gold); }
+.btn-outline-gold:hover { background:var(--gold); color:var(--navy); transform:translateY(-2px); }
+.btn-outline-white { background:transparent; color:var(--white); border:1.5px solid rgba(255,255,255,.45); }
+.btn-outline-white:hover { border-color:#fff; color:#fff; }
+.btn-navy { background:var(--navy); color:#fff; }
+.btn-navy:hover { background:var(--blue); transform:translateY(-2px); }
+.btn-sm { padding:10px 24px; font-size:.7rem; }
+
+/* ──────────────── REVEAL ──────────────── */
+.reveal { opacity:0; transform:translateY(32px); transition:opacity .75s var(--ease), transform .75s var(--ease); }
+.reveal.visible { opacity:1; transform:none; }
+.reveal-delay-1 { transition-delay:.1s; }
+.reveal-delay-2 { transition-delay:.2s; }
+.reveal-delay-3 { transition-delay:.3s; }
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+#topbar { position:fixed; top:0; left:0; right:0; z-index:200; height:54px; background:var(--navy); transition:background .3s, box-shadow .3s; }
+#topbar.scrolled { box-shadow:0 4px 32px rgba(0,0,0,.5); }
+.top-row { display:flex; align-items:center; justify-content:space-between; height:54px; padding:0 5%; gap:1rem; }
+.nav-brand-group { display:flex; align-items:center; gap:.8rem; }
+.nav-brand { display:flex; align-items:center; gap:.9rem; cursor:pointer; }
+.nav-brand img { display:block; width:auto; max-width:150px; height:44px; object-fit:contain; }
+.top-actions { display:flex; align-items:center; justify-content:flex-end; gap:clamp(.5rem,1.2vw,1rem); }
+.top-actions .nav-social { order:0; }
+.top-link { padding:.34rem .55rem; border:1px solid rgba(255,255,255,.35); border-radius:2px; color:#fff; font-size:.62rem; font-weight:700; letter-spacing:.045em; text-transform:uppercase; white-space:nowrap; }
+.top-link:hover, .portal-links a:hover { color:#fff; }
+.top-apply { order:1; }
+.top-tickets { order:2; }
+.portal-links { order:3; display:flex; align-items:center; gap:.4rem; color:rgba(255,255,255,.6); font-size:.58rem; white-space:nowrap; }
+.portal-links a { color:rgba(255,255,255,.75); }
+.desktop-nav { display:flex; align-items:center; justify-content:center; min-height:39px; margin-top:54px; padding:0 1rem; background:var(--cobalt); }
+.nav-menu { display:flex; align-items:center; justify-content:center; gap:clamp(1rem,2vw,2rem); width:100%; list-style:none; }
+.nav-menu a { color:rgba(255,255,255,.92); font-size:.66rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; transition:color .25s, background .25s; padding:5px 4px; position:relative; white-space:nowrap; }
+.nav-menu a::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform .25s; }
+.nav-menu a:hover { color:#fff; }
+.nav-menu a:hover::after { transform:scaleX(1); }
+.nav-menu a[aria-current="page"] { border-radius:16px; background:rgba(255,255,255,.16); }
+.top-actions .nav-social { display:flex; align-items:center; gap:.6rem; }
+
+/* ── HAMBURGER ── */
+.hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; padding:8px; cursor:pointer; }
+.hamburger span { display:block; width:24px; height:2px; background:var(--gold); border-radius:2px; transition:.3s; }
+.hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+
+/* Social icons in nav */
+.nav-social { display:flex; align-items:center; gap:.6rem; }
+.nav-social a { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border:1px solid rgba(200,168,75,.25); border-radius:50%; color:rgba(255,255,255,.5); transition:all .25s; }
+.nav-social a:hover { border-color:#fff; color:#fff; background:rgba(255,255,255,.08); }
+.nav-social a svg { width:14px; height:14px; fill:currentColor; }
+
+/* ── MOBILE NAV PANEL ── */
+.nav-mobile-panel {
+  position:fixed;
+  top:54px; left:0; right:0; bottom:0;
+  background:rgba(8,12,20,.97);
+  backdrop-filter:blur(20px);
+  z-index:199;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2rem;
+  overflow-y:auto;
+  padding:2rem 0;
+}
+.nav-mobile-panel.open { display:flex; }
+.nav-mobile-panel a { color:rgba(255,255,255,.75); font-family:var(--ff-display); font-size:1.8rem; font-weight:500; letter-spacing:.05em; transition:color .25s; }
+.nav-mobile-panel a:hover { color:#fff; }
+.mobile-social { display:flex; gap:1rem; margin-top:.5rem; }
+.mobile-social a { display:flex; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid rgba(200,168,75,.3); border-radius:50%; color:rgba(255,255,255,.6); }
+.mobile-social a:hover { border-color:#fff; color:#fff; }
+.mobile-social a svg { width:18px; height:18px; fill:currentColor; }
+
+@media(max-width:900px){
+  .desktop-nav { display:none; }
+  .top-actions .nav-social { display:flex; }
+  .top-link, .portal-links { display:none; }
+  .hamburger { display:flex; }
+}
+@media(max-width:600px){
+  .top-row { gap:.4rem; padding-right:4%; padding-left:4%; }
+  .top-actions { gap:.4rem; }
+  .nav-brand img { max-width:110px; }
+  .nav-social { gap:.3rem; }
+  .nav-social a { width:28px; height:28px; }
+}
+@media(max-width:360px){
+  .nav-brand img { max-width:85px; }
+  .nav-social { gap:.2rem; }
+  .nav-social a { width:24px; height:24px; }
+  .nav-social a svg { width:12px; height:12px; }
+  .hamburger { padding:4px; }
+  .hamburger span { width:20px; }
+}
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+#home { min-height:calc(100vh - 93px); position:relative; display:flex; align-items:center; overflow:hidden; background:var(--ink); }
+.hero-bg { position:absolute; inset:0; background:url('Images/Background 186.jpg') center/cover no-repeat; opacity:1; filter:none; transform:none; }
+.hero-bg::after { content:''; position:absolute; inset:0; background:rgba(8,12,20,.23); }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(8,12,20,.43) 0%,rgba(8,12,20,.53) 48%,rgba(8,12,20,.89) 100%); }
+.hero-grain { position:absolute; inset:0; opacity:.04; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.hero-deco { position:absolute; top:0; right:0; width:45%; height:100%; pointer-events:none; overflow:hidden; }
+.hero-deco::before { content:''; position:absolute; top:-10%; right:-5%; width:600px; height:600px; border:1px solid rgba(223,192,106,.16); border-radius:50%; transform:rotate(-20deg); }
+.hero-deco::after { content:''; position:absolute; top:10%; right:5%; width:380px; height:380px; border:1px solid rgba(223,192,106,.12); border-radius:50%; }
+.hero-deco-left { right:auto; left:0; }
+.hero-deco-left::before { right:auto; left:-300px; }
+.hero-deco-left::after { right:auto; left:-190px; }
+.hero-content { position:relative; z-index:2; width:100%; padding:60px 24px 36px; display:block; max-width:900px; margin:0 auto; text-align:center; }
+.hero-left { max-width:800px; margin:0 auto; }
+.hero-monogram { display:block; width:auto; height:clamp(72px,10vw,104px); margin:0 auto 1.2rem; object-fit:contain; filter:brightness(0) invert(1) drop-shadow(0 5px 18px rgba(255,255,255,.22)); animation:hero-monogram-float 7s ease-in-out infinite; }
+@keyframes hero-monogram-float { 0%,100% { transform:translateY(0) rotate(-1deg); } 50% { transform:translateY(-8px) rotate(1deg); } }
+.hero-title { font-family:var(--ff-body); font-size:clamp(2.8rem,5vw,3.6rem); font-weight:800; line-height:1.02; color:var(--white); margin:0 auto .9rem; letter-spacing:.01em; text-shadow:0 24px 48px rgba(0,0,0,.35); }
+.hero-title em { font-style:italic; color:#fff; }
+.hero-tagline { margin:0 auto 1.25rem; color:#fff; font-size:.78rem; font-weight:600; letter-spacing:.18em; line-height:1.5; text-transform:uppercase; }
+.hero-subtitle { font-family:var(--ff-body); font-size:clamp(1.05rem,2vw,1.15rem); font-weight:500; line-height:1.35; color:rgba(255,255,255,.96); margin-bottom:1rem; letter-spacing:.01em; }
+.hero-subtitle em { font-style:italic; color:#fff; }
+.hero-sub { font-size:.84rem; color:rgba(255,255,255,.9); line-height:1.8; max-width:680px; font-weight:400; margin:0 auto 1.6rem; }
+.hero-actions { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
+.hero-actions .btn { padding:11px 28px; font-size:.72rem; box-shadow:0 18px 32px rgba(0,0,0,.18); border-radius:999px; }
+.hero-actions .btn-gold { background:#fff; color:var(--navy); }
+.hero-actions .btn-outline-white { background:rgba(255,255,255,.14); color:var(--white); border-color:rgba(255,255,255,.18); }
+.hero-actions .btn-outline-white:hover { background:rgba(255,255,255,.2); color:var(--white); }
+.hero-actions .btn:hover { transform:translateY(-2px); }
+.hero-right { display:none; }
+.hero-stat-card { background:rgba(255,255,255,.04); border:1px solid rgba(200,168,75,.15); padding:1.5rem 1.8rem; backdrop-filter:blur(8px); transition:background .3s, border-color .3s; }
+.hero-stat-card:hover { background:rgba(26,53,97,.4); border-color:rgba(200,168,75,.35); }
+.hero-stat-card .num { font-family:var(--ff-display); font-size:2.4rem; font-weight:600; color:#fff; line-height:1; }
+.hero-stat-card .label { font-size:.75rem; color:rgba(255,255,255,.45); letter-spacing:.1em; margin-top:.3rem; }
+@media(max-width:600px){
+  #home { min-height:100vh; }
+  .hero-content { padding:86px 20px 40px; }
+  .hero-monogram { height:clamp(68px,19vw,84px); margin-bottom:1rem; }
+  .hero-title { font-size:clamp(2.5rem,11vw,3.2rem); }
+  .hero-tagline { margin-bottom:1rem; font-size:.72rem; letter-spacing:.14em; }
+  .hero-actions { gap:.7rem; }
+  .hero-actions .btn { padding:13px 24px; font-size:.68rem; }
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-monogram { animation:none; }
+}
+
+/* ═══════════════════════════════════════════════
+   ANNOUNCEMENT BAR
+═══════════════════════════════════════════════ */
+.announce-bar { background:var(--gold); padding:12px 5%; display:none; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
+.announce-bar p { font-size:.78rem; font-weight:600; color:var(--navy); letter-spacing:.05em; }
+.announce-bar a { font-size:.72rem; font-weight:700; color:var(--navy); border-bottom:1px solid var(--navy); padding-bottom:1px; }
+.announcement-special { background:#e9f0f7; }
+.announcement-special.section { padding:72px 5%; }
+.announcement-special .container { max-width:900px; }
+.announcement-special .section-header { max-width:900px; margin:0 auto 2rem; }
+.announcement-special .section-intro { font-size:.84rem; }
+.monthly-layout { display:grid; grid-template-columns:minmax(0,1fr) 292px; gap:35px; align-items:start; width:min(100%,765px); margin:0 auto; }
+.monthly-content { display:flex; flex-direction:column; gap:1.5rem; }
+.monthly-item { background:#fff; border:1px solid var(--mist); border-radius:14px; padding:1.4rem 1.5rem; box-shadow:0 16px 36px rgba(0,0,0,.06); transition:transform .3s ease, box-shadow .3s ease; }
+.monthly-item:hover { transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,.1); }
+.monthly-item h3 { font-family:var(--ff-display); font-size:.9rem; color:var(--navy); margin-bottom:1rem; }
+.monthly-item p, .monthly-item ul { color:var(--mid); font-size:.85rem; line-height:1.8; }
+.featured-announcement { display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding:1.5rem 1.75rem; margin:0 auto 2rem; max-width:765px; background:var(--navy); border:1px solid rgba(200,168,75,.55); border-left:4px solid var(--gold); border-radius:12px; box-shadow:0 16px 36px rgba(0,0,0,.12); }
+.featured-announcement-copy { flex:1; }
+.featured-announcement-label { display:block; margin-bottom:.55rem; color:#fff; font-size:.65rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+.featured-announcement h3 { color:var(--white); font-family:var(--ff-display); font-size:clamp(1.15rem,2.5vw,1.55rem); line-height:1.25; margin-bottom:.55rem; }
+.featured-announcement p { color:rgba(255,255,255,.78); font-size:.86rem; line-height:1.7; }
+.featured-announcement .btn { flex-shrink:0; white-space:nowrap; }
+@media(max-width:640px){ .featured-announcement { align-items:flex-start; flex-direction:column; padding:1.3rem; } .featured-announcement .btn { white-space:normal; } }
+.monthly-item.monthly-path { display:block; color:inherit; padding:1.1rem 1.25rem; border-radius:10px; }
+.monthly-item.monthly-path h3 { margin-bottom:.45rem; font-size:1rem; }
+.monthly-item.monthly-path p { margin-bottom:.6rem; }
+.monthly-path-link { color:var(--navy); font-size:.76rem; font-weight:700; letter-spacing:.04em; }
+.monthly-path:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
+.announcement-paths { background:var(--white); }
+.announcement-paths .container { max-width:1100px; }
+.pathway-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+.pathway-grid .monthly-path { min-height:100%; margin:0; }
+@media(max-width:700px){ .pathway-grid { grid-template-columns:minmax(0,1fr); } }
+.monthly-item ul { margin-top:1rem; padding-left:1.2rem; }
+.monthly-item ul li { margin-bottom:.6rem; }
+.monthly-video { position:sticky; top:100px; }
+.video-window { background:#fff; border:1px solid var(--mist); border-radius:14px; padding:12px; box-shadow:0 16px 36px rgba(0,0,0,.06); position:relative; }
+.video-window iframe { display:block; width:100%; aspect-ratio:16 / 9; height:auto; border:0; border-radius:12px; }
+.video-window iframe[hidden] { display:none; }
+.youtube-preview { position:relative; display:block; width:100%; overflow:hidden; padding:0; border:0; border-radius:12px; background:var(--navy); color:var(--white); text-align:left; cursor:pointer; }
+.youtube-preview::after { position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,12,20,.12),rgba(8,12,20,.72)); content:""; }
+.youtube-preview img { display:block; width:100%; aspect-ratio:16 / 9; object-fit:cover; transition:transform .45s ease, filter .45s ease; }
+.youtube-preview:hover img { transform:scale(1.04); filter:saturate(1.12); }
+.youtube-preview:focus-visible { outline:3px solid var(--gold); outline-offset:4px; }
+.youtube-preview-copy { position:absolute; z-index:1; right:1.25rem; bottom:1.25rem; left:1.25rem; display:flex; flex-direction:column; gap:.35rem; }
+.youtube-preview-eyebrow { color:#fff; font-size:.65rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; }
+.youtube-preview-title { font-size:clamp(1rem,2.3vw,1.35rem); font-weight:600; }
+.youtube-preview-play { position:absolute; z-index:1; top:50%; left:50%; display:grid; width:68px; height:68px; place-items:center; padding-left:4px; transform:translate(-50%,-50%); border:1px solid rgba(255,255,255,.7); border-radius:50%; background:var(--gold); color:var(--navy); font-size:1.6rem; box-shadow:0 8px 28px rgba(0,0,0,.35); transition:transform .25s ease, background .25s ease; }
+.youtube-preview:hover .youtube-preview-play { transform:translate(-50%,-50%) scale(1.08); background:var(--gold2); }
+.youtube-direct-link { display:inline-block; margin:.85rem .25rem 0; color:var(--navy); font-size:.78rem; font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+.youtube-direct-link:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+.fullscreen-btn { position:absolute; top:10px; right:10px; background:rgba(0,0,0,.5); color:white; border:none; border-radius:50%; width:40px; height:40px; font-size:18px; cursor:pointer; opacity:0; transition:opacity .3s; }
+.video-window:hover .fullscreen-btn, .fullscreen-btn:focus-visible { opacity:1; }
+@media(max-width:820px){ .monthly-layout { grid-template-columns:minmax(0,1fr); gap:2rem; } .monthly-video { position:static; } }
+@media(max-width:820px){ .announcement-special .container { padding:0 3%; } }
+
+/* ═══════════════════════════════════════════════
+   SECTION GENERIC
+═══════════════════════════════════════════════ */
+.section { padding:96px 5%; }
+.section-header { margin-bottom:3.5rem; }
+.section-header.centered { text-align:center; }
+.section-header.centered .gold-rule { margin:0 auto 1.8rem; }
+.section-intro { font-size:.98rem; line-height:1.9; color:var(--mid); font-weight:300; max-width:620px; }
+.section-intro.centered { margin:0 auto; }
+
+/* ═══════════════════════════════════════════════
+   ABOUT / IDENTITY
+═══════════════════════════════════════════════ */
+#about { background:var(--white); }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+.about-lead { font-family:var(--ff-display); font-size:1.3rem; font-style:italic; color:var(--navy); line-height:1.7; margin-bottom:1.8rem; padding-bottom:1.4rem; border-bottom:1px solid var(--mist); }
+.about-body { font-size:.96rem; line-height:1.95; color:var(--mid); font-weight:300; margin-bottom:1rem; }
+.mv-stack { display:flex; flex-direction:column; gap:1.2rem; }
+.mv-item { padding:1.6rem 1.8rem; border-left:3px solid var(--gold); background:var(--cream); transition:background .3s; }
+.mv-item:hover { background:var(--off); }
+.mv-item h4 { font-family:var(--ff-display); font-size:1.1rem; color:var(--navy); margin-bottom:.5rem; }
+.mv-item p { font-size:.88rem; color:var(--mid); line-height:1.8; }
+.pillars { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--off); margin-top:4rem; }
+.pillar-item { background:var(--white); padding:2rem 1.4rem; text-align:center; transition:background .3s, color .3s; cursor:default; }
+.pillar-item:hover { background:var(--navy); }
+.pillar-item:hover .pi-title { color:#fff; }
+.pillar-item:hover .pi-text { color:rgba(255,255,255,.45); }
+.pi-icon { font-size:1.6rem; margin-bottom:.8rem; }
+.pi-title { font-family:var(--ff-display); font-size:.98rem; color:var(--navy); margin-bottom:.3rem; transition:color .3s; }
+.pi-text { font-size:.78rem; color:var(--light); line-height:1.6; transition:color .3s; }
+@media(max-width:800px){ .about-grid{grid-template-columns:1fr;gap:3rem;} .pillars{grid-template-columns:repeat(2,1fr);} }
+
+/* ═══════════════════════════════════════════════
+   PROGRAMS / CURRICULUM
+═══════════════════════════════════════════════ */
+#programs { background:var(--navy); }
+.programs-intro { font-size:.95rem; color:rgba(255,255,255,.45); max-width:620px; line-height:1.9; font-weight:300; margin-bottom:2.8rem; }
+.prog-tabs { display:flex; gap:0; flex-wrap:wrap; margin-bottom:2.5rem; }
+.prog-tab { padding:12px 28px; background:transparent; border:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.45); font-size:.7rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; transition:all .25s; cursor:pointer; }
+.prog-tab:hover { color:#fff; border-color:rgba(200,168,75,.3); }
+.prog-tab.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
+.prog-panel { display:none; }
+.prog-panel.active { display:block; }
+.prog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); }
+.prog-card { background:rgba(8,12,20,.95); padding:2.4rem 2rem; transition:background .3s; }
+.prog-card:hover { background:var(--cobalt); }
+.prog-card .pc-icon { font-size:1.8rem; margin-bottom:1rem; }
+.prog-card h3 { font-family:var(--ff-display); font-size:1.2rem; color:#fff; margin-bottom:.7rem; }
+.prog-card p { font-size:.85rem; color:rgba(255,255,255,.45); line-height:1.8; margin-bottom:1rem; }
+.prog-card .pc-tags { display:flex; flex-wrap:wrap; gap:.35rem; }
+.pc-tag { font-size:.65rem; letter-spacing:.08em; border:1px solid rgba(200,168,75,.25); color:#fff; padding:3px 9px; }
+.exam-panel { max-width:900px; margin-top:2rem; border:1px solid rgba(200,168,75,.2); padding:2.5rem; }
+.exam-panel h3 { font-family:var(--ff-display); font-size:1.3rem; color:#fff; margin-bottom:1.2rem; }
+.exam-cols { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2rem; }
+.exam-col h4 { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:#fff; margin-bottom:.9rem; }
+.exam-col ul { list-style:none; }
+.exam-col li { font-size:.87rem; color:rgba(255,255,255,.55); line-height:2; padding-left:.9rem; position:relative; }
+.exam-col li::before { content:'•'; position:absolute; left:0; color:#fff; opacity:.7; }
+.exam-notice { margin-top:1.4rem; padding:1rem 1.4rem; background:rgba(200,168,75,.08); border-left:2px solid var(--gold); font-size:.83rem; color:rgba(255,255,255,.55); line-height:1.7; }
+.exam-notice strong { color:rgba(255,255,255,.75); }
+.schedule-row { display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:2.5rem; }
+.sched-item { flex:1; min-width:160px; background:rgba(26,53,97,.25); border:1px solid rgba(200,168,75,.15); padding:1.4rem 1.8rem; }
+.sched-item .sday { font-family:var(--ff-display); font-size:1.1rem; color:#fff; margin-bottom:.2rem; }
+.sched-item .stime { font-size:.87rem; color:rgba(255,255,255,.6); }
+.perf-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); }
+.perf-card { background:rgba(8,12,20,.95); padding:2.4rem 2rem; transition:background .3s; }
+.perf-card:hover { background:var(--cobalt); }
+.perf-card .pf-icon { font-size:1.8rem; margin-bottom:1rem; }
+.perf-card h3 { font-family:var(--ff-display); font-size:1.2rem; color:#fff; margin-bottom:.7rem; }
+.perf-card p { font-size:.84rem; color:rgba(255,255,255,.45); line-height:1.8; margin-bottom:.6rem; }
+.perf-card ul { list-style:none; }
+.perf-card ul li { font-size:.85rem; color:rgba(255,255,255,.5); line-height:1.9; padding-left:.9rem; position:relative; }
+.perf-card ul li::before { content:'▸'; position:absolute; left:0; color:#fff; font-size:.7rem; top:.15em; }
+
+/* ═══════════════════════════════════════════════
+   ADMISSIONS
+═══════════════════════════════════════════════ */
+#admissions { background:var(--cream); }
+.admissions-layout { display:grid; grid-template-columns:1.1fr 1fr; gap:5rem; align-items:start; }
+.adm-age-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-bottom:2.5rem; }
+.age-card { padding:1.6rem; border:1px solid var(--mist); background:var(--white); transition:border-color .3s, box-shadow .3s; }
+.age-card:hover { border-color:var(--gold); box-shadow:0 6px 24px rgba(200,168,75,.12); }
+.age-card .ac-range { font-family:var(--ff-display); font-size:1.5rem; color:var(--navy); font-weight:600; margin-bottom:.3rem; }
+.age-card .ac-label { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--navy); font-weight:600; margin-bottom:.5rem; }
+.age-card p { font-size:.83rem; color:var(--mid); line-height:1.7; }
+.req-list { list-style:none; margin-bottom:2rem; }
+.req-list li { display:flex; align-items:flex-start; gap:.9rem; padding:1rem 0; border-bottom:1px solid var(--mist); font-size:.9rem; color:var(--mid); line-height:1.6; }
+.req-list li:last-child { border:none; }
+.req-list li .ri { color:var(--navy); font-size:1rem; flex-shrink:0; margin-top:.1rem; }
+.app-step { display:flex; gap:1.4rem; align-items:flex-start; margin-bottom:2rem; }
+.step-num { width:44px; height:44px; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--ff-display); font-size:1.2rem; font-weight:600; flex-shrink:0; }
+.step-body h4 { font-family:var(--ff-display); font-size:1.1rem; color:var(--navy); margin-bottom:.35rem; }
+.step-body p { font-size:.87rem; color:var(--mid); line-height:1.7; }
+.step-connector { width:1px; height:28px; background:var(--mist); margin-left:21px; }
+@media(max-width:800px){ .admissions-layout { grid-template-columns:1fr; gap:3rem; } .adm-age-cards { grid-template-columns:1fr 1fr; } }
+@media(max-width:380px){ .adm-age-cards { grid-template-columns:minmax(0,1fr); } }
+
+/* ═══════════════════════════════════════════════
+   UPCOMING EVENTS
+═══════════════════════════════════════════════ */
+#upcoming-events { background:#fff; color:#111; padding-top:4.5rem; padding-bottom:4.5rem; }
+.upcoming-events-heading { display:flex; align-items:center; justify-content:space-between; gap:1.5rem; margin-bottom:1.6rem; }
+.upcoming-events-heading h2 { margin:0; color:#111; font-family:var(--ff-display); font-size:clamp(1.7rem,3vw,2.2rem); }
+.event-view-tabs { display:flex; align-items:center; gap:.35rem; padding:4px; border:1px solid #d4d4d4; border-radius:999px; background:#f5f5f5; }
+.event-view-tab { padding:.55rem .9rem; border:0; border-radius:999px; background:transparent; color:#333; font:inherit; font-size:.74rem; font-weight:700; cursor:pointer; }
+.event-view-tab[aria-selected="true"] { background:var(--navy); color:#fff; }
+.event-view-tab:focus-visible { outline:2px solid var(--navy); outline-offset:2px; }
+.events-controls { display:flex; align-items:center; gap:.65rem; }
+.events-city-select { max-width:200px; border:0; border-radius:999px; padding:.7rem 2.2rem .7rem 1rem; background:#f0f0f0; color:#111; font:inherit; font-size:.78rem; }
+.events-carousel-button { width:36px; height:36px; display:flex; align-items:center; justify-content:center; border:1px solid #aaa; border-radius:50%; background:#fff; color:#111; font-size:1.1rem; cursor:pointer; }
+.events-carousel-button:hover:not(:disabled) { border-color:#111; background:#111; color:#fff; }
+.events-carousel-button:disabled { opacity:.35; cursor:not-allowed; }
+.browse-events-link { margin-left:.35rem; padding-left:1rem; border-left:1px solid #bbb; color:#111; font-size:.76rem; font-weight:700; white-space:nowrap; }
+.upcoming-events-track { display:flex; gap:1rem; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:thin; scrollbar-color:#aaa transparent; padding-bottom:.65rem; }
+.upcoming-event-card { flex:0 0 clamp(200px,18vw,240px); min-height:310px; display:flex; flex-direction:column; padding-right:1rem; border-right:1px solid #aaa; scroll-snap-align:start; }
+.upcoming-event-image { width:100%; height:142px; object-fit:cover; background:#e8e8e8; }
+.upcoming-event-date { margin:1rem 0 .65rem; color:#555; font-size:.62rem; letter-spacing:.04em; text-transform:uppercase; }
+.upcoming-event-title { margin-bottom:.35rem; color:#111; font-family:var(--ff-display); font-size:1.05rem; line-height:1.2; }
+.upcoming-event-description { color:#444; font-size:.72rem; line-height:1.45; }
+.upcoming-event-venue { margin-top:auto; padding-top:.8rem; border-top:1px solid #aaa; color:#555; font-size:.6rem; letter-spacing:.08em; line-height:1.45; text-transform:uppercase; }
+.upcoming-events-empty { width:100%; padding:3.5rem 1rem; border-top:1px solid #ccc; border-bottom:1px solid #ccc; color:#555; font-size:.92rem; text-align:center; }
+.past-events-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1.25rem; }
+.events-controls[hidden], .upcoming-events-track[hidden], .past-events-grid[hidden] { display:none; }
+.past-event-card { min-width:0; display:flex; flex-direction:column; border-bottom:1px solid #aaa; padding-bottom:.9rem; }
+.past-event-image { width:100%; aspect-ratio:16 / 10; object-fit:cover; background:#e8e8e8; }
+.past-event-date { margin:.8rem 0 .35rem; color:#555; font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; }
+.past-event-title { color:#111; font-family:var(--ff-display); font-size:1rem; line-height:1.3; }
+.past-events-empty { grid-column:1 / -1; padding:2rem 0; border-top:1px solid #ccc; border-bottom:1px solid #ccc; color:#555; font-size:.92rem; text-align:center; }
+@media(max-width:650px){
+  #upcoming-events { padding-top:3.5rem; padding-bottom:3.5rem; }
+  .upcoming-events-heading { align-items:flex-start; flex-direction:column; gap:1rem; }
+  .event-view-tabs { max-width:100%; }
+  .events-controls { width:100%; flex-wrap:wrap; }
+  .events-city-select { flex:1; min-width:155px; }
+  .browse-events-link { margin-left:0; }
+  .upcoming-event-card { flex-basis:75vw; max-width:280px; }
+  .past-events-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+}
+@media(max-width:380px){ .past-events-grid { grid-template-columns:minmax(0,1fr); } }
+
+/* ═══════════════════════════════════════════════
+   EVENTS & PERFORMANCES
+═══════════════════════════════════════════════ */
+#events { background:var(--navy); }
+.events-intro { font-size:.95rem; color:rgba(255,255,255,.45); max-width:620px; line-height:1.9; font-weight:300; margin-bottom:3rem; }
+.events-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5px; background:rgba(255,255,255,.03); margin-bottom:3rem; }
+.event-card { background:rgba(8,12,20,.95); padding:2.5rem 2.2rem; transition:background .3s; position:relative; overflow:hidden; }
+.event-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); }
+.event-card:hover::before { transform:scaleX(1); }
+.event-card:hover { background:var(--cobalt); }
+.event-card .ec-icon { font-size:2rem; margin-bottom:1.2rem; }
+.event-card h3 { font-family:var(--ff-display); font-size:1.25rem; color:#fff; margin-bottom:.8rem; }
+.event-card p { font-size:.86rem; color:rgba(255,255,255,.45); line-height:1.85; margin-bottom:1rem; }
+.event-card ul { list-style:none; }
+.event-card ul li { font-size:.84rem; color:rgba(255,255,255,.5); padding:5px 0 5px .9rem; position:relative; border-bottom:1px solid rgba(255,255,255,.05); }
+.event-card ul li:last-child { border:none; }
+@media(max-width:380px){ .events-grid { grid-template-columns:minmax(0,1fr); } }
+.event-card ul li::before { content:'◆'; position:absolute; left:0; color:#fff; font-size:.45rem; top:.6em; }
+.booking-strip { background:rgba(200,168,75,.08); border:1px solid rgba(200,168,75,.2); padding:2.5rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+.booking-strip p { font-family:var(--ff-display); font-size:1.2rem; font-style:italic; color:rgba(255,255,255,.7); max-width:540px; line-height:1.6; }
+.booking-strip .bs-actions { display:flex; gap:.8rem; flex-wrap:wrap; }
+#booking .btn-outline-gold, .booking-strip .btn-outline-gold { color:#fff; }
+
+/* ═══════════════════════════════════════════════
+   WHY LSM
+═══════════════════════════════════════════════ */
+#why { background:var(--off); }
+.why-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2rem; }
+.why-item { display:flex; gap:1.2rem; align-items:flex-start; }
+.why-num { font-family:var(--ff-display); font-size:2.2rem; color:var(--navy); font-style:italic; line-height:1; opacity:.4; flex-shrink:0; }
+.why-body h4 { font-family:var(--ff-display); font-size:1.05rem; color:var(--navy); margin-bottom:.35rem; }
+.why-body p { font-size:.84rem; color:var(--mid); line-height:1.75; }
+
+/* ═══════════════════════════════════════════════
+   APPROACH
+═══════════════════════════════════════════════ */
+#approach { background:var(--cobalt); }
+.approach-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1.5px; background:rgba(255,255,255,.04); margin-top:2rem; }
+.approach-item { background:rgba(8,12,20,.9); padding:2.2rem 2rem; }
+.approach-item .ap-num { font-family:var(--ff-display); font-size:2.8rem; font-style:italic; color:#fff; opacity:.4; line-height:1; margin-bottom:1rem; }
+.approach-item h4 { font-family:var(--ff-display); font-size:1.05rem; color:#fff; margin-bottom:.5rem; }
+.approach-item p { font-size:.83rem; color:rgba(255,255,255,.45); line-height:1.75; }
+
+/* ═══════════════════════════════════════════════
+   PARTNERS
+═══════════════════════════════════════════════ */
+#partners { background:var(--white); }
+.partners-note { font-size:.9rem; color:var(--mid); max-width:600px; margin:0 auto 3rem; text-align:center; line-height:1.8; }
+.partners-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px; background:var(--off); max-width:900px; margin:0 auto; }
+.partner-cell { background:var(--white); padding:2.4rem 1.8rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; transition:background .3s; }
+.partner-cell:hover { background:var(--cream); }
+.partner-cell img { max-height:64px; width:auto; object-fit:contain; }
+.partner-cell:hover img { }
+.partner-cell span { font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--light); }
+
+/* ═══════════════════════════════════════════════
+   STUDENT LIFE / GALLERY
+═══════════════════════════════════════════════ */
+#student-life { background:var(--cream); }
+.slideshow-wrap { position:relative; width:100%; height:480px; overflow:hidden; }
+.slideshow-wrap img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s; }
+.slideshow-wrap img.active { opacity:1; }
+.play-pause-btn { position:absolute; top:12px; right:12px; z-index:10; background:var(--navy); color:#fff; border:none; width:56px; height:56px; font-size:1.1rem; cursor:pointer; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 20px 42px rgba(10,24,56,.35); transition:transform .2s ease, background .25s ease, box-shadow .25s ease; }
+.play-pause-btn:hover { transform:translateY(-1px); background:var(--blue); box-shadow:0 22px 48px rgba(10,24,56,.45); }
+.slide-dots { display:flex; gap:.5rem; justify-content:center; margin-top:1.2rem; }
+.slide-dot { width:8px; height:8px; border-radius:50%; background:var(--mist); cursor:pointer; transition:background .3s; }
+.slide-dot.active { background:var(--gold); }
+#gallery { background:var(--white); }
+
+/* ═══════════════════════════════════════════════
+   LSM OPEN ORCHESTRA
+═══════════════════════════════════════════════ */
+#open-orchestra { background:var(--off); }
+.open-orchestra-intro { display:grid; grid-template-columns:1.1fr .9fr; gap:3rem; align-items:center; margin-bottom:4rem; }
+.open-orchestra-intro p, .open-orchestra-section p { font-size:.95rem; line-height:1.9; color:var(--mid); margin-bottom:1rem; }
+.open-orchestra-intro p:last-child, .open-orchestra-section p:last-child { margin-bottom:0; }
+.open-orchestra-image { width:100%; aspect-ratio:4/3; object-fit:cover; }
+.leadership-section { background:var(--off); }
+.leadership-heading { max-width:760px; margin-bottom:1.5rem; }
+.leadership-intro { max-width:760px; margin-bottom:2rem; color:var(--mid); font-size:.92rem; line-height:1.8; }
+.leadership-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+.leadership-card { background:var(--white); border:1px solid var(--mist); min-width:0; }
+.leadership-card img { display:block; width:100%; height:230px; object-fit:cover; object-position:center 20%; }
+.leadership-card-copy { padding:1.35rem 1.4rem 1.5rem; }
+.leadership-card h3 { font-family:var(--ff-display); font-size:1.15rem; color:var(--navy); margin-bottom:.3rem; }
+.leadership-role { color:var(--orange); font-size:.76rem; font-weight:700; line-height:1.5; margin-bottom:.75rem; }
+.leadership-bio { color:var(--mid); font-size:.85rem; line-height:1.75; }
+.open-orchestra-details { display:grid; grid-template-columns:1fr 1fr; gap:3rem; border-top:1px solid var(--mist); padding:2.5rem 0; }
+.open-orchestra-section { min-width:0; }
+.orchestra-section-title { font-family:var(--ff-display); font-size:1.35rem; color:var(--navy); margin-bottom:1rem; }
+.orchestra-requirements { display:grid; grid-template-columns:1fr 1fr; gap:.75rem 2rem; list-style:disc; padding-left:1.2rem; margin:1.5rem 0; }
+.orchestra-requirements li { padding-left:.15rem; color:var(--mid); font-size:.88rem; line-height:1.7; }
+.orchestra-requirements li::marker { color:var(--orange); }
+.orchestra-steps { list-style:none; counter-reset:orchestra-step; margin-top:1.4rem; }
+.orchestra-steps li { counter-increment:orchestra-step; display:grid; grid-template-columns:2.4rem 1fr; gap:.8rem; padding:1rem 0; border-top:1px solid var(--mist); color:var(--mid); font-size:.9rem; line-height:1.7; }
+.orchestra-steps li::before { content:"0" counter(orchestra-step); color:var(--orange); font-weight:700; }
+.open-orchestra-payment { border-left:3px solid var(--orange); padding:1rem 1.2rem; background:rgba(255,255,255,.55); }
+.open-orchestra-commitment { padding:2rem 0 0; border-top:1px solid var(--mist); font-family:var(--ff-display); color:var(--navy) !important; font-size:1.08rem !important; }
+.gal-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
+.gal-item { overflow:hidden; position:relative; }
+.gal-item img { width:100%; height:210px; object-fit:cover; transition:transform .5s var(--ease); }
+.gal-item:hover img { transform:scale(1.07); }
+.gal-item .gal-over { position:absolute; inset:0; background:rgba(8,12,20,.65); opacity:0; display:flex; align-items:center; justify-content:center; transition:opacity .35s; }
+.gal-item:hover .gal-over { opacity:1; }
+.gal-over span { font-family:var(--ff-display); font-size:1.1rem; color:#fff; font-style:italic; }
+
+/* ═══════════════════════════════════════════════
+   PARTNERSHIPS & DONATIONS
+═══════════════════════════════════════════════ */
+#partnership-donation { background:var(--cream); }
+.partnership-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; margin-top:3rem; }
+.partnership-card { background:var(--white); padding:2rem; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,.08); transition:transform .3s, box-shadow .3s; }
+.partnership-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,.12); }
+.partnership-card .pc-icon { font-size:3rem; text-align:center; margin-bottom:1rem; }
+.partnership-card h3 { font-family:var(--ff-display); font-size:1.25rem; color:var(--navy); margin-bottom:.5rem; }
+.partnership-card p { color:var(--mid); line-height:1.6; margin-bottom:1rem; }
+.partnership-card ul { list-style:none; padding:0; margin:0 0 1.5rem; }
+.partnership-card ul li { padding:.25rem 0; color:var(--text); font-size:.9rem; }
+.partnership-card ul li:before { content:"✓ "; color:var(--navy); font-weight:bold; }
+
+/* ═══════════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════════ */
+#testimonials { background:var(--off); }
+.test-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; max-width:960px; margin:0 auto; }
+.test-card { border-left:3px solid var(--gold); padding:1.8rem 2rem; background:var(--white); transition:box-shadow .3s; }
+.test-card:hover { box-shadow:0 8px 32px rgba(0,0,0,.08); }
+.test-card blockquote { font-family:var(--ff-display); font-style:italic; font-size:1.05rem; color:var(--text); line-height:1.8; margin-bottom:1rem; }
+.test-card cite { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--navy); font-style:normal; }
+
+/* ═══════════════════════════════════════════════
+   BOOKING / CONTACT
+═══════════════════════════════════════════════ */
+#booking { background:linear-gradient(180deg, #061024 0%, #09162c 100%); }
+#booking .section-header .section-title { color:var(--white); }
+#booking .section-header .section-intro { color:rgba(255,255,255,.78) !important; }
+#booking .tag-label { color:#fff; }
+.booking-layout { display:grid; grid-template-columns:minmax(0,0.95fr) minmax(0,1.2fr); gap:clamp(2rem,4vw,4rem); align-items:start; margin-top:2rem; }
+.booking-layout > * { min-width:0; }
+.booking-form-panel { background:transparent; border:none; border-radius:0; padding:0; box-shadow:none; }
+.booking-form-panel .form-card { background:transparent; box-shadow:none; padding:0; border:none; }
+.booking-form-panel p { color:rgba(255,255,255,.83); }
+
+/* ── Form tab system ── */
+.form-tab-nav { display:flex; gap:0; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:6px; margin-bottom:1.5rem; }
+.form-tab-nav-btn { flex:1; min-width:0; background:transparent; border:none; color:rgba(255,255,255,.75); font-family:var(--ff-body); font-size:.75rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; padding:.9rem .8rem; cursor:pointer; border-radius:12px; transition:color .25s, background .25s; white-space:normal; }
+.form-tab-nav-btn:hover { color:var(--white); }
+.form-tab-nav-btn.active { background:var(--gold); color:var(--navy); }
+@media(max-width:560px){ .form-tab-nav { flex-direction:column; } }
+
+/* ── Form panels ── */
+.ftab-panel { display:none; animation:fadeUp .3s ease forwards; }
+.ftab-panel.active { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+.booking-contact-panel .section-header { margin-bottom:2rem; }
+.booking-contact-panel h3 { font-family:var(--ff-display); font-size:1.4rem; color:var(--white); margin-bottom:1rem; }
+.booking-contact-panel ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:1rem; }
+.booking-contact-panel li { display:flex; align-items:flex-start; gap:0.95rem; }
+.booking-contact-panel li > div { min-width:0; }
+.booking-contact-panel .ci-icon-box { width:42px; min-width:42px; height:42px; display:flex; align-items:center; justify-content:center; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05); color:#fff; font-size:1.1rem; }
+.booking-contact-panel strong { color:#fff; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; display:block; margin-bottom:.15rem; }
+.booking-contact-panel a, .booking-contact-panel span { color:rgba(255,255,255,.95); text-decoration:none; font-size:.92rem; }
+.booking-contact-panel li a { overflow-wrap:anywhere; }
+.booking-contact-panel a:hover { color:#fff; }
+.booking-contact-panel .contact-actions { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.2rem; }
+.booking-contact-panel .contact-actions a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; padding:12px 18px; background:transparent; border:1px solid rgba(255,255,255,.18); border-radius:0; color:rgba(255,255,255,.95); font-size:.82rem; text-transform:uppercase; transition:background .25s, border-color .25s, color .25s; }
+.booking-contact-panel .contact-actions a:hover { background:rgba(255,255,255,.08); border-color:#fff; color:#fff; }
+.booking-contact-panel .contact-note-box { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:24px; padding:1.5rem; margin-top:1.5rem; }
+.booking-contact-panel .contact-note-box p { color:rgba(255,255,255,.83); font-size:.9rem; line-height:1.6; margin:0; }
+@media(max-width:1100px){ .booking-layout { grid-template-columns:minmax(0,1fr); gap:3rem; } }
+
+/* ── Field groups ── */
+.booking-form { display:flex; flex-direction:column; gap:0; }
+.form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+@media(max-width:560px){ .form-row-2 { grid-template-columns:1fr; } }
+
+.fg { display:flex; flex-direction:column; gap:.4rem; margin-bottom:.9rem; }
+.fg label { font-size:.62rem; letter-spacing:.25em; text-transform:uppercase; color:rgba(255,255,255,.35); font-weight:500; }
+.fg input, .fg select, .fg textarea {
+  padding:13px 16px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
+  color:var(--white); font-family:var(--ff-body); font-size:.92rem; outline:none;
+  transition:border-color .25s, background .25s; border-radius:4px;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color:var(--gold); background:rgba(255,255,255,.08); }
+.fg input::placeholder, .fg textarea::placeholder { color:rgba(255,255,255,.25); }
+.fg select { color:rgba(255,255,255,.6); cursor:pointer; -webkit-appearance:none; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c8a84b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 1rem center; padding-right:2.5rem; }
+.fg select option { background:var(--navy); color:var(--white); }
+.fg textarea { resize:vertical; min-height:110px; }
+.fg input.invalid, .fg select.invalid, .fg textarea.invalid { border-color:rgba(201,80,76,.7); box-shadow:0 0 0 3px rgba(201,80,76,.1); }
+.field-err { font-size:.7rem; color:#e88; display:none; }
+.fg.has-err .field-err { display:block; }
+
+/* ── Checkbox field ── */
+.fg-checkbox { display:flex; align-items:center; gap:.5rem; margin-bottom:.9rem; }
+.fg-checkbox input[type="checkbox"] { width:16px; height:16px; cursor:pointer; accent-color:var(--gold); }
+.fg-checkbox label { font-size:.8rem; color:rgba(255,255,255,.6); font-weight:400; letter-spacing:0; text-transform:none; margin:0; cursor:pointer; }
+.checkbox-group { margin-bottom:1.2rem; padding:1rem; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:4px; }
+.checkbox-group > p { font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); display:block; margin-bottom:.8rem; font-weight:500; }
+
+/* ── Submit button ── */
+.btn-form-submit { display:flex; align-items:center; justify-content:center; gap:.5rem; width:100%; margin-top:.5rem; padding:.9rem 1.5rem; background:var(--gold); border:none; border-radius:4px; color:var(--navy); font-family:var(--ff-body); font-size:.78rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; transition:background .25s, transform .2s, opacity .25s; }
+.btn-form-submit:hover { background:var(--gold2); transform:translateY(-1px); }
+.btn-form-submit:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+.btn-form-submit .fspinner { width:16px; height:16px; border:2px solid rgba(8,12,20,.3); border-top-color:var(--navy); border-radius:50%; animation:fspin .7s linear infinite; display:none; }
+@keyframes fspin { to{transform:rotate(360deg)} }
+
+/* ── Form notices ── */
+.form-notice { display:none; align-items:center; gap:.75rem; padding:1rem 1.2rem; border-radius:4px; font-size:.86rem; margin-top:1rem; line-height:1.5; }
+.form-notice.show { display:flex; }
+.form-notice.ok { background:rgba(76,175,121,.1); border:1px solid rgba(76,175,121,.3); color:#7ddc7d; }
+.form-notice.err { background:rgba(201,80,76,.1); border:1px solid rgba(201,80,76,.3); color:#e88; }
+
+@media(max-width:800px){ .booking-layout { grid-template-columns:1fr; gap:3rem; } }
+
+/* ═══════════════════════════════════════════════
+   CTA BANNER
+═══════════════════════════════════════════════ */
+.cta-banner { background:var(--gold); padding:56px 5%; display:flex; align-items:center; justify-content:center; gap:3rem; flex-wrap:wrap; text-align:center; }
+.cta-banner h2 { font-family:var(--ff-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:600; color:var(--navy); max-width:520px; line-height:1.15; }
+.cta-banner h2 em { font-style:italic; }
+.cta-btn-group { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+.cta-banner .btn-navy { background:var(--navy); color:#fff; }
+.cta-banner .btn-outline-navy { background:transparent; border:1.5px solid var(--navy); color:var(--navy); padding:14px 34px; font-size:.75rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; transition:all .25s; }
+.cta-banner .btn-outline-navy:hover { background:var(--navy); color:#fff; }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+.footer-intro-band { background:#f3e9d9; padding:34px 5%; color:var(--navy); }
+.footer-intro-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:minmax(160px,230px) minmax(0,1fr) minmax(210px,.8fr); align-items:center; gap:2rem; }
+.footer-logo-panel { min-height:148px; display:flex; align-items:center; justify-content:center; padding:1rem; }
+.footer-logo-panel img { width:140px; height:140px; object-fit:contain; }
+.footer-intro-copy { max-width:590px; }
+.footer-intro-copy h2 { margin-bottom:.55rem; color:var(--navy); font-family:var(--ff-display); font-size:clamp(1.2rem,2vw,1.65rem); }
+.footer-intro-copy p { color:#3e4855; font-size:.9rem; line-height:1.75; }
+.footer-intro-action { padding-left:1.5rem; border-left:1px solid rgba(12,24,41,.45); }
+.footer-intro-action h3 { margin-bottom:.55rem; color:var(--navy); font-size:1rem; }
+.footer-intro-action p { margin-bottom:1rem; color:#3e4855; font-size:.84rem; line-height:1.65; }
+.footer-intro-action a { color:var(--navy); font-size:.82rem; font-weight:700; }
+.footer-intro-action a:hover { color:var(--navy); }
+footer { background:#050505; padding:48px 5% 76px; color:#fff; }
+.footer-grid { display:grid; grid-template-columns:1.45fr repeat(2,minmax(130px,1fr)) minmax(180px,1fr); gap:2.4rem; margin-bottom:2.5rem; }
+.footer-brand-logo { display:inline-flex; align-items:center; margin-bottom:1rem; }
+.footer-brand-logo img { width:auto; max-width:180px; max-height:72px; object-fit:contain; }
+.footer-brand .fb-logo { margin-bottom:.4rem; color:#fff; font-family:var(--ff-display); font-size:1.4rem; }
+.footer-brand .fb-sub { margin-bottom:1rem; color:rgba(255,255,255,.72); font-family:var(--ff-display); font-size:.85rem; font-style:italic; }
+.footer-brand p { margin-bottom:1rem; color:rgba(255,255,255,.82); font-size:.82rem; line-height:1.8; }
+.footer-col h3, .footer-col h4 { margin-bottom:1rem; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+.footer-col ul { list-style:none; }
+.footer-col ul li { margin-bottom:.58rem; }
+.footer-col ul li a { color:rgba(255,255,255,.82); font-size:.82rem; line-height:1.5; transition:color .2s; }
+.footer-col ul li a:hover, .footer-contact a:hover { color:#fff; }
+.footer-contact { padding-left:1.6rem; border-left:1px solid rgba(255,255,255,.25); }
+.footer-contact h2 { margin-bottom:.55rem; color:#fff; font-family:var(--ff-display); font-size:1.3rem; }
+.footer-contact > p { max-width:440px; margin-bottom:1.2rem; color:rgba(255,255,255,.82); font-size:.88rem; line-height:1.7; }
+.footer-contact-list { list-style:none; margin-bottom:1.2rem; }
+.footer-contact-list li { margin-bottom:.48rem; color:rgba(255,255,255,.82); font-size:.82rem; line-height:1.55; overflow-wrap:anywhere; }
+.footer-contact-list a { color:inherit; }
+.footer-contact-heading { margin-top:1.2rem; }
+.footer-social { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
+.footer-social a { display:flex; align-items:center; justify-content:center; min-width:36px; height:36px; padding:0 .55rem; border:1px solid rgba(255,255,255,.7); border-radius:50%; color:#fff; font-size:.68rem; font-weight:700; transition:all .2s; }
+.footer-social a:hover { border-color:#fff; color:#fff; }
+.footer-social a svg { width:14px; height:14px; fill:currentColor; }
+.footer-brand > .footer-social { display:none; }
+.footer-bottom { border-top:1px solid rgba(255,255,255,.28); padding-top:1.2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+.footer-bottom p { color:rgba(255,255,255,.82); font-size:.74rem; line-height:1.6; }
+.footer-bottom .ft-links { display:flex; flex-wrap:wrap; gap:1.2rem; }
+.footer-bottom .ft-links a { color:rgba(255,255,255,.82); font-size:.74rem; }
+.footer-bottom .ft-links a:hover { color:#fff; }
+@media(max-width:900px){
+  .footer-intro-inner { grid-template-columns:170px minmax(0,1fr); }
+  .footer-logo-panel { grid-row:span 2; }
+  .footer-intro-action { padding:1rem 0 0; border-left:0; border-top:1px solid rgba(12,24,41,.25); }
+  .footer-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .footer-contact { padding:0; border:0; }
+}
+@media(max-width:560px){
+  .footer-intro-band { padding:28px 6%; }
+  .footer-intro-inner { grid-template-columns:minmax(0,1fr); gap:1.2rem; }
+  .footer-logo-panel { grid-row:auto; justify-content:center; min-height:104px; }
+  .footer-logo-panel img { width:104px; height:104px; }
+  .footer-intro-copy, .footer-intro-action { text-align:center; }
+  footer { padding:36px 6% 96px; }
+  .footer-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:2rem 1rem; }
+  .footer-contact { grid-column:1 / -1; padding:1.4rem 0 0; border:0; border-top:1px solid rgba(255,255,255,.25); }
+  .footer-brand-logo img { max-width:145px; max-height:60px; }
+  .footer-bottom { align-items:flex-start; }
+  .footer-bottom .ft-links { gap:.85rem 1rem; }
+}
+@media(max-width:360px){ .footer-grid { grid-template-columns:minmax(0,1fr); } }
+
+/* ═══════════════════════════════════════════════
+   STICKY MOBILE CTA
+═══════════════════════════════════════════════ */
+.sticky-cta { display:none; position:fixed; bottom:0; left:0; right:0; z-index:198; background:var(--navy); border-top:1px solid rgba(200,168,75,.2); padding:7px 5% max(7px, env(safe-area-inset-bottom)); gap:.6rem; align-items:center; justify-content:center; }
+@media(max-width:600px){
+  .sticky-cta { display:flex; }
+  .sticky-cta .btn { flex:1; max-width:170px; min-height:36px; justify-content:center; padding:8px 12px; border:1px solid #fff; border-radius:999px; font-size:.6rem; letter-spacing:.08em; }
+  .sticky-cta .btn-gold { background:#fff; color:var(--navy); }
+  .sticky-cta .btn-outline-gold { background:transparent; color:#fff; }
+}
+
+/* Open orchestra mobile layout */
+@media(max-width:800px){ .open-orchestra-intro, .open-orchestra-details { grid-template-columns:1fr; gap:1.5rem; } .open-orchestra-image { max-height:360px; } .leadership-grid { grid-template-columns:1fr; } .leadership-card { display:block; } .leadership-card img { height:230px; object-position:center 16%; } }
+@media(max-width:600px){ .orchestra-requirements { grid-template-columns:1fr; } }
+@media(max-width:600px){ .orchestra-section-title { font-size:1.2rem; } }
+
+/* Student life slideshow mobile */
+@media(max-width:600px){ .slideshow-wrap { height:300px; } .slideshow-wrap img { object-fit:contain; } }
+
+/* General mobile sizes */
+@media(max-width:600px){ .section-title { font-size:2rem; } .btn { padding:12px 28px; font-size:.7rem; } }
+
+/* ═══════════════════════════════════════════════
+   MISC
+═══════════════════════════════════════════════ */
+.sep-gold { width:100%; height:1px; background:linear-gradient(to right,transparent,rgba(200,168,75,.3),transparent); }
+.quote-block { border-left:3px solid var(--gold); padding:1.2rem 1.8rem; font-family:var(--ff-display); font-style:italic; font-size:1.1rem; color:rgba(255,255,255,.6); line-height:1.7; margin:2rem 0; background:rgba(200,168,75,.04); }
+</style>
 </head>
 <body>
 
 <!-- ═══════ TOPBAR ═══════ -->
 <header id="topbar">
   <div class="top-row">
-    <a href="#home" class="nav-brand" aria-label="Go to home">
-      <img src="Images/Logos/LSM Logos/LSM Logo white.png" alt="LSM Logo">
-    </a>
+    <div class="nav-brand-group">
+      <a class="nav-brand" href="#home" aria-label="Lilongwe School of Music home">
+        <img src="Images/Logos/LSM Logos/LSM Logo white.png" alt="Lilongwe School of Music">
+      </a>
+    </div>
     <div class="top-actions">
-      <div class="action-row">
-        <div class="nav-social top-social">
-          <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          </a>
-          <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </a>
-        </div>
-        <a href="#admissions" class="btn btn-outline-white top-btn">Apply Now</a>
-        <a href="#booking" class="btn btn-outline-white top-btn">🎫 Book Tickets</a>
+      <div class="nav-social">
+        <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank" rel="noopener noreferrer" aria-label="Contact LSM on WhatsApp">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </a>
       </div>
-      <div class="login-row" style="display:flex; gap:0.4rem; align-items:center; font-size:.65rem; color:rgba(255,255,255,.7);">
-        <a href="portal.html" style="color:rgba(255,255,255,.7); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='rgba(255,255,255,.7)'">Student Login</a>
-        <span style="color:rgba(255,255,255,.4);">/</span>
-        <a href="portal.html" style="color:rgba(255,255,255,.7); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='rgba(255,255,255,.7)'">Staff Login</a>
+      <a class="top-link top-apply" href="#admissions">Apply Now</a>
+      <a class="top-link top-tickets" href="#upcoming-events"><span aria-hidden="true">🎟</span> Book Tickets</a>
+      <div class="portal-links">
+        <a href="portal.html">Student Login</a>
+        <span aria-hidden="true">/</span>
+        <a href="portal.html">Staff Login</a>
       </div>
     </div>
     <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">
       <span></span><span></span><span></span>
     </button>
-  </div> 
-  <nav class="subnav" aria-label="Primary site navigation">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#programs">Programs</a>
-    <a href="#admissions">Admissions</a>
-    <a href="#events">Events</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#myo">Youth Orchestra</a>
-    <a href="#booking">Contact</a>
-  </nav>
+  </div>
 </header>
+
+<nav class="desktop-nav" aria-label="Main navigation">
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="#home" aria-current="page">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#admissions">Admissions</a></li>
+    <li><a href="#upcoming-events">Events</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#open-orchestra">LSM Open Orchestra</a></li>
+    <li><a href="#booking">Contact</a></li>
+  </ul>
+</nav>
 
 <!-- Mobile nav panel -->
 <nav class="nav-mobile-panel" id="mobilePanel" aria-label="Mobile navigation">
   <a href="#home" onclick="closeMobileNav()">Home</a>
   <a href="#about" onclick="closeMobileNav()">About LSM</a>
+  <a href="#leadership" onclick="closeMobileNav()">Leadership</a>
   <a href="#programs" onclick="closeMobileNav()">Curriculum</a>
   <a href="#admissions" onclick="closeMobileNav()">Admissions</a>
-  <a href="#events" onclick="closeMobileNav()">Events</a>
+  <a href="#upcoming-events" onclick="closeMobileNav()">Events</a>
   <a href="#gallery" onclick="closeMobileNav()">LSM Orchestra</a>
-  <a href="#myo" onclick="closeMobileNav()">Youth Orchestra</a>
+  <a href="#open-orchestra" onclick="closeMobileNav()">LSM Open Orchestra</a>
   <a href="#partnership-donation" onclick="closeMobileNav()">Support LSM</a>
   <a href="#booking" onclick="closeMobileNav()">Book / Contact</a>
   <a href="portal.html" onclick="closeMobileNav()">Student Portal</a>
@@ -130,15 +862,13 @@
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-grain"></div>
-  <div class="hero-deco hero-deco-left"></div>
   <div class="hero-deco"></div>
+  <div class="hero-deco hero-deco-left"></div>
   <div class="hero-content">
     <div class="hero-left">
-      <div class="hero-badge">
-        <div class="dot"></div>
-        <span>Malawi's Premier Conservatory</span>
-      </div>
+      <img class="hero-monogram" src="Monograms/LSM Monogram (1).png" alt="" aria-hidden="true">
       <h1 class="hero-title">Lilongwe School <br>of Music</h1>
+      <p class="hero-tagline">Malawi's Premier Conservatory</p>
       <h2 class="hero-subtitle">Training<br><em>World-Class</em><br>Musicians in Malawi</h2>
       <p class="hero-sub">A conservatory-level institution offering structured instrumental training, vocal studies, ensemble performance, and internationally benchmarked examination preparation.</p>
       <div class="hero-actions">
@@ -165,52 +895,84 @@
       </div>
     </div>
   </div>
-  <div class="hero-scroll-hint">
-    <span>Scroll</span>
-    <div class="line"></div>
-  </div>
 </section>
 
-<!-- ═══════ MONTHLY ANNOUNCEMENT SPECIAL ═══════ -->
+<!-- ═══════ MONTHLY ANNOUNCEMENTS ═══════ -->
 <section id="monthly-announcement" class="section announcement-special">
   <div class="container">
     <div class="section-header centered">
       <span class="tag-label">Monthly Bulletin</span>
       <h2 class="section-title">Announcement Special</h2>
       <div class="gold-rule centered"></div>
-      <p class="section-intro"><center>A dedicated monthly update space for featured announcements, event highlights, and LSM news.</center></p>
+      <p class="section-intro">School updates, opportunities and upcoming events from Lilongwe School of Music.</p>
     </div>
+    <article class="featured-announcement reveal">
+      <div class="featured-announcement-copy">
+        <span class="featured-announcement-label">LSM Open Orchestra · Now recruiting</span>
+        <h3>Vacancies for a soprano singer and a trumpet player</h3>
+        <p>LSM Open Orchestra is inviting enquiries from interested soprano singers and trumpet players. Contact us for audition and participation details.</p>
+      </div>
+      <a class="btn btn-gold" href="https://wa.me/265981448075?text=Hello%2C%20I%27m%20interested%20in%20the%20LSM%20Open%20Orchestra%20vacancy." target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a>
+    </article>
     <div class="monthly-layout reveal">
       <div class="monthly-content">
         <article class="monthly-item">
-          <h3>May 2026 Special Edition</h3>
-          <p>New intake now open for Grade 1–8 music exam preparation, ensemble coaching, and private instruction. This month's focus is on spring recital planning, ensemble registrations, and scholarship auditions.</p>
-          <ul>
-            <li>Feature: Orchestra rehearsal schedule update</li>
-            <li>Reminder: Grade 5 Theory preparation sessions begin 15 May</li>
-            <li>Spotlight: Student performance showcase on 28 May</li>
-          </ul>
+          <h3>Enrolment &amp; Programmes</h3>
+          <p>Ask us about current enrolment, available programmes, lesson schedules and fees.</p>
         </article>
         <article class="monthly-item">
-          <h3>Composer of the Month</h3>
-          <p>Celebrating the works of local composers and chamber music arrangements that inspire our students. Add your note here as the monthly recommendation.</p>
+          <h3>Assessments &amp; Exams</h3>
+          <p>Contact the school for the latest assessment dates, booking arrangements and examination preparation information.</p>
         </article>
         <article class="monthly-item">
-          <h3>Second Assessment</h3>
-          <p>
-
-Announcement: <br>Please take note that the second assessment is due on 10 May 2026. If you have not yet taken the assessment, a booking fee will be required.
-Kindly, if you are in Grades 1 to 3 and have not yet taken the assessment, text me immediately so that we can schedule it.
-Please note that the assessment takes two hours, which is equivalent to two scheduled classes.
-Thank you.</article>
+          <h3>Performances &amp; Events</h3>
+          <p>Get in touch for information about upcoming student performances, orchestra events and concert opportunities.</p>
+        </article>
       </div>
       <div class="monthly-video">
-        <div class="video-window">
-          <!-- ⚠️ REPLACE YOUR_VIDEO_ID below with your actual YouTube video ID -->
-          <iframe id="lsm-video" width="100%" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="LSM Monthly Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <button type="button" class="fullscreen-btn" onclick="toggleFullscreen()" aria-label="Toggle Fullscreen">⛶</button>
+        <div class="video-window" id="lsm-video-window">
+          <button id="lsm-video-preview" class="youtube-preview" type="button" aria-label="Play Lilongwe School of Music video">
+            <img src="https://img.youtube.com/vi/p015FfT_zjs/maxresdefault.jpg" alt="">
+            <span class="youtube-preview-play" aria-hidden="true">▶</span>
+            <span class="youtube-preview-copy">
+              <span class="youtube-preview-eyebrow">Lilongwe School of Music</span>
+              <span class="youtube-preview-title">Watch on YouTube</span>
+            </span>
+          </button>
+          <iframe id="lsm-video" title="Lilongwe School of Music video" data-src="https://www.youtube-nocookie.com/embed/p015FfT_zjs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen hidden></iframe>
+          <button type="button" class="fullscreen-btn" onclick="toggleFullscreen('lsm-video-window')" aria-label="Toggle video fullscreen">⛶</button>
         </div>
+        <a class="youtube-direct-link" href="https://youtu.be/p015FfT_zjs" target="_blank" rel="noopener noreferrer">Open video on YouTube</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ QUICK PATHWAYS ═══════ -->
+<section class="section announcement-paths" aria-labelledby="pathways-title">
+  <div class="container">
+    <div class="section-header centered">
+      <span class="tag-label">Your Next Step</span>
+      <h2 class="section-title" id="pathways-title">Find your musical pathway</h2>
+      <div class="gold-rule centered"></div>
+      <p class="section-intro">Explore what you can learn, see students in action, or ask us about getting started.</p>
+    </div>
+    <div class="pathway-grid reveal">
+      <a class="monthly-item monthly-path" href="#programs">
+        <h3>Explore programmes</h3>
+        <p>Instrumental, vocal, theory and ensemble training.</p>
+        <span class="monthly-path-link">See what you can learn →</span>
+      </a>
+      <a class="monthly-item monthly-path" href="#student-life">
+        <h3>See student life</h3>
+        <p>Get a glimpse of rehearsals, performances and life at LSM.</p>
+        <span class="monthly-path-link">Discover LSM →</span>
+      </a>
+      <a class="monthly-item monthly-path" href="#booking">
+        <h3>Ask about lessons</h3>
+        <p>Tell us what you are interested in and we can share current details.</p>
+        <span class="monthly-path-link">Enquire with us →</span>
+      </a>
     </div>
   </div>
 </section>
@@ -251,6 +1013,44 @@ Thank you.</article>
       <div class="pillar-item"><div class="pi-icon">⚡</div><div class="pi-title">Discipline</div><div class="pi-text">Consistency and commitment in practice and performance</div></div>
       <div class="pillar-item"><div class="pi-icon">🎨</div><div class="pi-title">Creativity</div><div class="pi-text">Artistic expression and musical interpretation</div></div>
       <div class="pillar-item"><div class="pi-icon">🌍</div><div class="pi-title">Inclusivity</div><div class="pi-text">Talent developed from all backgrounds</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ LSM LEADERSHIP ═══════ -->
+<section id="leadership" class="section leadership-section" aria-labelledby="leadership-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag-label">Our Leadership</span>
+      <h2 class="section-title" id="leadership-title">Leadership at LSM</h2>
+      <div class="gold-rule"></div>
+      <p class="section-intro">Our leadership team supports the work of Lilongwe School of Music and LSM Open Orchestra, bringing together artistic direction, planning, development and financial stewardship.</p>
+    </div>
+    <div class="leadership-grid reveal">
+      <article class="leadership-card">
+        <img src="Images/Directors/Brian Lia Director_ Violist.jpg" alt="Brian Lia playing viola during an LSM performance" loading="lazy">
+        <div class="leadership-card-copy">
+          <h3>Brian Lia</h3>
+          <p class="leadership-role">Artistic and Academic Lead</p>
+          <p class="leadership-bio">Brian provides artistic and academic leadership across Lilongwe School of Music and LSM Open Orchestra. He guides the orchestra's musical direction and standards, supports repertoire and programme development, and contributes to the learning and artistic growth of its musicians. He is also a music teacher at Lilongwe School of Music.</p>
+        </div>
+      </article>
+      <article class="leadership-card">
+        <img src="Images/Directors/Mr. Edgar Mwanja Violinist Co-Director.jpeg" alt="Edgar Mwanja playing violin during an LSM performance" loading="lazy">
+        <div class="leadership-card-copy">
+          <h3>Edgar Mwanja</h3>
+          <p class="leadership-role">Planning and Development Lead</p>
+          <p class="leadership-bio">Edgar supports planning and development across Lilongwe School of Music and LSM Open Orchestra, including shaping projects, coordinating development priorities and building opportunities that contribute to the orchestra's growth. He is also a music teacher at Lilongwe School of Music.</p>
+        </div>
+      </article>
+      <article class="leadership-card">
+        <img src="Images/Directors/Vitumbiko Chisi Co Director_ Trombonist principal.jpg" alt="Vitumbiko Chisi playing trombone during an LSM performance" loading="lazy">
+        <div class="leadership-card-copy">
+          <h3>Vitumbiko Chisi</h3>
+          <p class="leadership-role">Finance Lead</p>
+          <p class="leadership-bio">Vitumbiko supports financial planning and administration for Lilongwe School of Music and LSM Open Orchestra, including responsible budgeting and financial management. He also serves as a brass facilitator, contributing to the preparation and development of brass musicians.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -361,7 +1161,7 @@ Thank you.</article>
       </div>
       <div class="schedule-row reveal">
         <div style="flex-basis:100%;margin-bottom:.5rem;">
-          <h3 style="font-family:var(--ff-display);color:var(--gold);font-size:1.1rem;letter-spacing:.03em;">Class Schedule</h3>
+          <h3 style="font-family:var(--ff-display);color:var(--navy);font-size:1.1rem;letter-spacing:.03em;">Class Schedule</h3>
         </div>
         <div class="sched-item">
           <div class="sday">Friday</div>
@@ -371,7 +1171,7 @@ Thank you.</article>
           <div class="sday">Saturday</div>
           <div class="stime">4:00 PM – 7:30 PM</div>
         </div>
-        <div style="flex:2;min-width:240px;padding:1.4rem 1.8rem;background:rgba(26,53,97,.15);border:1px solid rgba(201,214,232,.18);display:flex;align-items:center;">
+        <div style="flex:2;min-width:240px;padding:1.4rem 1.8rem;background:rgba(26,53,97,.15);border:1px solid rgba(200,168,75,.1);display:flex;align-items:center;">
           <p style="font-size:.84rem;color:rgba(255,255,255,.45);line-height:1.85;">Flexible part-time schedule designed to allow students to balance academic and professional commitments with music education.</p>
         </div>
         <div style="display:flex;align-items:center;padding:1rem;">
@@ -485,6 +1285,35 @@ Thank you.</article>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════ UPCOMING EVENTS ═══════ -->
+<section id="upcoming-events" class="section" aria-labelledby="upcoming-events-title">
+  <div class="container">
+    <div class="upcoming-events-heading">
+      <h2 id="upcoming-events-title">Upcoming Events</h2>
+      <div class="event-view-tabs" role="tablist" aria-label="Choose event view">
+        <button class="event-view-tab" id="upcoming-events-tab" type="button" role="tab" aria-selected="true" aria-controls="upcoming-events-panel">Upcoming</button>
+        <button class="event-view-tab" id="past-events-tab" type="button" role="tab" aria-selected="false" aria-controls="past-events-panel">Past events</button>
+      </div>
+      <div class="events-controls">
+        <label class="sr-only" for="events-city">Filter events by city</label>
+        <select class="events-city-select" id="events-city">
+          <option value="all">All cities</option>
+          <option value="Lilongwe">Lilongwe</option>
+          <option value="Mzuzu">Mzuzu</option>
+          <option value="Blantyre">Blantyre</option>
+        </select>
+        <button class="events-carousel-button" id="events-previous" type="button" aria-label="Previous events" disabled>‹</button>
+        <button class="events-carousel-button" id="events-next" type="button" aria-label="Next events" disabled>›</button>
+        <a class="browse-events-link" href="#events">Browse event information <span aria-hidden="true">›</span></a>
+      </div>
+    </div>
+    <div class="upcoming-events-track" id="upcoming-events-track" role="tabpanel" aria-labelledby="upcoming-events-tab" aria-live="polite">
+      <p class="upcoming-events-empty">Upcoming events will be announced here. Please check back soon.</p>
+    </div>
+    <div class="past-events-grid" id="past-events-panel" role="tabpanel" aria-labelledby="past-events-tab" aria-live="polite" hidden></div>
   </div>
 </section>
 
@@ -602,7 +1431,7 @@ Thank you.</article>
   </div>
 </section>
 
-<!-- STUDENT LIFE  -->
+<!-- STUDENT LIFE -->
 <section id="student-life" class="section" style="background:var(--cream);">
   <div class="container">
     <div class="section-header">
@@ -628,7 +1457,6 @@ Thank you.</article>
         <div class="slide-dot" onclick="goSlide(4)"></div>
         <div class="slide-dot" onclick="goSlide(5)"></div>
       </div>
-      <div class="slide-status" id="slideStatus">Viewing <span>1</span> of 6</div>
     </div>
   </div>
 </section>
@@ -663,7 +1491,6 @@ Thank you.</article>
       <div class="slide-dot" onclick="goSlideGallery(6)"></div>
       <div class="slide-dot" onclick="goSlideGallery(7)"></div>
     </div>
-    <div class="slide-status" id="gallerySlideStatus">Viewing <span>1</span> of 8</div>
   </div>
 </section>
 
@@ -671,7 +1498,7 @@ Thank you.</article>
 <section id="videos" class="section">
   <div class="container">
     <div class="section-header">
-      <span class="tag-label">Info Graphics</span>
+      <span class="tag-label">Rehearsals &amp; Performances</span>
       <h2 class="section-title">LSM Videos</h2>
       <div class="gold-rule"></div>
       <p class="section-intro">Watch our latest rehearsals and performances showcasing the talent and dedication of LSM students.</p>
@@ -681,7 +1508,7 @@ Thank you.</article>
         <div id="videoThumbnail" style="position:relative;width:100%;background:#000;border-radius:6px;overflow:hidden;cursor:pointer;">
           <img src="Images/LSM Orchestra.jpg" alt="Malawi National Anthem" style="width:100%;height:auto;display:block;opacity:.8;transition:opacity .3s;"/>
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);">
-            <button id="playVideoBtn" style="width:80px;height:80px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:all .3s;box-shadow:0 8px 28px rgba(201,214,232,.35);">▶</button>
+            <button id="playVideoBtn" style="width:80px;height:80px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:all .3s;box-shadow:0 8px 28px rgba(200,168,75,.35);">▶</button>
           </div>
           <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);padding:20px;color:#fff;font-family:var(--ff-display);">
             <p style="margin:0;font-size:1.2rem;font-weight:600;">Malawi National Anthem</p>
@@ -694,44 +1521,76 @@ Thank you.</article>
       </div>
       <div id="noContent" style="display:none; text-align:center; padding:40px; font-size:18px; color:#666; background:#e8e8e8; border-radius:5px; max-width:800px; margin:20px auto;">No content available, comeback later</div>
       <div class="controls" style="text-align:center; margin-top:10px;">
-        <button id="togglePlayPause" style="padding:10px 20px; margin:0 5px; cursor:pointer; display:none;" aria-label="Pause">⏸</button>
-        <button onclick="toggleFullscreen()" style="padding:10px 20px; margin:0 5px; cursor:pointer;" aria-label="Fullscreen">⛶</button>
-        <button onclick="minimizeVideo()" style="padding:10px 20px; margin:0 5px; cursor:pointer;" aria-label="Minimize">🗕</button>
+        <button id="togglePlayPause" style="padding:10px 20px; margin:0 5px; cursor:pointer; display:none;">Pause</button>
+        <button onclick="toggleFullscreen()" style="padding:10px 20px; margin:0 5px; cursor:pointer;">Fullscreen</button>
+        <button onclick="minimizeVideo()" style="padding:10px 20px; margin:0 5px; cursor:pointer;">Minimize</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════ MALAWI YOUTH ORCHESTRA (MYO) ═══════ -->
-<section id="myo" class="section">
+<!-- ═══════ LSM OPEN ORCHESTRA ═══════ -->
+<section id="open-orchestra" class="section">
   <div class="container">
     <div class="section-header">
-      <span class="tag-label">Coming Soon</span>
-      <h2 class="section-title">The Malawi Youth Orchestra (MYO)</h2>
+      <span class="tag-label">Founded by Lilongwe School of Music</span>
+      <h2 class="section-title">LSM Open Orchestra</h2>
       <div class="gold-rule"></div>
-      <p class="section-intro">An exciting new initiative bringing together the finest young musicians and vocalists in Malawi for world-class orchestral and ensemble experiences.</p>
+      <p class="section-intro">An independent orchestra identity, supported by the musical foundation of Lilongwe School of Music.</p>
     </div>
     <div class="reveal">
-      <div>
-        <h3 class="myo-section-title">About the Malawi Youth Orchestra</h3>
-        <p style="font-size:.95rem;line-height:1.9;color:var(--text);margin-bottom:1.2rem;">The Malawi Youth Orchestra (MYO) represents a groundbreaking initiative to develop and celebrate the next generation of musical performers in Malawi. Designed as an elite ensemble project under the Lilongwe School of Music, MYO will bring together the most talented instrumentalists and vocalists across the country to perform at the highest standards.</p>
-        <p style="font-size:.95rem;line-height:1.9;color:var(--text);margin-bottom:2rem;">We are currently in the planning stages and are excited to share that we will be launching the Malawi Youth Orchestra in the future. This represents a major step in advancing music performance and education across our nation.</p>
+      <div class="open-orchestra-intro">
+        <div>
+          <h3 class="orchestra-section-title">About us</h3>
+          <p>LSM Open Orchestra is an orchestra founded by Lilongwe School of Music. We bring musicians together to prepare and perform orchestral programmes with care, commitment and artistic purpose.</p>
+          <p>We are building the orchestra step by step: developing our musicians, establishing our sound and presenting performances for audiences in Malawi. Each project is an opportunity to make meaningful music, work well together and grow as an ensemble.</p>
+          <p>The orchestra has its own identity and artistic direction, supported by the musical foundation of Lilongwe School of Music.</p>
+          <p>Classical music is at the heart of both Lilongwe School of Music and LSM Open Orchestra. Our performances will also include contemporary music and local instruments, reflecting the musical tastes and traditions of the community.</p>
+        </div>
+        <img class="open-orchestra-image" src="Images/LSM Orchestra.jpg" alt="LSM musicians performing together">
       </div>
-      <div>
-        <h3 class="myo-section-title">Planned Activities</h3>
-        <ul style="list-style:none;margin-bottom:2rem;">
-          <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Auditions &amp; Recruitment:</strong> Nationwide auditions to identify and select the most promising young musicians across all instrumental and vocal disciplines.</span></li>
-          <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Intensive Rehearsals:</strong> Regular ensemble rehearsals and coaching with master musicians to develop world-class performance standards.</span></li>
-            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Concert Performances:</strong> Public concerts and touring performances across Malawi, showcasing our nation's musical talent at the highest level.</span></li>
-            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">International Collaborations:</strong> Partnerships with international orchestras and music institutions for collaborative performances and cultural exchange.</span></li>
-            <li style="display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Music Education Workshops:</strong> Masterclasses and educational workshops delivered by leading musicians and conductors for MYO members and the broader student community.</span></li>
-            <li style="display:flex;gap:1rem;align-items:flex-start;"><span style="color:var(--gold);font-weight:bold;flex-shrink:0;">▸</span><span style="font-size:.93rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--navy);">Professional Development:</strong> Preparation for international competition opportunities and professional music careers.</span></li>
+
+      <div class="open-orchestra-details">
+        <div class="open-orchestra-section">
+          <h3 class="orchestra-section-title">Membership and recruitment</h3>
+          <p>LSM Open Orchestra welcomes applications from musicians who are interested in orchestral performance and meet the requirements of an advertised position.</p>
+          <p>Lilongwe School of Music students will receive first consideration as the orchestra seeks to support and develop their artistry. Musicians from outside the school are also welcome to apply.</p>
+          <p>Membership applications will be invited when positions are advertised for orchestral instruments and local instruments. Interested musicians must complete the application form provided for that recruitment period and submit any requested supporting materials. Applications are reviewed for each opening, and selection depends on the instruments needed, the musical requirements and the needs of the orchestra.</p>
+          <p>Membership is renewed annually. Members who wish to continue must reapply when the annual renewal process is announced. Renewal and selection will depend on the orchestra's needs and the member's participation and readiness.</p>
+          <p class="open-orchestra-payment"><strong>Project-based engagement:</strong> Musicians are engaged and paid on a project and performance basis. Payment relates to a specific project or performance, according to the terms communicated for that engagement. It is not a fixed hourly wage or monthly salary, and payment is not guaranteed between projects. Each project announcement or agreement will explain the payment amount, what it covers and when it will be made.</p>
+        </div>
+        <div class="open-orchestra-section">
+          <h3 class="orchestra-section-title">Requirements to apply</h3>
+          <p>Applicants should:</p>
+          <ul class="orchestra-requirements">
+            <li>Play an instrument named in the advertised opening.</li>
+            <li>Meet the musical standard stated for that position.</li>
+            <li>Be able to read music, where required for the repertoire.</li>
+            <li>Be willing to prepare parts independently and work under a conductor.</li>
+            <li>Attend the scheduled rehearsals and performances.</li>
+            <li>Demonstrate commitment, punctuality, reliability and a collaborative attitude.</li>
+            <li>Complete the application form and provide the requested information or recording.</li>
+            <li>Follow any additional requirements stated in the position advertisement.</li>
           </ul>
+          <p>Each recruitment notice will specify the available positions, eligibility, audition or assessment process, application deadline, rehearsal schedule, performance commitments and payment terms.</p>
         </div>
       </div>
-      <div style="padding:2rem;background:var(--cream);border:1px solid var(--mist);border-left:3px solid var(--gold);border-radius:4px;margin-top:3rem;">
-        <p style="font-family:var(--ff-display);font-size:1.1rem;font-style:italic;color:var(--navy);line-height:1.8;margin-bottom:1rem;"><strong style="color:var(--text);">Participation:</strong> The Malawi Youth Orchestra will feature the finest young instrumentalists and vocalists from across Malawi, selected through rigorous auditions. Whether you perform classical, contemporary, or traditional music, if you have the passion and dedication for excellence, there is a place for you.</p>
-        <p style="font-size:.9rem;color:var(--mid);line-height:1.7;"><strong style="color:var(--text);">Stay tuned</strong> for announcements regarding auditions, rehearsal schedules, and performance dates as we prepare for the launch of this transformative initiative in the near future.</p>
+
+      <div class="open-orchestra-details">
+        <div class="open-orchestra-section">
+          <h3 class="orchestra-section-title">How to apply</h3>
+          <ol class="orchestra-steps">
+            <li>Read the current recruitment or membership renewal announcement.</li>
+            <li>Complete the application form provided for that opening.</li>
+            <li>Submit the form and any requested materials by the stated deadline.</li>
+            <li>Attend an audition or assessment if invited or required.</li>
+            <li>Wait for the orchestra to contact you about the outcome and next steps.</li>
+          </ol>
+        </div>
+        <div class="open-orchestra-section">
+          <h3 class="orchestra-section-title">Our commitment</h3>
+          <p class="open-orchestra-commitment">We are committed to thoughtful preparation, high standards and respect for the work of every musician. We will build the orchestra through the music we perform, the way we work together and the relationships we form with audiences and partners.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -848,14 +1707,14 @@ Thank you.</article>
             <span class="ci-icon-box">✉️</span>
             <div>
               <strong>Email</strong>
-              <a href="mailto:lilongweschoolofmusic.lsm@yahoo.com">lilongweschoolofmusic.lsm@yahoo.com</a>
+              <a href="mailto:lilongweschoolofmusic.lsm@yahoo.com">lilongweschoolofmusic.lsm@gmail.com & lilongweschoolofmusic.lsm@yahoo.com </a>
             </div>
           </li>
           <li>
             <span class="ci-icon-box">📍</span>
             <div>
               <strong>Location</strong>
-              <span>Lilongwe Area 23 Midland (Near Chipasula Pvt Sec School), Malawi</span>
+              <span>Lilongwe Area 21 Chilinde (Chiwoko TDC Buliding), Malawi</span>
             </div>
           </li>
           <li>
@@ -1143,57 +2002,76 @@ Thank you.</article>
 </section>
 
 <!-- ═══════ FOOTER ═══════ -->
+<section class="footer-intro-band" aria-label="Support Lilongwe School of Music">
+  <div class="footer-intro-inner">
+    <div class="footer-logo-panel">
+      <img src="Monograms/LSM Monogram (2).png" alt="Lilongwe School of Music monogram">
+    </div>
+    <div class="footer-intro-copy">
+      <h2>Music education. Shared ambition. A global outlook.</h2>
+      <p>Lilongwe School of Music brings together music education, performance and ensemble opportunities in Malawi.</p>
+    </div>
+    <div class="footer-intro-action">
+      <h3>Help music thrive</h3>
+      <p>Explore ways to partner with or support the work of LSM.</p>
+      <a href="#partnership-donation">Partner with LSM <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
 <footer>
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="fb-logo">Lilongwe School of Music</div>
+        <a class="footer-brand-logo" href="#home" aria-label="Lilongwe School of Music home">
+          <img src="Images/Logos/LSM Logos/LSM Logo white.png" alt="Lilongwe School of Music">
+        </a>
         <div class="fb-sub">Performance Art Theatre · Orchestra · Music Education</div>
-        <p>Malawi's leading conservatory for instrumental performance, vocal studies, ensemble training, and internationally benchmarked music examinations.</p>
-        <div class="footer-social">
-          <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        <p>Music education, performance and ensemble opportunities in Lilongwe, Malawi.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Attend</h3>
+        <ul>
+          <li><a href="#upcoming-events">Events</a></li>
+          <li><a href="#gallery">Photo gallery</a></li>
+          <li><a href="#videos">Watch &amp; listen</a></li>
+          <li><a href="#open-orchestra">LSM Open Orchestra</a></li>
+          <li><a href="videos.html">Video library</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="#about">About LSM</a></li>
+          <li><a href="#programs">Music programmes</a></li>
+          <li><a href="#admissions">Admissions</a></li>
+          <li><a href="#partners">Examination partners</a></li>
+          <li><a href="#student-life">Student life</a></li>
+          <li><a href="teachers.html">Our teachers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h3>Get involved</h3>
+        <ul>
+          <li><a href="#open-orchestra">Join LSM Open Orchestra</a></li>
+          <li><a href="orchestra-roster.html">LSM Open Orchestra roster</a></li>
+          <li><a href="#partnership-donation">Partnerships &amp; donations</a></li>
+          <li><a href="vacancies.html">Vacancies</a></li>
+        </ul>
+        <h3 class="footer-contact-heading">Contact</h3>
+        <ul class="footer-contact-list">
+          <li>Lilongwe, Malawi</li>
+        </ul>
+        <div class="footer-social" aria-label="LSM social media">
+          <a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
-          <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
-          <a href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          <a href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           </a>
         </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About LSM</a></li>
-          <li><a href="#programs">Curriculum</a></li>
-          <li><a href="#admissions">Admissions</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Programs</h4>
-        <ul>
-          <li><a href="#programs">Instrumental Performance</a></li>
-          <li><a href="#programs">Vocal Studies</a></li>
-          <li><a href="#programs">Music Theory</a></li>
-          <li><a href="#programs">Ensemble Training</a></li>
-          <li><a href="#programs">Examination Prep</a></li>
-          <li><a href="#programs">Diploma Qualifications</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:+265981448075">+265 981 448 075</a></li>
-          <li><a href="tel:+265997246261">+265 997 246 261</a></li>
-          <li><a href="mailto:lilongweschoolofmusic.lsm@yahoo.com">LSM Email</a></li>
-          <li><a href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank">WhatsApp</a></li>
-          <li><a href="https://www.instagram.com/lilongweschoolofmusic?igsh=MWI1bDZ4YjZrZm5rcw==" target="_blank">Instagram</a></li>
-          <li><a href="https://www.facebook.com/share/18ayuoRPAu/" target="_blank">Facebook</a></li>
-        </ul>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1207,12 +2085,6 @@ Thank you.</article>
     </div>
   </div>
 </footer>
-
-<!-- WhatsApp Float -->
-<a href="https://wa.me/265981448075?text=Hello%20from%20LSM%20website" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
-  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-  WhatsApp Us
-</a>
 
 <!-- Sticky mobile CTA -->
 <div class="sticky-cta">
@@ -1261,6 +2133,194 @@ var io = new IntersectionObserver(function(entries) {
 }, { threshold: .07 });
 document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 
+/* ── UPCOMING EVENTS ── */
+var upcomingEvents = [
+  {
+    date: '2026-12-12',
+    time: '3:00 PM',
+    title: 'Chaminade Marianist Secondary School Christmas Concert',
+    city: 'Lilongwe',
+    venue: 'Chaminade Marianist Secondary School',
+    image: 'Images/LSM With Chaminade Orchestra.jpg',
+    imageAlt: 'LSM musicians performing with Chaminade Orchestra'
+  }
+];
+var pastEvents = [
+  {
+    dateLabel: 'March 2026',
+    title: 'LSM Orchestra Opening Night',
+    image: 'Images/LSM Orchestra.jpg',
+    imageAlt: 'LSM Orchestra performing on opening night'
+  },
+  {
+    title: 'Collaboration with Chaminade Orchestra',
+    image: 'Images/LSM With Chaminade Orchestra.jpg',
+    imageAlt: 'LSM musicians performing with Chaminade Orchestra'
+  },
+  {
+    title: 'Student Soloist Performance',
+    image: 'Images/LSM in performance.jpg',
+    imageAlt: 'LSM student performing as a soloist'
+  },
+  {
+    title: 'Chamber Ensemble Highlights',
+    image: 'Images/LSM Ensemble.jpg',
+    imageAlt: 'LSM chamber ensemble performing together'
+  }
+];
+var eventsCitySelect = document.getElementById('events-city');
+var eventsTrack = document.getElementById('upcoming-events-track');
+var eventsPrevious = document.getElementById('events-previous');
+var eventsNext = document.getElementById('events-next');
+var upcomingEventsTab = document.getElementById('upcoming-events-tab');
+var pastEventsTab = document.getElementById('past-events-tab');
+var pastEventsPanel = document.getElementById('past-events-panel');
+var eventsControls = document.querySelector('.events-controls');
+var eventsTitle = document.getElementById('upcoming-events-title');
+
+function renderPastEvents() {
+  if (!pastEventsPanel) return;
+  pastEventsPanel.replaceChildren();
+  if (!pastEvents.length) {
+    var emptyMessage = document.createElement('p');
+    emptyMessage.className = 'past-events-empty';
+    emptyMessage.textContent = 'Past event highlights will be added here as they are shared.';
+    pastEventsPanel.appendChild(emptyMessage);
+    return;
+  }
+
+  pastEvents.forEach(function(event) {
+    var card = document.createElement('article');
+    card.className = 'past-event-card';
+
+    if (event.image) {
+      var image = document.createElement('img');
+      image.className = 'past-event-image';
+      image.src = event.image;
+      image.alt = event.imageAlt || '';
+      image.loading = 'lazy';
+      card.appendChild(image);
+    }
+
+    if (event.dateLabel) {
+      var date = document.createElement('p');
+      date.className = 'past-event-date';
+      date.textContent = event.dateLabel;
+      card.appendChild(date);
+    }
+
+    var title = document.createElement('h3');
+    title.className = 'past-event-title';
+    title.textContent = event.title;
+    card.appendChild(title);
+    pastEventsPanel.appendChild(card);
+  });
+}
+
+function setEventsView(showPastEvents) {
+  if (!upcomingEventsTab || !pastEventsTab || !eventsTrack || !pastEventsPanel || !eventsControls || !eventsTitle) return;
+  upcomingEventsTab.setAttribute('aria-selected', String(!showPastEvents));
+  pastEventsTab.setAttribute('aria-selected', String(showPastEvents));
+  eventsTrack.hidden = showPastEvents;
+  eventsControls.hidden = showPastEvents;
+  pastEventsPanel.hidden = !showPastEvents;
+  eventsTitle.textContent = showPastEvents ? 'Past Events & Highlights' : 'Upcoming Events';
+  if (showPastEvents) renderPastEvents();
+}
+
+function updateEventsCarouselButtons() {
+  if (!eventsTrack || !eventsPrevious || !eventsNext) return;
+  var canScroll = eventsTrack.scrollWidth > eventsTrack.clientWidth + 1;
+  eventsPrevious.disabled = !canScroll || eventsTrack.scrollLeft <= 1;
+  eventsNext.disabled = !canScroll || eventsTrack.scrollLeft + eventsTrack.clientWidth >= eventsTrack.scrollWidth - 1;
+}
+
+function renderUpcomingEvents() {
+  if (!eventsTrack || !eventsCitySelect) return;
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+  var selectedCity = eventsCitySelect.value;
+  var events = upcomingEvents.filter(function(event) {
+    var eventDate = new Date(event.date + 'T00:00:00');
+    return !Number.isNaN(eventDate.getTime()) &&
+      eventDate >= today &&
+      (selectedCity === 'all' || event.city === selectedCity);
+  }).sort(function(a, b) {
+    return a.date.localeCompare(b.date);
+  });
+
+  eventsTrack.replaceChildren();
+  if (!events.length) {
+    var emptyMessage = document.createElement('p');
+    emptyMessage.className = 'upcoming-events-empty';
+    emptyMessage.textContent = selectedCity === 'all'
+      ? 'No upcoming events are currently announced. Please check back soon.'
+      : 'No events are currently announced for this city. Please check back soon.';
+    eventsTrack.appendChild(emptyMessage);
+    updateEventsCarouselButtons();
+    return;
+  }
+
+  events.forEach(function(event) {
+    var card = document.createElement('article');
+    card.className = 'upcoming-event-card';
+
+    if (event.image) {
+      var image = document.createElement('img');
+      image.className = 'upcoming-event-image';
+      image.src = event.image;
+      image.alt = event.imageAlt || '';
+      image.loading = 'lazy';
+      card.appendChild(image);
+    }
+
+    var date = document.createElement('p');
+    date.className = 'upcoming-event-date';
+    date.textContent = (event.dateLabel || new Date(event.date + 'T00:00:00').toLocaleDateString(undefined, {
+      weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+    })) + (event.time ? ' · ' + event.time : '');
+    card.appendChild(date);
+
+    var title = document.createElement('h3');
+    title.className = 'upcoming-event-title';
+    title.textContent = event.title;
+    card.appendChild(title);
+
+    if (event.description) {
+      var description = document.createElement('p');
+      description.className = 'upcoming-event-description';
+      description.textContent = event.description;
+      card.appendChild(description);
+    }
+
+    var venue = document.createElement('p');
+    venue.className = 'upcoming-event-venue';
+    venue.textContent = [event.venue, event.city].filter(Boolean).join(' · ');
+    card.appendChild(venue);
+    eventsTrack.appendChild(card);
+  });
+
+  eventsTrack.scrollLeft = 0;
+  updateEventsCarouselButtons();
+}
+
+if (eventsCitySelect && eventsTrack && eventsPrevious && eventsNext) {
+  eventsCitySelect.addEventListener('change', renderUpcomingEvents);
+  eventsTrack.addEventListener('scroll', updateEventsCarouselButtons, { passive: true });
+  eventsPrevious.addEventListener('click', function() {
+    eventsTrack.scrollBy({ left: -eventsTrack.clientWidth * .8, behavior: 'smooth' });
+  });
+  eventsNext.addEventListener('click', function() {
+    eventsTrack.scrollBy({ left: eventsTrack.clientWidth * .8, behavior: 'smooth' });
+  });
+  window.addEventListener('resize', updateEventsCarouselButtons);
+  renderUpcomingEvents();
+}
+if (upcomingEventsTab && pastEventsTab) {
+  upcomingEventsTab.addEventListener('click', function() { setEventsView(false); });
+  pastEventsTab.addEventListener('click', function() { setEventsView(true); });
+}
+
 /* ── TABS: programs ── */
 function switchProgTab(name, btn) {
   document.querySelectorAll('.prog-panel').forEach(function(p) { p.classList.remove('active'); });
@@ -1283,38 +2343,21 @@ document.querySelectorAll('.form-tab-nav-btn').forEach(function(btn) {
 var slideIdx = 0;
 var slides = document.querySelectorAll('#slideshow img');
 var dots   = document.querySelectorAll('#slideDots .slide-dot');
-var slideStatus = document.getElementById('slideStatus');
-
-function updateSlideStatus() {
-  if (!slideStatus) return;
-  var count = slideIdx + 1;
-  slideStatus.querySelector('span').textContent = count;
-}
-
 function goSlide(n) {
   slides[slideIdx].classList.remove('active');
   dots[slideIdx].classList.remove('active');
   slideIdx = n;
   slides[slideIdx].classList.add('active');
   dots[slideIdx].classList.add('active');
-  updateSlideStatus();
 }
-
 setInterval(function() { goSlide((slideIdx + 1) % slides.length); }, 3800);
 
 /* ── GALLERY SLIDESHOW ── */
 var gallerySlideIdx = 0;
 var gallerySlides = document.querySelectorAll('#gallery-slideshow img');
 var galleryDots   = document.querySelectorAll('#gallery-slideDots .slide-dot');
-var galleryStatus = document.getElementById('gallerySlideStatus');
 var galleryInterval;
 var galleryPlaying = true;
-
-function updateGalleryStatus() {
-  if (!galleryStatus) return;
-  var count = gallerySlideIdx + 1;
-  galleryStatus.querySelector('span').textContent = count;
-}
 
 function goSlideGallery(n) {
   gallerySlides[gallerySlideIdx].classList.remove('active');
@@ -1322,7 +2365,6 @@ function goSlideGallery(n) {
   gallerySlideIdx = n;
   gallerySlides[gallerySlideIdx].classList.add('active');
   galleryDots[gallerySlideIdx].classList.add('active');
-  updateGalleryStatus();
 }
 
 function toggleGallerySlideshow() {
@@ -1338,8 +2380,6 @@ function toggleGallerySlideshow() {
 }
 
 galleryInterval = setInterval(function() { goSlideGallery((gallerySlideIdx + 1) % gallerySlides.length); }, 3800);
-updateSlideStatus();
-updateGalleryStatus();
 
 /* ════════════════════════════════════════════════
    FORM VALIDATION & SUBMISSION
@@ -1508,8 +2548,19 @@ async function submitLSMForm(id) {
 }
 
 /* ── FULLSCREEN VIDEO ── */
-function toggleFullscreen() {
-  var video = document.getElementById('videoPlayer');
+var lsmVideoPreview = document.getElementById('lsm-video-preview');
+var lsmVideoFrame = document.getElementById('lsm-video');
+if (lsmVideoPreview && lsmVideoFrame) {
+  lsmVideoPreview.addEventListener('click', function() {
+    lsmVideoFrame.src = lsmVideoFrame.dataset.src + '?autoplay=1';
+    lsmVideoFrame.hidden = false;
+    lsmVideoPreview.hidden = true;
+  });
+}
+
+function toggleFullscreen(targetId) {
+  var video = document.getElementById(targetId || 'videoPlayer');
+  if (!video) return;
   if (video.requestFullscreen) {
     video.requestFullscreen();
   } else if (video.webkitRequestFullscreen) {
@@ -1575,20 +2626,20 @@ function minimizeVideo() {
   var hasSrc = Array.from(sources).some(function(s){ var v = s.getAttribute('src'); return v && v.trim() !== '' && !v.includes('path/to'); });
   if (!hasSrc) showNoContent();
 })();
-
-/* ── TOPBAR SCROLL MINIMIZE ── */
-var lastScrollTop = 0;
-var topbar = document.getElementById('topbar');
-window.addEventListener('scroll', function() {
-  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  if (scrollTop > 100) {
-    topbar.classList.add('scroll-minimized');
-  } else {
-    topbar.classList.remove('scroll-minimized');
-  }
-  lastScrollTop = scrollTop;
-});
 </script>
-<script src="script.js"></script>
+<script>
+  document.addEventListener('pointermove', function(event) {
+    if (event.pointerType === 'touch' || window.innerWidth <= 600) return;
+    var nearRightEdge = event.clientX >= document.documentElement.clientWidth - 18;
+    if (nearRightEdge) {
+      document.documentElement.classList.add('scrollbar-visible');
+    } else {
+      document.documentElement.classList.remove('scrollbar-visible');
+    }
+  }, { passive: true });
+  document.documentElement.addEventListener('pointerleave', function() {
+    document.documentElement.classList.remove('scrollbar-visible');
+  });
+</script>
 </body>
 </html>

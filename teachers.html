@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LSM Teachers</title>
+<link rel="stylesheet" href="teachers.css">
+</head>
+<body>
+<header style="background:#1E2A4A;color:#fff;padding:1rem 0;">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h1>LSM Teachers</h1>
+      <a href="index.html" style="color:#f4f7fb;text-decoration:none;">← Back to Home</a>
+    </div>
+  </div>
+</header>
+<main class="container" style="padding:2rem 5%">
+  <section class="teachers-panel">
+    <div class="panel-header">
+      <h2>Meet Our Teachers</h2>
+      <p class="lead">Add a teacher's photo and role using the form — entries are shown below.</p>
+    </div>
+
+    <div class="teachers-grid" id="teachersGrid">
+      <!-- existing example teacher -->
+      <article class="teacher-card">
+        <div class="tc-photo"><img src="Images/Logos/LSM Logos/LSM Logo white.png" alt="LSM Founder"></div>
+        <div class="tc-body">
+          <h3>Ms. Jane Doe</h3>
+          <p class="tc-role">Head of Strings</p>
+          <p class="tc-bio">Violin teacher with 10+ years of conservatory experience; conductor and ensemble coach.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="add-teacher">
+      <h3>Add / Insert Teacher</h3>
+      <form id="teacherForm">
+        <label>Photo (JPG/PNG)</label>
+        <input type="file" id="teacherPhoto" accept="image/*" required>
+        <label>Full Name</label>
+        <input type="text" id="teacherName" placeholder="Full name" required>
+        <label>Role / Title</label>
+        <input type="text" id="teacherRole" placeholder="e.g. Piano Instructor" required>
+        <label>Short Description / Bio</label>
+        <textarea id="teacherBio" rows="3" placeholder="Brief bio or role description"></textarea>
+        <div style="display:flex;gap:.6rem;align-items:center;margin-top:.6rem;">
+          <button type="submit" class="btn">Add Teacher</button>
+          <button type="button" id="clearForm" class="btn btn-ghost">Clear</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+<script src="teachers.js"></script>
+</body>
+</html>
