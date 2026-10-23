@@ -534,7 +534,10 @@ html.scrollbar-visible::-webkit-scrollbar-thumb { background:rgba(12,24,41,.55);
 .leadership-intro { max-width:760px; margin-bottom:2rem; color:var(--mid); font-size:.92rem; line-height:1.8; }
 .leadership-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
 .leadership-card { background:var(--white); border:1px solid var(--mist); min-width:0; }
+.leadership-card-advisor { grid-column:2; }
 .leadership-card img { display:block; width:100%; height:230px; object-fit:cover; object-position:center 20%; }
+.leadership-photo-placeholder { width:100%; height:230px; background:var(--mist); }
+.leadership-photo-placeholder svg { display:block; width:100%; height:100%; }
 .leadership-card-copy { padding:1.35rem 1.4rem 1.5rem; }
 .leadership-card h3 { font-family:var(--ff-display); font-size:1.15rem; color:var(--navy); margin-bottom:.3rem; }
 .leadership-role { color:var(--orange); font-size:.76rem; font-weight:700; line-height:1.5; margin-bottom:.75rem; }
@@ -758,7 +761,7 @@ footer { background:#050505; padding:48px 5% 76px; color:#fff; }
 }
 
 /* Open orchestra mobile layout */
-@media(max-width:800px){ .open-orchestra-intro, .open-orchestra-details { grid-template-columns:1fr; gap:1.5rem; } .open-orchestra-image { max-height:360px; } .leadership-grid { grid-template-columns:1fr; } .leadership-card { display:block; } .leadership-card img { height:230px; object-position:center 16%; } }
+@media(max-width:800px){ .open-orchestra-intro, .open-orchestra-details { grid-template-columns:1fr; gap:1.5rem; } .open-orchestra-image { max-height:360px; } .leadership-grid { grid-template-columns:1fr; } .leadership-card, .leadership-card-advisor { display:block; grid-column:auto; } .leadership-card img { height:230px; object-position:center 16%; } }
 @media(max-width:600px){ .orchestra-requirements { grid-template-columns:1fr; } }
 @media(max-width:600px){ .orchestra-section-title { font-size:1.2rem; } }
 
@@ -908,11 +911,10 @@ footer { background:#050505; padding:48px 5% 76px; color:#fff; }
     </div>
     <article class="featured-announcement reveal">
       <div class="featured-announcement-copy">
-        <span class="featured-announcement-label">LSM Open Orchestra · Now recruiting</span>
-        <h3>Vacancies for a soprano singer and a trumpet player</h3>
-        <p>LSM Open Orchestra is inviting enquiries from interested soprano singers and trumpet players. Contact us for audition and participation details.</p>
+        <span class="featured-announcement-label">LSM Open Orchestra · Recruitment closed</span>
+        <h3>Soprano and trumpet vacancies</h3>
+        <p>Recruitment for the soprano singer and trumpet player vacancies closed on 18 October. Thank you to everyone who expressed interest.</p>
       </div>
-      <a class="btn btn-gold" href="https://wa.me/265981448075?text=Hello%2C%20I%27m%20interested%20in%20the%20LSM%20Open%20Orchestra%20vacancy." target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a>
     </article>
     <div class="monthly-layout reveal">
       <div class="monthly-content">
@@ -1013,44 +1015,6 @@ footer { background:#050505; padding:48px 5% 76px; color:#fff; }
       <div class="pillar-item"><div class="pi-icon">⚡</div><div class="pi-title">Discipline</div><div class="pi-text">Consistency and commitment in practice and performance</div></div>
       <div class="pillar-item"><div class="pi-icon">🎨</div><div class="pi-title">Creativity</div><div class="pi-text">Artistic expression and musical interpretation</div></div>
       <div class="pillar-item"><div class="pi-icon">🌍</div><div class="pi-title">Inclusivity</div><div class="pi-text">Talent developed from all backgrounds</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════ LSM LEADERSHIP ═══════ -->
-<section id="leadership" class="section leadership-section" aria-labelledby="leadership-title">
-  <div class="container">
-    <div class="section-header">
-      <span class="tag-label">Our Leadership</span>
-      <h2 class="section-title" id="leadership-title">Leadership at LSM</h2>
-      <div class="gold-rule"></div>
-      <p class="section-intro">Our leadership team supports the work of Lilongwe School of Music and LSM Open Orchestra, bringing together artistic direction, planning, development and financial stewardship.</p>
-    </div>
-    <div class="leadership-grid reveal">
-      <article class="leadership-card">
-        <img src="Images/Directors/Brian Lia Director_ Violist.jpg" alt="Brian Lia playing viola during an LSM performance" loading="lazy">
-        <div class="leadership-card-copy">
-          <h3>Brian Lia</h3>
-          <p class="leadership-role">Artistic and Academic Lead</p>
-          <p class="leadership-bio">Brian provides artistic and academic leadership across Lilongwe School of Music and LSM Open Orchestra. He guides the orchestra's musical direction and standards, supports repertoire and programme development, and contributes to the learning and artistic growth of its musicians. He is also a music teacher at Lilongwe School of Music.</p>
-        </div>
-      </article>
-      <article class="leadership-card">
-        <img src="Images/Directors/Mr. Edgar Mwanja Violinist Co-Director.jpeg" alt="Edgar Mwanja playing violin during an LSM performance" loading="lazy">
-        <div class="leadership-card-copy">
-          <h3>Edgar Mwanja</h3>
-          <p class="leadership-role">Planning and Development Lead</p>
-          <p class="leadership-bio">Edgar supports planning and development across Lilongwe School of Music and LSM Open Orchestra, including shaping projects, coordinating development priorities and building opportunities that contribute to the orchestra's growth. He is also a music teacher at Lilongwe School of Music.</p>
-        </div>
-      </article>
-      <article class="leadership-card">
-        <img src="Images/Directors/Vitumbiko Chisi Co Director_ Trombonist principal.jpg" alt="Vitumbiko Chisi playing trombone during an LSM performance" loading="lazy">
-        <div class="leadership-card-copy">
-          <h3>Vitumbiko Chisi</h3>
-          <p class="leadership-role">Finance Lead</p>
-          <p class="leadership-bio">Vitumbiko supports financial planning and administration for Lilongwe School of Music and LSM Open Orchestra, including responsible budgeting and financial management. He also serves as a brass facilitator, contributing to the preparation and development of brass musicians.</p>
-        </div>
-      </article>
     </div>
   </div>
 </section>
@@ -1592,6 +1556,62 @@ footer { background:#050505; padding:48px 5% 76px; color:#fff; }
           <p class="open-orchestra-commitment">We are committed to thoughtful preparation, high standards and respect for the work of every musician. We will build the orchestra through the music we perform, the way we work together and the relationships we form with audiences and partners.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ LSM LEADERSHIP ═══════ -->
+<section id="leadership" class="section leadership-section" aria-labelledby="leadership-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag-label">Our Leadership</span>
+      <h2 class="section-title" id="leadership-title">Leadership at LSM</h2>
+      <div class="gold-rule"></div>
+      <p class="section-intro">Our leadership team supports the work of Lilongwe School of Music and LSM Open Orchestra, bringing together artistic direction, planning, operations and financial stewardship.</p>
+    </div>
+    <div class="leadership-grid reveal">
+      <article class="leadership-card">
+        <img src="Images/Directors/Brian Lia Director_ Violist.jpg" alt="Brian Lia playing viola during an LSM performance" loading="lazy">
+        <div class="leadership-card-copy">
+          <h3>Mr. Brian Lia</h3>
+          <p class="leadership-role">Artistic and Academic Lead</p>
+          <p class="leadership-bio">Brian Lia provides artistic and academic leadership across Lilongwe School of Music and LSM Open Orchestra. He guides the orchestra's musical direction and standards, supports repertoire and programme development, and contributes to the learning and artistic growth of its musicians. He is also a music teacher at Lilongwe School of Music.</p>
+        </div>
+      </article>
+      <article class="leadership-card">
+        <img src="Images/Directors/Mr. Edgar Mwanja Violinist Co-Director.jpeg" alt="Edgar Mwanja playing violin during an LSM performance" loading="lazy">
+        <div class="leadership-card-copy">
+          <h3>Mr. Edgar Mwanja</h3>
+          <p class="leadership-role">Planning and Development Lead</p>
+          <p class="leadership-bio">Edgar Mwanja supports planning and development across Lilongwe School of Music and LSM Open Orchestra, including shaping projects, coordinating development priorities and building opportunities that contribute to the orchestra's growth. He is also a music teacher at Lilongwe School of Music.</p>
+        </div>
+      </article>
+      <article class="leadership-card">
+        <img src="Images/Directors/Vitumbiko Chisi Co Director_ Trombonist principal.jpg" alt="Vitumbiko Chisi playing trombone during an LSM performance" loading="lazy">
+        <div class="leadership-card-copy">
+          <h3>Mr. Vitumbiko Chisi</h3>
+          <p class="leadership-role">Finance Lead</p>
+          <p class="leadership-bio">Vitumbiko Chisi supports financial planning and administration for Lilongwe School of Music and LSM Open Orchestra, including responsible budgeting and financial management. He also serves as a brass facilitator, contributing to the preparation and development of brass musicians.</p>
+        </div>
+      </article>
+      <article class="leadership-card leadership-card-advisor">
+        <div class="leadership-photo-placeholder" role="img" aria-label="Illustrated profile placeholder for Mr. Sydney Chuka">
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <rect width="360" height="230" fill="#e8e4d9"/>
+            <circle cx="180" cy="112" r="77" fill="#f7f4ec"/>
+            <path d="M91 230c7-39 34-63 68-72h42c34 9 61 33 68 72" fill="none" stroke="#122240" stroke-width="5" stroke-linecap="round"/>
+            <path d="M150 159v-22m60 22v-22" fill="none" stroke="#122240" stroke-width="5" stroke-linecap="round"/>
+            <path d="M131 87c0-31 20-51 49-51 31 0 49 22 49 51v26c0 32-21 54-49 54s-49-22-49-54z" fill="#f7f4ec" stroke="#122240" stroke-width="5"/>
+            <path d="M130 91c1-39 19-60 51-60 29 0 48 20 49 54-10-4-18-12-24-24-18 17-43 26-76 30z" fill="#122240" stroke="#122240" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M151 108h2m54 0h2m-33 8-4 16h9m-23 12c11 9 25 9 36 0" fill="none" stroke="#122240" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="leadership-card-copy">
+          <h3>Mr. Sydney Chuka</h3>
+          <p class="leadership-role">Operations Advisor</p>
+          <p class="leadership-bio">Advises on operational planning and coordination, helping strengthen the day-to-day processes that support the school's programmes.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
